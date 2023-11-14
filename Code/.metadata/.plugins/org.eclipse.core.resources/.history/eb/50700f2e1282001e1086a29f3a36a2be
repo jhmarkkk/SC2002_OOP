@@ -1,0 +1,10 @@
+package assignment_CAMsApp;
+
+public class CAMsApplication {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
