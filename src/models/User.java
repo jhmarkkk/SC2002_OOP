@@ -38,7 +38,6 @@ public class User {
 	 * @param role the {@link Role} of the user
 	 */
 	public User(String userID, String password, String name, String faculty, Role role) {
-		super();
 		this.userID = userID;
 		this.password = password;
 		this.name = name;
@@ -134,6 +133,13 @@ public class User {
 	 */
 	public void setRole(Role role) {
 		this.role = role;
+	}
+	
+	/**
+	 * Views the profile of the user.
+	 */
+	public void viewProfile() {
+		
 	}
 	
 }
