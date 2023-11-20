@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
 
-import interfaces.CreatedCampViewable;
-import interfaces.ViewFilterable;
-import interfaces.ViewFilterable.filterBy;
 import interfaces.CampDaoInterface;
+import interfaces.views.CreatedCampViewable;
+import interfaces.views.ViewFilterable;
+import interfaces.views.ViewFilterable.FilterType;
 
 /**
  * This file is the implementation for staff to view all the camps that the
@@ -19,14 +19,15 @@ import interfaces.CampDaoInterface;
 public class CreatedCampView implements CreatedCampViewable {
     public void view() {
         System.out.println("===== Created Camps =====");
-        System.out.printf("----- %s  -----");
+        System.out.printf(
+                "Index | Camp Name | Dates | Registration closing date | Open to | Location | Total slots | Camp Committee slots | Description | Visibility");
     }
 
     /**
      * @param idlist
      * @return ArrayList<Object>
      */
-    public ArrayList<Object> filter(ArrayList<String> idlist, filterBy filter) {
+    public ArrayList<Object> filter(ArrayList<String> idlist, FilterType filterType = filterType.Name) {
         // use the interface to get camps
         CampDaoInterface campDao = CampDaoImplementation();
         ArrayList<Object> camps = campDao.getCamps();
