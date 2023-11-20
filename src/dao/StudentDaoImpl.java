@@ -10,14 +10,14 @@ import models.Student;
 /**
  * 
  */
-public class StudentDaoImplementation implements StudentDaoInterface {
+public class StudentDaoImpl implements StudentDao {
 	
 	private Map<String, Student> students;
 
 	/**
 	 * @param students
 	 */
-	public StudentDaoImplementation(Map<String, Student> students) {
+	public StudentDaoImpl(Map<String, Student> students) {
 		this.students = students;
 	}
 

@@ -10,7 +10,7 @@ import models.Student;
 /**
  * 
  */
-public interface StudentDaoInterface {
+public interface StudentDao {
 	public Map<String, Student> getStudents();
 	public void setStudents(Map<String, Student> students);
 }

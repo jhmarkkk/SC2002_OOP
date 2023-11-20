@@ -8,14 +8,14 @@ import models.User;
 /**
  * 
  */
-public class CurrentUserDaoImplementation implements CurrentUserDaoInterface {
+public class CurrentUserDaoImpl implements CurrentUserDao {
 	
 	private User currentUser;
 
 	/**
 	 * @param currentUser
 	 */
-	public CurrentUserDaoImplementation(User currentUser) {
+	public CurrentUserDaoImpl(User currentUser) {
 		this.currentUser = currentUser;
 	}
 

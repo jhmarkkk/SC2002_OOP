@@ -10,14 +10,14 @@ import models.CommitteeMember;
 /**
  * 
  */
-public class CommitteeMemberDaoImplementation implements CommitteeMemberDaoInterface {
+public class CommitteeMemberDaoImpl implements CommitteeMemberDao {
 	
 	private Map<String, CommitteeMember> committeeMembers;
 
 	/**
 	 * @param committeeMembers
 	 */
-	public CommitteeMemberDaoImplementation(Map<String, CommitteeMember> committeeMembers) {
+	public CommitteeMemberDaoImpl(Map<String, CommitteeMember> committeeMembers) {
 		this.committeeMembers = committeeMembers;
 	}
 

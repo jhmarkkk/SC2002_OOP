@@ -10,14 +10,14 @@ import models.Camp;
 /**
  * 
  */
-public class CampDaoImplementation implements CampDaoInterface {
+public class CampDaoImpl implements CampDao {
 	
 	private Map<String, Camp> camps;
 
 	/**
 	 * @param camps
 	 */
-	public CampDaoImplementation(Map<String, Camp> camps) {
+	public CampDaoImpl(Map<String, Camp> camps) {
 		this.camps = camps;
 	}
 

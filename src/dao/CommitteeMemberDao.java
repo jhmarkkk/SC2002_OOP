@@ -10,7 +10,7 @@ import models.CommitteeMember;
 /**
  * 
  */
-public interface CommitteeMemberDaoInterface {
+public interface CommitteeMemberDao {
 	public Map<String, CommitteeMember> getCommitteeMembers();
 	public void setCommitteeMembers(Map<String, CommitteeMember> committeeMembers);
 }

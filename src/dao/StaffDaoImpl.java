@@ -10,14 +10,14 @@ import models.Staff;
 /**
  * 
  */
-public class StaffDaoImplementation implements StaffDaoInterface {
+public class StaffDaoImpl implements StaffDao {
 	
 	private Map<String, Staff> staffs;
 
 	/**
 	 * @param staffs
 	 */
-	public StaffDaoImplementation(Map<String, Staff> staffs) {
+	public StaffDaoImpl(Map<String, Staff> staffs) {
 		this.staffs = staffs;
 	}
 

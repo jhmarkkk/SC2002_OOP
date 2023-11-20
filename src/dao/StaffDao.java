@@ -10,7 +10,7 @@ import models.Staff;
 /**
  * 
  */
-public interface StaffDaoInterface {
+public interface StaffDao {
 	public Map<String, Staff> getStaffs();
 	public void setStaffs(Map<String, Staff> staffs);
 }
