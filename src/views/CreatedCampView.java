@@ -18,6 +18,8 @@ import interfaces.views.ViewFilterable.FilterType;
 
 public class CreatedCampView implements CreatedCampViewable {
     public void view() {
+                CampDaoInterface campDao = CampDaoImplementation();
+        ArrayList<Camp> camps = campDao.getCamps();
         System.out.println("===== Created Camps =====");
         System.out.printf(
                 "Index | Camp Name | Dates | Registration closing date | Open to | Location | Total slots | Camp Committee slots | Description | Visibility");
@@ -27,27 +29,29 @@ public class CreatedCampView implements CreatedCampViewable {
      * @param idlist
      * @return ArrayList<Object>
      */
-    public ArrayList<Object> filter(ArrayList<String> idlist, FilterType filterType = filterType.Name) {
+    public void filter(ArrayList<String> idlist, FilterType filterType = filterType.Name) {
         // use the interface to get camps
         CampDaoInterface campDao = CampDaoImplementation();
-        ArrayList<Object> camps = campDao.getCamps();
+        ArrayList<Camp> camps = campDao.getCamps();
         for (String id : idlist) {
-            for (Object camp : camps) {
+            for (Camp camp : camps) {
                 // if the id does not match the idlist, remove it from camps
                 if (!Objects.equals(id, camp.getName())) {
                     camps.remove(camp);
                 }
             }
         }
-        if (filter == filterBy.ALPHA) {
+        for (Camp camp : camps) {
+        }
+        if (filter == FilterType.NAME) {
             Collections.sort(camps, (camp1, camp2) -> camp1.getName().compareTo.camp2.getName());
             return camps;
         }
-        if (filter == filterBy.LOC) {
+        if (filter == FilterType.DATES) {
             Collections.sort(camps, (camp1, camp2) -> camp1.getLocation().compareTo.camp2.getLocation());
             return camps;
         }
-        if (filter == filterBy.DATE) {
+        if (filter == FilterType.DATE) {
             Collections.sort(camps, (camp1, camp2) -> camp1.getDate().compareTo.camp2.getName());
             return camps;
         }
