@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
 
-import interfaces.CampDaoInterface;
+import interfaces.dao.CampDaoInterface;
 import interfaces.views.CreatedCampViewable;
 import interfaces.views.ViewFilterable;
-import interfaces.views.ViewFilterable.FilterType;
+import enums.FilterType;
 
 /**
  * This file is the implementation for staff to view all the camps that the
@@ -17,6 +17,23 @@ import interfaces.views.ViewFilterable.FilterType;
  */
 
 public class CreatedCampView implements CreatedCampViewable {
+    CreatedCampView() {
+        CampDaoInterface campDao = CampDaoImplementation();
+        ArrayList<Camp> createdCamps = campDao.getCamps(); 
+        CurrentUserDaoInterface currentUserDao;
+        ArrayList<String> idlist = currentUserDao.getCurrentUser().getCreatedCamps();
+        for (String id : idlist) {
+            for (Camp camp : camps) {
+                // if the id does not match the idlist, remove it from camps
+                if (!Objects.equals(id, camp.getName())) {
+                    camps.remove(camp);
+                }
+            }
+        }
+
+    private ArrayList<Camp> createdCamps = createdCamps;
+    }
+
     public void view() {
                 CampDaoInterface campDao = CampDaoImplementation();
         ArrayList<Camp> camps = campDao.getCamps();
