@@ -15,6 +15,7 @@ public class Camp {
 	private String description;
 	private Staff staffInCharge;
 	private ArrayList<Student> attendees;
+	private ArrayList<String> withdrawnAttendees;
 	private ArrayList<CommitteeMember> committeeMembers;
 	private Visibility visibility = Visibility.OFF;
 	private ArrayList<Enquiry> enquiries;
@@ -31,6 +32,7 @@ public class Camp {
 	 * @param description
 	 * @param staffInCharge
 	 * @param attendees
+	 * @param withdrawnAttendees
 	 * @param committeeMembers
 	 * @param visibility
 	 * @param enquiries
@@ -38,8 +40,8 @@ public class Camp {
 	 */
 	public Camp(String name, ArrayList<Date> dates, Date registrationClosingDate, String openTo, String location,
 			int totalSlots, int committeeSlots, String description, Staff staffInCharge, ArrayList<Student> attendees,
-			ArrayList<CommitteeMember> committeeMembers, Visibility visibility, ArrayList<Enquiry> enquiries,
-			ArrayList<Suggestion> suggestions) {
+			ArrayList<String> withdrawnAttendees, ArrayList<CommitteeMember> committeeMembers, Visibility visibility,
+			ArrayList<Enquiry> enquiries, ArrayList<Suggestion> suggestions) {
 		this.name = name;
 		this.dates = dates;
 		this.registrationClosingDate = registrationClosingDate;
@@ -50,12 +52,13 @@ public class Camp {
 		this.description = description;
 		this.staffInCharge = staffInCharge;
 		this.attendees = attendees;
+		this.withdrawnAttendees = withdrawnAttendees;
 		this.committeeMembers = committeeMembers;
 		this.visibility = visibility;
 		this.enquiries = enquiries;
 		this.suggestions = suggestions;
 	}
-
+	
 	/**
 	 * @return the name
 	 */
@@ -180,6 +183,20 @@ public class Camp {
 	 */
 	public void setAttendees(ArrayList<Student> attendees) {
 		this.attendees = attendees;
+	}
+
+	/**
+	 * @return the withdrawnAttendees
+	 */
+	public ArrayList<String> getWithdrawnAttendees() {
+		return withdrawnAttendees;
+	}
+
+	/**
+	 * @param withdrawnAttendees the withdrawnAttendees to set
+	 */
+	public void setWithdrawnAttendees(ArrayList<String> withdrawnAttendees) {
+		this.withdrawnAttendees = withdrawnAttendees;
 	}
 
 	/**
