@@ -2,8 +2,12 @@ package interfaces;
 
 import java.util.ArrayList;
 
-public interface CreatedCampViewable extends Viewable, ViewFilterable {
-    void view();
+enum filterBy {
+    ALPHA,
+    DATE,
+    LOC
+}
 
+public interface ViewFilterable {
     ArrayList<Object> filter(ArrayList<String> idList, filterBy filter);
 }
