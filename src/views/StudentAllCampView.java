@@ -2,11 +2,25 @@ package views;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 import interfaces.views.Viewable;
 import interfaces.views.FilterViewable;
 
 public class StudentAllCampView implements Viewable {
+    StudentAllCampView() {
+        CampDaoInterface campDao = CampDaoImplementation();
+        ArrayList<Camp> camps = campDao.getCamps();
+        CurrentUserDaoInterface currentUserDao;
+        String faculty = currentUserDao.getCurrentUser().getFaculty();
+        for (Camp camp : camps) {
+            // if the id does not match the idlist, remove it from camps
+            if (!Objects.equals(id, camp.getName())) {
+                camps.remove(camp);
+            }
+        }
+    }
+
     public void view() {
         CampDaoInterface campDao = CampDaoImplementation();
         ArrayList<Camp> camps = campDao.getCamps();
