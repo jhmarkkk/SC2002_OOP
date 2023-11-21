@@ -44,14 +44,13 @@ public class StaffDataService implements DataServiceable {
 						System.out.println("Username: " + username);
 						
 
-						//User staffData = new User(username, password, name, faculty, role);
-						User staffData = new User(password, name, faculty, role);
+						User staffData = new User(username, password, name, faculty, role);
 
 						// Put the data into the map with username as key
 						staffDataMap.put(username, staffData);
 
 						User exampleStaffData = staffDataMap.get(username);
-						//System.out.println("Username:" + examplestaffData.getUserID());
+						System.out.println("Username:" + exampleStaffData.getUserID());
 						System.out.println("Password:" + exampleStaffData.getPassword());
 						System.out.println("Name:" + exampleStaffData.getName());
 						System.out.println("Faculty:" + exampleStaffData.getFaculty());

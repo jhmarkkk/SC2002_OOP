@@ -47,14 +47,14 @@ public class StudentDataService implements DataServiceable {
 						System.out.println("Username: " + username);
 						
 
-						//User studentData = new User(username, password, name, faculty, role);
-						User studentData = new User(password, name, faculty, role);
+						User studentData = new User(username, password, name, faculty, role);
+						//User studentData = new User(password, name, faculty, role);
 
 						// Put the data into the map with username as key
 						studentDataMap.put(username, studentData);
 
 						User exampleStudentData = studentDataMap.get(username);
-						//System.out.println("Username:" + exampleStudentData.getUserID());
+						System.out.println("Username:" + exampleStudentData.getUserID());
 						System.out.println("Password:" + exampleStudentData.getPassword());
 						System.out.println("Name:" + exampleStudentData.getName());
 						System.out.println("Faculty:" + exampleStudentData.getFaculty());
