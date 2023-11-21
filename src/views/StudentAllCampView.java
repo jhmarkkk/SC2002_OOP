@@ -7,8 +7,10 @@ import java.util.Objects;
 import enums.Visibility;
 import enums.FilterType;
 import interfaces.views.CampViewable;
-import interfaces.views.FilterViewable;
+import interfaces.dao.CampDaoInterface;
+import interfaces.dao.CurrentUserDaoInterface;
 import models.Camp;
+import utils.CampFilter;
 
 public class StudentAllCampView implements CampViewable {
     public void filterView(FilterType filterType) {
@@ -25,10 +27,11 @@ public class StudentAllCampView implements CampViewable {
             }
 
         }
+        camps = CampFilter.filter(camps, filterType);
         int index = 1;
-        System.out.println("===== List of Camps =====");
+        System.out.println("===== List of Camps : Student =====");
         for (Camp camp : camps) {
-            System.out.printf("----- (%d) %s -----\n", index, camp.getName());
+            System.out.printf("----- (Camp %d) %s -----\n", index, camp.getName());
             System.out.print("Dates: ");
             for (Date date : camp.getDates()) {
                 System.out.printf("%s ", date.toString());
