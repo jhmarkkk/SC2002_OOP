@@ -5,7 +5,12 @@ import controllers.DataTransferController;
 import controllers.StaffController;
 import controllers.StudentController;
 import controllers.CommitteeController;
-import interfaces.currentUserDaoInterface;
+
+import enums.Role;
+
+import interfaces.CurrentUserDao;
+
+import models.User;
 
 /**
  * The main class executing the Camp Application and Management System (CAMs).
@@ -21,12 +26,11 @@ public class CAMs {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
 		do {
 			DataTransferController.importData();
 			SessionController.startSession();
-			if (!currentUserDao)
 
-				SessionController.endSession();
 			DataTransferController.exportData();
 		} while (true);
 
