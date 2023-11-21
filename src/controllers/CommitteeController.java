@@ -32,7 +32,7 @@ public class CommitteeController extends StudentController {
 	@Override
 	public void start() {
 		
-		CommitteeMember committeeMember = currentUserDao.getCurrentUser();
+		CommitteeMember committeeMember = (CommitteeMember)currentUserDao.getCurrentUser();
 		int choice;
 		
 		do {
@@ -80,8 +80,6 @@ public class CommitteeController extends StudentController {
 	protected void viewCampDetails() {
 		
 		int choice;
-		
-		
 		
 		do {
 			System.out.println("1. View attendees' enquires");
@@ -140,7 +138,6 @@ public class CommitteeController extends StudentController {
 			}
 			
 		} while (true);
-		
 	}
 	
 	protected void viewSuggestions() {
@@ -168,7 +165,6 @@ public class CommitteeController extends StudentController {
 				System.out.println("Invalid choice. Please choose again.");
 			}
 		} while (true);
-
 	}
 	
 	protected void createSuggestion() {
@@ -189,13 +185,11 @@ public class CommitteeController extends StudentController {
 	protected void replyEnquiry() {
 		
 		replyEnquiryService.reply();
-
 	}
 	
 	protected void generateReport() {
 		
 		generateReportService.generate();
-
 	}
 	
 }

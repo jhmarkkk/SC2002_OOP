@@ -4,11 +4,13 @@ import dao.StaffDaoImpl;
 import dao.StudentDaoImpl;
 import dao.CommitteeMemberDaoImpl;
 import dao.CampDaoImpl;
+import dao.CurrentUserDaoImpl;
 
 import interfaces.StaffDao;
 import interfaces.StudentDao;
 import interfaces.CommitteeMemberDao;
 import interfaces.CampDao;
+import interfaces.CurrentUserDao;
 import interfaces.DataServiceable;
 
 import services.StaffDataService;
@@ -32,6 +34,7 @@ public class DataTransferController {
 		StudentDao studentDao = new StudentDaoImpl();
 		CommitteeMemberDao committeeMemberDao = new CommitteeMemberDaoImpl();
 		CampDao campDao = new CampDaoImpl();
+		CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
 	}
 	
 	public static void exportData() {
