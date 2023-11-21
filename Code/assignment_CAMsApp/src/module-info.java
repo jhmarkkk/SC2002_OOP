@@ -1,8 +1,0 @@
-/**
- * 
- */
-/**
- * 
- */
-module assignment_app {
-}
