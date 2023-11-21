@@ -2,19 +2,24 @@ package controllers;
 
 import java.util.Scanner;
 
-import dao.CurrentUserDaoInterface;
 import enums.Role;
-import interfaces.ChangePasswordInterface;
+
+import interfaces.CurrentUserDao;
+import interfaces.ChangePasswordServiceable;
+
 import models.User;
+
 import services.ChangePasswordService;
 
 abstract class AbstractUserController {
 	
 	protected static Scanner sc = new Scanner(System.in);
 	
-	protected CurrentUserDaoInterface currentUserDao;
+	protected CurrentUserDao currentUserDao;
 	
 	protected static ProfileViewable profileView = new ProfileView();
+	
+	protected static ChangePasswordServiceable changePasswordService = new ChangePasswordService();
 	
 	public abstract void start();
 	
@@ -48,16 +53,15 @@ abstract class AbstractUserController {
 				System.out.println("Invalid choice. Please choose again.");
 			}
 			
-		} while (choice == 2);
+		} while (choice != 2);
 	}
 	
 	protected void changePassword() {
 
 		int choice;
-		ChangePasswordInterface changePassword = new ChangePasswordService();
 		
 		do {
-			if(changePassword.changePassword()) break;
+			if(changePasswordService.changePassword()) break;
 			
 			do {
 				System.out.println("1. Try again");			

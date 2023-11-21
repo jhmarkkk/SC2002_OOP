@@ -1,59 +1,222 @@
 package controllers;
 
-public class StudentController extends AbstractUserController {
+import interfaces.CampViewable;
+import interfaces.EnquiryViewable;
+import interfaces.AttendCampServiceable;
+import interfaces.EnquiryServiceable;
 
+import services.StudentAttendCampService;
+import services.StudentEnquiryService;
+
+import views.StudentAllCampView;
+import views.RegisteredCampView;
+import views.StudentEnquiryView;
+
+
+public class StudentController extends AbstractUserController {
+	
+	protected static CampViewable campView;
+	
+	protected static EnquiryViewable enquiryView;
+
+	protected static AttendCampServiceable attendCampService = new StudentAttendCampService();
+	
+	protected static EnquiryServiceable enquiryService = new StudentEnquiryService();	
+	
 	@Override
 	public void start() {
-		// TODO Auto-generated method stub
+		
+		int choice;
+		
+		do {
+			System.out.println("1. View profile");
+			System.out.println("2. View all camps");
+			System.out.println("3. View registered camps");
+			System.out.println("4. View enquiries");
+			System.out.println("5. Create enquiry");
+			System.out.println("6. Log out");
+			System.out.print("\nChoice: ");
+			
+			choice = sc.nextInt();
+			
+			System.out.println();
+			
+			switch (choice) {
+			case 1:
+				viewProfile();
+				break;
+			case 2:
+				viewAllCamps();
+				break;
+			case 3:
+				viewRegisteredCamps();
+				break;
+			case 4:
+				viewEnquiries();
+				break;
+			case 5:
+				createEnquiry();
+				break;
+			case 6:
+				return;
+			default:
+				System.out.println("Invalid choice. Please choose again.");
+			}
 
-	}
-
-	@Override
-	protected void viewProfile() {
-		// TODO Auto-generated method stub
-
+		} while(true);
 	}
 
 	@Override
 	protected void viewAllCamps() {
-		// TODO Auto-generated method stub
-
+		
+		int choice;
+		
+		CampView = new StudentAllCampView();
+		CampView.view();
+		
+		do {
+			System.out.println("1. Sort by camp name");
+			System.out.println("2. Sort by camp dates");
+			System.out.println("3. Sort by camp registration closing date");
+			System.out.println("4. Sort by camp location");
+			System.out.println("5. Sort by camp faculty");
+			System.out.println("6. Register for camp");
+			System.out.println("7. Back");
+			System.out.print("\nChoice: ");
+			
+			choice = sc.nextInt();
+			
+			System.out.println();
+			
+			switch (choice) {
+			case 1:
+				CampView.filterView(NAME);
+				break;
+			case 2:
+				CampView.filterView(DATES);
+				break;
+			case 3:
+				CampView.filterView(CLOSING_DATE);
+				break;
+			case 4:
+				CampView.filterView(LOCATION);
+				break;
+			case 5:
+				CampView.filterView(FACULTY);
+				break;
+			case 6:
+				registerForCamp();
+				break;
+			case 7:
+				return;
+			default:
+				System.out.println("Invalid choice. Please choose again.");
+			}
+			
+		} while (true);
 	}
 
 	@Override
 	protected void viewEnquiries() {
-		// TODO Auto-generated method stub
 
+		int choice;
+		
+		enquiryView = new StudentEnquiryView();
+		enquiryView.view();
+		
+		do {
+			System.out.println("1. Create enquiry");
+			System.out.println("2. Back");
+			System.out.print("\nChoice: ");
+			
+			choice = sc.nextInt();
+			
+			System.out.println();
+			
+			switch (choice) {
+			case 1:
+				createEnquiry();
+				break;
+			case 2:
+				return;
+			default:
+				System.out.println("Invalid choice. Please choose again.");
+			}
+		} while (true);
 	}
 	
 	protected void viewRegisteredCamps() {
-		// TODO Auto-generated method stub
 
+		int choice;
+		
+		CampView = new StudentAllCampView();
+		CampView.view();
+		
+		do {
+			System.out.println("1. Sort by camp name");
+			System.out.println("2. Sort by camp dates");
+			System.out.println("3. Sort by camp registration closing date");
+			System.out.println("4. Sort by camp location");
+			System.out.println("5. Sort by camp faculty");
+			System.out.println("6. Withdraw from camp");
+			System.out.println("7. Back");
+			System.out.print("\nChoice: ");
+			
+			choice = sc.nextInt();
+			
+			System.out.println();
+			
+			switch (choice) {
+			case 1:
+				CampView.filterView(NAME);
+				break;
+			case 2:
+				CampView.filterView(DATES);
+				break;
+			case 3:
+				CampView.filterView(CLOSING_DATE);
+				break;
+			case 4:
+				CampView.filterView(LOCATION);
+				break;
+			case 5:
+				CampView.filterView(FACULTY);
+				break;
+			case 6:
+				withdrawFromCamp();
+				break;
+			case 7:
+				return;
+			default:
+				System.out.println("Invalid choice. Please choose again.");
+			}
+			
+		} while (true);
 	}
 	
 	protected void registerForCamp() {
-		// TODO Auto-generated method stub
-
+		
+		attendCampService.register();
 	}
 	
-	protected void WithdrawFromCamp() {
-		// TODO Auto-generated method stub
+	protected void withdrawFromCamp() {
+		attendCampService.withdraw();
 
 	}
 	
 	protected void createEnquiry() {
-		// TODO Auto-generated method stub
-
+		
+		enquiryService.create();
 	}
 	
 	protected void editEnquiry() {
-		// TODO Auto-generated method stub
-
+		
+		enquiryService.edit();
 	}
 	
 	protected void deleteEnquiry() {
-		// TODO Auto-generated method stub
-
+		
+		enquiryService.delete();
 	}
 	
 }
