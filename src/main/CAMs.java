@@ -30,26 +30,7 @@ public class CAMs {
 		do {
 			DataTransferController.importData();
 			SessionController.startSession();
-			
-			currentUserDao currentUser;
-			try {
-				User user = currentUserDao.getCurrentUser();
-				switch (user.getRole()) {
-				case STAFF:
-					new StaffController().start();
-					break;
-				case STUDENT:
-					new StudentController().start();
-					break;
-				case COMMITTEE:
-					new CommitteeController().start();
-					break;
-				}
-			} catch (Exception e) {
-				break;
-			}
-			
-			SessionController.endSession();
+
 			DataTransferController.exportData();
 		} while (true);
 
