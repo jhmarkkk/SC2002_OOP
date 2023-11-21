@@ -1,4 +1,4 @@
-package assignment_CAMsApp;
+/*package assignment_CAMsApp;
 
 import java.util.Scanner;
 
@@ -20,4 +20,4 @@ public class CAMsApplication {
 		}
 	}
 
-}
+}*/
