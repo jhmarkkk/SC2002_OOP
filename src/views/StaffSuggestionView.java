@@ -1,5 +1,7 @@
 package views;
 
-public class StaffSuggestionView {
+import interfaces.views.SuggestionViewable;
+
+public class StaffSuggestionView implements SuggestionViewable {
 
 }

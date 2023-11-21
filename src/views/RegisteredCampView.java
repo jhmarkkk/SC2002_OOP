@@ -8,9 +8,10 @@ import enums.FilterType;
 import models.Camp;
 import models.Student;
 import models.CommitteeMember;
+import interfaces.views.CampViewable;
 import utils.CampFilter;
 
-public class RegisteredCampView {
+public class RegisteredCampView implements CampViewable {
     public void filterView(FilterType filterType) {
         CampDaoInterface campDao;
         ArrayList<Camp> camps = campDao.getCamps();

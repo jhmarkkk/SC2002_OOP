@@ -1,5 +1,7 @@
 package views;
 
-public class CampDetailView {
+import interfaces.views.CampDetailViewable;
+
+public class CampDetailView implements CampDetailViewable {
 
 }

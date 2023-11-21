@@ -10,7 +10,7 @@ public class ProfileView implements ProfileViewable {
         System.out.printf("User ID: %s\n", currentUser.getUserID());
         System.out.printf("Name: %s\n", currentUser.getName());
         System.out.printf("Faculty: %s\n", currentUser.getFaculty());
-        if (currentUser.getRole().name() == "COMMITTEE") {
+        if (currentUser.getRole().toString() == "Committee") {
             System.out.printf("Role: Committee of %s", currentUser.getFacilitatingCamp());
         } else {
             System.out.printf("Role: %s",

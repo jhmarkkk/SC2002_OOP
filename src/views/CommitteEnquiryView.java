@@ -1,5 +1,7 @@
 package views;
 
-public class CommitteEnquiryView {
+import interfaces.views.EnquiryViewable;
+
+public class CommitteEnquiryView implements EnquiryViewable {
 
 }

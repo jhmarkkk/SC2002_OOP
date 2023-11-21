@@ -1,5 +1,7 @@
 package views;
 
-public class CommitteeSuggestionView {
+import interfaces.views.SuggestionViewable;
+
+public class CommitteeSuggestionView implements SuggestionViewable {
 
 }
