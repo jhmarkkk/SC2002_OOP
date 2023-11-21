@@ -18,8 +18,7 @@ import enums.FilterType;
 
 public class CreatedCampView implements CreatedCampViewable {
     CreatedCampView() {
-        CampDaoInterface campDao = new CampDaoImpl();
-        ArrayList<Camp> createdCamps = campDao.getCamps(); 
+
         CurrentUserDaoInterface currentUserDao;
         ArrayList<String> idlist = currentUserDao.getCurrentUser().getCreatedCamps();
         for (String id : idlist) {
