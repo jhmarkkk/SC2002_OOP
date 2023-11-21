@@ -1,7 +1,9 @@
 package views;
 
-import interfaces.views.StaffAllCampViewable;
+import enums.FilterType;
+import interfaces.views.CampViewable;
 
-public class StaffAllCampView implements StaffAllCampViewable {
-
+public class StaffAllCampView implements CampViewable {
+    public void filterView(FilterType filterType) {
+    }
 }

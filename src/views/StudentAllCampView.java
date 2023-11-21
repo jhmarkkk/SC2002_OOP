@@ -4,26 +4,27 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
-import interfaces.views.Viewable;
+import enums.Visibility;
+import enums.FilterType;
+import interfaces.views.CampViewable;
 import interfaces.views.FilterViewable;
+import models.Camp;
 
-public class StudentAllCampView implements Viewable {
-    StudentAllCampView() {
-        CampDaoInterface campDao = CampDaoImplementation();
+public class StudentAllCampView implements CampViewable {
+    public void filterView(FilterType filterType) {
+        CampDaoInterface campDao;
         ArrayList<Camp> camps = campDao.getCamps();
         CurrentUserDaoInterface currentUserDao;
         String faculty = currentUserDao.getCurrentUser().getFaculty();
+
         for (Camp camp : camps) {
             // if the id does not match the idlist, remove it from camps
-            if (!Objects.equals(id, camp.getName())) {
+            if (camp.getOpenTo() != "NTU" || (!Objects.equals(faculty, camp.getOpenTo()))
+                    || camp.getVisibility().name() == "OFF") {
                 camps.remove(camp);
             }
-        }
-    }
 
-    public void view() {
-        CampDaoInterface campDao = CampDaoImplementation();
-        ArrayList<Camp> camps = campDao.getCamps();
+        }
         int index = 1;
         System.out.println("===== List of Camps =====");
         for (Camp camp : camps) {
