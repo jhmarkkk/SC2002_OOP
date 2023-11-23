@@ -3,6 +3,7 @@
  */
 package dao;
 
+import interfaces.dao.CurrentUserDao;
 import models.User;
 
 /**
@@ -10,7 +11,7 @@ import models.User;
  */
 public class CurrentUserDaoImpl implements CurrentUserDao {
 	
-	private User currentUser;
+	private static User currentUser;
 
 	/**
 	 * @param currentUser

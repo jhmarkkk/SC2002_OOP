@@ -1,10 +1,10 @@
 package controllers;
 
-import interfaces.CampDetailViewable;
-import interfaces.SuggestionViewable;
-import interfaces.ReplyEnquiryServiceable;
-import interfaces.SuggestionServiceable;
-import interfaces.GenerateReportServiceable;
+import interfaces.views.CampDetailViewable;
+import interfaces.views.SuggestionViewable;
+import interfaces.services.ReplyEnquiryServiceable;
+import interfaces.services.SuggestionServiceable;
+import interfaces.services.GenerateReportServiceable;
 
 import models.CommitteeMember;
 

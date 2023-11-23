@@ -1,5 +1,9 @@
 package views;
 
-public class StudentEnquiryView {
+import interfaces.views.EnquiryViewable;
 
+public class StudentEnquiryView implements EnquiryViewable{
+    public void view() {
+        
+    }
 }
