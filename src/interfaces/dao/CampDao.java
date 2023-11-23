@@ -1,7 +1,7 @@
 /**
  * 
  */
-package dao;
+package interfaces.dao;
 
 import java.util.Map;
 

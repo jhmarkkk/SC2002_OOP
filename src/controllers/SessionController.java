@@ -2,7 +2,7 @@ package controllers;
 
 import java.util.Scanner;
 
-import interfaces.AuthServiceable;
+import interfaces.services.AuthServiceable;
 
 import services.AuthService;
 
