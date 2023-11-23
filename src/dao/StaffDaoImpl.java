@@ -5,6 +5,7 @@ package dao;
 
 import java.util.Map;
 
+import interfaces.dao.StaffDao;
 import models.Staff;
 
 /**

@@ -6,12 +6,12 @@ import dao.CommitteeMemberDaoImpl;
 import dao.CampDaoImpl;
 import dao.CurrentUserDaoImpl;
 
-import interfaces.StaffDao;
-import interfaces.StudentDao;
-import interfaces.CommitteeMemberDao;
-import interfaces.CampDao;
-import interfaces.CurrentUserDao;
-import interfaces.DataServiceable;
+import interfaces.dao.StaffDao;
+import interfaces.dao.StudentDao;
+import interfaces.dao.CommitteeMemberDao;
+import interfaces.dao.CampDao;
+import interfaces.dao.CurrentUserDao;
+import interfaces.services.DataServiceable;
 
 import services.StaffDataService;
 import services.StudentDataService;
