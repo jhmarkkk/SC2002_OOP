@@ -1,5 +1,5 @@
 package interfaces.views;
 
-public class AttendeeViewable extends Viewable {
+public interface AttendeeViewable extends Viewable {
     
 }
