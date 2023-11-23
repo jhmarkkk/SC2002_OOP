@@ -4,6 +4,7 @@ package models;
  * 
  */
 public class Enquiry {
+	
 	private Integer enquiryID;
 	private String enquiry;
 	private String enquirer;
@@ -17,6 +18,7 @@ public class Enquiry {
 	 * @param replier
 	 */
 	public Enquiry(Integer enquiryID, String enquiry, String enquirer, String replier, String reply) {
+		
 		this.enquiryID = enquiryID;
 		this.enquiry = enquiry;
 		this.enquirer = enquirer;
@@ -28,6 +30,7 @@ public class Enquiry {
 	 * @return the enquiry
 	 */
 	public String getEnquiry() {
+		
 		return enquiry;
 	}
 
@@ -35,6 +38,7 @@ public class Enquiry {
 	 * @param enquiry the enquiry to set
 	 */
 	public void setEnquiry(String enquiry) {
+		
 		this.enquiry = enquiry;
 	}
 
@@ -42,6 +46,7 @@ public class Enquiry {
 	 * @return the replier
 	 */
 	public String getReplier() {
+		
 		return replier;
 	}
 
@@ -49,6 +54,7 @@ public class Enquiry {
 	 * @param replier the replier to set
 	 */
 	public void setReplier(String replier) {
+		
 		this.replier = replier;
 	}
 
@@ -56,6 +62,7 @@ public class Enquiry {
 	 * @return the enquiryID
 	 */
 	public Integer getEnquiryID() {
+		
 		return enquiryID;
 	}
 
@@ -63,6 +70,7 @@ public class Enquiry {
 	 * @return the enquirer
 	 */
 	public String getEnquirer() {
+		
 		return enquirer;
 	}
 
@@ -70,6 +78,7 @@ public class Enquiry {
 	 * @return the reply
 	 */
 	public String getReply() {
+		
 		return reply;
 	}
 
@@ -77,6 +86,7 @@ public class Enquiry {
 	 * @param reply the reply to set
 	 */
 	public void setReply(String reply) {
+		
 		this.reply = reply;
 	}
 	

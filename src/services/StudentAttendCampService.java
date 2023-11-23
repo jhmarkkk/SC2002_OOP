@@ -1,6 +1,7 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -21,6 +22,7 @@ import models.Camp;
 import models.CommitteeMember;
 import models.Student;
 import models.User;
+import utils.DateUtil;
 
 
 public class StudentAttendCampService implements AttendCampServiceable {
@@ -38,10 +40,9 @@ public class StudentAttendCampService implements AttendCampServiceable {
     public void register(){
     	
     	int i, choice;
-    	String campName;
     	Camp selectedCamp;
     	Student currentUser = (Student)currentUserDao.getCurrentUser();
-    	ArrayList<Camp> validCamps = getValidCamps();
+    	ArrayList<Camp> validCamps = getValidCamps(currentUser);
     	
     	do {
     		System.out.println("Register for:");
@@ -68,7 +69,8 @@ public class StudentAttendCampService implements AttendCampServiceable {
     	do {
     		System.out.println("Register as:");
     		System.out.println("1. Attendee");
-    		System.out.println("2. CommitteeMember");
+    		if (selectedCamp.getCommitteeSlots() > selectedCamp.getCommitteeMembers().size())
+    			System.out.println("2. CommitteeMember");
     		System.out.print("Choice: ");
     		
     		choice = sc.nextInt();
@@ -80,7 +82,7 @@ public class StudentAttendCampService implements AttendCampServiceable {
     			break;
     		}
     		
-    		if (choice == 2) {
+    		if (choice == 2 || selectedCamp.getCommitteeSlots() > selectedCamp.getCommitteeMembers().size()) {
     			joinAsCommittee(currentUser, selectedCamp);
     			break;
     		}
@@ -136,9 +138,45 @@ public class StudentAttendCampService implements AttendCampServiceable {
     	System.out.printf("You have withdrawn from %s\n", selectedCampName);
     }
     
-    private ArrayList<Camp> getValidCamps(){
+    private ArrayList<Camp> getValidCamps(Student user){
     	
-    	// faculty, dates, slots, deadline, withdrawn status, facilitating camp, registered camp
+    	Map<String, Camp> campData = campDao.getCamps();
+    	ArrayList<Camp> camps = new ArrayList<>(campData.values());
+    	ArrayList<Camp> validCamps = new ArrayList<>();
+    	ArrayList<String> registeredCampName = user.getRegisteredCamps();
+    	ArrayList<GregorianCalendar> unavailableDates = new ArrayList<>();
+    	GregorianCalendar today = new GregorianCalendar();
+    	Boolean overlap = false;
+    	
+    	for (String name : registeredCampName)
+    	    unavailableDates.addAll(campData.get(name).getDates());
+    	
+    	for (Camp camp : camps) {
+			if (!camp.getOpenTo().equals(user.getFaculty()) && !camp.getOpenTo().equals("NTU")) continue;
+			if (camp.getAttendeeSlots() >= camp.getAttendees().size() && camp.getCommitteeSlots() >= camp.getCommitteeMembers().size()) continue;
+			if (DateUtil.toString(camp.getRegistrationClosingDate()).compareTo(DateUtil.toString(today)) < 0) continue;
+			if (registeredCampName.contains(camp.getName())) continue;
+			if (camp.getWithdrawnAttendees().contains(user.getUserID())) continue;
+			if (user.getRole() == Role.COMMITTEE) {
+				CommitteeMember committeeMember = (CommitteeMember) user;
+				if (committeeMember.getFacilitatingCamp() == camp.getName()) continue;
+			}
+			ArrayList<GregorianCalendar> dates = camp.getDates();
+			overlap = false;
+			for (GregorianCalendar date : dates) {
+				for (GregorianCalendar unavailableDate : unavailableDates) {
+					if (DateUtil.toString(date).equals(DateUtil.toString(unavailableDate))) {
+						overlap = true;
+						break;
+					}
+				}
+				if (overlap) break;
+			}
+			if (overlap) continue;
+			
+			validCamps.add(camp);
+		}
+    	return validCamps;
     }
     
     private void joinAsAttendee(Student user, Camp camp) {
@@ -162,22 +200,17 @@ public class StudentAttendCampService implements AttendCampServiceable {
     		return;
     	}
     	
-    	if (camp.getCommitteeSlots() == camp.getCommitteeMembers().size()) {
-    		System.out.println("Maximum number of committee members reached");
-    		return;
-    	}
-    	
     	CommitteeMember committeeMember = new CommitteeMember(user.getUserID(), user.getPassword(),
-    			user.getName(), user.getFaculty(), Role.COMMITTEE, user.getRegisteredCamps(),
-    			user.getEnquiries(), camp.getName(), new ArrayList<>(), 0);
-    	
-    	Map<String, Student> studentStore = studentDao.getStudents();
-    	studentStore.remove(user.getUserID());
-    	studentDao.setStudents(studentStore);
+    			user.getName(), user.getFaculty(), user.getRegisteredCamps(), user.getEnquiries(),
+    			camp.getName(), new ArrayList<>(), 0);
     	
     	Map<String, CommitteeMember> committeeMembersStore = committeeMemberDao.getCommitteeMembers();
     	committeeMembersStore.put(committeeMember.getUserID(), committeeMember);
     	committeeMemberDao.setCommitteeMembers(committeeMembersStore);
+    	
+    	Map<String, Student> studentStore = studentDao.getStudents();
+    	studentStore.remove(user.getUserID());
+    	studentDao.setStudents(studentStore);
     	
     	ArrayList<String> committeeMembers = camp.getCommitteeMembers();
     	committeeMembers.add(committeeMember.getName());
@@ -186,9 +219,6 @@ public class StudentAttendCampService implements AttendCampServiceable {
     	System.out.printf("You have registered for %s as a committee member\n", camp.getName());
     }
     
-//    CommitteeMember(String userID, String password, String name, String faculty, Role role,
-//			ArrayList<String> registeredCamps, ArrayList<Integer> enquiries, String facilitatingCamp,
-//			ArrayList<Integer> suggestions, int points)
     
     private boolean validateWithdrawingFromCommittee(User user, String campName) {
     	
