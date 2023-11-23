@@ -16,11 +16,11 @@ public class Student extends User {
 	 * @param registeredCamps
 	 * @param enquiries
 	 */
-	public Student(String userID, String password, String name, String faculty, Role role,
-			ArrayList<String> registeredCamps, ArrayList<Integer> enquiries) {
+	//public Student(String userID, String password, String name, String faculty, Role role, ArrayList<String> registeredCamps, ArrayList<Integer> enquiries) {
+	public Student(String userID, String password, String name, String faculty, Role role, ArrayList<String> registeredCamps) {
 		super(userID, password, name, faculty, role);
 		this.registeredCamps = registeredCamps;
-		this.enquiries = enquiries;
+		//this.enquiries = enquiries;
 	}
 
 	/**
@@ -37,19 +37,19 @@ public class Student extends User {
 		this.registeredCamps = registeredCamps;
 	}
 
-	/**
-	 * @return the enquiries
-	 */
-	public ArrayList<Integer> getEnquiries() {
-		return enquiries;
-	}
+	// /**
+	//  * @return the enquiries
+	//  */
+	// public ArrayList<Integer> getEnquiries() {
+	// 	return enquiries;
+	// }
 
-	/**
-	 * @param enquiries the enquiries to set
-	 */
-	public void setEnquiries(ArrayList<Integer> enquiries) {
-		this.enquiries = enquiries;
-	}
+	// /**
+	//  * @param enquiries the enquiries to set
+	//  */
+	// public void setEnquiries(ArrayList<Integer> enquiries) {
+	// 	this.enquiries = enquiries;
+	// }
 	
 	
 
