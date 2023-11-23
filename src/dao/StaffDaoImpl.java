@@ -12,7 +12,7 @@ import models.Staff;
  */
 public class StaffDaoImpl implements StaffDao {
 	
-	private Map<String, Staff> staffs;
+	private static Map<String, Staff> staffs;
 
 	/**
 	 * @param staffs

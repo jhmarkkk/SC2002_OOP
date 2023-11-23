@@ -12,7 +12,7 @@ import models.CommitteeMember;
  */
 public class CommitteeMemberDaoImpl implements CommitteeMemberDao {
 	
-	private Map<String, CommitteeMember> committeeMembers;
+	private static Map<String, CommitteeMember> committeeMembers;
 
 	/**
 	 * @param committeeMembers
