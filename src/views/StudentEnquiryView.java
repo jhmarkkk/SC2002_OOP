@@ -22,9 +22,9 @@ public class StudentEnquiryView implements EnquiryViewable {
         int campIndex = 1;
         int enqIndex = 1;
         for (Camp registeredCamp : registeredCamps) {
-            System.out.printf("----- Enquiry for %s (%d)-----\n", registeredCamp.getName(), campIndex);
             for (Enquiry enq : registeredCamp.getEnquiries()) {
                 if (enq.getEnquirer().equals(userID)) {
+                    System.out.printf("----- Enquiry for %s (%d)-----\n", registeredCamp.getName(), campIndex);
                     System.out.printf("***** Enquiry %d *****\n", enqIndex);
                     System.out.printf("%s\n", enq.getEnquiry());
                     if (enq.getReplier() != null) {
