@@ -1,6 +1,6 @@
 package enums;
 
-public enum FilterType {
+public enum SortType {
 	NAME,
 	DATES,
 	CLOSING_DATE,

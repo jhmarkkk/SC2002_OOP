@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Date;
 import enums.Visibility;
 
@@ -18,8 +19,8 @@ public class Camp {
 	private ArrayList<String> withdrawnAttendees;
 	private ArrayList<String> committeeMembers;
 	private Visibility visibility = Visibility.OFF;
-	private ArrayList<Enquiry> enquiries;
-	private ArrayList<Suggestion> suggestions;
+	private Map<String, Enquiry> enquiries;
+	private Map<String, Suggestion> suggestions;
 	private static Integer enquiryCounter;
 	private static Integer suggestionCounter;
 	
@@ -44,7 +45,7 @@ public class Camp {
 	public Camp(String name, ArrayList<Date> dates, Date registrationClosingDate, String openTo, String location,
 			int totalSlots, int committeeSlots, String description, String staffInCharge, ArrayList<String> attendees,
 			ArrayList<String> withdrawnAttendees, ArrayList<String> committeeMembers,
-			ArrayList<Enquiry> enquiries, ArrayList<Suggestion> suggestions, Integer enquiryCounter,
+			Map<String, Enquiry> enquiries, Map<String, Suggestion> suggestions, Integer enquiryCounter,
 			Integer suggestionCounter) {
 		
 		this.name = name;
@@ -236,28 +237,28 @@ public class Camp {
 	/**
 	 * @return the enquiries
 	 */
-	public ArrayList<Enquiry> getEnquiries() {
+	public Map<String, Enquiry> getEnquiries() {
 		return enquiries;
 	}
 
 	/**
 	 * @param enquiries the enquiries to set
 	 */
-	public void setEnquiries(ArrayList<Enquiry> enquiries) {
+	public void setEnquiries(Map<String, Enquiry> enquiries) {
 		this.enquiries = enquiries;
 	}
 
 	/**
 	 * @return the suggestions
 	 */
-	public ArrayList<Suggestion> getSuggestions() {
+	public Map<String, Suggestion> getSuggestions() {
 		return suggestions;
 	}
 
 	/**
 	 * @param suggestions the suggestions to set
 	 */
-	public void setSuggestions(ArrayList<Suggestion> suggestions) {
+	public void setSuggestions(Map<String, Suggestion> suggestions) {
 		this.suggestions = suggestions;
 	}
 
