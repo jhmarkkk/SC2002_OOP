@@ -1,6 +1,8 @@
 package services;
 
-public class StaffCampService {
+import interfaces.services.CampServiceable;
+
+public class StaffCampService implements CampServiceable{
     public void create(){
         // TODO Auto-generated method stub
     }

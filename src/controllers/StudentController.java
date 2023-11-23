@@ -1,9 +1,11 @@
 package controllers;
 
-import interfaces.CampViewable;
-import interfaces.EnquiryViewable;
-import interfaces.AttendCampServiceable;
-import interfaces.EnquiryServiceable;
+import enums.FilterType;
+
+import interfaces.views.CampViewable;
+import interfaces.views.EnquiryViewable;
+import interfaces.services.AttendCampServiceable;
+import interfaces.services.EnquiryServiceable;
 
 import services.StudentAttendCampService;
 import services.StudentEnquiryService;
@@ -70,8 +72,8 @@ public class StudentController extends AbstractUserController {
 		
 		int choice;
 		
-		CampView = new StudentAllCampView();
-		CampView.filterView(NAME);
+		campView = new StudentAllCampView();
+		campView.filterView(FilterType.NAME);
 		
 		do {
 			System.out.println("1. Sort by camp dates");
@@ -88,16 +90,16 @@ public class StudentController extends AbstractUserController {
 			
 			switch (choice) {
 			case 1:
-				CampView.filterView(DATES);
+				campView.filterView(FilterType.DATES);
 				break;
 			case 2:
-				CampView.filterView(CLOSING_DATE);
+				campView.filterView(FilterType.CLOSING_DATE);
 				break;
 			case 3:
-				CampView.filterView(LOCATION);
+				campView.filterView(FilterType.LOCATION);
 				break;
 			case 4:
-				CampView.filterView(FACULTY);
+				campView.filterView(FilterType.FACULTY);
 				break;
 			case 5:
 				registerForCamp();
@@ -144,8 +146,8 @@ public class StudentController extends AbstractUserController {
 
 		int choice;
 		
-		CampView = new StudentAllCampView();
-		CampView.filterView(NAME);
+		campView = new RegisteredCampView();
+		campView.filterView(FilterType.NAME);
 		
 		do {
 			System.out.println("1. Sort by camp dates");
@@ -162,16 +164,16 @@ public class StudentController extends AbstractUserController {
 			
 			switch (choice) {
 			case 1:
-				CampView.filterView(DATES);
+				campView.filterView(FilterType.DATES);
 				break;
 			case 2:
-				CampView.filterView(CLOSING_DATE);
+				campView.filterView(FilterType.CLOSING_DATE);
 				break;
 			case 3:
-				CampView.filterView(LOCATION);
+				campView.filterView(FilterType.LOCATION);
 				break;
 			case 4:
-				CampView.filterView(FACULTY);
+				campView.filterView(FilterType.FACULTY);
 				break;
 			case 5:
 				withdrawFromCamp();
