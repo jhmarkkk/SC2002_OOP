@@ -4,11 +4,13 @@ import dao.StaffDaoImpl;
 import dao.StudentDaoImpl;
 import dao.CommitteeMemberDaoImpl;
 import dao.CampDaoImpl;
+import dao.CurrentUserDaoImpl;
 
 import interfaces.StaffDao;
 import interfaces.StudentDao;
 import interfaces.CommitteeMemberDao;
 import interfaces.CampDao;
+import interfaces.CurrentUserDao;
 import interfaces.DataServiceable;
 
 import services.StaffDataService;
@@ -27,18 +29,17 @@ public class DataTransferController {
 	private static DataServiceable campDataService = CampDataService();
 	
 	public static void importData() {
-		
-		StaffDao staffDao = new StaffDaoImpl();
-		StudentDao studentDao = new StudentDaoImpl();
-		CommitteeMemberDao committeeMemberDao = new CommitteeMemberDaoImpl();
-		CampDao campDao = new CampDaoImpl();
+		staffDataService.importing();
+		studentDataService.importing();
+		committeeMemberDataService.importing();
+		campDataService.importing();
 	}
 	
 	public static void exportData() {
 		
-		staffDataService.export();
-		studentDataService.export();
-		committeeMemberDataService.export();
-		campDataService.export();
+		staffDataService.exporting();
+		studentDataService.exporting();
+		committeeMemberDataService.exporting();
+		campDataService.exporting();
 	}
 }

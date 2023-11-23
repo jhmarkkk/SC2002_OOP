@@ -62,7 +62,6 @@ public class StudentController extends AbstractUserController {
 			default:
 				System.out.println("Invalid choice. Please choose again.");
 			}
-
 		} while(true);
 	}
 
@@ -72,16 +71,15 @@ public class StudentController extends AbstractUserController {
 		int choice;
 		
 		CampView = new StudentAllCampView();
-		CampView.view();
+		CampView.filterView(NAME);
 		
 		do {
-			System.out.println("1. Sort by camp name");
-			System.out.println("2. Sort by camp dates");
-			System.out.println("3. Sort by camp registration closing date");
-			System.out.println("4. Sort by camp location");
-			System.out.println("5. Sort by camp faculty");
-			System.out.println("6. Register for camp");
-			System.out.println("7. Back");
+			System.out.println("1. Sort by camp dates");
+			System.out.println("2. Sort by camp registration closing date");
+			System.out.println("3. Sort by camp location");
+			System.out.println("4. Sort by camp faculty");
+			System.out.println("5. Register for camp");
+			System.out.println("6. Back");
 			System.out.print("\nChoice: ");
 			
 			choice = sc.nextInt();
@@ -90,24 +88,21 @@ public class StudentController extends AbstractUserController {
 			
 			switch (choice) {
 			case 1:
-				CampView.filterView(NAME);
-				break;
-			case 2:
 				CampView.filterView(DATES);
 				break;
-			case 3:
+			case 2:
 				CampView.filterView(CLOSING_DATE);
 				break;
-			case 4:
+			case 3:
 				CampView.filterView(LOCATION);
 				break;
-			case 5:
+			case 4:
 				CampView.filterView(FACULTY);
 				break;
-			case 6:
+			case 5:
 				registerForCamp();
 				break;
-			case 7:
+			case 6:
 				return;
 			default:
 				System.out.println("Invalid choice. Please choose again.");
@@ -150,16 +145,15 @@ public class StudentController extends AbstractUserController {
 		int choice;
 		
 		CampView = new StudentAllCampView();
-		CampView.view();
+		CampView.filterView(NAME);
 		
 		do {
-			System.out.println("1. Sort by camp name");
-			System.out.println("2. Sort by camp dates");
-			System.out.println("3. Sort by camp registration closing date");
-			System.out.println("4. Sort by camp location");
-			System.out.println("5. Sort by camp faculty");
-			System.out.println("6. Withdraw from camp");
-			System.out.println("7. Back");
+			System.out.println("1. Sort by camp dates");
+			System.out.println("2. Sort by camp registration closing date");
+			System.out.println("3. Sort by camp location");
+			System.out.println("4. Sort by camp faculty");
+			System.out.println("5. Withdraw from camp");
+			System.out.println("6. Back");
 			System.out.print("\nChoice: ");
 			
 			choice = sc.nextInt();
@@ -168,24 +162,21 @@ public class StudentController extends AbstractUserController {
 			
 			switch (choice) {
 			case 1:
-				CampView.filterView(NAME);
-				break;
-			case 2:
 				CampView.filterView(DATES);
 				break;
-			case 3:
+			case 2:
 				CampView.filterView(CLOSING_DATE);
 				break;
-			case 4:
+			case 3:
 				CampView.filterView(LOCATION);
 				break;
-			case 5:
+			case 4:
 				CampView.filterView(FACULTY);
 				break;
-			case 6:
+			case 5:
 				withdrawFromCamp();
 				break;
-			case 7:
+			case 6:
 				return;
 			default:
 				System.out.println("Invalid choice. Please choose again.");

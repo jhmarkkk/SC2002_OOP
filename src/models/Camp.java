@@ -262,5 +262,13 @@ public class Camp {
 		return staffInCharge;
 	}
 	
+	/**
+	 * 
+	 * @return The number of slots remaining for attendees.
+	 */
+	public int getAttendeeSlots() {
+		return this.totalSlots - this.committeeSlots;
+	}
+	
 
 }

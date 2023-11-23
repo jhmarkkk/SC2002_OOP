@@ -108,16 +108,15 @@ public class StaffController extends AbstractUserController {
 		int choice;
 		
 		CampView = new StaffAllCampView();
-		CampView.view();
+		CampView.filterView(NAME);
 		
 		do {
-			System.out.println("1. Sort by camp name");
-			System.out.println("2. Sort by camp dates");
-			System.out.println("3. Sort by camp registration closing date");
-			System.out.println("4. Sort by camp location");
-			System.out.println("5. Sort by camp faculty");
-			System.out.println("6. Sort by camp staff-in-charge");
-			System.out.println("7. Back");
+			System.out.println("1. Sort by camp dates");
+			System.out.println("2. Sort by camp registration closing date");
+			System.out.println("3. Sort by camp location");
+			System.out.println("4. Sort by camp faculty");
+			System.out.println("5. Sort by camp staff-in-charge");
+			System.out.println("6. Back");
 			System.out.print("\nChoice: ");
 			
 			choice = sc.nextInt();
@@ -126,24 +125,21 @@ public class StaffController extends AbstractUserController {
 			
 			switch (choice) {
 			case 1:
-				CampView.filterView(NAME);
-				break;
-			case 2:
 				CampView.filterView(DATES);
 				break;
-			case 3:
+			case 2:
 				CampView.filterView(CLOSING_DATE);
 				break;
-			case 4:
+			case 3:
 				CampView.filterView(LOCATION);
 				break;
-			case 5:
+			case 4:
 				CampView.filterView(FACULTY);
 				break;
-			case 6:
+			case 5:
 				CampView.filterView(STAFF);
 				break;
-			case 7:
+			case 6:
 				return;
 			default:
 				System.out.println("Invalid choice. Please choose again.");
@@ -186,19 +182,18 @@ public class StaffController extends AbstractUserController {
 		int choice;
 		
 		CampView = new CreatedCampView();
-		CampView.view();
+		CampView.filterView(NAME);
 		
 		do {
-			System.out.println("1. Sort by camp name");
-			System.out.println("2. Sort by camp dates");
-			System.out.println("3. Sort by camp registration closing date");
-			System.out.println("4. Sort by camp location");
-			System.out.println("5. Sort by camp faculty");
-			System.out.println("6. Sort by camp staff-in-charge");
-			System.out.println("7. View camp attendees");
-			System.out.println("8. Edit camp");
-			System.out.println("9. Delete camp");
-			System.out.println("10. Back");
+			System.out.println("1. Sort by camp dates");
+			System.out.println("2. Sort by camp registration closing date");
+			System.out.println("3. Sort by camp location");
+			System.out.println("4. Sort by camp faculty");
+			System.out.println("5. Sort by camp staff-in-charge");
+			System.out.println("6. View camp attendees");
+			System.out.println("7. Edit camp");
+			System.out.println("8. Delete camp");
+			System.out.println("9. Back");
 			System.out.print("\nChoice: ");
 			
 			choice = sc.nextInt();
@@ -207,30 +202,27 @@ public class StaffController extends AbstractUserController {
 			
 			switch (choice) {
 			case 1:
-				CampView.filterView(NAME);
-				break;
-			case 2:
 				CampView.filterView(DATES);
 				break;
-			case 3:
+			case 2:
 				CampView.filterView(CLOSING_DATE);
 				break;
-			case 4:
+			case 3:
 				CampView.filterView(LOCATION);
 				break;
-			case 5:
+			case 4:
 				CampView.filterView(FACULTY);
 				break;
-			case 6:
+			case 5:
 				CampView.filterView(STAFF);
 				break;
-			case 7:
+			case 6:
 				viewAttendees();
 				break;
-			case 8:
+			case 7:
 				editCamp();
 				break;
-			case 9:
+			case 8:
 				deleteCamp();
 				break;
 			case 10:
@@ -239,7 +231,6 @@ public class StaffController extends AbstractUserController {
 				System.out.println("Invalid choice. Please choose again.");
 			}
 		} while (true);
-
 	}
 	
 	protected void viewAttendees() {
@@ -288,7 +279,6 @@ public class StaffController extends AbstractUserController {
 			}
 			
 		} while (true);
-
 	}
 	
 	protected void approveSuggestion() {
