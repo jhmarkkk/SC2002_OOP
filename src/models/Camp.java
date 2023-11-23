@@ -20,6 +20,8 @@ public class Camp {
 	private Visibility visibility = Visibility.OFF;
 	private ArrayList<Enquiry> enquiries;
 	private ArrayList<Suggestion> suggestions;
+	private static Integer enquiryCounter;
+	private static Integer suggestionCounter;
 	
 	/**
 	 * @param name
@@ -34,14 +36,17 @@ public class Camp {
 	 * @param attendees
 	 * @param withdrawnAttendees
 	 * @param committeeMembers
-	 * @param visibility
 	 * @param enquiries
 	 * @param suggestions
+	 * @param enquiryCounter
+	 * @param suggestionCounter
 	 */
 	public Camp(String name, ArrayList<Date> dates, Date registrationClosingDate, String openTo, String location,
 			int totalSlots, int committeeSlots, String description, Staff staffInCharge, ArrayList<Student> attendees,
-			ArrayList<String> withdrawnAttendees, ArrayList<CommitteeMember> committeeMembers, Visibility visibility,
-			ArrayList<Enquiry> enquiries, ArrayList<Suggestion> suggestions) {
+			ArrayList<String> withdrawnAttendees, ArrayList<CommitteeMember> committeeMembers,
+			ArrayList<Enquiry> enquiries, ArrayList<Suggestion> suggestions, Integer enquiryCounter,
+			Integer suggestionCounter) {
+		
 		this.name = name;
 		this.dates = dates;
 		this.registrationClosingDate = registrationClosingDate;
@@ -54,9 +59,10 @@ public class Camp {
 		this.attendees = attendees;
 		this.withdrawnAttendees = withdrawnAttendees;
 		this.committeeMembers = committeeMembers;
-		this.visibility = visibility;
 		this.enquiries = enquiries;
 		this.suggestions = suggestions;
+		Camp.enquiryCounter = enquiryCounter;
+		Camp.suggestionCounter = suggestionCounter;
 	}
 	
 	/**
@@ -268,6 +274,34 @@ public class Camp {
 	 */
 	public int getAttendeeSlots() {
 		return this.totalSlots - this.committeeSlots;
+	}
+
+	/**
+	 * @return the enquiryCounter
+	 */
+	public Integer getEnquiryCounter() {
+		return enquiryCounter;
+	}
+
+	/**
+	 * @param enquiryCounter the enquiryCounter to set
+	 */
+	public void setEnquiryCounter(Integer enquiryCounter) {
+		Camp.enquiryCounter = enquiryCounter;
+	}
+
+	/**
+	 * @return the suggestionCounter
+	 */
+	public Integer getSuggestionCounter() {
+		return suggestionCounter;
+	}
+
+	/**
+	 * @param suggestionCounter the suggestionCounter to set
+	 */
+	public void setSuggestionCounter(Integer suggestionCounter) {
+		Camp.suggestionCounter = suggestionCounter;
 	}
 	
 
