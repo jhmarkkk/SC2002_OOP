@@ -1,5 +1,8 @@
 package main;
 
+import services.StaffDataService;
+import services.StudentDataService;
+import services.StaffDataService;
 import controllers.SessionController;
 import controllers.DataTransferController;
 import controllers.StaffController;
@@ -10,14 +13,6 @@ import interfaces.CurrentUserDao;
 
 import models.User;
 
-/**
- * The main class executing the Camp Application and Management System (CAMs).
- * This class handles the initialisation of data, log-in and starting the
- * appropriate session based on the role of logged-in user.
- * 
- * @author Chua Shan Hong
- *
- */
 public class CAMs {
 	
 	
@@ -51,5 +46,16 @@ public class CAMs {
 			SessionController.endSession();
 			DataTransferController.exportData();
 		} while (true);
+
+		//System.out.println("main testing");
+
+		//TESTING SERVICES
+		// StudentDataService studentDataService = new StudentDataService();
+		// String studentFilePath = "StudentList.csv";
+		// studentDataService.importing(studentFilePath);
+
+		// StaffDataService staffDataService = new StaffDataService();
+		// String staffFilePath = "StaffList.csv";
+		// staffDataService.importing(staffFilePath);
 	}
 }
