@@ -3,6 +3,7 @@
  */
 package dao;
 
+import interfaces.dao.CurrentUserDao;
 import models.User;
 
 /**
