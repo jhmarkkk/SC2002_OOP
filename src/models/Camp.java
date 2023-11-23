@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Date;
 import enums.Visibility;
 
@@ -13,13 +14,15 @@ public class Camp {
 	private int totalSlots;
 	private int committeeSlots;
 	private String description;
-	private Staff staffInCharge;
-	private ArrayList<Student> attendees;
+	private String staffInCharge;
+	private ArrayList<String> attendees;
 	private ArrayList<String> withdrawnAttendees;
-	private ArrayList<CommitteeMember> committeeMembers;
+	private ArrayList<String> committeeMembers;
 	private Visibility visibility = Visibility.OFF;
-	private ArrayList<Enquiry> enquiries;
-	private ArrayList<Suggestion> suggestions;
+	private Map<String, Enquiry> enquiries;
+	private Map<String, Suggestion> suggestions;
+	private static Integer enquiryCounter;
+	private static Integer suggestionCounter;
 	
 	/**
 	 * @param name
@@ -34,9 +37,10 @@ public class Camp {
 	 * @param attendees
 	 * @param withdrawnAttendees
 	 * @param committeeMembers
-	 * @param visibility
 	 * @param enquiries
 	 * @param suggestions
+	 * @param enquiryCounter
+	 * @param suggestionCounter
 	 */
 	// public Camp(String name, ArrayList<Date> dates, Date registrationClosingDate, String openTo, String location,
 	// 		int totalSlots, int committeeSlots, String description, Staff staffInCharge, ArrayList<Student> attendees,
@@ -176,14 +180,14 @@ public class Camp {
 	/**
 	 * @return the attendees
 	 */
-	public ArrayList<Student> getAttendees() {
+	public ArrayList<String> getAttendees() {
 		return attendees;
 	}
 
 	/**
 	 * @param attendees the attendees to set
 	 */
-	public void setAttendees(ArrayList<Student> attendees) {
+	public void setAttendees(ArrayList<String> attendees) {
 		this.attendees = attendees;
 	}
 
@@ -204,14 +208,14 @@ public class Camp {
 	/**
 	 * @return the committeeMembers
 	 */
-	public ArrayList<CommitteeMember> getCommitteeMembers() {
+	public ArrayList<String> getCommitteeMembers() {
 		return committeeMembers;
 	}
 
 	/**
 	 * @param committeeMembers the committeeMembers to set
 	 */
-	public void setCommitteeMembers(ArrayList<CommitteeMember> committeeMembers) {
+	public void setCommitteeMembers(ArrayList<String> committeeMembers) {
 		this.committeeMembers = committeeMembers;
 	}
 
@@ -232,35 +236,35 @@ public class Camp {
 	/**
 	 * @return the enquiries
 	 */
-	public ArrayList<Enquiry> getEnquiries() {
+	public Map<String, Enquiry> getEnquiries() {
 		return enquiries;
 	}
 
 	/**
 	 * @param enquiries the enquiries to set
 	 */
-	public void setEnquiries(ArrayList<Enquiry> enquiries) {
+	public void setEnquiries(Map<String, Enquiry> enquiries) {
 		this.enquiries = enquiries;
 	}
 
 	/**
 	 * @return the suggestions
 	 */
-	public ArrayList<Suggestion> getSuggestions() {
+	public Map<String, Suggestion> getSuggestions() {
 		return suggestions;
 	}
 
 	/**
 	 * @param suggestions the suggestions to set
 	 */
-	public void setSuggestions(ArrayList<Suggestion> suggestions) {
+	public void setSuggestions(Map<String, Suggestion> suggestions) {
 		this.suggestions = suggestions;
 	}
 
 	/**
 	 * @return the staffInCharge
 	 */
-	public Staff getStaffInCharge() {
+	public String getStaffInCharge() {
 		return staffInCharge;
 	}
 	
@@ -270,6 +274,34 @@ public class Camp {
 	 */
 	public int getAttendeeSlots() {
 		return this.totalSlots - this.committeeSlots;
+	}
+
+	/**
+	 * @return the enquiryCounter
+	 */
+	public Integer getEnquiryCounter() {
+		return enquiryCounter;
+	}
+
+	/**
+	 * @param enquiryCounter the enquiryCounter to set
+	 */
+	public void setEnquiryCounter(Integer enquiryCounter) {
+		Camp.enquiryCounter = enquiryCounter;
+	}
+
+	/**
+	 * @return the suggestionCounter
+	 */
+	public Integer getSuggestionCounter() {
+		return suggestionCounter;
+	}
+
+	/**
+	 * @param suggestionCounter the suggestionCounter to set
+	 */
+	public void setSuggestionCounter(Integer suggestionCounter) {
+		Camp.suggestionCounter = suggestionCounter;
 	}
 	
 

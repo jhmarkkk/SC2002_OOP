@@ -16,13 +16,6 @@ public class CommitteeMemberDaoImpl implements CommitteeMemberDao {
 	private static Map<String, CommitteeMember> committeeMembers;
 
 	/**
-	 * @param committeeMembers
-	 */
-	public CommitteeMemberDaoImpl(Map<String, CommitteeMember> committeeMembers) {
-		this.committeeMembers = committeeMembers;
-	}
-
-	/**
 	 * @return the committeeMembers
 	 */
 	public Map<String, CommitteeMember> getCommitteeMembers() {
@@ -33,7 +26,7 @@ public class CommitteeMemberDaoImpl implements CommitteeMemberDao {
 	 * @param committeeMembers the committeeMembers to set
 	 */
 	public void setCommitteeMembers(Map<String, CommitteeMember> committeeMembers) {
-		this.committeeMembers = committeeMembers;
+		CommitteeMemberDaoImpl.committeeMembers = committeeMembers;
 	}
 
 

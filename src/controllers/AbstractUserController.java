@@ -33,7 +33,6 @@ abstract class AbstractUserController {
 	protected void viewProfile() {
 		
 		int choice;
-		User currentUser = currentUserDao.getCurrentUser();
 		
 		profileView.view();
 		
