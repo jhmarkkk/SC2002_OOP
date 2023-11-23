@@ -27,18 +27,18 @@ public class DataTransferController {
 	private static DataServiceable campDataService = CampDataService();
 	
 	public static void importData() {
+		staffDataService.importing();
+		studentDataService.importing();
+		committeeMemberDataService.importing();
+		campDataService.importing();
 		
-		StaffDao staffDao = new StaffDaoImpl();
-		StudentDao studentDao = new StudentDaoImpl();
-		CommitteeMemberDao committeeMemberDao = new CommitteeMemberDaoImpl();
-		CampDao campDao = new CampDaoImpl();
 	}
 	
 	public static void exportData() {
 		
-		staffDataService.export();
-		studentDataService.export();
-		committeeMemberDataService.export();
-		campDataService.export();
+		staffDataService.exporting();
+		studentDataService.exporting();
+		committeeMemberDataService.exporting();
+		campDataService.exporting();
 	}
 }
