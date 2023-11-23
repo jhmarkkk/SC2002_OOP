@@ -17,21 +17,49 @@ import enums.Role;
 
 public class StudentDataService implements DataServiceable {
 
+	private Map<String, Student> studentDataMap = new HashMap<>();
+
 	public void exporting (String filePath) {
-		// TODO Auto-generated method stub
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+            // Write header line
+            bw.write("Name,Email,Faculty,Password,RegisteredCamps,Enquiries");
+            bw.newLine();
+
+            // Iterate through the studentDataMap and write each student's data to the file
+            for (Map.Entry<String, Student> entry : studentDataMap.entrySet()) {
+                Student student = entry.getValue();
+
+				String registeredCampsString;
+				if (student.getRegisteredCamps().isEmpty()) {
+					registeredCampsString = "#NULL!";
+				} else {
+					registeredCampsString = String.join("|", student.getRegisteredCamps());
+				}
+
+                // Write data fields separated by commas
+                bw.write(student.getName() + ","
+                        + student.getUserID() + "@e.ntu.edu.sg,"
+                        + student.getFaculty() + ","
+                        + student.getPassword() + ","
+                        + registeredCampsString);
+                bw.newLine();
+            }
+
+            System.out.println("Data exported successfully!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 	
 	public void importing(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
-            int rowNumber = 1;
-
-			Map<String, Student> studentDataMap = new HashMap<>();
+            int rowNumber = 0;
 
             while ((line = br.readLine()) != null) {
                 rowNumber++;
 
-                // Check if this is the second row
+                // Start only from 2nd row, neglecting the column header
                 if (rowNumber >= 2) {
                     // Split the line into fields based on the comma separator
                     String[] fields = line.split(",");
@@ -61,32 +89,15 @@ public class StudentDataService implements DataServiceable {
 							}
 						}
 	
-
+						//Initialising student constructor
 						Student studentData = new Student(username, password, name, faculty, role, registeredCamps);
 
 						// Put the data into the map with username as key
 						studentDataMap.put(username, studentData);
-
-						//PRINTING student map
-						Student exampleStudentData = studentDataMap.get(username);
-						System.out.println("Username:" + exampleStudentData.getUserID());
-						System.out.println("Password:" + exampleStudentData.getPassword());
-						System.out.println("Name:" + exampleStudentData.getName());
-						System.out.println("Faculty:" + exampleStudentData.getFaculty());
-						System.out.println("Role:" + exampleStudentData.getRole());
-						System.out.println("Registered Camps:");
-						int i = 0;
-						for (String element : exampleStudentData.getRegisteredCamps()) {
-							System.out.println("registeredCamps[" + i + "] : " + element);
-							i++;
-						}
-
-						// Line Space
-						System.out.println("");
-						
                     }
                 }
             }
+			System.out.println("Data imported successfully!");
         } catch (IOException e) {
             e.printStackTrace();
         }

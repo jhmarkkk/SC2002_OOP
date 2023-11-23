@@ -1,18 +1,18 @@
 package main;
 
-import services.StaffDataService;
+// import services.StaffDataService;
 import services.StudentDataService;
-import services.trying;
-import services.StaffDataService;
-import controllers.SessionController;
-import controllers.DataTransferController;
-import controllers.StaffController;
-import controllers.StudentController;
-import controllers.CommitteeController;
+// import services.trying;
+// import services.StaffDataService;
+// import controllers.SessionController;
+// import controllers.DataTransferController;
+// import controllers.StaffController;
+// import controllers.StudentController;
+// import controllers.CommitteeController;
 
-import interfaces.dao.CurrentUserDao;
+// import interfaces.dao.CurrentUserDao;
 
-import models.User;
+// import models.User;
 
 
 //import services.trying;
@@ -41,8 +41,10 @@ public class CAMs {
 
 		//TESTING STUDENT SERVICES
 		StudentDataService studentDataService = new StudentDataService();
-		String studentFilePath = "StudentList.csv";
-		studentDataService.importing(studentFilePath);
+		String inStudentFilePath = "StudentList.csv";
+		studentDataService.importing(inStudentFilePath);
+		String outStudentFilePath = "StudentListOut.csv";
+		studentDataService.exporting(outStudentFilePath);
 
 		//TESTING STAFF SERVICES
 		// StaffDataService staffDataService = new StaffDataService();

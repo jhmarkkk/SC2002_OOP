@@ -5,7 +5,7 @@ import enums.Role;
 
 public class Student extends User {
 	private ArrayList<String> registeredCamps;
-	private ArrayList<Integer> enquiries;
+	// private ArrayList<Integer> enquiries;
 	
 	/**
 	 * @param userID
