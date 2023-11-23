@@ -37,13 +37,23 @@ public class CreatedCampView implements CampViewable {
         
         StaffDao staffDao = new StaffDaoImpl();
         Map<String, Staff> staffMap = staffDao.getStaffs();
+        
+        //idlist is id of created Camps
         ArrayList<String> idlist = staffMap.get(staffID).getCreatedCamps();
         
         ArrayList<Camp> sortedCamps;
+        
+        
         System.out.println("===== Created Camps =====");
         System.out.printf("Index | Camp Name | Dates | Registration closing date | Open to | Location | Total slots | Camp Committee slots | Description | Visibility");
         
     }
+	
+	if (sortType == SortType.)
+	
+	class campCompare implements Comparator<Camp> {
+		public int compare
+	}
 	
 
 	CreatedCampView() {
