@@ -38,25 +38,27 @@ public class Camp {
 	 * @param enquiries
 	 * @param suggestions
 	 */
-	public Camp(String name, ArrayList<Date> dates, Date registrationClosingDate, String openTo, String location,
-			int totalSlots, int committeeSlots, String description, Staff staffInCharge, ArrayList<Student> attendees,
-			ArrayList<String> withdrawnAttendees, ArrayList<CommitteeMember> committeeMembers, Visibility visibility,
-			ArrayList<Enquiry> enquiries, ArrayList<Suggestion> suggestions) {
+	// public Camp(String name, ArrayList<Date> dates, Date registrationClosingDate, String openTo, String location,
+	// 		int totalSlots, int committeeSlots, String description, Staff staffInCharge, ArrayList<Student> attendees,
+	// 		ArrayList<String> withdrawnAttendees, ArrayList<CommitteeMember> committeeMembers, Visibility visibility,
+	// 		ArrayList<Enquiry> enquiries, ArrayList<Suggestion> suggestions) {
+	public Camp(String name, String openTo, String location, int totalSlots, int committeeSlots, String description) {
+
 		this.name = name;
-		this.dates = dates;
-		this.registrationClosingDate = registrationClosingDate;
+		// this.dates = dates;
+		// this.registrationClosingDate = registrationClosingDate;
 		this.openTo = openTo;
 		this.location = location;
 		this.totalSlots = totalSlots;
 		this.committeeSlots = committeeSlots;
 		this.description = description;
-		this.staffInCharge = staffInCharge;
-		this.attendees = attendees;
-		this.withdrawnAttendees = withdrawnAttendees;
-		this.committeeMembers = committeeMembers;
-		this.visibility = visibility;
-		this.enquiries = enquiries;
-		this.suggestions = suggestions;
+		// this.staffInCharge = staffInCharge;
+		// this.attendees = attendees;
+		// this.withdrawnAttendees = withdrawnAttendees;
+		// this.committeeMembers = committeeMembers;
+		// this.visibility = visibility;
+		// this.enquiries = enquiries;
+		// this.suggestions = suggestions;
 	}
 	
 	/**
