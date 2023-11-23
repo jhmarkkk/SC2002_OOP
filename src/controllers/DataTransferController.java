@@ -4,11 +4,13 @@ import dao.StaffDaoImpl;
 import dao.StudentDaoImpl;
 import dao.CommitteeMemberDaoImpl;
 import dao.CampDaoImpl;
+import dao.CurrentUserDaoImpl;
 
 import interfaces.StaffDao;
 import interfaces.StudentDao;
 import interfaces.CommitteeMemberDao;
 import interfaces.CampDao;
+import interfaces.CurrentUserDao;
 import interfaces.DataServiceable;
 
 import services.StaffDataService;
@@ -31,7 +33,6 @@ public class DataTransferController {
 		studentDataService.importing();
 		committeeMemberDataService.importing();
 		campDataService.importing();
-		
 	}
 	
 	public static void exportData() {
