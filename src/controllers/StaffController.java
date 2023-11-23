@@ -2,14 +2,14 @@ package controllers;
 
 import java.util.Scanner;
 
-import interfaces.CampViewable;
-import interfaces.AttendeeViewable;
-import interfaces.EnquiryViewable;
-import interfaces.SuggestionViewable;
-import interfaces.CampServiceable;
-import interfaces.ApproveSuggestionServiceable;
-import interfaces.ReplyEnquiryServiceable;
-import interfaces.GenerateReportServiceable;
+import interfaces.views.CampViewable;
+import interfaces.views.AttendeeViewable;
+import interfaces.views.EnquiryViewable;
+import interfaces.views.SuggestionViewable;
+import interfaces.services.CampServiceable;
+import interfaces.services.ApproveSuggestionServiceable;
+import interfaces.services.ReplyEnquiryServiceable;
+import interfaces.services.GenerateReportServiceable;
 
 import services.StaffCampService;
 import services.StaffApproveSuggestionService;

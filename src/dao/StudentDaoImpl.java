@@ -5,6 +5,7 @@ package dao;
 
 import java.util.Map;
 
+import interfaces.dao.StudentDao;
 import models.Student;
 
 /**
@@ -12,7 +13,7 @@ import models.Student;
  */
 public class StudentDaoImpl implements StudentDao {
 	
-	private Map<String, Student> students;
+	private static Map<String, Student> students;
 
 	/**
 	 * @param students

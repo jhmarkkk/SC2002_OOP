@@ -9,10 +9,8 @@ import java.util.Date;
 import java.util.Map;
 
 import interfaces.dao.CampDaoInterface;
-import interfaces.dao.CurrentUserDaoInterface;
 import interfaces.views.CampViewable;
-import models.Camp;
-import models.Student;
+import interfaces.views.ViewFilterable;
 import enums.FilterType;
 
 import utils.CampFilter;
@@ -28,36 +26,68 @@ import utils.CampFormatDate;
 public class CreatedCampView implements CampViewable {
 
     public void filterView(FilterType filterType) {
-        CampDaoInterface campDao;
-        Map<String, Camp> campsMap = campDao.getCamps();
-        CurrentUserDaoInterface currentUserDao;
-        ArrayList<String> createdCampIDs = currentUserDao.getCurrentUser().getCreatedCamps();
-        ArrayList<Camp> createdCamps;
-        for (String createdCampID : createdCampIDs) {
-            createdCamps.add(campsMap.get(createdCampID));
-        }
-        createdCamps = CampFilter.filter(createdCamps, filterType);
-        int index = 1;
-        SimpleDateFormat formatter = CampFormatDate.dateFormat();
-        System.out.println("===== Created Camps =====");
-        for (Camp createdCamp : createdCamps) {
-            System.out.printf("----- (Created Camp %d) %s -----\n", index, createdCamp.getName());
-            System.out.printf("Visibility : %s", camp.getVisibility().toString());
-            System.out.print("Dates: ");
-            for (Date date : createdCamp.getDates()) {
-                System.out.printf("%s ", formatter.format(date));
-            }
-            System.out.printf("\nLocation: %s\n", createdCamp.getLocation());
-            System.out.print("Attendees: ");
-            for (Student attendee : createdCamp.getAttendees()) {
-                System.out.printf(" %s", attendee.getName());
-            }
-            System.out.printf("Attendee Slots available: %d\n", createdCamp.getAttendeeSlots());
-            System.out.printf("\nCamp Committee Slots available: %d\n", createdCamp.getCommitteeSlots());
-            System.out.printf("Description: %s\n", createdCamp.getDescription());
-            System.out.printf("Staff in charge: %s\n", createdCamp.getStaffInCharge().getName());
-            index++;
-        }
+
     }
 
-};
+    // CreatedCampView() {
+    // CampDaoInterface campDao = new CampDaoImpl();
+    // ArrayList<Camp> createdCamps = campDao.getCamps();
+    // CurrentUserDaoInterface currentUserDao;
+    // ArrayList<String> idlist = currentUserDao.getCurrentUser().getCreatedCamps();
+    // for (String id : idlist) {
+    // for (Camp camp : camps) {
+    // // if the id does not match the idlist, remove it from camps
+    // if (!Objects.equals(id, camp.getName())) {
+    // camps.remove(camp);
+    // }
+    // }
+    // }
+
+    // private ArrayList<Camp> createdCamps = createdCamps;
+    // }
+
+    // public void view() {
+    // CampDaoInterface campDao = CampDaoImplementation();
+    // ArrayList<Camp> camps = campDao.getCamps();
+    // System.out.println("===== Created Camps =====");
+    // System.out.printf(
+    // "Index | Camp Name | Dates | Registration closing date | Open to | Location |
+    // Total slots | Camp Committee slots | Description | Visibility");
+    // }
+
+    // /**
+    // * @param idlist
+    // * @return ArrayList<Object>
+    // */
+    // public void filter(ArrayList<String> idlist, FilterType filterType =
+    // filterType.Name) {
+    // // use the interface to get camps
+    // CampDaoInterface campDao = CampDaoImplementation();
+    // ArrayList<Camp> camps = campDao.getCamps();
+    // for (String id : idlist) {
+    // for (Camp camp : camps) {
+    // // if the id does not match the idlist, remove it from camps
+    // if (!Objects.equals(id, camp.getName())) {
+    // camps.remove(camp);
+    // }
+    // }
+    // }
+    // for (Camp camp : camps) {
+    // }
+    // if (filter == FilterType.NAME) {
+    // Collections.sort(camps, (camp1, camp2) ->
+    // camp1.getName().compareTo.camp2.getName());
+    // return camps;
+    // }
+    // if (filter == FilterType.DATES) {
+    // Collections.sort(camps, (camp1, camp2) ->
+    // camp1.getLocation().compareTo.camp2.getLocation());
+    // return camps;
+    // }
+    // if (filter == FilterType.DATE) {
+    // Collections.sort(camps, (camp1, camp2) ->
+    // camp1.getDate().compareTo.camp2.getName());
+    // return camps;
+    // }
+    // };
+}

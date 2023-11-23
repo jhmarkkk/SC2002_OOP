@@ -1,7 +1,5 @@
 package interfaces.views;
 
-public interface CampDetailViewable extends Viewable, FilterViewable {
-    public void view();
+public interface CampDetailViewable extends Viewable {
 
-    public void filter();
 }
