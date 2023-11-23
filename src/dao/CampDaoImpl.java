@@ -12,14 +12,7 @@ import models.Camp;
  */
 public class CampDaoImpl implements CampDao {
 	
-	private Map<String, Camp> camps;
-
-	/**
-	 * @param camps
-	 */
-	public CampDaoImpl(Map<String, Camp> camps) {
-		this.camps = camps;
-	}
+	private static Map<String, Camp> camps;
 
 	/**
 	 * @return the camps
@@ -32,7 +25,7 @@ public class CampDaoImpl implements CampDao {
 	 * @param camps the camps to set
 	 */
 	public void setCamps(Map<String, Camp> camps) {
-		this.camps = camps;
+		CampDaoImpl.camps = camps;
 	}
 	
 	

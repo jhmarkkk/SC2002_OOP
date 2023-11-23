@@ -1,5 +1,8 @@
 package controllers;
 
+import java.util.Map;
+import java.util.HashMap;
+
 import dao.StaffDaoImpl;
 import dao.StudentDaoImpl;
 import dao.CommitteeMemberDaoImpl;
@@ -20,13 +23,15 @@ import services.CampDataService;
 
 public class DataTransferController {
 	
-	private static DataServiceable staffDataService = staffDataService();
+	private static Map<String, String> filePath =  new HashMap<>();
 	
-	private static DataServiceable studentDataService = StudentDataService();
+	private static DataServiceable staffDataService = new StaffDataService();
 	
-	private static DataServiceable committeeMemberDataService = CommitteeDataService();
+	private static DataServiceable studentDataService = new StudentDataService();
 	
-	private static DataServiceable campDataService = CampDataService();
+	private static DataServiceable committeeMemberDataService = new CommitteeDataService();
+	
+	private static DataServiceable campDataService = new CampDataService();
 	
 	public static void importData() {
 		staffDataService.importing();

@@ -13,13 +13,6 @@ public class CurrentUserDaoImpl implements CurrentUserDao {
 	private static User currentUser;
 
 	/**
-	 * @param currentUser
-	 */
-	public CurrentUserDaoImpl(User currentUser) {
-		this.currentUser = currentUser;
-	}
-
-	/**
 	 * @return the currentUser
 	 */
 	public User getCurrentUser() {
@@ -30,6 +23,6 @@ public class CurrentUserDaoImpl implements CurrentUserDao {
 	 * @param currentUser the currentUser to set
 	 */
 	public void setCurrentUser(User currentUser) {
-		this.currentUser = currentUser;
+		CurrentUserDaoImpl.currentUser = currentUser;
 	}
 }

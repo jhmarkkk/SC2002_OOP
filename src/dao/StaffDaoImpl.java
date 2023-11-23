@@ -15,13 +15,6 @@ public class StaffDaoImpl implements StaffDao {
 	private static Map<String, Staff> staffs;
 
 	/**
-	 * @param staffs
-	 */
-	public StaffDaoImpl(Map<String, Staff> staffs) {
-		this.staffs = staffs;
-	}
-
-	/**
 	 * @return the staffs
 	 */
 	public Map<String, Staff> getStaffs() {
@@ -32,7 +25,7 @@ public class StaffDaoImpl implements StaffDao {
 	 * @param staffs the staffs to set
 	 */
 	public void setStaffs(Map<String, Staff> staffs) {
-		this.staffs = staffs;
+		StaffDaoImpl.staffs = staffs;
 	}
 	
 }
