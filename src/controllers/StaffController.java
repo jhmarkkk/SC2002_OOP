@@ -6,11 +6,13 @@ import interfaces.views.CampViewable;
 import interfaces.views.AttendeeViewable;
 import interfaces.views.EnquiryViewable;
 import interfaces.views.SuggestionViewable;
+import interfaces.services.ToggleVisibilityServiceable;
 import interfaces.services.CampServiceable;
 import interfaces.services.ApproveSuggestionServiceable;
 import interfaces.services.ReplyEnquiryServiceable;
 import interfaces.services.GenerateReportServiceable;
 
+import services.ToggleVisibilityService;
 import services.StaffCampService;
 import services.StaffApproveSuggestionService;
 import services.StaffReplyEnquiryService;
@@ -43,6 +45,8 @@ public class StaffController extends AbstractUserController {
 
 	private static final SuggestionViewable suggestionView = new StaffSuggestionView();
 	
+	private static final ToggleVisibilityServiceable toggleVisibilityService = new ToggleVisibilityService();
+
 	private static final CampServiceable campService = new StaffCampService();
 	
 	private static final ApproveSuggestionServiceable approveSuggestionService = new StaffApproveSuggestionService();
@@ -191,9 +195,10 @@ public class StaffController extends AbstractUserController {
 			System.out.println("4. Sort by camp faculty");
 			System.out.println("5. Sort by camp staff-in-charge");
 			System.out.println("6. View camp attendees");
-			System.out.println("7. Edit camp");
-			System.out.println("8. Delete camp");
-			System.out.println("9. Back");
+			System.out.println("7. Toggle visibility");
+			System.out.println("8. Edit camp");
+			System.out.println("9. Delete camp");
+			System.out.println("10. Back");
 			System.out.print("\nChoice: ");
 			
 			choice = sc.nextInt();
@@ -220,9 +225,12 @@ public class StaffController extends AbstractUserController {
 				viewAttendees();
 				break;
 			case 7:
-				editCamp();
+				toggleVisibility();
 				break;
 			case 8:
+				editCamp();
+				break;
+			case 9:
 				deleteCamp();
 				break;
 			case 10:
@@ -236,6 +244,11 @@ public class StaffController extends AbstractUserController {
 	protected void viewAttendees() {
 		
 		attendeeView.view();
+	}
+	
+	protected void toggleVisibility() {
+		
+		toggleVisibilityService.toggle();
 	}
 	
 	protected void createCamp() {
