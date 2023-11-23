@@ -13,10 +13,10 @@ public class Camp {
 	private int totalSlots;
 	private int committeeSlots;
 	private String description;
-	private Staff staffInCharge;
-	private ArrayList<Student> attendees;
+	private String staffInCharge;
+	private ArrayList<String> attendees;
 	private ArrayList<String> withdrawnAttendees;
-	private ArrayList<CommitteeMember> committeeMembers;
+	private ArrayList<String> committeeMembers;
 	private Visibility visibility = Visibility.OFF;
 	private ArrayList<Enquiry> enquiries;
 	private ArrayList<Suggestion> suggestions;
@@ -42,8 +42,8 @@ public class Camp {
 	 * @param suggestionCounter
 	 */
 	public Camp(String name, ArrayList<Date> dates, Date registrationClosingDate, String openTo, String location,
-			int totalSlots, int committeeSlots, String description, Staff staffInCharge, ArrayList<Student> attendees,
-			ArrayList<String> withdrawnAttendees, ArrayList<CommitteeMember> committeeMembers,
+			int totalSlots, int committeeSlots, String description, String staffInCharge, ArrayList<String> attendees,
+			ArrayList<String> withdrawnAttendees, ArrayList<String> committeeMembers,
 			ArrayList<Enquiry> enquiries, ArrayList<Suggestion> suggestions, Integer enquiryCounter,
 			Integer suggestionCounter) {
 		
@@ -180,14 +180,14 @@ public class Camp {
 	/**
 	 * @return the attendees
 	 */
-	public ArrayList<Student> getAttendees() {
+	public ArrayList<String> getAttendees() {
 		return attendees;
 	}
 
 	/**
 	 * @param attendees the attendees to set
 	 */
-	public void setAttendees(ArrayList<Student> attendees) {
+	public void setAttendees(ArrayList<String> attendees) {
 		this.attendees = attendees;
 	}
 
@@ -208,14 +208,14 @@ public class Camp {
 	/**
 	 * @return the committeeMembers
 	 */
-	public ArrayList<CommitteeMember> getCommitteeMembers() {
+	public ArrayList<String> getCommitteeMembers() {
 		return committeeMembers;
 	}
 
 	/**
 	 * @param committeeMembers the committeeMembers to set
 	 */
-	public void setCommitteeMembers(ArrayList<CommitteeMember> committeeMembers) {
+	public void setCommitteeMembers(ArrayList<String> committeeMembers) {
 		this.committeeMembers = committeeMembers;
 	}
 
@@ -264,7 +264,7 @@ public class Camp {
 	/**
 	 * @return the staffInCharge
 	 */
-	public Staff getStaffInCharge() {
+	public String getStaffInCharge() {
 		return staffInCharge;
 	}
 	
