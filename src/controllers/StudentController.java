@@ -1,7 +1,6 @@
 package controllers;
 
-import enums.FilterType;
-
+import enums.SortType;
 import interfaces.views.CampViewable;
 import interfaces.views.EnquiryViewable;
 import interfaces.services.AttendCampServiceable;
@@ -73,7 +72,7 @@ public class StudentController extends AbstractUserController {
 		int choice;
 		
 		campView = new StudentAllCampView();
-		campView.filterView(FilterType.NAME);
+		campView.sortView(SortType.NAME);
 		
 		do {
 			System.out.println("1. Sort by camp dates");
@@ -90,16 +89,16 @@ public class StudentController extends AbstractUserController {
 			
 			switch (choice) {
 			case 1:
-				campView.filterView(FilterType.DATES);
+				campView.sortView(SortType.DATES);
 				break;
 			case 2:
-				campView.filterView(FilterType.CLOSING_DATE);
+				campView.sortView(SortType.CLOSING_DATE);
 				break;
 			case 3:
-				campView.filterView(FilterType.LOCATION);
+				campView.sortView(SortType.LOCATION);
 				break;
 			case 4:
-				campView.filterView(FilterType.FACULTY);
+				campView.sortView(SortType.FACULTY);
 				break;
 			case 5:
 				registerForCamp();
@@ -147,7 +146,7 @@ public class StudentController extends AbstractUserController {
 		int choice;
 		
 		campView = new RegisteredCampView();
-		campView.filterView(FilterType.NAME);
+		campView.sortView(SortType.NAME);
 		
 		do {
 			System.out.println("1. Sort by camp dates");
@@ -164,16 +163,16 @@ public class StudentController extends AbstractUserController {
 			
 			switch (choice) {
 			case 1:
-				campView.filterView(FilterType.DATES);
+				campView.sortView(SortType.DATES);
 				break;
 			case 2:
-				campView.filterView(FilterType.CLOSING_DATE);
+				campView.sortView(SortType.CLOSING_DATE);
 				break;
 			case 3:
-				campView.filterView(FilterType.LOCATION);
+				campView.sortView(SortType.LOCATION);
 				break;
 			case 4:
-				campView.filterView(FilterType.FACULTY);
+				campView.sortView(SortType.FACULTY);
 				break;
 			case 5:
 				withdrawFromCamp();
