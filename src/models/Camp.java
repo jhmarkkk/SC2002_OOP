@@ -308,38 +308,6 @@ public class Camp {
 		
 		return this.totalSlots - this.committeeSlots;
 	}
-
-	/**
-	 * @return the enquiryCounter
-	 */
-	public static Integer getEnquiryCounter() {
-		
-		return enquiryCounter;
-	}
-
-	/**
-	 * @param enquiryCounter the enquiryCounter to set
-	 */
-	public static void setEnquiryCounter(Integer enquiryCounter) {
-		
-		Camp.enquiryCounter = enquiryCounter;
-	}
-
-	/**
-	 * @return the suggestionCounter
-	 */
-	public static Integer getSuggestionCounter() {
-		
-		return suggestionCounter;
-	}
-
-	/**
-	 * @param suggestionCounter the suggestionCounter to set
-	 */
-	public static void setSuggestionCounter(Integer suggestionCounter) {
-		
-		Camp.suggestionCounter = suggestionCounter;
-	}
 	
 
 }

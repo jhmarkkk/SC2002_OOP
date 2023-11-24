@@ -10,19 +10,21 @@ public class Enquiry {
 	private String enquirer;
 	private String replier = null;
 	private String reply = null;
+	private static Integer enquiryCounter;
 	
 	/**
-	 * @param enquiryID
+	 * Before creating Enquiry instances, make sure you've set the enquiryCounter value!
 	 * @param enquiry
 	 * @param enquirer
 	 * @param replier
 	 */
-	public Enquiry(Integer enquiryID, String enquiry, String enquirer, String replier, String reply) {
-		this.enquiryID = enquiryID;
+	public Enquiry(String enquiry, String enquirer, String replier, String reply) {
+		this.enquiryID = enquiryCounter++;
 		this.enquiry = enquiry;
 		this.enquirer = enquirer;
 		this.replier = replier;
 		this.reply = reply;
+
 	}
 
 	/**
@@ -87,6 +89,22 @@ public class Enquiry {
 	public void setReply(String reply) {
 		
 		this.reply = reply;
+	}
+
+	/**
+	 * @return the enquiryCounter
+	 */
+	public Integer getEnquiryCounter() {
+		
+		return enquiryCounter;
+	}
+
+	/**
+	 * @param enquiryCounter the enquiryCounter to set
+	 */
+	public void setEnquiryCounter(Integer enquiryCounter) {
+		
+		Enquiry.enquiryCounter = enquiryCounter;
 	}
 	
 	
