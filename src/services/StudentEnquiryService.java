@@ -1,6 +1,8 @@
 package services;
 
 import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
 
 import interfaces.dao.CurrentUserDao;
 import dao.CurrentUserDaoImpl;
@@ -15,7 +17,8 @@ public class StudentEnquiryService implements EnquiryServiceable {
 
     private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
 
-    //Map<Integer, Enquiry> 
+     
+    private Map<Integer, Enquiry> enquiryMap = new HashMap<>();
 
     public void create(){
         //System.out.println("create() in StudentEnquiryService class");
@@ -30,7 +33,7 @@ public class StudentEnquiryService implements EnquiryServiceable {
 
         Enquiry enquiry = new Enquiry(enquiryString, enquirer, replier, reply);
 
-        //put in enquiry map
+        enquiryMap.put(enquiry.getEnquiryID(), enquiry);
 
         // // ===== For testing purpose only, remove/comment out after testing =====
         // System.out.println("enquiryString: " + enquiry.getEnquiry());
@@ -39,6 +42,7 @@ public class StudentEnquiryService implements EnquiryServiceable {
         // System.out.println("reply: " + enquiry.getReply());
     }
     public void delete(){
+        // TODO Auto-generated method stub
         System.out.println("delete() in StudentEnquiryService class");
 
 
