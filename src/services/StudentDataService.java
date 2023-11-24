@@ -4,16 +4,15 @@ import java.lang.System;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Dictionary;
-import java.util.Enumeration;
-import java.util.Hashtable;
+// import java.util.Dictionary;
+// import java.util.Enumeration;
+// import java.util.Hashtable;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
+// import java.util.Scanner;
 
 import interfaces.services.DataServiceable;
 import models.Student;
-import enums.Role;
 
 public class StudentDataService implements DataServiceable {
 
@@ -70,7 +69,6 @@ public class StudentDataService implements DataServiceable {
                         String email = fields[1];
 						String faculty = fields[2];
 						String password = fields[3];
-						Role role = Role.STUDENT;
 
 						String username = email.substring(0, email.indexOf('@'));
 
@@ -90,7 +88,7 @@ public class StudentDataService implements DataServiceable {
 						}
 	
 						//Initialising student constructor
-						Student studentData = new Student(username, password, name, faculty, role, registeredCamps);
+						Student studentData = new Student(username, password, name, faculty, registeredCamps);
 
 						// Put the data into the map with username as key
 						studentDataMap.put(username, studentData);

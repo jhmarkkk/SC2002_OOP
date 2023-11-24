@@ -42,9 +42,9 @@ public class CAMs {
 
 		//TESTING STUDENT SERVICES
 		StudentDataService studentDataService = new StudentDataService();
-		String inStudentFilePath = "StudentList.csv";
+		String inStudentFilePath = "data/StudentList.csv";
 		studentDataService.importing(inStudentFilePath);
-		String outStudentFilePath = "StudentListOut.csv";
+		String outStudentFilePath = "data/StudentListOut.csv";
 		studentDataService.exporting(outStudentFilePath);
 
 		//TESTING STAFF SERVICES
