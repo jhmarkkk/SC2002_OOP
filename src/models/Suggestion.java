@@ -5,7 +5,7 @@ package models;
  */
 public class Suggestion {
 	
-	private int suggestionID;
+	private Integer suggestionID;
 	private String suggestion;
 	private String suggester;
 	private boolean approved;
@@ -74,7 +74,7 @@ public class Suggestion {
 	/**
 	 * @return the suggestionID
 	 */
-	public int getSuggestionID() {
+	public Integer getSuggestionID() {
 		
 		return suggestionID;
 	}
@@ -90,7 +90,7 @@ public class Suggestion {
 	/**
 	 * @return the suggestionCounter
 	 */
-	public Integer getSuggestionCounter() {
+	public static Integer getSuggestionCounter() {
 		
 		return suggestionCounter;
 	}
@@ -98,7 +98,7 @@ public class Suggestion {
 	/**
 	 * @param suggestionCounter the suggestionCounter to set
 	 */
-	public void setSuggestionCounter(Integer suggestionCounter) {
+	public static void setSuggestionCounter(Integer suggestionCounter) {
 		
 		Suggestion.suggestionCounter = suggestionCounter;
 	}

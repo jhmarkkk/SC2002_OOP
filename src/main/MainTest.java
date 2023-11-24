@@ -1,33 +1,9 @@
 package main;
 
-import services.StaffDataService;
-import services.StudentDataService;
-import services.StaffDataService;
 import services.CampDataService;
 
-import controllers.SessionController;
-import controllers.DataTransferController;
-import controllers.StaffController;
-import controllers.StudentController;
-import controllers.CommitteeController;
-
-import interfaces.dao.CurrentUserDao;
-import dao.CurrentUserDaoImpl;
-
-import services.StudentEnquiryService;
-
-
-// import models.User;
-
-
-//import services.trying;
-
-public class CAMs {
-	
-	
-	private CAMs() {}
-	
-	public static void main(String[] args) {
+public class MainTest {
+    public static void main(String[] args) {
 		System.out.println("CAMs main() Testing");
 
 		// trying exporter = new trying();
