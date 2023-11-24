@@ -64,6 +64,7 @@ public class Camp {
 		this.enquiries = enquiries;
 		this.suggestions = suggestions;
 		this.visibility = visibility;
+
 	}
 
 	/**
