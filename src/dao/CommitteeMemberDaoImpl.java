@@ -3,6 +3,7 @@
  */
 package dao;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import interfaces.dao.CommitteeMemberDao;
@@ -13,7 +14,7 @@ import models.CommitteeMember;
  */
 public class CommitteeMemberDaoImpl implements CommitteeMemberDao {
 	
-	private static Map<String, CommitteeMember> committeeMembers;
+	private static Map<String, CommitteeMember> committeeMembers = new HashMap<String, CommitteeMember>();
 
 	/**
 	 * @return the committeeMembers

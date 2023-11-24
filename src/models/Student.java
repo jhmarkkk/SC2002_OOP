@@ -19,17 +19,18 @@ public class Student extends User {
 	 * @param registeredCamps
 	 * @param enquiries
 	 */
-	public Student(String userID, String password, String name, String faculty, ArrayList<String> registeredCamps, Map<String, ArrayList<Integer>> enquiries) {
+	
+	 public Student(String userID, String password, String name, String faculty, ArrayList<String> registeredCamps, Map<String, ArrayList<Integer>> enquiries) {
 		super(userID, password, name, faculty, Role.STUDENT);
 		this.registeredCamps = registeredCamps;
 		this.enquiries = enquiries;
 	}
-
+	
 	/**
 	 * @return the registeredCamps
 	 */
 	public ArrayList<String> getRegisteredCamps() {
-		
+
 		return registeredCamps;
 	}
 
@@ -56,7 +57,4 @@ public class Student extends User {
 		
 		this.enquiries = enquiries;
 	}
-	
-	
-
 }
