@@ -8,5 +8,6 @@ module SC2002_CAMs {
 	exports main;
 	exports models;
 	exports services;
+	exports utils;
 	exports views;
 }

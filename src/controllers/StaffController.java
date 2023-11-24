@@ -1,16 +1,18 @@
 package controllers;
 
-import enums.FilterType;
+import enums.SortType;
 
 import interfaces.views.CampViewable;
 import interfaces.views.AttendeeViewable;
 import interfaces.views.EnquiryViewable;
 import interfaces.views.SuggestionViewable;
+import interfaces.services.ToggleVisibilityServiceable;
 import interfaces.services.CampServiceable;
 import interfaces.services.ApproveSuggestionServiceable;
 import interfaces.services.ReplyEnquiryServiceable;
 import interfaces.services.GenerateReportServiceable;
 
+import services.ToggleVisibilityService;
 import services.StaffCampService;
 import services.StaffApproveSuggestionService;
 import services.StaffReplyEnquiryService;
@@ -43,6 +45,8 @@ public class StaffController extends AbstractUserController {
 
 	private static final SuggestionViewable suggestionView = new StaffSuggestionView();
 	
+	private static final ToggleVisibilityServiceable toggleVisibilityService = new ToggleVisibilityService();
+
 	private static final CampServiceable campService = new StaffCampService();
 	
 	private static final ApproveSuggestionServiceable approveSuggestionService = new StaffApproveSuggestionService();
@@ -108,7 +112,7 @@ public class StaffController extends AbstractUserController {
 		int choice;
 		
 		campView = new StaffAllCampView();
-		campView.filterView(FilterType.NAME);
+		campView.sortView(SortType.NAME);
 		
 		do {
 			System.out.println("1. Sort by camp dates");
@@ -125,19 +129,19 @@ public class StaffController extends AbstractUserController {
 			
 			switch (choice) {
 			case 1:
-				campView.filterView(FilterType.DATES);
+				campView.sortView(SortType.DATES);
 				break;
 			case 2:
-				campView.filterView(FilterType.CLOSING_DATE);
+				campView.sortView(SortType.CLOSING_DATE);
 				break;
 			case 3:
-				campView.filterView(FilterType.LOCATION);
+				campView.sortView(SortType.LOCATION);
 				break;
 			case 4:
-				campView.filterView(FilterType.FACULTY);
+				campView.sortView(SortType.FACULTY);
 				break;
 			case 5:
-				campView.filterView(FilterType.STAFF);
+				campView.sortView(SortType.STAFF);
 				break;
 			case 6:
 				return;
@@ -182,7 +186,7 @@ public class StaffController extends AbstractUserController {
 		int choice;
 		
 		campView = new CreatedCampView();
-		campView.filterView(FilterType.NAME);
+		campView.sortView(SortType.NAME);
 		
 		do {
 			System.out.println("1. Sort by camp dates");
@@ -191,9 +195,10 @@ public class StaffController extends AbstractUserController {
 			System.out.println("4. Sort by camp faculty");
 			System.out.println("5. Sort by camp staff-in-charge");
 			System.out.println("6. View camp attendees");
-			System.out.println("7. Edit camp");
-			System.out.println("8. Delete camp");
-			System.out.println("9. Back");
+			System.out.println("7. Toggle visibility");
+			System.out.println("8. Edit camp");
+			System.out.println("9. Delete camp");
+			System.out.println("10. Back");
 			System.out.print("\nChoice: ");
 			
 			choice = sc.nextInt();
@@ -202,27 +207,30 @@ public class StaffController extends AbstractUserController {
 			
 			switch (choice) {
 			case 1:
-				campView.filterView(FilterType.DATES);
+				campView.sortView(SortType.DATES);
 				break;
 			case 2:
-				campView.filterView(FilterType.CLOSING_DATE);
+				campView.sortView(SortType.CLOSING_DATE);
 				break;
 			case 3:
-				campView.filterView(FilterType.LOCATION);
+				campView.sortView(SortType.LOCATION);
 				break;
 			case 4:
-				campView.filterView(FilterType.FACULTY);
+				campView.sortView(SortType.FACULTY);
 				break;
 			case 5:
-				campView.filterView(FilterType.STAFF);
+				campView.sortView(SortType.STAFF);
 				break;
 			case 6:
 				viewAttendees();
 				break;
 			case 7:
-				editCamp();
+				toggleVisibility();
 				break;
 			case 8:
+				editCamp();
+				break;
+			case 9:
 				deleteCamp();
 				break;
 			case 10:
@@ -236,6 +244,11 @@ public class StaffController extends AbstractUserController {
 	protected void viewAttendees() {
 		
 		attendeeView.view();
+	}
+	
+	protected void toggleVisibility() {
+		
+		toggleVisibilityService.toggle();
 	}
 	
 	protected void createCamp() {
