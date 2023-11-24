@@ -149,7 +149,7 @@ public class StaffCampService implements CampServiceable {
         
         if (choice == i + 1) return;
 
-        selectedCampName = registeredCamps.get(choice);
+        selectedCampName = registeredCamps.get(choice - 1);
 
         // Deleting specified camp name and its values
         campData.remove(selectedCampName);
@@ -193,8 +193,12 @@ public class StaffCampService implements CampServiceable {
         
         if (choice == i + 1) return;
 
-
-        selectedCampName = registeredCamps.get(choice);
+        
+        // if (choice >= 0 || choice <= i) {
+        //     selectedCampName = registeredCamps.get(choice);
+        //     selectedCamp = campDao.getCamps().get(selectedCampName);
+        // }
+        selectedCampName = registeredCamps.get(choice - 1);
         selectedCamp = campDao.getCamps().get(selectedCampName);
         
         //

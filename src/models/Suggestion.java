@@ -66,7 +66,7 @@ public class Suggestion {
 	/**
 	 * @param approver the approver to set
 	 */
-	public void setApprover(boolean approved) {
+	public void setApproved(boolean approved) {
 		
 		this.approved = approved;
 	}

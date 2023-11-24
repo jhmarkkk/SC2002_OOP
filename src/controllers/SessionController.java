@@ -2,6 +2,9 @@ package controllers;
 
 import java.util.Scanner;
 
+import dao.CurrentUserDaoImpl;
+
+import interfaces.dao.CurrentUserDao;
 import interfaces.services.AuthServiceable;
 
 import services.AuthService;
@@ -12,6 +15,8 @@ public class SessionController {
 	
 	private static final AuthServiceable authService = new AuthService();
 	
+	private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
+
 	private SessionController() {}
 	
 	public static void startSession() {
@@ -31,6 +36,7 @@ public class SessionController {
 			switch (choice) {
 			case 1:
 				authService.login();
+				if (currentUserDao.getCurrentUser() != null) return;
 				break;
 			case 2:
 				return;
