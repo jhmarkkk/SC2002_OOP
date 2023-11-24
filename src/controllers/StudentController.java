@@ -1,10 +1,11 @@
 package controllers;
 
 import enums.SortType;
-import interfaces.views.CampViewable;
-import interfaces.views.SortViewable;
+
 import interfaces.services.AttendCampServiceable;
 import interfaces.services.EnquiryServiceable;
+import interfaces.views.CampViewable;
+import interfaces.views.EnquiryViewable;
 
 import services.StudentAttendCampService;
 import services.StudentEnquiryService;
@@ -17,7 +18,7 @@ public class StudentController extends AbstractUserController {
 
 	protected static CampViewable campView;
 
-	protected static SortViewable enquiryView;
+	protected static EnquiryViewable enquiryView;
 
 	protected static AttendCampServiceable attendCampService = new StudentAttendCampService();
 
@@ -31,8 +32,8 @@ public class StudentController extends AbstractUserController {
 		do {
 			System.out.println("1. View profile");
 			System.out.println("2. View all camps");
-			System.out.println("3. View registered camps");
-			System.out.println("4. View enquiries");
+			System.out.println("3. View my registered camps");
+			System.out.println("4. View my enquiries");
 			System.out.println("5. Create enquiry");
 			System.out.println("6. Log out");
 			System.out.print("\nChoice: ");
@@ -69,11 +70,12 @@ public class StudentController extends AbstractUserController {
 	protected void viewAllCamps() {
 
 		int choice;
+		SortType type = SortType.NAME;
 
 		campView = new StudentAllCampView();
-		campView.sortView(SortType.NAME);
 
 		do {
+			campView.sortView(type);
 			System.out.println("1. Sort by camp dates");
 			System.out.println("2. Sort by camp registration closing date");
 			System.out.println("3. Sort by camp location");
@@ -88,16 +90,16 @@ public class StudentController extends AbstractUserController {
 
 			switch (choice) {
 				case 1:
-					campView.sortView(SortType.DATES);
+					type = SortType.DATES;
 					break;
 				case 2:
-					campView.sortView(SortType.CLOSING_DATE);
+					type = SortType.CLOSING_DATE;
 					break;
 				case 3:
-					campView.sortView(SortType.LOCATION);
+					type = SortType.LOCATION;
 					break;
 				case 4:
-					campView.sortView(SortType.FACULTY);
+					type = SortType.FACULTY;
 					break;
 				case 5:
 					registerForCamp();
@@ -117,9 +119,9 @@ public class StudentController extends AbstractUserController {
 		int choice;
 
 		enquiryView = new StudentEnquiryView();
-		enquiryView.view();
 
 		do {
+			enquiryView.view();
 			System.out.println("1. Edit enquiry");
 			System.out.println("2. Delete enquiry");
 			System.out.println("3. Back");
@@ -147,11 +149,12 @@ public class StudentController extends AbstractUserController {
 	protected void viewRegisteredCamps() {
 
 		int choice;
+		SortType type = SortType.NAME;
 
 		campView = new RegisteredCampView();
-		campView.sortView(SortType.NAME);
 
 		do {
+			campView.sortView(type);
 			System.out.println("1. Sort by camp dates");
 			System.out.println("2. Sort by camp registration closing date");
 			System.out.println("3. Sort by camp location");
@@ -166,16 +169,16 @@ public class StudentController extends AbstractUserController {
 
 			switch (choice) {
 				case 1:
-					campView.sortView(SortType.DATES);
+					type = SortType.DATES;
 					break;
 				case 2:
-					campView.sortView(SortType.CLOSING_DATE);
+					type = SortType.CLOSING_DATE;
 					break;
 				case 3:
-					campView.sortView(SortType.LOCATION);
+					type = SortType.LOCATION;
 					break;
 				case 4:
-					campView.sortView(SortType.FACULTY);
+					type = SortType.FACULTY;
 					break;
 				case 5:
 					withdrawFromCamp();
