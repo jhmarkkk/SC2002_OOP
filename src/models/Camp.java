@@ -2,13 +2,15 @@ package models;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Date;
+import java.util.GregorianCalendar;
+
 import enums.Visibility;
 
 public class Camp {
+	
 	private String name;
-	private ArrayList<Date> dates;
-	private Date registrationClosingDate;
+	private ArrayList<GregorianCalendar> dates;
+	private GregorianCalendar registrationClosingDate;
 	private String openTo;
 	private String location;
 	private int totalSlots;
@@ -42,12 +44,13 @@ public class Camp {
 	 * @param enquiryCounter
 	 * @param suggestionCounter
 	 */
-	// public Camp(String name, ArrayList<Date> dates, Date registrationClosingDate, String openTo, String location,
-	// 		int totalSlots, int committeeSlots, String description, Staff staffInCharge, ArrayList<Student> attendees,
-	// 		ArrayList<String> withdrawnAttendees, ArrayList<CommitteeMember> committeeMembers, Visibility visibility,
-	// 		ArrayList<Enquiry> enquiries, ArrayList<Suggestion> suggestions) {
+	// public Camp(String name, ArrayList<GregorianCalendar> dates, GregorianCalendar registrationClosingDate,
+	// 		String openTo, String location, int totalSlots, int committeeSlots, String description,
+	// 		String staffInCharge, ArrayList<String> attendees, ArrayList<String> withdrawnAttendees,
+	// 		ArrayList<String> committeeMembers, Map<String, Enquiry> enquiries,
+	// 		Map<String, Suggestion> suggestions, Integer enquiryCounter, Integer suggestionCounter) {
 	public Camp(String name, String openTo, String location, int totalSlots, int committeeSlots, String description) {
-
+		
 		this.name = name;
 		// this.dates = dates;
 		// this.registrationClosingDate = registrationClosingDate;
@@ -69,6 +72,7 @@ public class Camp {
 	 * @return the name
 	 */
 	public String getName() {
+		
 		return name;
 	}
 
@@ -76,34 +80,39 @@ public class Camp {
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
+		
 		this.name = name;
 	}
 
 	/**
 	 * @return the dates
 	 */
-	public ArrayList<Date> getDates() {
+	public ArrayList<GregorianCalendar> getDates() {
+		
 		return dates;
 	}
 
 	/**
 	 * @param dates the dates to set
 	 */
-	public void setDates(ArrayList<Date> dates) {
+	public void setDates(ArrayList<GregorianCalendar> dates) {
+		
 		this.dates = dates;
 	}
 
 	/**
 	 * @return the registrationClosingDate
 	 */
-	public Date getRegistrationClosingDate() {
+	public GregorianCalendar getRegistrationClosingDate() {
+		
 		return registrationClosingDate;
 	}
 
 	/**
 	 * @param registrationClosingDate the registrationClosingDate to set
 	 */
-	public void setRegistrationClosingDate(Date registrationClosingDate) {
+	public void setRegistrationClosingDate(GregorianCalendar registrationClosingDate) {
+		
 		this.registrationClosingDate = registrationClosingDate;
 	}
 
@@ -111,6 +120,7 @@ public class Camp {
 	 * @return the openTo
 	 */
 	public String getOpenTo() {
+		
 		return openTo;
 	}
 
@@ -118,6 +128,7 @@ public class Camp {
 	 * @param openTo the openTo to set
 	 */
 	public void setOpenTo(String openTo) {
+		
 		this.openTo = openTo;
 	}
 
@@ -125,6 +136,7 @@ public class Camp {
 	 * @return the location
 	 */
 	public String getLocation() {
+		
 		return location;
 	}
 
@@ -132,6 +144,7 @@ public class Camp {
 	 * @param location the location to set
 	 */
 	public void setLocation(String location) {
+		
 		this.location = location;
 	}
 
@@ -139,6 +152,7 @@ public class Camp {
 	 * @return the totalSlots
 	 */
 	public int getTotalSlots() {
+		
 		return totalSlots;
 	}
 
@@ -146,6 +160,7 @@ public class Camp {
 	 * @param totalSlots the totalSlots to set
 	 */
 	public void setTotalSlots(int totalSlots) {
+		
 		this.totalSlots = totalSlots;
 	}
 
@@ -153,6 +168,7 @@ public class Camp {
 	 * @return the committeeSlots
 	 */
 	public int getCommitteeSlots() {
+		
 		return committeeSlots;
 	}
 
@@ -160,6 +176,7 @@ public class Camp {
 	 * @param committeeSlots the committeeSlots to set
 	 */
 	public void setCommitteeSlots(int committeeSlots) {
+		
 		this.committeeSlots = committeeSlots;
 	}
 
@@ -167,6 +184,7 @@ public class Camp {
 	 * @return the description
 	 */
 	public String getDescription() {
+		
 		return description;
 	}
 
@@ -174,6 +192,7 @@ public class Camp {
 	 * @param description the description to set
 	 */
 	public void setDescription(String description) {
+		
 		this.description = description;
 	}
 
@@ -181,6 +200,7 @@ public class Camp {
 	 * @return the attendees
 	 */
 	public ArrayList<String> getAttendees() {
+		
 		return attendees;
 	}
 
@@ -188,6 +208,7 @@ public class Camp {
 	 * @param attendees the attendees to set
 	 */
 	public void setAttendees(ArrayList<String> attendees) {
+		
 		this.attendees = attendees;
 	}
 
@@ -195,6 +216,7 @@ public class Camp {
 	 * @return the withdrawnAttendees
 	 */
 	public ArrayList<String> getWithdrawnAttendees() {
+		
 		return withdrawnAttendees;
 	}
 
@@ -202,6 +224,7 @@ public class Camp {
 	 * @param withdrawnAttendees the withdrawnAttendees to set
 	 */
 	public void setWithdrawnAttendees(ArrayList<String> withdrawnAttendees) {
+		
 		this.withdrawnAttendees = withdrawnAttendees;
 	}
 
@@ -209,6 +232,7 @@ public class Camp {
 	 * @return the committeeMembers
 	 */
 	public ArrayList<String> getCommitteeMembers() {
+		
 		return committeeMembers;
 	}
 
@@ -216,6 +240,7 @@ public class Camp {
 	 * @param committeeMembers the committeeMembers to set
 	 */
 	public void setCommitteeMembers(ArrayList<String> committeeMembers) {
+		
 		this.committeeMembers = committeeMembers;
 	}
 
@@ -223,6 +248,7 @@ public class Camp {
 	 * @return the visibility
 	 */
 	public Visibility getVisibility() {
+		
 		return visibility;
 	}
 
@@ -230,6 +256,7 @@ public class Camp {
 	 * @param visibility the visibility to set
 	 */
 	public void setVisibility(Visibility visibility) {
+		
 		this.visibility = visibility;
 	}
 
@@ -237,6 +264,7 @@ public class Camp {
 	 * @return the enquiries
 	 */
 	public Map<String, Enquiry> getEnquiries() {
+		
 		return enquiries;
 	}
 
@@ -244,6 +272,7 @@ public class Camp {
 	 * @param enquiries the enquiries to set
 	 */
 	public void setEnquiries(Map<String, Enquiry> enquiries) {
+		
 		this.enquiries = enquiries;
 	}
 
@@ -251,6 +280,7 @@ public class Camp {
 	 * @return the suggestions
 	 */
 	public Map<String, Suggestion> getSuggestions() {
+		
 		return suggestions;
 	}
 
@@ -258,6 +288,7 @@ public class Camp {
 	 * @param suggestions the suggestions to set
 	 */
 	public void setSuggestions(Map<String, Suggestion> suggestions) {
+		
 		this.suggestions = suggestions;
 	}
 
@@ -265,6 +296,7 @@ public class Camp {
 	 * @return the staffInCharge
 	 */
 	public String getStaffInCharge() {
+		
 		return staffInCharge;
 	}
 	
@@ -273,6 +305,7 @@ public class Camp {
 	 * @return The number of slots remaining for attendees.
 	 */
 	public int getAttendeeSlots() {
+		
 		return this.totalSlots - this.committeeSlots;
 	}
 
@@ -280,6 +313,7 @@ public class Camp {
 	 * @return the enquiryCounter
 	 */
 	public Integer getEnquiryCounter() {
+		
 		return enquiryCounter;
 	}
 
@@ -287,6 +321,7 @@ public class Camp {
 	 * @param enquiryCounter the enquiryCounter to set
 	 */
 	public void setEnquiryCounter(Integer enquiryCounter) {
+		
 		Camp.enquiryCounter = enquiryCounter;
 	}
 
@@ -294,6 +329,7 @@ public class Camp {
 	 * @return the suggestionCounter
 	 */
 	public Integer getSuggestionCounter() {
+		
 		return suggestionCounter;
 	}
 
@@ -301,6 +337,7 @@ public class Camp {
 	 * @param suggestionCounter the suggestionCounter to set
 	 */
 	public void setSuggestionCounter(Integer suggestionCounter) {
+		
 		Camp.suggestionCounter = suggestionCounter;
 	}
 	

@@ -1,10 +1,10 @@
-
 package models;
 
 /**
  * 
  */
 public class Suggestion {
+	
 	private int suggestionID;
 	private String suggestion;
 	private String suggester;
@@ -17,6 +17,7 @@ public class Suggestion {
 	 * @param approver
 	 */
 	public Suggestion(int suggestionID, String suggestion, String suggester, String approver) {
+		
 		this.suggestionID = suggestionID;
 		this.suggestion = suggestion;
 		this.suggester = suggester;
@@ -27,6 +28,7 @@ public class Suggestion {
 	 * @return the suggestion
 	 */
 	public String getSuggestion() {
+		
 		return suggestion;
 	}
 
@@ -34,6 +36,7 @@ public class Suggestion {
 	 * @param suggestion the suggestion to set
 	 */
 	public void setSuggestion(String suggestion) {
+		
 		this.suggestion = suggestion;
 	}
 
@@ -41,6 +44,7 @@ public class Suggestion {
 	 * @return the approver
 	 */
 	public String getApprover() {
+		
 		return approver;
 	}
 
@@ -48,6 +52,7 @@ public class Suggestion {
 	 * @param approver the approver to set
 	 */
 	public void setApprover(String approver) {
+		
 		this.approver = approver;
 	}
 
@@ -55,6 +60,7 @@ public class Suggestion {
 	 * @return the suggestionID
 	 */
 	public int getSuggestionID() {
+		
 		return suggestionID;
 	}
 
@@ -62,6 +68,7 @@ public class Suggestion {
 	 * @return the suggester
 	 */
 	public String getSuggester() {
+		
 		return suggester;
 	}
 	
