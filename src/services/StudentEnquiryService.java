@@ -17,7 +17,6 @@ public class StudentEnquiryService implements EnquiryServiceable {
 
     private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
 
-     
     private Map<Integer, Enquiry> enquiryMap = new HashMap<>();
 
     public void create(){

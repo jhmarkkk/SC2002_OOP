@@ -48,19 +48,19 @@ public class CAMs {
 
 		
 		//TESTING STUDENT SERVICES
-		// StudentDataService studentDataService = new StudentDataService();
-		// String inStudentFilePath = "data/StudentList.csv";
-		// studentDataService.importing(inStudentFilePath);
-		// String outStudentFilePath = "data/StudentListOut.csv";
-		// studentDataService.exporting(outStudentFilePath);
+		StudentDataService studentDataService = new StudentDataService();
+		String inStudentFilePath = "data/StudentList.csv";
+		studentDataService.importing(inStudentFilePath);
+		String outStudentFilePath = "data/StudentListOut.csv";
+		studentDataService.exporting(outStudentFilePath);
 
 
 		//TESTING STAFF SERVICES
-		StaffDataService staffDataService = new StaffDataService();
-		String inStaffFilePath = "data/StaffList.csv";
-		staffDataService.importing(inStaffFilePath);
-		String outStaffFilePath = "data/StaffListOut.csv";
-		staffDataService.exporting(outStaffFilePath);
+		// StaffDataService staffDataService = new StaffDataService();
+		// String inStaffFilePath = "data/StaffList.csv";
+		// staffDataService.importing(inStaffFilePath);
+		// String outStaffFilePath = "data/StaffListOut.csv";
+		// staffDataService.exporting(outStaffFilePath);
 
 	}
 }

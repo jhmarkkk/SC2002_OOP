@@ -35,9 +35,19 @@ public class StudentDataService implements DataServiceable {
                 if (student.getEnquiries().isEmpty()) {
                     enquiryString = "#NULL!";
                 } else {
-                    enquiryString = String.join("|", student.getEnquiries().stream().map(Object::toString).toArray(String[]::new));
+                    // Construct the enquiries string
+                    StringBuilder enquiryStringBuilder = new StringBuilder();
+                    for (Map.Entry<String, ArrayList<Integer>> campEnquiryEntry : student.getEnquiries().entrySet()) {
+                        String campName = campEnquiryEntry.getKey();
+                        ArrayList<Integer> enquiryList = campEnquiryEntry.getValue();
+                        String campEnquiryString = campName + "=" + String.join("|", enquiryList.stream().map(Object::toString).toArray(String[]::new));
+                        enquiryStringBuilder.append(campEnquiryString).append("*");
+                    }
+                
+                    // Remove the trailing asterisk if there are any enquiries
+                    enquiryString = enquiryStringBuilder.length() > 0 ? enquiryStringBuilder.substring(0, enquiryStringBuilder.length() - 1) : "#NULL!";
                 }
-
+                                
                 // Write data fields separated by commas
                 bw.write(student.getName() + ","
                         + student.getUserID() + "@e.ntu.edu.sg,"
@@ -92,22 +102,48 @@ public class StudentDataService implements DataServiceable {
 
                         //Extract enquiries
                         String enquiryString = fields[5];
-                        //Initialise Array to store enquiry IDs
-                        ArrayList<Integer> enquiry = new ArrayList<Integer>();
 
-                        //There exist enquiry
+                        Map<String, ArrayList<Integer>> enquiries = new HashMap<>();
+
                         if (!enquiryString.equals("#NULL!")){
-                            if (enquiryString.contains("|")){
-                                //enquiry.addAll(Arrays.asList(enquiryString.split("\\|")));
-                                Arrays.asList(enquiryString.split("\\|")).forEach(s -> enquiry.add(Integer.parseInt(s)));
+
+                            String[] campEnquiries;
+                            if (enquiryString.contains("*")){
+                                // Split the string based on the asterisk "*"
+                                campEnquiries = enquiryString.split("\\*");
                             } else {
-                                //enquiry.add(enquiryString);
-                                enquiry.add(Integer.parseInt(enquiryString));
+                                campEnquiries = new String[]{enquiryString};
                             }
-                        }
-	
+
+                            for (String campEnquiry : campEnquiries) {
+                                // Split each campEnquiry based on the equal sign "="
+                                String[] parts = campEnquiry.split("=");
+                                    
+                                // Ensure there are enough parts before accessing indices
+                                if (parts.length == 2) {
+                                    // The first part is the camp name, and the second part is the list of integers separated by "|"
+                                    String campName = parts[0].trim();
+
+                                    String[] enquiryValues;
+                                    if (parts[1].contains("|")){
+                                        enquiryValues = parts[1].split("\\|");
+                                    } else {
+                                        enquiryValues = new String[]{parts[1]};
+                                    }
+
+                                    // Convert the values to integers and add to the ArrayList
+                                    ArrayList<Integer> enquiryList = new ArrayList<>();
+                                    for (String value : enquiryValues) {
+                                        enquiryList.add(Integer.parseInt(value));
+                                    }
+
+                                    // Put the campName and enquiryList into the Map
+                                    enquiries.put(campName, enquiryList);
+                                }
+                            }                            
+                        }                        	
 						//Initialising student constructor
-						Student studentData = new Student(username, password, name, faculty, registeredCamps, enquiry);
+						Student studentData = new Student(username, password, name, faculty, registeredCamps, enquiries);
 
 						// Put the data into the map with username as key
 						studentDataMap.put(username, studentData);
