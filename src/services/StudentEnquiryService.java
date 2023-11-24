@@ -1,13 +1,15 @@
 package services;
 
 import java.util.Scanner;
-import java.beans.Visibility;
+//import java.beans.Visibility;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import interfaces.dao.CurrentUserDao;
 import dao.CurrentUserDaoImpl;
+import enums.Role;
+import enums.Visibility;
 import interfaces.services.EnquiryServiceable;
 import models.Enquiry;
 import models.Student;
@@ -15,6 +17,8 @@ import models.Student;
 import dao.CampDaoImpl;
 import interfaces.dao.CampDao;
 import models.Camp;
+import models.CommitteeMember;
+import models.User;
 
 
 public class StudentEnquiryService implements EnquiryServiceable {
@@ -24,16 +28,22 @@ public class StudentEnquiryService implements EnquiryServiceable {
     private static final CampDao campDao = new CampDaoImpl();
 
     public void create(){
-        Student student = currentUserDao.getCurrentUser().getRole();
-        String facilitatingCamp = campDao.getCamps().get(student.getFacilitatingCamp());
+        //Student student = currentUserDao.getCurrentUser().getRole();
+        User user = currentUserDao.getCurrentUser();
+        String facilitatingCamp = null;
+        if (user.getRole().equals(Role.COMMITTEE)){
+            CommitteeMember committeeMember = (CommitteeMember) currentUserDao.getCurrentUser();
+            facilitatingCamp = committeeMember.getFacilitatingCamp();
+        }
 
         String faculty = currentUserDao.getCurrentUser().getFaculty();
 
         //Get list of camp name for the user
+        Map<String, Camp> campsMap = campDao.getCamps();
         ArrayList<String> studentCamps = new ArrayList<String>();
         for (Camp camp : campsMap.values()) {
-            if (camp.getOpenTo.equals("NTU") || (faculty.equals(camp.getOpenTo())) && (camp.getVisibility() == Visibility.ON) && (!camp.getName().equals(facilitatingCamp))) {
-                studentCamps.add(camp);
+            if (camp.getOpenTo().equals("NTU") || (faculty.equals(camp.getOpenTo())) && (camp.getVisibility() == Visibility.ON) && (!camp.getName().equals(facilitatingCamp))) {
+                studentCamps.add(camp.getName());
             }
         }
 
@@ -77,7 +87,7 @@ public class StudentEnquiryService implements EnquiryServiceable {
             userEnquiries.put(campName, newEnquiries);
         }
         
-        Camp enquiringCamp = campData.get(campName);
+        Camp enquiringCamp = campsMap.get(campName);
         Map<Integer, Enquiry> oldEnquiries = enquiringCamp.getEnquiries();
         
         // Updating Camp's Enquiry Map
@@ -88,11 +98,11 @@ public class StudentEnquiryService implements EnquiryServiceable {
 
     public void delete(){
         Student currentUser = (Student) currentUserDao.getCurrentUser();
-        Camp facilitatingCamp = campDao.getCamps().get(currentUser.getFacilitatingCamp());
+        //String facilitatingCamp = campDao.getCamps().get(currentUser.getFacilitatingCamp());
 
         Map<String, Camp> campData = campDao.getCamps();
         ArrayList<String> campNameList = new ArrayList<>(campData.keySet());
-        ArrayList<String> enquiryList = campData.getEnquiries();
+        Map<String, ArrayList<Integer>> enquiryList = currentUser.getEnquiries();
 
         // // Choose which camp to delete enquiry from
         // System.out.println("Delete from: ");
@@ -108,20 +118,22 @@ public class StudentEnquiryService implements EnquiryServiceable {
         }
 
         // Choose which enquiry to delete
+        int i = 0;
+        
         do {
-            for (i = 0; i < enquiryList.size(); i++){
-                System.out.printf("Choice %d : %s\n", i + 1, enquiryList.get(i));
-                System.out.printf("Choice %d : Back", i + 2);
-                System.out.printf("Select choice: ");
-                int choice = sc.nextInt();
-                System.out.println();
-                if (choice == i + 2)
-                    return;
-                if (choice >= 1 || choice <= i + 1) {
-                    String enquiryDelete = enquiryList.get(choice-1);
-                    break;
-                }
+            for (i = 0; i < enquiryList.size(); i++)
+                {System.out.printf("Choice %d : %s\n", i + 1, enquiryList.get(i));}
+            System.out.printf("Choice %d : Back", i + 1);
+            System.out.printf("Select choice: ");
+            int choice = sc.nextInt();
+            System.out.println();
+            if (choice == i + 1)
+                return;
+            if (choice >= 1 || choice <= i + 1) {
+                String enquiryDelete = enquiryList.get(choice-1);
+                break;
             }
+            
         } while (true);
 
         // remove the enquiry from the user's knowledge
