@@ -60,6 +60,7 @@ public class CampDataService implements DataServiceable {
 			line = br.readLine();
 
 			while ((line = br.readLine()) != null) {
+				System.out.println("CampDataService line: " + line);
 				String[] fields = line.split(",");
 				campName = fields[0];
 
