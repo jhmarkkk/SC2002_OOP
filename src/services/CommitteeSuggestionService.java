@@ -25,7 +25,7 @@ public class CommitteeSuggestionService implements SuggestionServiceable {
         System.out.printf("Enter Suggestion for %s >>> ", facilitatingCamp.getName());
         String suggestionString = sc.nextLine();
 
-        String suggester = comMember.getName();
+        String suggester = comMember.getUserID();
 
         Suggestion newSuggestion = new Suggestion(suggestionString, suggester);
 
