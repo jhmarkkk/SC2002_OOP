@@ -17,7 +17,7 @@ public class ProfileView implements ProfileViewable {
         System.out.printf("Name: %s\n", currentUser.getName());
         System.out.printf("Faculty: %s\n", currentUser.getFaculty());
         if (currentUser.getRole() == Role.COMMITTEE) {
-        	CommitteeMember currentCommitteeMember = (CommitteeMember) currentUser;
+            CommitteeMember currentCommitteeMember = (CommitteeMember) currentUser;
             System.out.printf("Role: Committee of %s", currentCommitteeMember.getFacilitatingCamp());
         } else {
             System.out.printf("Role: %s",

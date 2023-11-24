@@ -3,6 +3,7 @@ package models;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 
 import enums.Visibility;
 
@@ -20,13 +21,12 @@ public class Camp {
 	private ArrayList<String> attendees;
 	private ArrayList<String> withdrawnAttendees;
 	private ArrayList<String> committeeMembers;
-	private Visibility visibility = Visibility.OFF;
-	private Map<String, Enquiry> enquiries;
-	private Map<String, Suggestion> suggestions;
-	private static Integer enquiryCounter;
-	private static Integer suggestionCounter;
+	private Map<Integer, Enquiry> enquiries;
+	private Map<Integer, Suggestion> suggestions;
+	private Visibility visibility;
 	
 	/**
+	 * Constructor used for importing Camp from csv.
 	 * @param name
 	 * @param dates
 	 * @param registrationClosingDate
@@ -41,17 +41,13 @@ public class Camp {
 	 * @param committeeMembers
 	 * @param enquiries
 	 * @param suggestions
-	 * @param enquiryCounter
-	 * @param suggestionCounter
+	 * @param visibility
 	 */
-	// public Camp(String name, ArrayList<GregorianCalendar> dates, GregorianCalendar registrationClosingDate,
-	// 		String openTo, String location, int totalSlots, int committeeSlots, String description,
-	// 		String staffInCharge, ArrayList<String> attendees, ArrayList<String> withdrawnAttendees,
-	// 		ArrayList<String> committeeMembers, Map<String, Enquiry> enquiries,
-	// 		Map<String, Suggestion> suggestions, Integer enquiryCounter, Integer suggestionCounter) {
-	
-		public Camp(String name, ArrayList<GregorianCalendar> dates, GregorianCalendar registrationClosingDate,
-			String openTo, String location, int totalSlots, int committeeSlots, String description) {
+	public Camp(String name, ArrayList<GregorianCalendar> dates, GregorianCalendar registrationClosingDate,
+			String openTo, String location, int totalSlots, int committeeSlots, String description,
+			String staffInCharge, ArrayList<String> attendees, ArrayList<String> withdrawnAttendees,
+			ArrayList<String> committeeMembers, Map<Integer, Enquiry> enquiries,
+			Map<Integer, Suggestion> suggestions, Visibility visibility) {
 		
 		this.name = name;
 		this.dates = dates;
@@ -61,15 +57,50 @@ public class Camp {
 		this.totalSlots = totalSlots;
 		this.committeeSlots = committeeSlots;
 		this.description = description;
-		// this.staffInCharge = staffInCharge;
-		// this.attendees = attendees;
-		// this.withdrawnAttendees = withdrawnAttendees;
-		// this.committeeMembers = committeeMembers;
-		// this.visibility = visibility;
-		// this.enquiries = enquiries;
-		// this.suggestions = suggestions;
+		this.staffInCharge = staffInCharge;
+		this.attendees = attendees;
+		this.withdrawnAttendees = withdrawnAttendees;
+		this.committeeMembers = committeeMembers;
+		this.enquiries = enquiries;
+		this.suggestions = suggestions;
+		this.visibility = visibility;
+
 	}
-	
+
+	/**
+	 * Constructor used for Staff to create new Camp.
+	 * @param name
+	 * @param dates
+	 * @param registrationClosingDate
+	 * @param openTo
+	 * @param location
+	 * @param totalSlots
+	 * @param committeeSlots
+	 * @param description
+	 * @param staffInCharge
+	 */
+	public Camp(String name, ArrayList<GregorianCalendar> dates, GregorianCalendar registrationClosingDate,
+			String openTo, String location, int totalSlots, int committeeSlots, String description,
+			String staffInCharge) {
+		this.name = name;
+		this.dates = dates;
+		this.registrationClosingDate = registrationClosingDate;
+		this.openTo = openTo;
+		this.location = location;
+		this.totalSlots = totalSlots;
+		this.committeeSlots = committeeSlots;
+		this.description = description;
+		this.staffInCharge = staffInCharge;
+		this.attendees = new ArrayList<String>();
+		this.withdrawnAttendees = new ArrayList<String>();
+		this.committeeMembers = new ArrayList<String>();
+		this.enquiries = new HashMap<Integer, Enquiry>();
+		this.suggestions = new HashMap<Integer, Suggestion>();
+		this.visibility = Visibility.OFF;
+	}
+
+
+
 	/**
 	 * @return the name
 	 */
@@ -265,7 +296,7 @@ public class Camp {
 	/**
 	 * @return the enquiries
 	 */
-	public Map<String, Enquiry> getEnquiries() {
+	public Map<Integer, Enquiry> getEnquiries() {
 		
 		return enquiries;
 	}
@@ -273,7 +304,7 @@ public class Camp {
 	/**
 	 * @param enquiries the enquiries to set
 	 */
-	public void setEnquiries(Map<String, Enquiry> enquiries) {
+	public void setEnquiries(Map<Integer, Enquiry> enquiries) {
 		
 		this.enquiries = enquiries;
 	}
@@ -281,7 +312,7 @@ public class Camp {
 	/**
 	 * @return the suggestions
 	 */
-	public Map<String, Suggestion> getSuggestions() {
+	public Map<Integer, Suggestion> getSuggestions() {
 		
 		return suggestions;
 	}
@@ -289,7 +320,7 @@ public class Camp {
 	/**
 	 * @param suggestions the suggestions to set
 	 */
-	public void setSuggestions(Map<String, Suggestion> suggestions) {
+	public void setSuggestions(Map<Integer, Suggestion> suggestions) {
 		
 		this.suggestions = suggestions;
 	}
@@ -309,38 +340,6 @@ public class Camp {
 	public int getAttendeeSlots() {
 		
 		return this.totalSlots - this.committeeSlots;
-	}
-
-	/**
-	 * @return the enquiryCounter
-	 */
-	public Integer getEnquiryCounter() {
-		
-		return enquiryCounter;
-	}
-
-	/**
-	 * @param enquiryCounter the enquiryCounter to set
-	 */
-	public void setEnquiryCounter(Integer enquiryCounter) {
-		
-		Camp.enquiryCounter = enquiryCounter;
-	}
-
-	/**
-	 * @return the suggestionCounter
-	 */
-	public Integer getSuggestionCounter() {
-		
-		return suggestionCounter;
-	}
-
-	/**
-	 * @param suggestionCounter the suggestionCounter to set
-	 */
-	public void setSuggestionCounter(Integer suggestionCounter) {
-		
-		Camp.suggestionCounter = suggestionCounter;
 	}
 	
 

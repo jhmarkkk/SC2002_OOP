@@ -1,23 +1,27 @@
 package controllers;
 
-import interfaces.views.CampDetailViewable;
-import interfaces.views.SuggestionViewable;
+import dao.CurrentUserDaoImpl;
+
+import interfaces.dao.CurrentUserDao;
+import interfaces.services.GenerateReportServiceable;
 import interfaces.services.ReplyEnquiryServiceable;
 import interfaces.services.SuggestionServiceable;
-import interfaces.services.GenerateReportServiceable;
+import interfaces.views.CampDetailViewable;
+import interfaces.views.SuggestionViewable;
 
 import models.CommitteeMember;
 
+import services.CommitteeGenerateReportService;
 import services.CommitteeReplyEnquiryService;
 import services.CommitteeSuggestionService;
-import services.CommitteeGenerateReportService;
 
 import views.CampDetailView;
 import views.CommitteeEnquiryView;
 import views.CommitteeSuggestionView;
 
-
 public class CommitteeController extends StudentController {
+	
+	private static CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
 	
 	private static final CampDetailViewable campDetailView = new CampDetailView();
 	
@@ -73,7 +77,6 @@ public class CommitteeController extends StudentController {
 			default:
 				System.out.println("Invalid choice. Please choose again.");
 			}
-
 		} while(true);
 	}
 	
@@ -87,7 +90,8 @@ public class CommitteeController extends StudentController {
 			System.out.println("1. View attendees' enquires");
 			System.out.println("2. View suggestions");
 			System.out.println("3. Create suggestion");
-			System.out.println("4. Back");
+			System.out.println("4. Generate attendee report");
+			System.out.println("5. Back");
 			System.out.print("\nChoice: ");
 			
 			choice = sc.nextInt();
@@ -105,6 +109,9 @@ public class CommitteeController extends StudentController {
 				createSuggestion();
 				break;
 			case 4:
+				generateReport();
+				break;
+			case 5:
 				return;
 			default:
 				System.out.println("Invalid choice. Please choose again.");
@@ -191,7 +198,7 @@ public class CommitteeController extends StudentController {
 	
 	protected void generateReport() {
 		
-		generateReportService.generate();
+		generateReportService.exporting("test");
 	}
 	
 }

@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import enums.Role;
 
@@ -11,11 +12,11 @@ public class CommitteeMember extends Student {
 	private int points = 0;
 	
 	/**
+	 * Constructor used for importing CommitteeMember from csv.
 	 * @param userID
 	 * @param password
 	 * @param name
 	 * @param faculty
-	 * @param role
 	 * @param registeredCamps
 	 * @param enquiries
 	 * @param facilitatingCamp
@@ -24,13 +25,36 @@ public class CommitteeMember extends Student {
 	 */
 	
 	public CommitteeMember(String userID, String password, String name, String faculty,
-			ArrayList<String> registeredCamps, ArrayList<Integer> enquiries,
-			String facilitatingCamp,ArrayList<Integer> suggestions, int points) {
+			ArrayList<String> registeredCamps, Map<String, ArrayList<Integer>> enquiries,
+			String facilitatingCamp, ArrayList<Integer> suggestions, int points) {
 		
-		super(userID, password, name, faculty, Role.COMMITTEE, registeredCamps, enquiries);
+		super(userID, password, name, faculty, registeredCamps, enquiries);
+		this.setRole(Role.COMMITTEE);
 		this.facilitatingCamp = facilitatingCamp;
 		this.suggestions = suggestions;
 		this.points = points;
+	}
+
+	/**
+	 * Constructor used for when a Student becomes a CommitteeMember.
+	 * @param userID
+	 * @param password
+	 * @param name
+	 * @param faculty
+	 * @param registeredCamps
+	 * @param enquiries
+	 * @param facilitatingCamp
+	 */
+	
+	public CommitteeMember(String userID, String password, String name, String faculty,
+			ArrayList<String> registeredCamps, Map<String, ArrayList<Integer>> enquiries,
+			String facilitatingCamp) {
+		
+		super(userID, password, name, faculty, registeredCamps, enquiries);
+		this.setRole(Role.COMMITTEE);
+		this.facilitatingCamp = facilitatingCamp;
+		this.suggestions = new ArrayList<Integer>();
+		this.points = 0;
 	}
 
 	/**
