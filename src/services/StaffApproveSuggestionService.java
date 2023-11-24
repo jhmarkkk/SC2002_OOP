@@ -23,16 +23,20 @@ public class StaffApproveSuggestionService implements ApproveSuggestionServiceab
     private static final Map<String, Camp> campsMap = campDao.getCamps();
 
     public void approve() {
-        int i, choice;
+        int i = 0, choice;
         Map<Integer, String> sugIDtoCampMap = new HashMap<Integer, String>();
-        do {
-            for (String createdCampID : createdCampIDs) {
-                System.out.printf("===== %s Suggestions =====\n", createdCampID);
-                for (Integer suggestionID : campsMap.get(createdCampID).getSuggestions().keySet()) {
-                    sugIDtoCampMap.put(suggestionID, createdCampID);
-
-                }
+        for (String createdCampID : createdCampIDs) {
+            for (Integer suggestionID : campsMap.get(createdCampID).getSuggestions().keySet()) {
+                sugIDtoCampMap.put(suggestionID, createdCampID);
             }
+        }
+        do {
+            System.out.printf("===== Suggestions =====\n");
+            for (Integer suggestionID : sugIDtoCampMap.keySet()) {
+    
+                System.out.printf("%d. Suggestion ID %d ", i++, );
+            }
+
             System.out.printf("Choice %d : Back", i + 1);
             System.out.printf("Select choice: ");
             choice = sc.nextInt();
