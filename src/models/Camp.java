@@ -21,8 +21,8 @@ public class Camp {
 	private ArrayList<String> withdrawnAttendees;
 	private ArrayList<String> committeeMembers;
 	private Visibility visibility = Visibility.OFF;
-	private Map<String, Enquiry> enquiries;
-	private Map<String, Suggestion> suggestions;
+	private Map<Integer, Enquiry> enquiries;
+	private Map<Integer, Suggestion> suggestions;
 	private static Integer enquiryCounter;
 	private static Integer suggestionCounter;
 	
@@ -47,8 +47,8 @@ public class Camp {
 	public Camp(String name, ArrayList<GregorianCalendar> dates, GregorianCalendar registrationClosingDate,
 			String openTo, String location, int totalSlots, int committeeSlots, String description,
 			String staffInCharge, ArrayList<String> attendees, ArrayList<String> withdrawnAttendees,
-			ArrayList<String> committeeMembers, Map<String, Enquiry> enquiries,
-			Map<String, Suggestion> suggestions, Integer enquiryCounter, Integer suggestionCounter) {
+			ArrayList<String> committeeMembers, Map<Integer, Enquiry> enquiries,
+			Map<Integer, Suggestion> suggestions, Integer enquiryCounter, Integer suggestionCounter) {
 		
 		this.name = name;
 		this.dates = dates;
@@ -307,38 +307,6 @@ public class Camp {
 	public int getAttendeeSlots() {
 		
 		return this.totalSlots - this.committeeSlots;
-	}
-
-	/**
-	 * @return the enquiryCounter
-	 */
-	public Integer getEnquiryCounter() {
-		
-		return enquiryCounter;
-	}
-
-	/**
-	 * @param enquiryCounter the enquiryCounter to set
-	 */
-	public void setEnquiryCounter(Integer enquiryCounter) {
-		
-		Camp.enquiryCounter = enquiryCounter;
-	}
-
-	/**
-	 * @return the suggestionCounter
-	 */
-	public Integer getSuggestionCounter() {
-		
-		return suggestionCounter;
-	}
-
-	/**
-	 * @param suggestionCounter the suggestionCounter to set
-	 */
-	public void setSuggestionCounter(Integer suggestionCounter) {
-		
-		Camp.suggestionCounter = suggestionCounter;
 	}
 	
 

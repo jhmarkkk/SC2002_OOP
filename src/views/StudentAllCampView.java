@@ -1,31 +1,29 @@
 package views;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Map;
 import java.util.Objects;
 
-import enums.FilterType;
+import dao.CampDaoImpl;
+import dao.CurrentUserDaoImpl;
+import models.Camp;
+import enums.SortType;
 import interfaces.views.CampViewable;
-// import interfaces.views.FilterViewable;
+import interfaces.dao.CampDao;
+import interfaces.dao.CurrentUserDao;
 
 public class StudentAllCampView implements CampViewable {
 
-    public void filterView(FilterType filterType) {
+    @Override
+    public void sortView(SortType sortType) {
+        // TODO Auto-generated method stub
 
+        CampDao campDao = new CampDaoImpl();
+        Map<String, Camp> campMap = campDao.getCamps();
+        CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
+        String faculty = currentUserDao.getCurrentUser().getFaculty();
+        
     }
-
-    // StudentAllCampView() {
-    //     CampDaoInterface campDao = CampDaoImplementation();
-    //     ArrayList<Camp> camps = campDao.getCamps();
-    //     CurrentUserDaoInterface currentUserDao;
-    //     String faculty = currentUserDao.getCurrentUser().getFaculty();
-    //     for (Camp camp : camps) {
-    //         // if the id does not match the idlist, remove it from camps
-    //         if (!Objects.equals(id, camp.getName())) {
-    //             camps.remove(camp);
-    //         }
-    //     }
-    // }
 
     // public void view() {
     //     CampDaoInterface campDao = CampDaoImplementation();

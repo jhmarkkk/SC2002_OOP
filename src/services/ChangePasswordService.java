@@ -8,7 +8,7 @@ import interfaces.services.ChangePasswordServiceable;
 import models.User;
 
 public class ChangePasswordService implements ChangePasswordServiceable{
-	
+
 	private static final Scanner sc = new Scanner(System.in);
 	
 	private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
