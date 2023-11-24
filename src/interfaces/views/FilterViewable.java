@@ -10,10 +10,10 @@ import java.util.ArrayList;
 //     STAFF
 // }
 
-import enums.FilterType;
+import enums.SortType;
 
 public interface FilterViewable {
     //void filter(ArrayList<String> idList, FilterType filterType);
 
-    public void filterView(FilterType filterType);
+    public void sortView(SortType sortType);
 }
