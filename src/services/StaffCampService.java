@@ -28,7 +28,7 @@ import dao.CommitteeMemberDaoImpl;
 import dao.CampDaoImpl;
 
 
-public class StaffCampService {
+public class StaffCampService implements CampServiceable {
     private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
     private static final CampDao campDao = new CampDaoImpl();
 
@@ -148,9 +148,12 @@ public class StaffCampService {
 
         // Deleting each enquiry in the Map
         Map<String, ArrayList<Integer>> userEnquiries = currentUser.getEnquiries();
-        //currentUser.getEnquiries()
         if(userEnquiries.containsKey(selectedCampName)){
             userEnquiries.remove(selectedCampName);
+        }
+
+        for (String key : userEnquiries.keySet()){
+
         }
     }
 
