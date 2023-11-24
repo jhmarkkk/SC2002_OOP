@@ -20,9 +20,9 @@ public class StaffSuggestionView implements SuggestionViewable {
         Staff staff = (Staff) currentUserDao.getCurrentUser();
         for (String createdCampID : staff.getCreatedCamps()) {
             Camp createdCamp = campsMap.get(createdCampID);
-            System.out.printf("===== %s Enquiries =====\n", createdCamp.getName());
+            System.out.printf("===== %s Suggestions =====\n", createdCamp.getName());
             for (Suggestion sug : createdCamp.getSuggestions().values()) {
-                System.out.printf("***** Enquiry %d from %s *****\n", sug.getSuggestionID(), sug.getSuggester());
+                System.out.printf("***** Suggestion %d from %s *****\n", sug.getSuggestionID(), sug.getSuggester());
                 System.out.printf("%s\n", sug.getSuggestion());
                 if (sug.getApprover() != null) {
                     System.out.printf("~~~~~ Approved by: %s ~~~~~\n", sug.getApprover());
