@@ -8,6 +8,7 @@ import dao.CampDaoImpl;
 import dao.CurrentUserDaoImpl;
 import models.Camp;
 import enums.SortType;
+import enums.Visibility;
 import interfaces.views.CampViewable;
 import interfaces.dao.CampDao;
 import interfaces.dao.CurrentUserDao;
@@ -22,7 +23,16 @@ public class StudentAllCampView implements CampViewable {
         Map<String, Camp> campMap = campDao.getCamps();
         CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
         String faculty = currentUserDao.getCurrentUser().getFaculty();
-        
+
+        ArrayList<Camp> studentCamps = new ArrayList<Camp>();
+        for (Camp camp : campMap.values()) {
+            // if the id does not match the idlist, remove it from camps
+            if (camp.getOpenTo().equals("NTU") || (faculty.equals(camp.getOpenTo()))
+                    && camp.getVisibility() == Visibility.ON) {
+                studentCamps.add(camp);
+            }
+
+        }
     }
 
     // public void view() {
