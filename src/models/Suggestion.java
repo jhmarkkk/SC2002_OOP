@@ -12,17 +12,31 @@ public class Suggestion {
 	private static Integer suggestionCounter;
 	
 	/**
+	 * Constructor used for importing Suggestion from csv.
 	 * Before creating Suggestion instances, make sure you've set the suggestionCounter value!
 	 * @param suggestion
 	 * @param suggester
 	 * @param approver
 	 */
-	public Suggestion(String suggestion, String suggester, String approver) {
+	public Suggestion(Integer suggestionID, String suggestion, String suggester, String approver) {
+		
+		this.suggestionID = suggestionID;
+		this.suggestion = suggestion;
+		this.suggester = suggester;
+		this.approver = approver;
+	}
+
+	/**
+	 * Constructor used for new Suggestion created by students.
+	 * @param suggestion
+	 * @param suggester
+	 */
+	public Suggestion(String suggestion, String suggester) {
 		
 		this.suggestionID = suggestionCounter++;
 		this.suggestion = suggestion;
 		this.suggester = suggester;
-		this.approver = approver;
+		this.approver = null;
 	}
 
 	/**
