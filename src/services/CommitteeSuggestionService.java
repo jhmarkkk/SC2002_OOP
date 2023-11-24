@@ -59,7 +59,7 @@ public class CommitteeSuggestionService implements SuggestionServiceable {
             System.out.println();
             if (choice == i + 1)
                 return;
-            if (choice >= 0 || choice <= i) {
+            if (choice >= 1 || choice <= i) {
                 suggestionDeleteID = suggestionIDs.get(choice - 1);
                 break;
             }

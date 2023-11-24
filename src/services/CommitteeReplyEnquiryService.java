@@ -39,7 +39,7 @@ public class CommitteeReplyEnquiryService implements ReplyEnquiryServiceable {
             System.out.println();
             if (choice == i + 1)
                 return;
-            if (choice >= 0 || choice <= i) {
+            if (choice >= 1 || choice <= i) {
                 enquiryToReply = facilitingEnqIDList.get(choice);
                 break;
             }
