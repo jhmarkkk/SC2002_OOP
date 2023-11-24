@@ -3,24 +3,22 @@ package controllers;
 import enums.SortType;
 
 import interfaces.views.CampViewable;
-import interfaces.views.AttendeeViewable;
-import interfaces.views.SortViewable;
+import interfaces.views.EnquiryViewable;
 import interfaces.views.SuggestionViewable;
-import interfaces.services.ToggleVisibilityServiceable;
-import interfaces.services.CampServiceable;
 import interfaces.services.ApproveSuggestionServiceable;
-import interfaces.services.ReplyEnquiryServiceable;
+import interfaces.services.CampServiceable;
 import interfaces.services.GenerateReportServiceable;
+import interfaces.services.ReplyEnquiryServiceable;
+import interfaces.services.ToggleVisibilityServiceable;
 
-import services.ToggleVisibilityService;
-import services.StaffCampService;
 import services.StaffApproveSuggestionService;
-import services.StaffReplyEnquiryService;
+import services.StaffCampService;
 import services.StaffGenerateReportService;
+import services.StaffReplyEnquiryService;
+import services.ToggleVisibilityService;
 
-import views.StaffAllCampView;
 import views.CreatedCampView;
-import views.AttendeeView;
+import views.StaffAllCampView;
 import views.StaffEnquiryView;
 import views.StaffSuggestionView;
 
@@ -40,9 +38,7 @@ public class StaffController extends AbstractUserController {
 
 	private static CampViewable campView;
 
-	private static final AttendeeViewable attendeeView = new AttendeeView();
-
-	private static final SortViewable enquiryView = new StaffEnquiryView();
+	private static final EnquiryViewable enquiryView = new StaffEnquiryView();
 
 	private static final SuggestionViewable suggestionView = new StaffSuggestionView();
 
@@ -64,10 +60,10 @@ public class StaffController extends AbstractUserController {
 		do {
 			System.out.println("1. View profile");
 			System.out.println("2. View all camps");
-			System.out.println("3. View created camps");
+			System.out.println("3. View my created camps");
 			System.out.println("4. Create new camp");
-			System.out.println("5. View suggestions");
-			System.out.println("6. View enquiries");
+			System.out.println("5. View committee members' suggestions");
+			System.out.println("6. View attendees' enquiries");
 			System.out.println("7. Generate Report");
 			System.out.println("8. Log out");
 			System.out.print("\nChoice: ");
@@ -111,11 +107,12 @@ public class StaffController extends AbstractUserController {
 	protected void viewAllCamps() {
 
 		int choice;
+		SortType type = SortType.NAME;
 
 		campView = new StaffAllCampView();
-		campView.sortView(SortType.NAME);
 
 		do {
+			campView.sortView(type);
 			System.out.println("1. Sort by camp dates");
 			System.out.println("2. Sort by camp registration closing date");
 			System.out.println("3. Sort by camp location");
@@ -130,19 +127,19 @@ public class StaffController extends AbstractUserController {
 
 			switch (choice) {
 				case 1:
-					campView.sortView(SortType.DATES);
+					type = SortType.DATES;
 					break;
 				case 2:
-					campView.sortView(SortType.CLOSING_DATE);
+					type = SortType.CLOSING_DATE;
 					break;
 				case 3:
-					campView.sortView(SortType.LOCATION);
+					type = SortType.LOCATION;
 					break;
 				case 4:
-					campView.sortView(SortType.FACULTY);
+					type = SortType.FACULTY;
 					break;
 				case 5:
-					campView.sortView(SortType.STAFF);
+					type = SortType.STAFF;
 					break;
 				case 6:
 					return;
@@ -158,9 +155,9 @@ public class StaffController extends AbstractUserController {
 
 		int choice;
 
-		enquiryView.view();
 
 		do {
+			enquiryView.view();
 			System.out.println("1. Reply enquiry");
 			System.out.println("2. Back");
 			System.out.print("\nChoice: ");
@@ -185,21 +182,21 @@ public class StaffController extends AbstractUserController {
 	protected void viewCreatedCamps() {
 
 		int choice;
+		SortType type = SortType.NAME;
 
 		campView = new CreatedCampView();
-		campView.sortView(SortType.NAME);
 
 		do {
+			campView.sortView(type);
 			System.out.println("1. Sort by camp dates");
 			System.out.println("2. Sort by camp registration closing date");
 			System.out.println("3. Sort by camp location");
 			System.out.println("4. Sort by camp faculty");
 			System.out.println("5. Sort by camp staff-in-charge");
-			System.out.println("6. View camp attendees");
-			System.out.println("7. Toggle visibility");
-			System.out.println("8. Edit camp");
-			System.out.println("9. Delete camp");
-			System.out.println("10. Back");
+			System.out.println("6. Toggle visibility");
+			System.out.println("7. Edit camp");
+			System.out.println("8. Delete camp");
+			System.out.println("9. Back");
 			System.out.print("\nChoice: ");
 
 			choice = sc.nextInt();
@@ -208,43 +205,35 @@ public class StaffController extends AbstractUserController {
 
 			switch (choice) {
 				case 1:
-					campView.sortView(SortType.DATES);
+					type = SortType.DATES;
 					break;
 				case 2:
-					campView.sortView(SortType.CLOSING_DATE);
+					type = SortType.CLOSING_DATE;
 					break;
 				case 3:
-					campView.sortView(SortType.LOCATION);
+					type = SortType.LOCATION;
 					break;
 				case 4:
-					campView.sortView(SortType.FACULTY);
+					type = SortType.FACULTY;
 					break;
 				case 5:
-					campView.sortView(SortType.STAFF);
+					type = SortType.STAFF;
 					break;
 				case 6:
-					viewAttendees();
-					break;
-				case 7:
 					toggleVisibility();
 					break;
-				case 8:
+				case 7:
 					editCamp();
 					break;
-				case 9:
+				case 8:
 					deleteCamp();
 					break;
-				case 10:
+				case 9:
 					return;
 				default:
 					System.out.println("Invalid choice. Please choose again.");
 			}
 		} while (true);
-	}
-
-	protected void viewAttendees() {
-
-		attendeeView.view();
 	}
 
 	protected void toggleVisibility() {
@@ -271,10 +260,9 @@ public class StaffController extends AbstractUserController {
 
 		int choice;
 
-		suggestionView.view();
-
 		do {
-			System.out.println("1. Approve/Reject suggestion");
+			suggestionView.view();
+			System.out.println("1. Approve suggestion");
 			System.out.println("2. Back");
 			System.out.print("\nChoice: ");
 
@@ -307,7 +295,7 @@ public class StaffController extends AbstractUserController {
 
 	protected void generateReport() {
 
-		generateReportService.generate();
+		generateReportService.exporting("report/StaffReport.txt");
 	}
 
 }
