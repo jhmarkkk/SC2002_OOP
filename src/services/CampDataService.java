@@ -27,7 +27,6 @@ public class CampDataService implements DataServiceable{
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
-            int rowNumber = 0;
 
 			Map<String, Camp> campDataMap = new HashMap<>();
 
@@ -48,24 +47,25 @@ public class CampDataService implements DataServiceable{
     }
 		
 
-	/**
-	 * 
-	 * @param text 
-	 * @return a Map that takes in enquiryID as key and returns its constructed Enquiry object. 
-	 */
-	private Map<Integer, Enquiry> createEnquiryMap(String text){
-		Map<Integer, Enquiry> enquiryMap = new HashMap<>();
+	// /**
+	//  * 
+	//  * @param text 
+	//  * @return a Map that takes in enquiryID as key and returns its constructed Enquiry object. 
+	//  */
+
+	// private Map<Integer, Enquiry> createEnquiryMap(String text){
+	// 	Map<Integer, Enquiry> enquiryMap = new HashMap<>();
 		
-		String[] fields = text.split(",");
-		Integer enquiryID = Integer.valueOf(fields[0]);
-		String enquirer = fields[1];
-		String enquiry = fields[2];
-		String replier = fields[3];
-		String reply = fields[4];
+	// 	String[] fields = text.split(",");
+	// 	Integer enquiryID = Integer.valueOf(fields[0]);
+	// 	String enquirer = fields[1];
+	// 	String enquiry = fields[2];
+	// 	String replier = fields[3];
+	// 	String reply = fields[4];
 		
-		enquiryMap.put(enquiryID, new Enquiry(enquiryID, enquirer, enquiry, replier, reply)); 
-		return enquiryMap;
+	// 	enquiryMap.put(enquiryID, new Enquiry(enquiryID, enquirer, enquiry, replier, reply)); 
+	// 	return enquiryMap;
 		
-	}
+	// }
 	
 }

@@ -8,7 +8,7 @@ public class Suggestion {
 	private int suggestionID;
 	private String suggestion;
 	private String suggester;
-	private String approver = null;
+	private boolean approved;
 	private static Integer suggestionCounter;
 	
 	/**
@@ -16,14 +16,14 @@ public class Suggestion {
 	 * Before creating Suggestion instances, make sure you've set the suggestionCounter value!
 	 * @param suggestion
 	 * @param suggester
-	 * @param approver
+	 * @param approved
 	 */
-	public Suggestion(Integer suggestionID, String suggestion, String suggester, String approver) {
+	public Suggestion(Integer suggestionID, String suggestion, String suggester, boolean approved) {
 		
 		this.suggestionID = suggestionID;
 		this.suggestion = suggestion;
 		this.suggester = suggester;
-		this.approver = approver;
+		this.approved = approved;
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class Suggestion {
 		this.suggestionID = suggestionCounter++;
 		this.suggestion = suggestion;
 		this.suggester = suggester;
-		this.approver = null;
+		this.approved = false;
 	}
 
 	/**
@@ -58,17 +58,17 @@ public class Suggestion {
 	/**
 	 * @return the approver
 	 */
-	public String getApprover() {
+	public boolean getApproved() {
 		
-		return approver;
+		return approved;
 	}
 
 	/**
 	 * @param approver the approver to set
 	 */
-	public void setApprover(String approver) {
+	public void setApprover(boolean approved) {
 		
-		this.approver = approver;
+		this.approved = approved;
 	}
 
 	/**
