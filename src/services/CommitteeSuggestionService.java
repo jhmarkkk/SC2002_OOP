@@ -17,7 +17,7 @@ public class CommitteeSuggestionService implements SuggestionServiceable {
     Scanner sc = new Scanner(System.in);
 
     private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
-    public static final CampDao campDao = new CampDaoImpl();
+    private static final CampDao campDao = new CampDaoImpl();
     private static final CommitteeMember comMember = (CommitteeMember) currentUserDao.getCurrentUser();
     private static final Camp facilitatingCamp = campDao.getCamps().get(comMember.getFacilitatingCamp());
 
@@ -38,27 +38,30 @@ public class CommitteeSuggestionService implements SuggestionServiceable {
         // add to comMember knowledge of suggestion
         committeeSuggestionMap.add(newSuggestion.getSuggestionID());
 
+        System.out.printf("You have created suggestion with id %d\n", newSuggestion.getSuggestionID());
     }
 
     public void delete() {
+        int i, choice, suggestionDeleteID;
         ArrayList<Integer> suggestionIDs = comMember.getSuggestions();
         if (suggestionIDs.size() == 0) {
             System.out.println("No suggestion to delete!");
             return;
         }
-        for (Integer suggestionID : suggestionIDs) {
-            Suggestion sug = facilitatingCamp.getSuggestions().get(suggestionID);
-            System.out.printf("***** Suggestion %d *****\n", sug.getSuggestionID());
-            System.out.printf("%s\n", sug.getSuggestion());
-        }
-        int suggestionDeleteID;
-        System.out.println("Enter a suggestion number to delete: ");
-        suggestionDeleteID = sc.nextInt();
         do {
-            System.out.println("Invalid suggestion ID entered");
-            System.out.println("Enter a suggestion number to delete: ");
-            suggestionDeleteID = sc.nextInt();
-        } while (!suggestionIDs.contains(suggestionDeleteID));
+            for (i = 0; i < suggestionIDs.size(); i++)
+                System.out.printf("Choice %d : Suggestion ID %d\n", i, suggestionIDs.get(i));
+            System.out.printf("Choice %d : Back", i + 1);
+            System.out.printf("Select choice: ");
+            choice = sc.nextInt();
+            System.out.println();
+            if (choice == i + 1)
+                return;
+            if (choice >= 0 || choice <= i) {
+                suggestionDeleteID = suggestionIDs.get(i);
+                break;
+            }
+        } while (true);
 
         // remove suggestion IDs from the user's knowledge
         suggestionIDs.remove(Integer.valueOf(suggestionDeleteID));
@@ -67,32 +70,38 @@ public class CommitteeSuggestionService implements SuggestionServiceable {
         SuggestionMap.remove(suggestionDeleteID);
         facilitatingCamp.setSuggestions(SuggestionMap);
 
+        System.out.printf("You have deleted suggestion with id %d\n", suggestionDeleteID);
     }
 
     public void edit() {
+        int i, choice, suggestionEditID;
         ArrayList<Integer> suggestionIDs = comMember.getSuggestions();
         if (suggestionIDs.size() == 0) {
             System.out.println("No suggestion to edit!");
             return;
         }
-        for (Integer suggestionID : suggestionIDs) {
-            Suggestion sug = facilitatingCamp.getSuggestions().get(suggestionID);
-            System.out.printf("***** Suggestion %d *****\n", sug.getSuggestionID());
-            System.out.printf("%s\n", sug.getSuggestion());
-        }
-        int suggestionEditID;
-        System.out.println("Enter a suggestion number to edit: ");
-        suggestionEditID = sc.nextInt();
         do {
-            System.out.println("Invalid suggestion ID entered");
-            System.out.println("Enter a suggestion number to edit: ");
-            suggestionEditID = sc.nextInt();
-        } while (!suggestionIDs.contains(suggestionEditID));
+            for (i = 0; i < suggestionIDs.size(); i++)
+                System.out.printf("Choice %d : Suggestion ID %d\n", i, suggestionIDs.get(i));
+            System.out.printf("Choice %d : Back", i + 1);
+            System.out.printf("Select choice: ");
+            choice = sc.nextInt();
+            System.out.println();
+            if (choice == i + 1)
+                return;
+            if (choice >= 0 || choice <= i) {
+                suggestionEditID = suggestionIDs.get(i);
+                break;
+            }
+        } while (true);
+
         // change the suggestion from the camp's knowledge
         Map<Integer, Suggestion> SuggestionMap = facilitatingCamp.getSuggestions();
         Suggestion suggestionToEdit = SuggestionMap.get(suggestionEditID);
         System.out.printf("Enter new Suggestion for %s >>> ", facilitatingCamp.getName());
         String suggestionString = sc.nextLine();
         suggestionToEdit.setSuggestion(suggestionString);
+
+        System.out.printf("You have edited suggestion with id %d\n", suggestionEditID);
     }
 }

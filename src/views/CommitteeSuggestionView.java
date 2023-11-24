@@ -17,14 +17,12 @@ public class CommitteeSuggestionView implements SuggestionViewable {
         CampDao campDao = new CampDaoImpl();
         Camp facilitatingCamp = campDao.getCamps().get(committeeMember.getFacilitatingCamp());
         int sugIndex = 1;
-        System.out.printf("===== (Facilitating Camp Suggestions) %s =====\n", facilitatingCamp.getName());
+        System.out.printf("===== Facilitating %s Suggestions =====\n", facilitatingCamp.getName());
         for (Suggestion sug : facilitatingCamp.getSuggestions().values()) {
-            System.out.printf("***** Suggestion %d *****\n", sug.getSuggestionID());
-            System.out.printf("%s\n", sug.getSuggestion());
-            if (sug.getApprover() != null) {
-                System.out.printf("~~~~~ Approved by: %s ~~~~~\n", sug.getApprover());
+            if (!sug.getApproved()) {
+                System.out.printf("***** Suggestion %d from %s *****\n", sug.getSuggestionID(), sug.getSuggester());
+                System.out.printf("%s\n", sug.getSuggestion());
             }
-
         }
     }
 }

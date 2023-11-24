@@ -3,6 +3,7 @@
  */
 package dao;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import interfaces.dao.StudentDao;
@@ -13,7 +14,7 @@ import models.Student;
  */
 public class StudentDaoImpl implements StudentDao {
 	
-	private static Map<String, Student> students;
+	private static Map<String, Student> students = new HashMap<String, Student>();
 
 	/**
 	 * @return the students
