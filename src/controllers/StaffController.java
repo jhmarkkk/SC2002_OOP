@@ -1,6 +1,6 @@
 package controllers;
 
-import java.util.Scanner;
+import enums.FilterType;
 
 import interfaces.views.CampViewable;
 import interfaces.views.AttendeeViewable;
@@ -35,7 +35,7 @@ import views.StaffSuggestionView;
  */
 public class StaffController extends AbstractUserController {
 	
-	private static CampViewable CampView;
+	private static CampViewable campView;
 	
 	private static final AttendeeViewable attendeeView = new AttendeeView();
 	
@@ -107,8 +107,8 @@ public class StaffController extends AbstractUserController {
 		
 		int choice;
 		
-		CampView = new StaffAllCampView();
-		CampView.filterView(NAME);
+		campView = new StaffAllCampView();
+		campView.filterView(FilterType.NAME);
 		
 		do {
 			System.out.println("1. Sort by camp dates");
@@ -125,19 +125,19 @@ public class StaffController extends AbstractUserController {
 			
 			switch (choice) {
 			case 1:
-				CampView.filterView(DATES);
+				campView.filterView(FilterType.DATES);
 				break;
 			case 2:
-				CampView.filterView(CLOSING_DATE);
+				campView.filterView(FilterType.CLOSING_DATE);
 				break;
 			case 3:
-				CampView.filterView(LOCATION);
+				campView.filterView(FilterType.LOCATION);
 				break;
 			case 4:
-				CampView.filterView(FACULTY);
+				campView.filterView(FilterType.FACULTY);
 				break;
 			case 5:
-				CampView.filterView(STAFF);
+				campView.filterView(FilterType.STAFF);
 				break;
 			case 6:
 				return;
@@ -181,8 +181,8 @@ public class StaffController extends AbstractUserController {
 
 		int choice;
 		
-		CampView = new CreatedCampView();
-		CampView.filterView(NAME);
+		campView = new CreatedCampView();
+		campView.filterView(FilterType.NAME);
 		
 		do {
 			System.out.println("1. Sort by camp dates");
@@ -202,19 +202,19 @@ public class StaffController extends AbstractUserController {
 			
 			switch (choice) {
 			case 1:
-				CampView.filterView(DATES);
+				campView.filterView(FilterType.DATES);
 				break;
 			case 2:
-				CampView.filterView(CLOSING_DATE);
+				campView.filterView(FilterType.CLOSING_DATE);
 				break;
 			case 3:
-				CampView.filterView(LOCATION);
+				campView.filterView(FilterType.LOCATION);
 				break;
 			case 4:
-				CampView.filterView(FACULTY);
+				campView.filterView(FilterType.FACULTY);
 				break;
 			case 5:
-				CampView.filterView(STAFF);
+				campView.filterView(FilterType.STAFF);
 				break;
 			case 6:
 				viewAttendees();
