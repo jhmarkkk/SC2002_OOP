@@ -21,7 +21,6 @@ import interfaces.services.AttendCampServiceable;
 import models.Camp;
 import models.CommitteeMember;
 import models.Student;
-import models.User;
 import utils.DateUtil;
 
 
@@ -264,7 +263,7 @@ public class StudentAttendCampService implements AttendCampServiceable {
     }
     
     
-    private boolean validateWithdrawingFromCommittee(User user, String campName) {
+    private boolean validateWithdrawingFromCommittee(Student user, String campName) {
     	
     	if (user.getRole() != Role.COMMITTEE) return false;
     	
