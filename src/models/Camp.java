@@ -49,11 +49,13 @@ public class Camp {
 	// 		String staffInCharge, ArrayList<String> attendees, ArrayList<String> withdrawnAttendees,
 	// 		ArrayList<String> committeeMembers, Map<String, Enquiry> enquiries,
 	// 		Map<String, Suggestion> suggestions, Integer enquiryCounter, Integer suggestionCounter) {
-	public Camp(String name, String openTo, String location, int totalSlots, int committeeSlots, String description) {
+	
+		public Camp(String name, ArrayList<GregorianCalendar> dates, GregorianCalendar registrationClosingDate,
+			String openTo, String location, int totalSlots, int committeeSlots, String description) {
 		
 		this.name = name;
-		// this.dates = dates;
-		// this.registrationClosingDate = registrationClosingDate;
+		this.dates = dates;
+		this.registrationClosingDate = registrationClosingDate;
 		this.openTo = openTo;
 		this.location = location;
 		this.totalSlots = totalSlots;
