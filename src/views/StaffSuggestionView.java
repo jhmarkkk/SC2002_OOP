@@ -8,7 +8,6 @@ import interfaces.dao.CampDao;
 import interfaces.dao.CurrentUserDao;
 import interfaces.views.SuggestionViewable;
 import models.Camp;
-import models.Enquiry;
 import models.Staff;
 import models.Suggestion;
 

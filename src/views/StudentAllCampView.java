@@ -2,7 +2,6 @@ package views;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Objects;
 
 import interfaces.dao.CampDao;
 import dao.CampDaoImpl;
@@ -36,9 +35,7 @@ public class StudentAllCampView implements CampViewable {
             }
 
         }
-    }
 
-        }
         studentCamps = CampFilter.filter(studentCamps, sortType);
         int index = 1;
         System.out.println("===== List of Camps : Student =====");
@@ -57,7 +54,8 @@ public class StudentAllCampView implements CampViewable {
                     staffDao.getStaffs().get(studentCamp.getStaffInCharge()).getName());
             index++;
         }
-    }}
+    }
+}
 
 // StudentAllCampView() {
 // CampDaoInterface campDao = CampDaoImplementation();
