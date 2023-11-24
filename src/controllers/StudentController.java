@@ -1,10 +1,11 @@
 package controllers;
 
 import enums.SortType;
-import interfaces.views.CampViewable;
-import interfaces.views.SortViewable;
+
 import interfaces.services.AttendCampServiceable;
 import interfaces.services.EnquiryServiceable;
+import interfaces.views.CampViewable;
+import interfaces.views.EnquiryViewable;
 
 import services.StudentAttendCampService;
 import services.StudentEnquiryService;
@@ -17,7 +18,7 @@ public class StudentController extends AbstractUserController {
 
 	protected static CampViewable campView;
 
-	protected static SortViewable enquiryView;
+	protected static EnquiryViewable enquiryView;
 
 	protected static AttendCampServiceable attendCampService = new StudentAttendCampService();
 

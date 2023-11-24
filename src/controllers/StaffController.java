@@ -3,24 +3,22 @@ package controllers;
 import enums.SortType;
 
 import interfaces.views.CampViewable;
-import interfaces.views.AttendeeViewable;
-import interfaces.views.SortViewable;
+import interfaces.views.EnquiryViewable;
 import interfaces.views.SuggestionViewable;
-import interfaces.services.ToggleVisibilityServiceable;
-import interfaces.services.CampServiceable;
 import interfaces.services.ApproveSuggestionServiceable;
-import interfaces.services.ReplyEnquiryServiceable;
+import interfaces.services.CampServiceable;
 import interfaces.services.GenerateReportServiceable;
+import interfaces.services.ReplyEnquiryServiceable;
+import interfaces.services.ToggleVisibilityServiceable;
 
-import services.ToggleVisibilityService;
-import services.StaffCampService;
 import services.StaffApproveSuggestionService;
-import services.StaffReplyEnquiryService;
+import services.StaffCampService;
 import services.StaffGenerateReportService;
+import services.StaffReplyEnquiryService;
+import services.ToggleVisibilityService;
 
-import views.StaffAllCampView;
 import views.CreatedCampView;
-import views.AttendeeView;
+import views.StaffAllCampView;
 import views.StaffEnquiryView;
 import views.StaffSuggestionView;
 
@@ -40,9 +38,7 @@ public class StaffController extends AbstractUserController {
 
 	private static CampViewable campView;
 
-	private static final AttendeeViewable attendeeView = new AttendeeView();
-
-	private static final SortViewable enquiryView = new StaffEnquiryView();
+	private static final EnquiryViewable enquiryView = new StaffEnquiryView();
 
 	private static final SuggestionViewable suggestionView = new StaffSuggestionView();
 
@@ -195,11 +191,10 @@ public class StaffController extends AbstractUserController {
 			System.out.println("3. Sort by camp location");
 			System.out.println("4. Sort by camp faculty");
 			System.out.println("5. Sort by camp staff-in-charge");
-			System.out.println("6. View camp attendees");
-			System.out.println("7. Toggle visibility");
-			System.out.println("8. Edit camp");
-			System.out.println("9. Delete camp");
-			System.out.println("10. Back");
+			System.out.println("6. Toggle visibility");
+			System.out.println("7. Edit camp");
+			System.out.println("8. Delete camp");
+			System.out.println("9. Back");
 			System.out.print("\nChoice: ");
 
 			choice = sc.nextInt();
@@ -223,28 +218,20 @@ public class StaffController extends AbstractUserController {
 					campView.sortView(SortType.STAFF);
 					break;
 				case 6:
-					viewAttendees();
-					break;
-				case 7:
 					toggleVisibility();
 					break;
-				case 8:
+				case 7:
 					editCamp();
 					break;
-				case 9:
+				case 8:
 					deleteCamp();
 					break;
-				case 10:
+				case 9:
 					return;
 				default:
 					System.out.println("Invalid choice. Please choose again.");
 			}
 		} while (true);
-	}
-
-	protected void viewAttendees() {
-
-		attendeeView.view();
 	}
 
 	protected void toggleVisibility() {
@@ -307,7 +294,7 @@ public class StaffController extends AbstractUserController {
 
 	protected void generateReport() {
 
-		generateReportService.generate();
+		generateReportService.exporting("data/StaffReport.txt");
 	}
 
 }

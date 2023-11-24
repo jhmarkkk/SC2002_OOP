@@ -198,7 +198,7 @@ public class CommitteeController extends StudentController {
 	
 	protected void generateReport() {
 		
-		generateReportService.exporting("test");
+		generateReportService.exporting("data/CommitteeReport.txt");
 	}
 	
 }
