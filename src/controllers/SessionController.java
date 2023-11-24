@@ -20,9 +20,10 @@ public class SessionController {
 		int choice;
 		
 		do {
+			System.out.println("Start");
 			System.out.println("1. Log in");
 			System.out.println("2. Quit");
-			System.out.print("\nChoice :");
+			System.out.print("\nChoice: ");
 			
 			choice = sc.nextInt();
 			
@@ -33,11 +34,11 @@ public class SessionController {
 				authService.login();
 				break;
 			case 2:
-				break;
+				return;
 			default:
 				System.out.println("Invalid choice. Please choose again.");
 			}
-		} while (choice != 2);
+		} while (true);
 	}
 	
 	public static void endSession() {
