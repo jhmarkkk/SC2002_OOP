@@ -12,7 +12,6 @@ public class SessionController {
 	
 	private static final AuthServiceable authService = new AuthService();
 	
-	
 	private SessionController() {}
 	
 	public static void startSession() {
