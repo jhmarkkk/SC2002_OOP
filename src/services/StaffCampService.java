@@ -47,7 +47,7 @@ public class StaffCampService implements CampServiceable {
         // Accept user input for the starting camp date
         System.out.println("Enter starting camp date (YYYY-MM-DD): ");
         String startDateStr = sc.nextLine();
-        GregorianCalendar startDate = parseDate(startDateStr);
+        GregorianCalendar startDate = toDate(startDateStr);
 
         // Accept user input for the ending camp date
         System.out.println("Enter number of days camp is held: ");
@@ -107,21 +107,31 @@ public class StaffCampService implements CampServiceable {
         System.out.println("Camp description: " + description + "\n");
 
 
-        // //STAFF IN CHARGE
-        // String staffInCharge = currentUserDao.getCurrentUser().getUserID();
+        //STAFF IN CHARGE
+        String staffInCharge = currentUserDao.getCurrentUser().getUserID();
 
-        Camp camp = new Camp(name, dates, registrationClosingDate, openTo, location, totalSlots, committeeSlots, description);
+
+        // Define rest of values as NULL
+        ArrayList<String> attendees = null;
+        ArrayList<String> withdrawnAttendees = null;
+		ArrayList<String> committeeMembers = null;
+        Map<Integer, Enquiry> enquiries = null;
+		Map<Integer, Suggestion> suggestions = null;
+        Visibility visibility = Visibility.OFF;
+
+        Camp camp = new Camp(name, dates, registrationClosingDate, openTo, location, totalSlots, committeeSlots, description,
+        staffInCharge, attendees, withdrawnAttendees, committeeMembers, enquiries, suggestions, visibility);
         campMap.put(name, camp);
     }
 
 
     public void delete() {
-        // TODO Auto-generated method stub
         int i, choice;
         String selectedCampName;
         
         Map<String, Camp> campData = campDao.getCamps();
         Student currentUser = (Student)currentUserDao.getCurrentUser();
+        CommitteeMember currentCommitteeMember = (CommitteeMember)currentUserDao.getCurrentUser();
 
     	ArrayList<String> registeredCamps = currentUser.getRegisteredCamps();
         
@@ -146,14 +156,16 @@ public class StaffCampService implements CampServiceable {
         System.out.println(selectedCampName + " successfully deleted.");
         System.out.println("Remaining number of camps created by you: " + registeredCamps.size());
 
-        // Deleting each enquiry in the Map
+        // Deleting each enquiry in the Enquiries Map
         Map<String, ArrayList<Integer>> userEnquiries = currentUser.getEnquiries();
         if(userEnquiries.containsKey(selectedCampName)){
             userEnquiries.remove(selectedCampName);
         }
 
-        for (String key : userEnquiries.keySet()){
-
+        // Deleting each suggestion in the Suggestion Map
+        ArrayList<Integer> userSuggestions = currentCommitteeMember.getSuggestions();
+        for (int index : userSuggestions){
+            userSuggestions.remove(index);
         }
     }
 
@@ -163,7 +175,7 @@ public class StaffCampService implements CampServiceable {
         String selectedCampName;
         Camp selectedCamp;
         
-        Map<String, Camp> campData = campDao.getCamps();
+        //Map<String, Camp> campData = campDao.getCamps();
         Student currentUser = (Student)currentUserDao.getCurrentUser();
     	ArrayList<String> registeredCamps = currentUser.getRegisteredCamps();
         
@@ -215,7 +227,7 @@ public class StaffCampService implements CampServiceable {
 
                     System.out.println("Enter new starting camp date (YYYY-MM-DD): ");
                     String startDateStr = sc.nextLine();
-                    GregorianCalendar startDate = parseDate(startDateStr);
+                    GregorianCalendar startDate = toDate(startDateStr);
 
                     // Accept user input for the number of days camp is held
                     System.out.println("Enter number of days camp is held: ");
@@ -297,31 +309,7 @@ public class StaffCampService implements CampServiceable {
     }
 
 
-    //Parse Date method
-    private static GregorianCalendar parseDate(String dateStr) {
-        String[] parts = dateStr.split("-");
-        int year = Integer.parseInt(parts[0]);
-        int month = Integer.parseInt(parts[1]) - 1; // Months are 0-based in Java
-        int day = Integer.parseInt(parts[2]);
-        return new GregorianCalendar(year, month, day);
-    }
-
-    // //Get Date Range method 1
-    // private static ArrayList<GregorianCalendar> getDateRange(GregorianCalendar startDate, GregorianCalendar endDate) {
-    //     ArrayList<GregorianCalendar> dateRange = new ArrayList<>();
-    //     GregorianCalendar currentDate = new GregorianCalendar(startDate.get(GregorianCalendar.YEAR),
-    //             startDate.get(GregorianCalendar.MONTH), startDate.get(GregorianCalendar.DAY_OF_MONTH));
-
-    //     while (currentDate.before(endDate) || currentDate.equals(endDate)) {
-    //         dateRange.add(new GregorianCalendar(currentDate.get(GregorianCalendar.YEAR),
-    //                 currentDate.get(GregorianCalendar.MONTH), currentDate.get(GregorianCalendar.DAY_OF_MONTH)));
-    //         currentDate.add(GregorianCalendar.DAY_OF_MONTH, 1);
-    //     }
-
-    //     return dateRange;
-    // }
-
-    //Get Date Range method 2
+    //Get Date Range method
     private static ArrayList<GregorianCalendar> getDateRange(GregorianCalendar startDate, int numOfDays) {
         ArrayList<GregorianCalendar> dateRange = new ArrayList<>();
         GregorianCalendar currentDate = new GregorianCalendar(startDate.get(GregorianCalendar.YEAR),
