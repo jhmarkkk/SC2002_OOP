@@ -53,7 +53,7 @@ public class StaffReplyEnquiryService implements ReplyEnquiryServiceable {
             if (choice == i + 1)
                 return;
             if (choice >= 0 || choice <= i) {
-                enquiryReplyID = enquiriesID.get(i);
+                enquiryReplyID = enquiriesID.get(choice);
                 break;
             }
         } while (true);
