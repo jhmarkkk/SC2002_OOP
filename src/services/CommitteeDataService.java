@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import interfaces.services.DataServiceable;
 import interfaces.dao.CommitteeMemberDao;
@@ -33,7 +34,7 @@ public class CommitteeDataService implements DataServiceable {
 				if (committeeMember.getRegisteredCamps().isEmpty()) {
 					registeredCampsString = "#NULL!";
 				} else {
-					registeredCampsString = String.join("\\|", committeeMember.getRegisteredCamps());
+					registeredCampsString = String.join("|", committeeMember.getRegisteredCamps());
 				}
 
                 String enquiryString;
@@ -45,7 +46,7 @@ public class CommitteeDataService implements DataServiceable {
                     for (Map.Entry<String, ArrayList<Integer>> campEnquiryEntry : committeeMember.getEnquiries().entrySet()) {
                         String campName = campEnquiryEntry.getKey();
                         ArrayList<Integer> enquiryList = campEnquiryEntry.getValue();
-                        String campEnquiryString = campName + "=" + String.join("\\|", enquiryList.stream().map(Object::toString).toArray(String[]::new));
+                        String campEnquiryString = campName + "=" + String.join("|", enquiryList.stream().map(Object::toString).toArray(String[]::new));
                         enquiryStringBuilder.append(campEnquiryString).append("*");
                     }
                 
@@ -57,7 +58,8 @@ public class CommitteeDataService implements DataServiceable {
                 if (committeeMember.getSuggestions().isEmpty()) {
                     suggestionsString = "#NULL!";
                 } else {
-                    suggestionsString = String.join("\\|", committeeMember.getSuggestions().toString());
+                    System.out.println();
+                    suggestionsString = committeeMember.getSuggestions().stream().map(Object::toString).collect(Collectors.joining("|"));
                 }
 
                 // Write data fields separated by commas

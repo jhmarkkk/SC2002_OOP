@@ -1,6 +1,6 @@
 Name,Email,Faculty,Password,createdCamps
-Madhukumar,HUKUMAR@NTU.EDU.SG,SCSE,password,1|2
 Alexei,OURIN@ntu.edu.sg,ADM,password,3|4|5
-Chattopadhyay,UPAM@NTU.EDU.SG,EEE,password,6
-Datta,ANWIT@NTU.EDU.SG,SCSE,password,#NULL!
-Arvind,ARVI@NTU.EDU.SG,NBS,password,#NULL!
+Chattopadhyay,UPAM@ntu.edu.sg,EEE,password,6
+Madhukumar,HUKUMAR@ntu.edu.sg,SCSE,password,1|2
+Arvind,ARVI@ntu.edu.sg,NBS,password,#NULL!
+Datta,ANWIT@ntu.edu.sg,SCSE,password,#NULL!
