@@ -48,7 +48,7 @@ public class StudentDataService implements DataServiceable {
                 bw.newLine();
             }
 
-            System.out.println("Data exported successfully!");
+            System.out.println("Student data exported successfully!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -114,7 +114,7 @@ public class StudentDataService implements DataServiceable {
                     }
                 }
             }
-			System.out.println("Data imported successfully!");
+			System.out.println("Student data imported successfully!");
         } catch (IOException e) {
             e.printStackTrace();
         }
