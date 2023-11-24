@@ -21,20 +21,22 @@ import interfaces.services.CampServiceable;
 import interfaces.dao.CurrentUserDao;
 import interfaces.dao.StudentDao;
 import interfaces.dao.CommitteeMemberDao;
+import interfaces.dao.CampDao;
 import dao.CurrentUserDaoImpl;
 import dao.StudentDaoImpl;
 import dao.CommitteeMemberDaoImpl;
+import dao.CampDaoImpl;
 
 
 public class StaffCampService {
     private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
-
-    Map<String, Camp> campMap = new HashMap<>();
+    private static final CampDao campDao = new CampDaoImpl();
 
     Scanner sc = new Scanner(System.in);
-
     
     public void create() {
+        Map<String, Camp> campMap = new HashMap<>();
+
         //CAMP NAME
         System.out.println("Enter camp name: ");
         String name = sc.nextLine();
@@ -47,17 +49,12 @@ public class StaffCampService {
         String startDateStr = sc.nextLine();
         GregorianCalendar startDate = parseDate(startDateStr);
 
+        // Accept user input for the ending camp date
         System.out.println("Enter number of days camp is held: ");
         int numOfDays = sc.nextInt();
         ArrayList<GregorianCalendar> dates = getDateRange(startDate, numOfDays);
 
-        // // Accept user input for the ending camp date
-        // System.out.println("Enter ending camp date (YYYY-MM-DD): ");
-        // String endDateStr = sc.nextLine();
-        // GregorianCalendar endDate = parseDate(endDateStr);
-
         // Print the range of dates
-        //ArrayList<GregorianCalendar> dates = getDateRange(startDate, endDate);
         System.out.println("Camp Dates:");
         for (GregorianCalendar date : dates) {
             System.out.println(String.format("%04d-%02d-%02d", date.get(GregorianCalendar.YEAR), date.get(GregorianCalendar.MONTH) + 1, date.get(GregorianCalendar.DAY_OF_MONTH)));
@@ -65,23 +62,24 @@ public class StaffCampService {
         System.out.println();
 
 
-        //Registration Closing Date
+        //REGISTRATION CLOSING DATE
         System.out.println("Enter registration closing date: ");
-        String closingDate = sc.nextLine();
+        String closingDate = sc.next();
         GregorianCalendar registrationClosingDate = parseDate(closingDate);
         System.out.println("Registration Closing Date: ");
         System.out.println(String.format("%04d-%02d-%02d", registrationClosingDate.get(GregorianCalendar.YEAR), registrationClosingDate.get(GregorianCalendar.MONTH) + 1, registrationClosingDate.get(GregorianCalendar.DAY_OF_MONTH)) + "\n");
 
 
         //OPEN TO
-        System.out.println("Is this camp open to School or NTU?");
-        String openTo = sc.nextLine();
+        System.out.println("Enter user group (School Name or NTU):");
+        String openTo = sc.next();
+        
         System.out.println("Camp is only open to " + openTo + "\n");
 
 
         //LOCATION
         System.out.println("Enter camp location: ");
-        String location = sc.nextLine();
+        String location = sc.next();
         System.out.println("Camp location: " + location + "\n");
 
 
@@ -119,73 +117,180 @@ public class StaffCampService {
 
     public void delete() {
         // TODO Auto-generated method stub
+        int i, choice;
+        String selectedCampName;
+        
+        Map<String, Camp> campData = campDao.getCamps();
+        Student currentUser = (Student)currentUserDao.getCurrentUser();
+
+    	ArrayList<String> registeredCamps = currentUser.getRegisteredCamps();
+        
+        //Choose which camp to delete
+        System.out.println("Delete from:");
+        for (i = 0; i < registeredCamps.size(); i++)
+            System.out.printf("%d. %s\n", i+1, registeredCamps.get(i));
+        
+        System.out.printf("%d. Back\n", i+1);
+        System.out.print("Choice: ");
+        
+        choice = sc.nextInt();
+        
+        System.out.println();
+        
+        if (choice == i + 1) return;
+
+        selectedCampName = registeredCamps.get(choice);
+
+        // Deleting specified camp name and its values
+        campData.remove(selectedCampName);
+        System.out.println(selectedCampName + " successfully deleted.");
+        System.out.println("Remaining number of camps created by you: " + registeredCamps.size());
+
+        // Deleting each enquiry in the Map
+        Map<String, ArrayList<Integer>> userEnquiries = currentUser.getEnquiries();
+        //currentUser.getEnquiries()
+        if(userEnquiries.containsKey(selectedCampName)){
+            userEnquiries.remove(selectedCampName);
+        }
     }
 
 
     public void edit() {
-        System.out.println("---------------Edit Camps---------------");
-        System.out.println("Edit:");
-        System.out.println("1. Names");
-        System.out.println("2. Dates");
-        System.out.println("3. Registration closing date");
-        System.out.println("4. Open to");
-        System.out.println("5. Location");
-        System.out.println("6. Total slots");
-        System.out.println("7. Camp committee slots");
-        System.out.println("8. Description");
-        System.out.println("9. Back");
+        int i, choice, edit_choice;
+        String selectedCampName;
+        Camp selectedCamp;
         
-        // int choice = sc.nextInt();
+        Map<String, Camp> campData = campDao.getCamps();
+        Student currentUser = (Student)currentUserDao.getCurrentUser();
+    	ArrayList<String> registeredCamps = currentUser.getRegisteredCamps();
         
-        // switch(choice){
-        //     case 1:
-        //         //1. NAMES (not done)
-        //         System.out.println("Current name: " + camp.getName(name));
-        //         System.out.println("Enter new name: ");
-        //         String newName = sc.nextLine();
-        //         System.out.println("Updated new name: " + newName);
+        //Choose which camp to edit
+        System.out.println("Edit from:");
+        for (i = 0; i < registeredCamps.size(); i++)
+            System.out.printf("%d. %s\n", i+1, registeredCamps.get(i));
+        
+        System.out.printf("%d. Back\n", i+1);
+        System.out.print("Choice: ");
+        
+        choice = sc.nextInt();
+        
+        System.out.println();
+        
+        if (choice == i + 1) return;
 
-        //         Camp camp = campMap.get(name);
-        //         campMap.remove(name);
-        //         camp.setName(newName);
-        //         campMap.put(newName, camp);
-        //         break;
-        //     case 2:
-        //         //2. DATES
-        //         System.out.println("Current camp dates:");
-        //         for (GregorianCalendar date : camp.getDates(dates)) {
-        //             System.out.println(String.format("%04d-%02d-%02d", date.get(GregorianCalendar.YEAR), date.get(GregorianCalendar.MONTH) + 1, date.get(GregorianCalendar.DAY_OF_MONTH)));
-        //         }
+        
+        // if (choice >= 0 || choice <= i) {
+        //     selectedCampName = registeredCamps.get(choice);
+        //     selectedCamp = campDao.getCamps().get(selectedCampName);
+        // }
+        selectedCampName = registeredCamps.get(choice);
+        selectedCamp = campDao.getCamps().get(selectedCampName);
+        
+        //
+        do {
+            System.out.println("---------------Edit Camps---------------");
+            System.out.println("Edit:");
+            System.out.println("1. Dates");
+            System.out.println("2. Registration closing date");
+            System.out.println("3. Open to");
+            System.out.println("4. Location");
+            System.out.println("5. Total slots");
+            System.out.println("6. Camp committee slots");
+            System.out.println("7. Description");
+            System.out.println("8. Back");
+        
+            edit_choice = sc.nextInt();
+            
+            switch(edit_choice){
+                case 1:
+                    // 1. DATES
+                    System.out.println("Current camp dates:");
+                    for (GregorianCalendar date : selectedCamp.getDates()) {
+                        System.out.println(String.format("%04d-%02d-%02d", date.get(GregorianCalendar.YEAR),
+                        date.get(GregorianCalendar.MONTH) + 1, date.get(GregorianCalendar.DAY_OF_MONTH)));
+                    }
 
-        //         camp.setDates
+                    System.out.println("Enter new starting camp date (YYYY-MM-DD): ");
+                    String startDateStr = sc.nextLine();
+                    GregorianCalendar startDate = parseDate(startDateStr);
 
+                    // Accept user input for the number of days camp is held
+                    System.out.println("Enter number of days camp is held: ");
+                    int numOfDays = sc.nextInt();
+                    ArrayList<GregorianCalendar> newDates = getDateRange(startDate, numOfDays);
 
-        //         break;
-        //     case 3:
-        //         //text
-        //         break;
-        //     case 4:
-        //         //text
-        //         break;
-        //     case 5:
-        //         //text
-        //         break;
-        //     case 6:
-        //         //text
-        //         break;
-        //     case 7:
-        //         //text
-        //         break;
-        //     case 8:
-        //         //text
-        //         break;
-        //     case 9:
-        //         //text
-        //         break;
-        //     default:
-        //         System.out.println("Invalid choice. Try again.");
-        // }        
+                    // Print the range of dates
+                    System.out.println("Camp Dates:");
+                    for (GregorianCalendar date : newDates) {
+                        System.out.println(String.format("%04d-%02d-%02d", date.get(GregorianCalendar.YEAR),
+                        date.get(GregorianCalendar.MONTH) + 1, date.get(GregorianCalendar.DAY_OF_MONTH)));
+                    }
+                    selectedCamp.setDates(newDates);
+                    break;
+                case 2:
+                    // 2. REGISTRATION CLOSING DATE
+                    System.out.println("Current registration closing date: " + selectedCamp.getRegistrationClosingDate());
+                    System.out.println("Enter new registration closing date: ");
+                    String newClosingDate = sc.nextLine();
+                    
+                    // Change from String to GregorianCalendar
+                    GregorianCalendar newRegistrationClosingDate = parseDate(newClosingDate);
 
+                    System.out.println("Updated registration closing date: " + newRegistrationClosingDate);
+                    System.out.println(String.format("%04d-%02d-%02d", newRegistrationClosingDate.get(GregorianCalendar.YEAR),
+                    newRegistrationClosingDate.get(GregorianCalendar.MONTH) + 1, newRegistrationClosingDate.get(GregorianCalendar.DAY_OF_MONTH)) + "\n");
+                    
+                    selectedCamp.setRegistrationClosingDate(newRegistrationClosingDate);
+                    break;
+                case 3:
+                    // 3. OPEN TO 
+                    System.out.println("Current user group: " + selectedCamp.getOpenTo());
+                    System.out.println("Enter new user group: ");
+                    String newOpenTo = sc.nextLine();
+                    System.out.println("Updated user group: " + newOpenTo);
+                    selectedCamp.setOpenTo(newOpenTo);
+                    break;
+                case 4:
+                    // 4. LOCATION
+                    System.out.println("Current location: " + selectedCamp.getLocation());
+                    System.out.println("Enter new location: ");
+                    String newLocation = sc.nextLine();
+                    System.out.println("Updated location: " + newLocation);
+                    selectedCamp.setLocation(newLocation);
+                    break;
+                case 5:
+                    // 5. TOTAL SLOTS
+                    System.out.println("Current total slots: " + selectedCamp.getTotalSlots());
+                    System.out.println("Enter new total slots: ");
+                    int newTotalSlots = sc.nextInt();
+                    System.out.println("Updated total slots: " + newTotalSlots);
+                    selectedCamp.setTotalSlots(newTotalSlots);
+                    break;
+                case 6:
+                    // 6. CAMP COMMITTEE SLOTS
+                    System.out.println("Current camp committee slots: " + selectedCamp.getCommitteeSlots());
+                    System.out.println("Enter new camp committee slots: ");
+                    int newCommitteeSlots = sc.nextInt();
+                    System.out.println("Updated camp committee slots: " + newCommitteeSlots);
+                    selectedCamp.setCommitteeSlots(newCommitteeSlots);
+                    break;
+                case 7:
+                    // 7. DESCRIPTION
+                    System.out.println("Current camp description: " + selectedCamp.getDescription());
+                    System.out.println("Enter new camp description: ");
+                    String newDescription = sc.nextLine();
+                    System.out.println("Updated camp description: " + newDescription);
+                    selectedCamp.setDescription(newDescription);
+                    break;
+                case 8:
+                    // 8. BACK
+                    // Go back to main menu
+                    return;
+                default:
+                    System.out.println("Invalid choice. Try again.");
+                    break;
+            }
+        } while(edit_choice < 1 || edit_choice > 8);        
     }
 
 

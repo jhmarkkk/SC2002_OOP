@@ -72,6 +72,7 @@ public class CAMs {
 		//Staff Camp Service TESTING
 		StaffCampService staffCampService = new StaffCampService();
 		staffCampService.create();
-		//staffCampService.edit();
+		staffCampService.edit();
+		staffCampService.delete();
 	}
 }
