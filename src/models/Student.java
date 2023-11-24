@@ -7,7 +7,7 @@ import enums.Role;
 public class Student extends User {
 	
 	private ArrayList<String> registeredCamps;
-	//private ArrayList<Integer> enquiries;
+	private ArrayList<Integer> enquiries;
 	
 	/**
 	 * @param userID
@@ -18,18 +18,18 @@ public class Student extends User {
 	 * @param registeredCamps
 	 * @param enquiries
 	 */
-	//public Student(String userID, String password, String name, String faculty, ArrayList<String> registeredCamps, ArrayList<Integer> enquiries) {
-	public Student(String userID, String password, String name, String faculty, ArrayList<String> registeredCamps) {
+	public Student(String userID, String password, String name, String faculty, ArrayList<String> registeredCamps, ArrayList<Integer> enquiries) {
+	//public Student(String userID, String password, String name, String faculty, ArrayList<String> registeredCamps) {
 		super(userID, password, name, faculty, Role.STUDENT);
 		this.registeredCamps = registeredCamps;
-		//this.enquiries = enquiries;
+		this.enquiries = enquiries;
 	}
 
 	/**
 	 * @return the registeredCamps
 	 */
 	public ArrayList<String> getRegisteredCamps() {
-		
+
 		return registeredCamps;
 	}
 
@@ -56,7 +56,4 @@ public class Student extends User {
 		
 		this.enquiries = enquiries;
 	}
-	
-	
-
 }

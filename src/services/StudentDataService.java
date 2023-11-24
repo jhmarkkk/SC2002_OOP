@@ -4,12 +4,8 @@ import java.lang.System;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-// import java.util.Dictionary;
-// import java.util.Enumeration;
-// import java.util.Hashtable;
 import java.util.HashMap;
 import java.util.Map;
-// import java.util.Scanner;
 
 import interfaces.services.DataServiceable;
 import models.Student;
@@ -35,12 +31,20 @@ public class StudentDataService implements DataServiceable {
 					registeredCampsString = String.join("|", student.getRegisteredCamps());
 				}
 
+                String enquiryString;
+                if (student.getEnquiries().isEmpty()) {
+                    enquiryString = "#NULL!";
+                } else {
+                    enquiryString = String.join("|", student.getEnquiries().stream().map(Object::toString).toArray(String[]::new));
+                }
+
                 // Write data fields separated by commas
                 bw.write(student.getName() + ","
                         + student.getUserID() + "@e.ntu.edu.sg,"
                         + student.getFaculty() + ","
                         + student.getPassword() + ","
-                        + registeredCampsString);
+                        + registeredCampsString + ","
+                        + enquiryString);
                 bw.newLine();
             }
 
@@ -76,9 +80,8 @@ public class StudentDataService implements DataServiceable {
 						String registeredCampsString = fields[4];
 						//Initialise Array to store Registered Camp(s)
 						ArrayList<String> registeredCamps = new ArrayList<String>();
-						//If there's no registered camp
 
-						//There exsit a camp registered
+						//There exist camp(s) registered
 						if (!registeredCampsString.equals("#NULL!")){
 							if (registeredCampsString.contains("|")) {	//registered for > 1 camp
 								registeredCamps.addAll(Arrays.asList(registeredCampsString.split("\\|")));
@@ -86,9 +89,25 @@ public class StudentDataService implements DataServiceable {
 								registeredCamps.add(registeredCampsString);
 							}
 						}
+
+                        //Extract enquiries
+                        String enquiryString = fields[5];
+                        //Initialise Array to store enquiry IDs
+                        ArrayList<Integer> enquiry = new ArrayList<Integer>();
+
+                        //There exist enquiry
+                        if (!enquiryString.equals("#NULL!")){
+                            if (enquiryString.contains("|")){
+                                //enquiry.addAll(Arrays.asList(enquiryString.split("\\|")));
+                                Arrays.asList(enquiryString.split("\\|")).forEach(s -> enquiry.add(Integer.parseInt(s)));
+                            } else {
+                                //enquiry.add(enquiryString);
+                                enquiry.add(Integer.parseInt(enquiryString));
+                            }
+                        }
 	
 						//Initialising student constructor
-						Student studentData = new Student(username, password, name, faculty, registeredCamps);
+						Student studentData = new Student(username, password, name, faculty, registeredCamps, enquiry);
 
 						// Put the data into the map with username as key
 						studentDataMap.put(username, studentData);
