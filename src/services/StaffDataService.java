@@ -11,13 +11,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import interfaces.services.DataServiceable;
+import interfaces.dao.StaffDao;
+import dao.StaffDaoImpl;
 import models.Staff;
 
 public class StaffDataService implements DataServiceable {
 	
 	public void exporting (String filePath) {
 
-        Map<String, Staff> staffDataMap = new HashMap<>();
+        StaffDao staffDao = new StaffDaoImpl();
+        Map<String, Staff> staffDataMap = staffDao.getStaffs();
 
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
             // Write header line
@@ -52,7 +55,9 @@ public class StaffDataService implements DataServiceable {
 	
 	public void importing (String filePath) {
 
-        Map<String, Staff> staffDataMap = new HashMap<>();
+        StaffDao staffDao = new StaffDaoImpl();
+        Map<String, Staff> staffDataMap = staffDao.getStaffs();
+
 
 		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;

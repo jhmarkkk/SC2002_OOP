@@ -8,13 +8,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import interfaces.services.DataServiceable;
+import interfaces.dao.StudentDao;
+import dao.StudentDaoImpl;
 import models.Student;
 
 public class StudentDataService implements DataServiceable {
 
 	public void exporting (String filePath) {
 
-        Map<String, Student> studentDataMap = new HashMap<>();
+        StudentDao studentDao = new StudentDaoImpl();
+        Map<String, Student> studentDataMap = studentDao.getStudents();
 
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
             // Write header line
@@ -67,7 +70,8 @@ public class StudentDataService implements DataServiceable {
 	
 	public void importing(String filePath) {
 
-        Map<String, Student> studentDataMap = new HashMap<>();
+        StudentDao studentDao = new StudentDaoImpl();
+        Map<String, Student> studentDataMap = studentDao.getStudents();
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
