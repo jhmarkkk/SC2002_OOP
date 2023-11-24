@@ -153,19 +153,6 @@ public class StudentDataService implements DataServiceable {
 						studentDataMap.put(username, studentData);
                     }
                 }
-
-                // Print each element of the array
-                System.out.println("Imported Array:");
-                int i = 0;
-                for (int element : importedArray) {
-                    System.out.println("index[" + i + "] : " + element);
-                    i++;
-                }
-
-                // Print the string
-                System.out.println("Imported String: " + line.substring(line.lastIndexOf(',') + 1));
-            } else {
-                System.out.println("The CSV file is empty.");
             }
 			System.out.println("Student data imported successfully!");
         } catch (IOException e) {
