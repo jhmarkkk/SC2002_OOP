@@ -3,7 +3,7 @@ package main;
 import services.StaffDataService;
 import services.StudentDataService;
 import services.CampDataService;
-
+import services.CommitteeDataService;
 import controllers.SessionController;
 import controllers.DataTransferController;
 import controllers.StaffController;
@@ -40,16 +40,15 @@ public class CAMs {
 		// studentDataService.exporting(testFilePath);
 		
 		//TESTING STUDENT SERVICES
-		StudentDataService studentDataService = new StudentDataService();
-		String inStudentFilePath = "data/StudentList.csv";
-		studentDataService.importing(inStudentFilePath);
-		String outStudentFilePath = "data/StudentListOut.csv";
-		studentDataService.exporting(outStudentFilePath);
+		// StudentDataService studentDataService = new StudentDataService();
+		// String inStudentFilePath = "data/StudentList.csv";
+		// studentDataService.importing(inStudentFilePath);
+		// String outStudentFilePath = "data/StudentListOut.csv";
+		// studentDataService.exporting(outStudentFilePath);
 
 		//TESTING ENQUIRIES
-		StudentEnquiryService enquiry = new StudentEnquiryService();
-		enquiry.create();
-
+		// StudentEnquiryService enquiry = new StudentEnquiryService();
+		// enquiry.create();
 
 		// TESTING STAFF SERVICES
 		// StaffDataService staffDataService = new StaffDataService();
@@ -57,6 +56,14 @@ public class CAMs {
 		// staffDataService.importing(inStaffFilePath);
 		// String outStaffFilePath = "data/StaffListOut.csv";
 		// staffDataService.exporting(outStaffFilePath);
+
+		//TESTING STUDENT SERVICES
+		CommitteeDataService committeeDataService = new CommitteeDataService();
+		String inCommitteeFilePath = "data/CommitteeList.csv";
+		committeeDataService.importing(inCommitteeFilePath);
+		String outCommitteeFilePath = "data/CommitteeListOut.csv";
+		committeeDataService.exporting(outCommitteeFilePath);
+
 
 	}
 }
