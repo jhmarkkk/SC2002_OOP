@@ -28,18 +28,14 @@ public class StudentEnquiryService implements EnquiryServiceable {
 
         Student currentUser = (Student) currentUserDao.getCurrentUser();
         String enquirer = currentUser.getName();
-        String replier = null;
-        String reply = null;
 
-        Enquiry enquiry = new Enquiry(enquiryString, enquirer, replier, reply);
+        Enquiry enquiry = new Enquiry(enquiryString, enquirer);
 
         enquiryMap.put(enquiry.getEnquiryID(), enquiry);
 
         // // ===== For testing purpose only, remove/comment out after testing =====
         // System.out.println("enquiryString: " + enquiry.getEnquiry());
         // System.out.println("enquirer: " + enquiry.getEnquirer());
-        // System.out.println("replier: " + enquiry.getReplier());
-        // System.out.println("reply: " + enquiry.getReply());
     }
     public void delete(){
         // TODO Auto-generated method stub
@@ -50,5 +46,6 @@ public class StudentEnquiryService implements EnquiryServiceable {
     }
     public void edit(){
         // TODO Auto-generated method stub
+        System.out.println("edit() in StudentEnquiryService class");
     }
 }
