@@ -94,7 +94,7 @@ public class Enquiry {
 	/**
 	 * @return the enquiryCounter
 	 */
-	public Integer getEnquiryCounter() {
+	public static Integer getEnquiryCounter() {
 		
 		return enquiryCounter;
 	}
@@ -102,12 +102,9 @@ public class Enquiry {
 	/**
 	 * @param enquiryCounter the enquiryCounter to set
 	 */
-	public void setEnquiryCounter(Integer enquiryCounter) {
+	public static void setEnquiryCounter(Integer enquiryCounter) {
 		
 		Enquiry.enquiryCounter = enquiryCounter;
 	}
-	
-	
-	
 	
 }
