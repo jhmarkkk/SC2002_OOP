@@ -17,7 +17,7 @@ public class CommitteeSuggestionService implements SuggestionServiceable {
     Scanner sc = new Scanner(System.in);
 
     private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
-    public static final CampDao campDao = new CampDaoImpl();
+    private static final CampDao campDao = new CampDaoImpl();
     private static final CommitteeMember comMember = (CommitteeMember) currentUserDao.getCurrentUser();
     private static final Camp facilitatingCamp = campDao.getCamps().get(comMember.getFacilitatingCamp());
 
