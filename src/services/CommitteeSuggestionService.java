@@ -58,7 +58,7 @@ public class CommitteeSuggestionService implements SuggestionServiceable {
             if (choice == i + 1)
                 return;
             if (choice >= 0 || choice <= i) {
-                suggestionDeleteID = suggestionIDs.get(i);
+                suggestionDeleteID = suggestionIDs.get(choice - 1);
                 break;
             }
         } while (true);
@@ -90,7 +90,7 @@ public class CommitteeSuggestionService implements SuggestionServiceable {
             if (choice == i + 1)
                 return;
             if (choice >= 0 || choice <= i) {
-                suggestionEditID = suggestionIDs.get(i);
+                suggestionEditID = suggestionIDs.get(choice - 1);
                 break;
             }
         } while (true);

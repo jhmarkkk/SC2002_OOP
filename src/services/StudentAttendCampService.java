@@ -58,7 +58,7 @@ public class StudentAttendCampService implements AttendCampServiceable {
     		if (choice == i + 1) return;
     		
     		if (choice >= 0 || choice <= i) {
-    			selectedCamp = validCamps.get(choice);
+    			selectedCamp = validCamps.get(choice - 1);
     			break;
     		}
     		
@@ -113,7 +113,7 @@ public class StudentAttendCampService implements AttendCampServiceable {
     		if (choice == i + 1) return;
     		
     		if (choice >= 0 || choice <= i) {
-    			selectedCampName = registeredCampNames.get(choice);
+    			selectedCampName = registeredCampNames.get(choice - 1);
     			selectedCamp = campDao.getCamps().get(selectedCampName);
     			break;
     		}
