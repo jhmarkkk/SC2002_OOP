@@ -13,7 +13,7 @@ public class ChangePasswordService implements ChangePasswordServiceable{
 	
 	private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
 	
-    public void changePassword(){
+    public boolean changePassword(){
 
     	String oldPassword, newPassword;
     	User currentUser = currentUserDao.getCurrentUser();
@@ -29,24 +29,25 @@ public class ChangePasswordService implements ChangePasswordServiceable{
     	
     	if (!currentUser.getPassword().equals(oldPassword)) {
     		System.out.println("Incorrect old password");
-    		return;
+    		return false;
     	}
     	
     	if (currentUser.getPassword().equals(newPassword)) {
     		System.out.println("Old and new passwords are the same");
-    		return;
+    		return false;
     	}
     	
     	if (newPassword.isBlank()) {
     		System.out.println("Invalid new password");
-    		return;
+    		return false;
     	}
     	
     	if (newPassword.length() < 8) {
     		System.out.println("Invalid new password");
-    		return;
+    		return false;
     	}
     	
     	System.out.println("Password sucessfully changed");
+    	return true;
     }
 }
