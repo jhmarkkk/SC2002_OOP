@@ -1,8 +1,7 @@
 package main;
 
-// import services.StaffDataService;
-import services.StudentDataService;
 import services.StaffDataService;
+import services.StudentDataService;
 import services.CampDataService;
 
 import controllers.SessionController;
@@ -16,27 +15,25 @@ import dao.CurrentUserDaoImpl;
 
 import services.StudentEnquiryService;
 
+import models.User;
 
-// import models.User;
-
-//import services.trying;
 
 public class CAMs {
-	
-	
-	private CAMs() {}
-	
+
+	private CAMs() {
+	}
+
 	public static void main(String[] args) {
-		
+
 		System.out.println("CAMs main() Testing");
 
 		// trying exporter = new trying();
-        // // Specify the path to your CSV file
-        // String filePath = "testing.csv";
-        // // Export the array to the CSV file
+		// // Specify the path to your CSV file
+		// String filePath = "testing.csv";
+		// // Export the array to the CSV file
 		// exporter.exporting(filePath);
-        // exporter.importing(filePath);
-        // System.out.println("Array exported to CSV successfully.");
+		// exporter.importing(filePath);
+		// System.out.println("Array exported to CSV successfully.");
 
 		// StudentDataService studentDataService = new StudentDataService();
 		// String testFilePath = "testing.csv";
@@ -55,7 +52,7 @@ public class CAMs {
 		studentDataService.exporting(outStudentFilePath);
 
 
-		//TESTING STAFF SERVICES
+		// TESTING STAFF SERVICES
 		// StaffDataService staffDataService = new StaffDataService();
 		// String inStaffFilePath = "data/StaffList.csv";
 		// staffDataService.importing(inStaffFilePath);
