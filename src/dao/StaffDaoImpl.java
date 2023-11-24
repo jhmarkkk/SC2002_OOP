@@ -3,6 +3,7 @@
  */
 package dao;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import interfaces.dao.StaffDao;
@@ -13,7 +14,7 @@ import models.Staff;
  */
 public class StaffDaoImpl implements StaffDao {
 	
-	private static Map<String, Staff> staffs;
+	private static Map<String, Staff> staffs = new HashMap<String, Staff>();
 
 	/**
 	 * @return the staffs
