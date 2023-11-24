@@ -19,12 +19,12 @@ public class CommitteeSuggestionView implements SuggestionViewable {
         int sugIndex = 1;
         System.out.printf("===== (Facilitating Camp Suggestions) %s =====\n", facilitatingCamp.getName());
         for (Suggestion sug : facilitatingCamp.getSuggestions().values()) {
-            System.out.printf("***** Suggestion %d *****\n", sugIndex);
+            System.out.printf("***** Suggestion %d *****\n", sug.getSuggestionID());
             System.out.printf("%s\n", sug.getSuggestion());
             if (sug.getApprover() != null) {
                 System.out.printf("~~~~~ Approved by: %s ~~~~~\n", sug.getApprover());
             }
-            sugIndex++;
+
         }
     }
 }
