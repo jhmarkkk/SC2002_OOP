@@ -120,8 +120,9 @@ public class StudentController extends AbstractUserController {
 		enquiryView.view();
 
 		do {
-			System.out.println("1. Create enquiry");
-			System.out.println("2. Back");
+			System.out.println("1. Edit enquiry");
+			System.out.println("2. Delete enquiry");
+			System.out.println("3. Back");
 			System.out.print("\nChoice: ");
 
 			choice = sc.nextInt();
@@ -130,9 +131,12 @@ public class StudentController extends AbstractUserController {
 
 			switch (choice) {
 				case 1:
-					createEnquiry();
+					editEnquiry();
 					break;
 				case 2:
+					deleteEnquiry();
+					break;
+				case 3:
 					return;
 				default:
 					System.out.println("Invalid choice. Please choose again.");

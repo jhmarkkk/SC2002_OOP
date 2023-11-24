@@ -1,13 +1,14 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import enums.Role;
 
 public class Student extends User {
 	
 	private ArrayList<String> registeredCamps;
-	//private ArrayList<Integer> enquiries;
+	private Map<String, ArrayList<Integer>> enquiries;
 	
 	/**
 	 * @param userID
@@ -18,11 +19,10 @@ public class Student extends User {
 	 * @param registeredCamps
 	 * @param enquiries
 	 */
-	//public Student(String userID, String password, String name, String faculty, ArrayList<String> registeredCamps, ArrayList<Integer> enquiries) {
-	public Student(String userID, String password, String name, String faculty, ArrayList<String> registeredCamps) {
+	public Student(String userID, String password, String name, String faculty, ArrayList<String> registeredCamps, Map<String, ArrayList<Integer>> enquiries) {
 		super(userID, password, name, faculty, Role.STUDENT);
 		this.registeredCamps = registeredCamps;
-		//this.enquiries = enquiries;
+		this.enquiries = enquiries;
 	}
 
 	/**
@@ -44,7 +44,7 @@ public class Student extends User {
 	/**
 	 * @return the enquiries
 	 */
-	public ArrayList<Integer> getEnquiries() {
+	public Map<String, ArrayList<Integer>> getEnquiries() {
 		
 		return enquiries;
 	}
@@ -52,7 +52,7 @@ public class Student extends User {
 	/**
 	 * @param enquiries the enquiries to set
 	 */
-	public void setEnquiries(ArrayList<Integer> enquiries) {
+	public void setEnquiries(Map<String, ArrayList<Integer>> enquiries) {
 		
 		this.enquiries = enquiries;
 	}
