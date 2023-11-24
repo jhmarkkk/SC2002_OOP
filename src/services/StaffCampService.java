@@ -47,7 +47,7 @@ public class StaffCampService implements CampServiceable {
         // Accept user input for the starting camp date
         System.out.println("Enter starting camp date (YYYY-MM-DD): ");
         String startDateStr = sc.nextLine();
-        GregorianCalendar startDate = parseDate(startDateStr);
+        GregorianCalendar startDate = toDate(startDateStr);
 
         // Accept user input for the ending camp date
         System.out.println("Enter number of days camp is held: ");
@@ -223,7 +223,7 @@ public class StaffCampService implements CampServiceable {
 
                     System.out.println("Enter new starting camp date (YYYY-MM-DD): ");
                     String startDateStr = sc.nextLine();
-                    GregorianCalendar startDate = parseDate(startDateStr);
+                    GregorianCalendar startDate = toDate(startDateStr);
 
                     // Accept user input for the number of days camp is held
                     System.out.println("Enter number of days camp is held: ");
@@ -304,15 +304,6 @@ public class StaffCampService implements CampServiceable {
         } while(edit_choice < 1 || edit_choice > 8);        
     }
 
-
-    //Parse Date method
-    private static GregorianCalendar parseDate(String dateStr) {
-        String[] parts = dateStr.split("-");
-        int year = Integer.parseInt(parts[0]);
-        int month = Integer.parseInt(parts[1]) - 1; // Months are 0-based in Java
-        int day = Integer.parseInt(parts[2]);
-        return new GregorianCalendar(year, month, day);
-    }
 
     //Get Date Range method
     private static ArrayList<GregorianCalendar> getDateRange(GregorianCalendar startDate, int numOfDays) {
