@@ -20,7 +20,7 @@ public class ProfileView implements ProfileViewable {
             CommitteeMember currentCommitteeMember = (CommitteeMember) currentUser;
             System.out.printf("Role: Committee of %s", currentCommitteeMember.getFacilitatingCamp());
         } else {
-            System.out.printf("Role: %s",
+            System.out.printf("Role: %s\n",
                     currentUser.getRole().toString());
         }
     }
