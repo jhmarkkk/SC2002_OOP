@@ -1,42 +1,42 @@
 package views;
 
-import enums.FilterType;
+import enums.SortType;
 import interfaces.views.CampViewable;
 
-public class StaffAllCampView implements CampViewable {
-    public void filterView(FilterType filterType) {
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Map;
 
-import enums.FilterType;
-import interfaces.views.CampViewable;
+import interfaces.dao.CampDao;
+import dao.CampDaoImpl;
+
+import interfaces.dao.StaffDao;
+import dao.StaffDaoImpl;
+
 import models.Camp;
 import utils.CampFilter;
-import utils.CampFormatDate;
+import utils.DateUtil;
 
 public class StaffAllCampView implements CampViewable {
-    public void filterView(FilterType filterType) {
-        CampDaoInterface campDao;
+    public void sortView(SortType sortType) {
+        CampDao campDao = new CampDaoImpl();
         Map<String, Camp> campsMap = campDao.getCamps();
+        StaffDao staffDao = new StaffDaoImpl();
         ArrayList<Camp> staffAllCamps = new ArrayList<Camp>(campsMap.values());
-        ArrayList<Camp> staffAllCamps = CampFilter.filter(staffAllCamps, filterType);
+        staffAllCamps = CampFilter.filter(staffAllCamps, sortType);
         int index = 1;
-        SimpleDateFormat formatter = CampFormatDate.dateFormat();
         System.out.println("===== List of Camps : Staff =====");
         for (Camp staffCamp : staffAllCamps) {
             System.out.printf("----- (Camp %d) %s -----\n", index, staffCamp.getName());
             System.out.printf("Visibility : %s", staffCamp.getVisibility().toString());
-            System.out.print("Dates: ");
-            for (Date date : staffCamp.getDates()) {
-                System.out.printf("%s ", formatter.format(date));
-            }
+            System.out.print("Duration: ");
+            System.out.printf("From %s ", DateUtil.toString(staffCamp.getDates().get(0)));
+            System.out.printf("to %s ",
+                    DateUtil.toString(staffCamp.getDates().get(staffCamp.getDates().size() - 1)));
             System.out.printf("\nLocation: %s\n", staffCamp.getLocation());
             System.out.printf("Attendee Slots available: %d\n", staffCamp.getAttendeeSlots());
             System.out.printf("Camp Committee Slots available: %d\n", staffCamp.getCommitteeSlots());
-            System.out.printf("Staff in charge: %s\n", staffCamp.getStaffInCharge().getName());
+            System.out.printf("Staff in charge: %s\n",
+                    staffDao.getStaffs().get(staffCamp.getStaffInCharge()).getName());
             index++;
         }
     }

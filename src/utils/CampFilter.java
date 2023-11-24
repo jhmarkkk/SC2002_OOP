@@ -3,31 +3,43 @@ package utils;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import enums.FilterType;
+import enums.SortType;
 import models.Camp;
 
-public class CampFilter {
-    public static ArrayList<Camp> filter(ArrayList<Camp> camps, FilterType filterType) {
-        if (filterType == FilterType.LOCATION) {
-            Collections.sort(camps, (camp1, camp2) -> camp1.getLocation().compareTo(camp2.getLocation()));
-        }
-        else if (filterType == FilterType.CLOSING_DATE) {
-            Collections.sort(camps,
-                    (camp1, camp2) -> camp1.getRegistrationClosingDate().compareTo(camp2.getRegistrationClosingDate()));
-        }
-        else if (filterType == FilterType.DATES) {
-            Collections.sort(camps, (camp1, camp2) -> camp1.getDates().get(0).compareTo(camp2.getDates().get(0)));
+import utils.CampComparators.NameComparator;
+import utils.CampComparators.StartComparator;
+import utils.CampComparators.ClosingComparator;
+import utils.CampComparators.LocationComparator;
+import utils.CampComparators.FacultyComparator;
+import utils.CampComparators.StaffComparator;
 
-        }
-        else if (filterType == FilterType.FACULTY) {
-            Collections.sort(camps, (camp1, camp2) -> camp1.getOpenTo().compareTo(camp2.getOpenTo()));
-        }
-        else if (filterType == FilterType.STAFF) {
-            Collections.sort(camps,
-            (camp1, camp2) -> camp1.getStaffInCharge().getName().compareTo(camp2.getStaffInCharge().getName()));
-        }
-        else (filterType == FilterType.NAME) {
-            Collections.sort(camps, (camp1, camp2) -> camp1.getName().compareTo(camp2.getName()));
+public class CampFilter {
+    public static ArrayList<Camp> filter(ArrayList<Camp> camps, SortType sortType) {
+        switch (sortType) {
+            case NAME:
+                NameComparator nameComparator = new NameComparator();
+                Collections.sort(camps, nameComparator);
+                break;
+            case DATES:
+                StartComparator startComparator = new StartComparator();
+                Collections.sort(camps, startComparator);
+                break;
+            case CLOSING_DATE:
+                ClosingComparator closeComparator = new ClosingComparator();
+                Collections.sort(camps, closeComparator);
+                break;
+            case LOCATION:
+                LocationComparator locComparator = new LocationComparator();
+                Collections.sort(camps, locComparator);
+                break;
+            case FACULTY:
+                FacultyComparator facultyComparator = new FacultyComparator();
+                Collections.sort(camps, facultyComparator);
+                break;
+            case STAFF:
+                StaffComparator staffComparator = new StaffComparator();
+                Collections.sort(camps, staffComparator);
+                break;
         }
         return camps;
     }
