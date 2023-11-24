@@ -1,59 +1,61 @@
 package main;
 
-import services.StaffDataService;
+// import services.StaffDataService;
 import services.StudentDataService;
 import services.StaffDataService;
+import services.CampDataService;
+
 import controllers.SessionController;
 import controllers.DataTransferController;
 import controllers.StaffController;
 import controllers.StudentController;
 import controllers.CommitteeController;
 
-import interfaces.CurrentUserDao;
+import interfaces.dao.CurrentUserDao;
+import dao.CurrentUserDaoImpl;
 
-import models.User;
+import services.StudentEnquiryService;
+
+
+// import models.User;
+
+
+//import services.trying;
 
 public class CAMs {
 	
 	
 	private CAMs() {}
 	
-	/**
-	 * 
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		
-		do {
-			DataTransferController.importData();
-			SessionController.startSession();
-			CurrentUserDao currentUser;
-			User user = currentUser.getCurrentUser();
-			if (user == null) break;
-			
-			switch (user.getRole()) {
-			case STAFF:
-				new StudentController().start();
-				break;
-			case STUDENT:
-				new StudentController().start();
-				break;
-			case COMMITTEE:
-				new StudentController().start();
-				break;
-			}
-			
-			SessionController.endSession();
-			DataTransferController.exportData();
-		} while (true);
+		System.out.println("CAMs main() Testing");
 
-		//System.out.println("main testing");
+		// trying exporter = new trying();
+        // // Specify the path to your CSV file
+        // String filePath = "testing.csv";
+        // // Export the array to the CSV file
+		// exporter.exporting(filePath);
+        // exporter.importing(filePath);
+        // System.out.println("Array exported to CSV successfully.");
 
-		//TESTING SERVICES
 		// StudentDataService studentDataService = new StudentDataService();
-		// String studentFilePath = "StudentList.csv";
-		// studentDataService.importing(studentFilePath);
+		// String testFilePath = "testing.csv";
+		// studentDataService.exporting(testFilePath);
 
+
+		//TESTING STUDENT SERVICES
+		// StudentDataService studentDataService = new StudentDataService();
+		// String inStudentFilePath = "data/StudentList.csv";
+		// studentDataService.importing(inStudentFilePath);
+		// String outStudentFilePath = "data/StudentListOut.csv";
+		// studentDataService.exporting(outStudentFilePath);
+
+		//TESTING ENQUIRIES
+		StudentEnquiryService enquiry = new StudentEnquiryService();
+		enquiry.create();
+
+		//TESTING STAFF SERVICES
 		// StaffDataService staffDataService = new StaffDataService();
 		// String staffFilePath = "StaffList.csv";
 		// staffDataService.importing(staffFilePath);

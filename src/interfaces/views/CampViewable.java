@@ -1,9 +1,8 @@
 package interfaces.views;
 
-import java.util.ArrayList;
+import enums.SortType;
 
 public interface CampViewable extends FilterViewable {
-    // void view(ArrayList<Camp>);
-
-    // void filter(ArrayList<String> idList, FilterType filter);
+	
+	public void sortView(SortType sortType);
 }

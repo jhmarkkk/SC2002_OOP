@@ -17,9 +17,9 @@ public class Staff extends User{
 	 * @param role
 	 * @param createdCamps
 	 */
-	public Staff(String userID, String password, String name, String faculty, Role role,
-			ArrayList<String> createdCamps) {
-		super(userID, password, name, faculty, role);
+	public Staff(String userID, String password, String name,
+			String faculty, ArrayList<String> createdCamps) {
+		super(userID, password, name, faculty, Role.STAFF);
 		this.createdCamps = createdCamps;
 	}
 

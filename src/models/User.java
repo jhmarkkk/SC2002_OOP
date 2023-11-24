@@ -38,6 +38,7 @@ public class User {
 	 * @param role the {@link Role} of the user
 	 */
 	public User(String userID, String password, String name, String faculty, Role role) {
+		
 		this.userID = userID;
 		this.password = password;
 		this.name = name;
@@ -51,6 +52,7 @@ public class User {
 	 * @return the userID
 	 */
 	public String getUserID() {
+		
 		return userID;
 	}
 
@@ -60,6 +62,7 @@ public class User {
 	 * @param userID the userID to set
 	 */
 	public void setUserID(String userID) {
+		
 		this.userID = userID;
 	}
 
@@ -69,6 +72,7 @@ public class User {
 	 * @return the password
 	 */
 	public String getPassword() {
+		
 		return password;
 	}
 
@@ -78,6 +82,7 @@ public class User {
 	 * @param password the password to set
 	 */
 	public void setPassword(String password) {
+		
 		this.password = password;
 	}
 
@@ -87,6 +92,7 @@ public class User {
 	 * @return the name
 	 */
 	public String getName() {
+		
 		return name;
 	}
 
@@ -96,6 +102,7 @@ public class User {
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
+		
 		this.name = name;
 	}
 
@@ -105,6 +112,7 @@ public class User {
 	 * @return the faculty
 	 */
 	public String getFaculty() {
+		
 		return faculty;
 	}
 
@@ -114,6 +122,7 @@ public class User {
 	 * @param faculty the faculty to set
 	 */
 	public void setFaculty(String faculty) {
+		
 		this.faculty = faculty;
 	}
 
@@ -123,6 +132,7 @@ public class User {
 	 * @return the role
 	 */
 	public Role getRole() {
+		
 		return role;
 	}
 
@@ -132,14 +142,7 @@ public class User {
 	 * @param role the role to set
 	 */
 	public void setRole(Role role) {
+		
 		this.role = role;
 	}
-	
-	/**
-	 * Views the profile of the user.
-	 */
-	public void viewProfile() {
-		
-	}
-	
 }

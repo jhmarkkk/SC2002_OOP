@@ -3,18 +3,17 @@ package views;
 import java.lang.Comparable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Comparator;
 import java.util.Collections;
 import java.util.Objects;
-import java.util.Date;
-import java.util.Map;
 
-import interfaces.dao.CampDaoInterface;
+import interfaces.dao.CampDao;
+import interfaces.dao.CurrentUserDao;
+import interfaces.dao.StaffDao;
 import interfaces.views.CampViewable;
 import interfaces.views.ViewFilterable;
 import enums.FilterType;
-
-import utils.CampFilter;
-import utils.CampFormatDate;
 
 /**
  * This file is the implementation for staff to view all the camps that the
