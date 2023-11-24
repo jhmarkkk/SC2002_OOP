@@ -1,5 +1,8 @@
 package interfaces.services;
 
-public interface GenerateReportServiceable {
-    public void generate();
+import enums.GenerateType;
+import models.Camp;
+
+public interface GenerateReportServiceable extends Exportable {
+    public String generate(Camp camp, GenerateType type);
 }

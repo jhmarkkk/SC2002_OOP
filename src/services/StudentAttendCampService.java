@@ -38,7 +38,7 @@ public class StudentAttendCampService implements AttendCampServiceable {
 	
     public void register(){
     	
-    	int i, choice;
+    	int i = 0, choice;
     	Camp selectedCamp;
     	Student currentUser = (Student)currentUserDao.getCurrentUser();
     	ArrayList<Camp> validCamps = getValidCamps(currentUser);
@@ -92,7 +92,7 @@ public class StudentAttendCampService implements AttendCampServiceable {
     
     public void withdraw(){
         
-    	int i, choice;
+    	int i = 0, choice;
     	String selectedCampName;
     	Camp selectedCamp;
     	Student currentUser = (Student)currentUserDao.getCurrentUser();

@@ -1,62 +1,46 @@
-package main;
-
-import services.StaffDataService;
-import services.StudentDataService;
-import services.StaffDataService;
-import services.CampDataService;
-
-import controllers.SessionController;
-import controllers.DataTransferController;
-import controllers.StaffController;
-import controllers.StudentController;
-import controllers.CommitteeController;
-
-import interfaces.dao.CurrentUserDao;
-import dao.CurrentUserDaoImpl;
-
-import services.StudentEnquiryService;
-
-
-// import models.User;
-
-
-//import services.trying;
-
-public class CAMs {
-	
-	
-	private CAMs() {}
-	
-	public static void main(String[] args) {
-		System.out.println("CAMs main() Testing");
-
-		// trying exporter = new trying();
-        // // Specify the path to your CSV file
-        // String filePath = "testing.csv";
-        // // Export the array to the CSV file
-		// exporter.exporting(filePath);
-        // exporter.importing(filePath);
-        // System.out.println("Array exported to CSV successfully.");
-
-		// StudentDataService studentDataService = new StudentDataService();
-		// String testFilePath = "testing.csv";
-		// studentDataService.exporting(testFilePath);
-
-
-		//TESTING CAMP DATA SERVICES
-		CampDataService campDataService = new CampDataService();
-		String inCampFilePath = "data/CampList.csv";
-		campDataService.importing(inCampFilePath);
-		// String outStudentFilePath = "data/StudentListOut.csv";
-		// studentDataService.exporting(outStudentFilePath);
-
-		//TESTING ENQUIRIES
-		// StudentEnquiryService enquiry = new StudentEnquiryService();
-		// enquiry.create();
-
-		//TESTING STAFF SERVICES
-		// StaffDataService staffDataService = new StaffDataService();
-		// String staffFilePath = "StaffList.csv";
-		// staffDataService.importing(staffFilePath);
-	}
-}
+//package main;
+//
+//import controllers.SessionController;
+//import controllers.DataTransferController;
+//import controllers.StaffController;
+//import controllers.StudentController;
+//import controllers.CommitteeController;
+//
+//import interfaces.dao.CurrentUserDao;
+//import dao.CurrentUserDaoImpl;
+//
+//import models.User;
+//
+//public class CAMs {
+//
+//	private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
+//
+//	private CAMs() {
+//	}
+//
+//	public static void main(String[] args) {
+//
+//		do {
+//			DataTransferController.importData();
+//			SessionController.startSession();
+//			User user = currentUserDao.getCurrentUser();
+//			if (user == null)
+//				break;
+//
+//			switch (user.getRole()) {
+//			case STAFF:
+//				new StaffController().start();
+//				break;
+//			case STUDENT:
+//				new StudentController().start();
+//				break;
+//			case COMMITTEE:
+//				new CommitteeController().start();
+//				break;
+//			}
+//
+//			SessionController.endSession();
+//			DataTransferController.exportData();
+//		} while (true);
+//	}
+//}
