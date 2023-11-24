@@ -1,7 +1,10 @@
 package interfaces.views;
 
-import enums.FilterType;
+
+import enums.SortType;
 
 public interface FilterViewable {
-    void filterView(FilterType filterType);
+    //void filter(ArrayList<String> idList, FilterType filterType);
+
+    public void sortView(SortType sortType);
 }

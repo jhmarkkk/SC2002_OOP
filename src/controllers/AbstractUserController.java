@@ -4,8 +4,11 @@ import java.util.Scanner;
 
 import enums.Role;
 
-import interfaces.CurrentUserDao;
-import interfaces.ChangePasswordServiceable;
+import interfaces.dao.CurrentUserDao;
+import interfaces.services.ChangePasswordServiceable;
+import services.ChangePasswordService;
+import views.ProfileView;
+import interfaces.views.ProfileViewable;
 
 import models.User;
 
@@ -30,7 +33,6 @@ abstract class AbstractUserController {
 	protected void viewProfile() {
 		
 		int choice;
-		User currentUser = currentUserDao.getCurrentUser();
 		
 		profileView.view();
 		

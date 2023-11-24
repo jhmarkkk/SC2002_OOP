@@ -1,10 +1,10 @@
 package controllers;
 
-import interfaces.CampDetailViewable;
-import interfaces.SuggestionViewable;
-import interfaces.ReplyEnquiryServiceable;
-import interfaces.SuggestionServiceable;
-import interfaces.GenerateReportServiceable;
+import interfaces.views.CampDetailViewable;
+import interfaces.views.SuggestionViewable;
+import interfaces.services.ReplyEnquiryServiceable;
+import interfaces.services.SuggestionServiceable;
+import interfaces.services.GenerateReportServiceable;
 
 import models.CommitteeMember;
 
@@ -41,7 +41,7 @@ public class CommitteeController extends StudentController {
 			System.out.println("3. View registered camps");
 			System.out.println("4. View enquiries");
 			System.out.println("5. Create enquiry");
-			System.out.printf("6. View %s details", committeeMember.getfacilitatingCamp());
+			System.out.printf("6. View %s details", committeeMember.getFacilitatingCamp());
 			System.out.println("7. Log out");
 			System.out.print("\nChoice: ");
 			
@@ -80,6 +80,8 @@ public class CommitteeController extends StudentController {
 	protected void viewCampDetails() {
 		
 		int choice;
+		
+		campDetailView.view();
 		
 		do {
 			System.out.println("1. View attendees' enquires");

@@ -1,5 +1,8 @@
 package interfaces.views;
 
-public interface CampViewable extends FilterViewable {
+import enums.SortType;
 
+public interface CampViewable extends FilterViewable {
+	
+	public void sortView(SortType sortType);
 }

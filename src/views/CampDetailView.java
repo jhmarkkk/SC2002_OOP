@@ -37,5 +37,4 @@ public class CampDetailView implements CampDetailViewable {
         System.out.printf("Staff in charge: %s\n", facilitatingCamp.getStaffInCharge().getName());
 
     }
-
 }

@@ -3,6 +3,7 @@
  */
 package dao;
 
+import interfaces.dao.CurrentUserDao;
 import models.User;
 
 /**
@@ -10,14 +11,7 @@ import models.User;
  */
 public class CurrentUserDaoImpl implements CurrentUserDao {
 	
-	private User currentUser;
-
-	/**
-	 * @param currentUser
-	 */
-	public CurrentUserDaoImpl(User currentUser) {
-		this.currentUser = currentUser;
-	}
+	private static User currentUser;
 
 	/**
 	 * @return the currentUser
@@ -30,6 +24,6 @@ public class CurrentUserDaoImpl implements CurrentUserDao {
 	 * @param currentUser the currentUser to set
 	 */
 	public void setCurrentUser(User currentUser) {
-		this.currentUser = currentUser;
+		CurrentUserDaoImpl.currentUser = currentUser;
 	}
 }

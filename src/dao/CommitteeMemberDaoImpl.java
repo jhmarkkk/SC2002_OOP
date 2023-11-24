@@ -5,6 +5,7 @@ package dao;
 
 import java.util.Map;
 
+import interfaces.dao.CommitteeMemberDao;
 import models.CommitteeMember;
 
 /**
@@ -12,14 +13,7 @@ import models.CommitteeMember;
  */
 public class CommitteeMemberDaoImpl implements CommitteeMemberDao {
 	
-	private Map<String, CommitteeMember> committeeMembers;
-
-	/**
-	 * @param committeeMembers
-	 */
-	public CommitteeMemberDaoImpl(Map<String, CommitteeMember> committeeMembers) {
-		this.committeeMembers = committeeMembers;
-	}
+	private static Map<String, CommitteeMember> committeeMembers;
 
 	/**
 	 * @return the committeeMembers
@@ -32,7 +26,7 @@ public class CommitteeMemberDaoImpl implements CommitteeMemberDao {
 	 * @param committeeMembers the committeeMembers to set
 	 */
 	public void setCommitteeMembers(Map<String, CommitteeMember> committeeMembers) {
-		this.committeeMembers = committeeMembers;
+		CommitteeMemberDaoImpl.committeeMembers = committeeMembers;
 	}
 
 

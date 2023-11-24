@@ -5,6 +5,7 @@ package dao;
 
 import java.util.Map;
 
+import interfaces.dao.StaffDao;
 import models.Staff;
 
 /**
@@ -12,14 +13,7 @@ import models.Staff;
  */
 public class StaffDaoImpl implements StaffDao {
 	
-	private Map<String, Staff> staffs;
-
-	/**
-	 * @param staffs
-	 */
-	public StaffDaoImpl(Map<String, Staff> staffs) {
-		this.staffs = staffs;
-	}
+	private static Map<String, Staff> staffs;
 
 	/**
 	 * @return the staffs
@@ -32,7 +26,7 @@ public class StaffDaoImpl implements StaffDao {
 	 * @param staffs the staffs to set
 	 */
 	public void setStaffs(Map<String, Staff> staffs) {
-		this.staffs = staffs;
+		StaffDaoImpl.staffs = staffs;
 	}
 	
 }
