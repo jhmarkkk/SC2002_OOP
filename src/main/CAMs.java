@@ -1,20 +1,20 @@
 package main;
 
 // import services.StaffDataService;
-import services.StudentDataService;
-import services.StaffDataService;
-import services.CampDataService;
-
-import controllers.SessionController;
-import controllers.DataTransferController;
-import controllers.StaffController;
-import controllers.StudentController;
-import controllers.CommitteeController;
-
-import interfaces.dao.CurrentUserDao;
-import dao.CurrentUserDaoImpl;
-
-import services.StudentEnquiryService;
+//import services.StudentDataService;
+//import services.StaffDataService;
+//import services.CampDataService;
+//
+//import controllers.SessionController;
+//import controllers.DataTransferController;
+//import controllers.StaffController;
+//import controllers.StudentController;
+//import controllers.CommitteeController;
+//
+//import interfaces.dao.CurrentUserDao;
+//import dao.CurrentUserDaoImpl;
+//
+//import services.StudentEnquiryService;
 
 
 // import models.User;
@@ -52,8 +52,8 @@ public class CAMs {
 		// studentDataService.exporting(outStudentFilePath);
 
 		//TESTING ENQUIRIES
-		StudentEnquiryService enquiry = new StudentEnquiryService();
-		enquiry.create();
+//		StudentEnquiryService enquiry = new StudentEnquiryService();
+//		enquiry.create();
 
 		//TESTING STAFF SERVICES
 		// StaffDataService staffDataService = new StaffDataService();

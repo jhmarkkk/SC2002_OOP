@@ -1,5 +1,5 @@
 package interfaces.services;
 
-public interface GenerateReportServiceable {
-    public void generate();
+public interface GenerateReportServiceable extends Exportable {
+    public String generate();
 }
