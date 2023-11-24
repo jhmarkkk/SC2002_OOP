@@ -18,7 +18,6 @@ public class Enquiry {
 	 * @param replier
 	 */
 	public Enquiry(Integer enquiryID, String enquiry, String enquirer, String replier, String reply) {
-		
 		this.enquiryID = enquiryID;
 		this.enquiry = enquiry;
 		this.enquirer = enquirer;

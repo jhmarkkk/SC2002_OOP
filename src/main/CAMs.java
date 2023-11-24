@@ -4,6 +4,7 @@ package main;
 import services.StudentDataService;
 import services.StaffDataService;
 import services.CampDataService;
+
 import controllers.SessionController;
 import controllers.DataTransferController;
 import controllers.StaffController;
@@ -12,6 +13,9 @@ import controllers.CommitteeController;
 
 import interfaces.dao.CurrentUserDao;
 import dao.CurrentUserDaoImpl;
+
+import services.StudentEnquiryService;
+
 
 // import models.User;
 
@@ -41,11 +45,15 @@ public class CAMs {
 
 
 		//TESTING STUDENT SERVICES
-		StudentDataService studentDataService = new StudentDataService();
-		String inStudentFilePath = "data/StudentList.csv";
-		studentDataService.importing(inStudentFilePath);
-		String outStudentFilePath = "data/StudentListOut.csv";
-		studentDataService.exporting(outStudentFilePath);
+		// StudentDataService studentDataService = new StudentDataService();
+		// String inStudentFilePath = "data/StudentList.csv";
+		// studentDataService.importing(inStudentFilePath);
+		// String outStudentFilePath = "data/StudentListOut.csv";
+		// studentDataService.exporting(outStudentFilePath);
+
+		//TESTING ENQUIRIES
+		StudentEnquiryService enquiry = new StudentEnquiryService();
+		enquiry.create();
 
 		//TESTING STAFF SERVICES
 		// StaffDataService staffDataService = new StaffDataService();

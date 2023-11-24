@@ -312,7 +312,7 @@ public class Camp {
 	/**
 	 * @return the enquiryCounter
 	 */
-	public Integer getEnquiryCounter() {
+	public static Integer getEnquiryCounter() {
 		
 		return enquiryCounter;
 	}
@@ -320,7 +320,7 @@ public class Camp {
 	/**
 	 * @param enquiryCounter the enquiryCounter to set
 	 */
-	public void setEnquiryCounter(Integer enquiryCounter) {
+	public static void setEnquiryCounter(Integer enquiryCounter) {
 		
 		Camp.enquiryCounter = enquiryCounter;
 	}
@@ -328,7 +328,7 @@ public class Camp {
 	/**
 	 * @return the suggestionCounter
 	 */
-	public Integer getSuggestionCounter() {
+	public static Integer getSuggestionCounter() {
 		
 		return suggestionCounter;
 	}
@@ -336,7 +336,7 @@ public class Camp {
 	/**
 	 * @param suggestionCounter the suggestionCounter to set
 	 */
-	public void setSuggestionCounter(Integer suggestionCounter) {
+	public static void setSuggestionCounter(Integer suggestionCounter) {
 		
 		Camp.suggestionCounter = suggestionCounter;
 	}
