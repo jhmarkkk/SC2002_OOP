@@ -60,10 +60,10 @@ public class StaffController extends AbstractUserController {
 		do {
 			System.out.println("1. View profile");
 			System.out.println("2. View all camps");
-			System.out.println("3. View created camps");
+			System.out.println("3. View my created camps");
 			System.out.println("4. Create new camp");
-			System.out.println("5. View suggestions");
-			System.out.println("6. View enquiries");
+			System.out.println("5. View committee members' suggestions");
+			System.out.println("6. View attendees' enquiries");
 			System.out.println("7. Generate Report");
 			System.out.println("8. Log out");
 			System.out.print("\nChoice: ");
@@ -107,11 +107,12 @@ public class StaffController extends AbstractUserController {
 	protected void viewAllCamps() {
 
 		int choice;
+		SortType type = SortType.NAME;
 
 		campView = new StaffAllCampView();
-		campView.sortView(SortType.NAME);
 
 		do {
+			campView.sortView(type);
 			System.out.println("1. Sort by camp dates");
 			System.out.println("2. Sort by camp registration closing date");
 			System.out.println("3. Sort by camp location");
@@ -126,19 +127,19 @@ public class StaffController extends AbstractUserController {
 
 			switch (choice) {
 				case 1:
-					campView.sortView(SortType.DATES);
+					type = SortType.DATES;
 					break;
 				case 2:
-					campView.sortView(SortType.CLOSING_DATE);
+					type = SortType.CLOSING_DATE;
 					break;
 				case 3:
-					campView.sortView(SortType.LOCATION);
+					type = SortType.LOCATION;
 					break;
 				case 4:
-					campView.sortView(SortType.FACULTY);
+					type = SortType.FACULTY;
 					break;
 				case 5:
-					campView.sortView(SortType.STAFF);
+					type = SortType.STAFF;
 					break;
 				case 6:
 					return;
@@ -154,9 +155,9 @@ public class StaffController extends AbstractUserController {
 
 		int choice;
 
-		enquiryView.view();
 
 		do {
+			enquiryView.view();
 			System.out.println("1. Reply enquiry");
 			System.out.println("2. Back");
 			System.out.print("\nChoice: ");
@@ -181,11 +182,12 @@ public class StaffController extends AbstractUserController {
 	protected void viewCreatedCamps() {
 
 		int choice;
+		SortType type = SortType.NAME;
 
 		campView = new CreatedCampView();
-		campView.sortView(SortType.NAME);
 
 		do {
+			campView.sortView(type);
 			System.out.println("1. Sort by camp dates");
 			System.out.println("2. Sort by camp registration closing date");
 			System.out.println("3. Sort by camp location");
@@ -203,19 +205,19 @@ public class StaffController extends AbstractUserController {
 
 			switch (choice) {
 				case 1:
-					campView.sortView(SortType.DATES);
+					type = SortType.DATES;
 					break;
 				case 2:
-					campView.sortView(SortType.CLOSING_DATE);
+					type = SortType.CLOSING_DATE;
 					break;
 				case 3:
-					campView.sortView(SortType.LOCATION);
+					type = SortType.LOCATION;
 					break;
 				case 4:
-					campView.sortView(SortType.FACULTY);
+					type = SortType.FACULTY;
 					break;
 				case 5:
-					campView.sortView(SortType.STAFF);
+					type = SortType.STAFF;
 					break;
 				case 6:
 					toggleVisibility();
@@ -258,10 +260,9 @@ public class StaffController extends AbstractUserController {
 
 		int choice;
 
-		suggestionView.view();
-
 		do {
-			System.out.println("1. Approve/Reject suggestion");
+			suggestionView.view();
+			System.out.println("1. Approve suggestion");
 			System.out.println("2. Back");
 			System.out.print("\nChoice: ");
 
@@ -294,7 +295,7 @@ public class StaffController extends AbstractUserController {
 
 	protected void generateReport() {
 
-		generateReportService.exporting("data/StaffReport.txt");
+		generateReportService.exporting("report/StaffReport.txt");
 	}
 
 }
