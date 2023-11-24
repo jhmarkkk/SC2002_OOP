@@ -23,25 +23,24 @@ public class CAMs {
 		do {
 			DataTransferController.importData();
 			SessionController.startSession();
-			// User user = currentUserDao.getCurrentUser();
-			// if (user == null)
-			// 	break;
+			User user = currentUserDao.getCurrentUser();
+			if (user == null)
+				break;
 
-			// switch (user.getRole()) {
-			// case STAFF:
-			// 	new StaffController().start();
-			// 	break;
-			// case STUDENT:
-			// 	new StudentController().start();
-			// 	break;
-			// case COMMITTEE:
-			// 	new CommitteeController().start();
-			// 	break;
-			// }
+			switch (user.getRole()) {
+			case STAFF:
+				new StaffController().start();
+				break;
+			case STUDENT:
+				new StudentController().start();
+				break;
+			case COMMITTEE:
+				new CommitteeController().start();
+				break;
+			}
 
 			SessionController.endSession();
 			DataTransferController.exportData();
-            break;
 		} while (true);
 	}
 }
