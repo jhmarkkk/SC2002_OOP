@@ -12,9 +12,10 @@ import models.Student;
 
 public class StudentDataService implements DataServiceable {
 
-	private Map<String, Student> studentDataMap = new HashMap<>();
-
 	public void exporting (String filePath) {
+
+        Map<String, Student> studentDataMap = new HashMap<>();
+
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
             // Write header line
             bw.write("Name,Email,Faculty,Password,RegisteredCamps,Enquiries");
@@ -65,6 +66,9 @@ public class StudentDataService implements DataServiceable {
 	}
 	
 	public void importing(String filePath) {
+
+        Map<String, Student> studentDataMap = new HashMap<>();
+
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             int rowNumber = 0;

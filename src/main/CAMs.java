@@ -38,11 +38,6 @@ public class CAMs {
 		// StudentDataService studentDataService = new StudentDataService();
 		// String testFilePath = "testing.csv";
 		// studentDataService.exporting(testFilePath);
-
-		//TESTING ENQUIRIES
-		// StudentEnquiryService enquiry = new StudentEnquiryService();
-		// enquiry.create();
-
 		
 		//TESTING STUDENT SERVICES
 		StudentDataService studentDataService = new StudentDataService();
@@ -51,6 +46,9 @@ public class CAMs {
 		String outStudentFilePath = "data/StudentListOut.csv";
 		studentDataService.exporting(outStudentFilePath);
 
+		//TESTING ENQUIRIES
+		StudentEnquiryService enquiry = new StudentEnquiryService();
+		enquiry.create();
 
 		// TESTING STAFF SERVICES
 		// StaffDataService staffDataService = new StaffDataService();

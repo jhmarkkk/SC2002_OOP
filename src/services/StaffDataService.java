@@ -14,10 +14,11 @@ import interfaces.services.DataServiceable;
 import models.Staff;
 
 public class StaffDataService implements DataServiceable {
-
-	private Map<String, Staff> staffDataMap = new HashMap<>();
 	
 	public void exporting (String filePath) {
+
+        Map<String, Staff> staffDataMap = new HashMap<>();
+
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
             // Write header line
             bw.write("Name,Email,Faculty,Password,createdCamps");
@@ -50,6 +51,9 @@ public class StaffDataService implements DataServiceable {
 	}
 	
 	public void importing (String filePath) {
+
+        Map<String, Staff> staffDataMap = new HashMap<>();
+
 		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             int rowNumber = 0;
