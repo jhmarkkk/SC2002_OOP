@@ -15,6 +15,20 @@ import interfaces.views.CampViewable;
 import interfaces.views.ViewFilterable;
 import enums.FilterType;
 
+import dao.CurrentUserDaoImpl;
+import dao.CampDaoImpl;
+import dao.StaffDaoImpl;
+
+import models.Camp;
+import models.Staff;
+
+import utils.CampComparators;
+
+import enums.SortType;
+
+import utils.CampFilter;
+import utils.CampFormatDate;
+
 /**
  * This file is the implementation for staff to view all the camps that the
  * staff are currently in control of
@@ -28,6 +42,7 @@ public class CreatedCampView implements CampViewable {
 
     }
 
+    <<<<<<<HEAD
     // CreatedCampView() {
     // CampDaoInterface campDao = new CampDaoImpl();
     // ArrayList<Camp> createdCamps = campDao.getCamps();
@@ -41,6 +56,25 @@ public class CreatedCampView implements CampViewable {
     // }
     // }
     // }
+    =======
+
+};
+
+    public void sortView(SortType sortType) {
+		CampDao campDao = new CampDaoImpl();
+		Map<String, Camp> campMap = campDao.getCamps(); 
+        
+        CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
+        String staffID = currentUserDao.getCurrentUser().getUserID();
+        
+        StaffDao staffDao = new StaffDaoImpl();
+        Map<String, Staff> staffMap = staffDao.getStaffs();
+        
+        //idlist is id of created Camps
+        ArrayList<String> idList = staffMap.get(staffID).getCreatedCamps();
+        
+        ArrayList<Camp> campsList = new ArrayList<Camp>();
+>>>>>>> d7b98d644ff8ef5ce7dc0726741e91687b0916eb
 
     // private ArrayList<Camp> createdCamps = createdCamps;
     // }
