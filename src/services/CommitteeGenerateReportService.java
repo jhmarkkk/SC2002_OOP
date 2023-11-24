@@ -124,12 +124,12 @@ public class CommitteeGenerateReportService implements GenerateReportServiceable
         
         if (type == GenerateType.COMMITTEE) {
         	report = String.format("Committee Members' List for %s\n", camp.getName());
-        	report = report.concat(String.format("%s\n", "=".repeat(14)));
-        	report = report.concat(String.format("%-10s| %s\n", "Name", "Points"));
-        	report = report.concat(String.format("%s\n", "-".repeat(14)));      	
+        	report = report.concat(String.format("%s\n", "=".repeat(10)));
+        	report = report.concat(String.format("%-10s\n", "Name"));
+        	report = report.concat(String.format("%s\n", "-".repeat(10)));      	
     		for (String userID : camp.getCommitteeMembers()) {
         		committeeMember = committeeMemberData.get(userID);
-        		report = report.concat(String.format("%-10s| %s\n", committeeMember.getName(), committeeMember.getPoints()));
+        		report = report.concat(String.format("%-10s\n", committeeMember.getName()));
         	}
     		
     		return report;
