@@ -11,7 +11,7 @@ import dao.CurrentUserDaoImpl;
 import dao.StudentDaoImpl;
 
 import enums.Role;
-
+import enums.Visibility;
 import interfaces.dao.CampDao;
 import interfaces.dao.CommitteeMemberDao;
 import interfaces.dao.CurrentUserDao;
@@ -47,7 +47,7 @@ public class StudentAttendCampService implements AttendCampServiceable {
     	do {
     		System.out.println("Register for:");
     		for (i = 0; i < validCamps.size(); i++)
-    			System.out.printf("%d. %s\n", i+1, validCamps.get(i).getName());
+    			System.out.printf("%2d. %s\n", i+1, validCamps.get(i).getName());
     		
     		System.out.printf("%d. Back\n", i+1);
     		System.out.print("Choice: ");
@@ -97,14 +97,14 @@ public class StudentAttendCampService implements AttendCampServiceable {
     	String selectedCampName;
     	Camp selectedCamp;
     	Student currentUser = (Student)currentUserDao.getCurrentUser();
-    	ArrayList<String> registeredCamps = currentUser.getRegisteredCamps();
+    	ArrayList<String> registeredCampNames = currentUser.getRegisteredCamps();
     	
     	do {
     		System.out.println("Withdraw from:");
-    		for (i = 0; i < registeredCamps.size(); i++)
-    			System.out.printf("%d. %s\n", i+1, registeredCamps.get(i));
+    		for (i = 0; i < registeredCampNames.size(); i++)
+    			System.out.printf("%2d. %s\n", i+1, registeredCampNames.get(i));
     		
-    		System.out.printf("%d. Back\n", i+1);
+    		System.out.printf("%2d. Back\n", i+1);
     		System.out.print("Choice: ");
     		
     		choice = sc.nextInt();
@@ -114,7 +114,7 @@ public class StudentAttendCampService implements AttendCampServiceable {
     		if (choice == i + 1) return;
     		
     		if (choice >= 0 || choice <= i) {
-    			selectedCampName = registeredCamps.get(choice);
+    			selectedCampName = registeredCampNames.get(choice);
     			selectedCamp = campDao.getCamps().get(selectedCampName);
     			break;
     		}
@@ -125,8 +125,8 @@ public class StudentAttendCampService implements AttendCampServiceable {
     	
     	if(validateWithdrawingFromCommittee(currentUser, selectedCampName)) return;
     	
-    	registeredCamps.remove(selectedCampName);
-    	currentUser.setRegisteredCamps(registeredCamps);
+    	registeredCampNames.remove(selectedCampName);
+    	currentUser.setRegisteredCamps(registeredCampNames);
     	
     	ArrayList<String> attendees = selectedCamp.getAttendees();
     	ArrayList<String> withdrawnAttendees = selectedCamp.getWithdrawnAttendees();
@@ -145,38 +145,82 @@ public class StudentAttendCampService implements AttendCampServiceable {
     	ArrayList<Camp> validCamps = new ArrayList<>();
     	ArrayList<String> registeredCampName = user.getRegisteredCamps();
     	ArrayList<GregorianCalendar> unavailableDates = new ArrayList<>();
-    	GregorianCalendar today = new GregorianCalendar();
-    	Boolean overlap = false;
     	
     	for (String name : registeredCampName)
     	    unavailableDates.addAll(campData.get(name).getDates());
     	
     	for (Camp camp : camps) {
-			if (!camp.getOpenTo().equals(user.getFaculty()) && !camp.getOpenTo().equals("NTU")) continue;
-			if (camp.getAttendeeSlots() >= camp.getAttendees().size() && camp.getCommitteeSlots() >= camp.getCommitteeMembers().size()) continue;
-			if (DateUtil.toString(camp.getRegistrationClosingDate()).compareTo(DateUtil.toString(today)) < 0) continue;
+    		if (camp.getVisibility() == Visibility.OFF) continue;
+    		
+			if (compareFaculty(camp.getOpenTo(), user.getFaculty())) continue;
+			
+			if (compareSlots(camp)) continue;
+			
+			if (compareDeadline(DateUtil.toString(camp.getRegistrationClosingDate()))) continue;
+			
 			if (registeredCampName.contains(camp.getName())) continue;
+			
 			if (camp.getWithdrawnAttendees().contains(user.getUserID())) continue;
-			if (user.getRole() == Role.COMMITTEE) {
-				CommitteeMember committeeMember = (CommitteeMember) user;
-				if (committeeMember.getFacilitatingCamp() == camp.getName()) continue;
-			}
-			ArrayList<GregorianCalendar> dates = camp.getDates();
-			overlap = false;
-			for (GregorianCalendar date : dates) {
-				for (GregorianCalendar unavailableDate : unavailableDates) {
-					if (DateUtil.toString(date).equals(DateUtil.toString(unavailableDate))) {
-						overlap = true;
-						break;
-					}
-				}
-				if (overlap) break;
-			}
-			if (overlap) continue;
+			
+			if (compareFacilitatingCamp(user, camp.getName())) continue;
+
+			if (compareDates(camp.getDates(), unavailableDates)) continue;
 			
 			validCamps.add(camp);
 		}
     	return validCamps;
+    }
+    
+    private Boolean compareFaculty(String campFaculty, String userFaculty) {
+    	
+    	if (campFaculty.equals("NTU")) return false;
+    	
+    	if (campFaculty.equals(userFaculty)) return false;
+    	
+    	return true;
+    }
+    
+    private Boolean compareSlots(Camp camp) {
+    	
+    	if (camp.getAttendees().size() < camp.getAttendeeSlots()) return false;
+    	
+    	if (camp.getCommitteeMembers().size() < camp.getCommitteeSlots()) return false;
+    	
+    	return true;
+    }
+    
+    private Boolean compareDeadline(String deadline) {
+    	
+    	GregorianCalendar today = new GregorianCalendar();
+    	
+    	if (DateUtil.toString(today).compareTo(deadline) < 0) return true;
+    	
+    	return false;
+    }
+    
+    private Boolean compareFacilitatingCamp(Student user, String campName) {
+    	
+    	CommitteeMember committeeMember;
+    	
+    	if (user.getRole() != Role.COMMITTEE) return false;
+    	
+    	committeeMember = (CommitteeMember) user;
+    	if (committeeMember.getFacilitatingCamp().equals(campName)) return true;
+    	
+    	return false;
+    }
+    
+    private Boolean compareDates(ArrayList<GregorianCalendar> dates, ArrayList<GregorianCalendar> unavailableDates) {
+    	
+    	for (GregorianCalendar date : dates) {
+			for (GregorianCalendar unavailableDate : unavailableDates) {
+				if (DateUtil.toString(date).equals(DateUtil.toString(unavailableDate))) {
+					return true;
+				}
+			}
+		}
+    	
+    	return false;
     }
     
     private void joinAsAttendee(Student user, Camp camp) {
