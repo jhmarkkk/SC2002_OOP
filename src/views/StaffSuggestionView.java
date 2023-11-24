@@ -25,9 +25,8 @@ public class StaffSuggestionView implements SuggestionViewable {
             for (Suggestion sug : createdCamp.getSuggestions().values()) {
                 System.out.printf("***** Enquiry %d from %s *****\n", sug.getSuggestionID(), sug.getSuggester());
                 System.out.printf("%s\n", sug.getSuggestion());
-                if (sug.getApprover()) {
-                    System.out.printf("~~~~~ Replied by: %s ~~~~~\n", enq.getReplier());
-                    System.out.printf("%s\n", enq.getReply());
+                if (sug.getApprover() != null) {
+                    System.out.printf("~~~~~ Approved by: %s ~~~~~\n", sug.getApprover());
                 }
             }
         }
