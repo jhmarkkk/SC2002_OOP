@@ -9,16 +9,17 @@ public class Suggestion {
 	private String suggestion;
 	private String suggester;
 	private String approver = null;
+	private static Integer suggestionCounter;
 	
 	/**
-	 * @param suggestionID
+	 * Before creating Suggestion instances, make sure you've set the suggestionCounter value!
 	 * @param suggestion
 	 * @param suggester
 	 * @param approver
 	 */
-	public Suggestion(int suggestionID, String suggestion, String suggester, String approver) {
+	public Suggestion(String suggestion, String suggester, String approver) {
 		
-		this.suggestionID = suggestionID;
+		this.suggestionID = suggestionCounter++;
 		this.suggestion = suggestion;
 		this.suggester = suggester;
 		this.approver = approver;
@@ -70,6 +71,22 @@ public class Suggestion {
 	public String getSuggester() {
 		
 		return suggester;
+	}
+
+	/**
+	 * @return the suggestionCounter
+	 */
+	public Integer getSuggestionCounter() {
+		
+		return suggestionCounter;
+	}
+
+	/**
+	 * @param suggestionCounter the suggestionCounter to set
+	 */
+	public void setSuggestionCounter(Integer suggestionCounter) {
+		
+		Suggestion.suggestionCounter = suggestionCounter;
 	}
 	
 	
