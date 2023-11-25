@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+
 import enums.Role;
 
 public class Staff extends User{

@@ -1,9 +1,9 @@
 package models;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Map;
 
 import enums.Visibility;
 
@@ -80,8 +80,8 @@ public class Camp {
 	 * @param staffInCharge
 	 */
 	public Camp(String name, ArrayList<GregorianCalendar> dates, GregorianCalendar registrationClosingDate,
-			String openTo, String location, int totalSlots, int committeeSlots, String description,
-			String staffInCharge) {
+			String openTo, String location, int totalSlots, int committeeSlots, String description, String staffInCharge) {
+		
 		this.name = name;
 		this.dates = dates;
 		this.registrationClosingDate = registrationClosingDate;
@@ -98,8 +98,6 @@ public class Camp {
 		this.suggestions = new HashMap<Integer, Suggestion>();
 		this.visibility = Visibility.OFF;
 	}
-
-
 
 	/**
 	 * @return the name

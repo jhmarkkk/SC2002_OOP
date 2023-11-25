@@ -6,8 +6,9 @@ import controllers.StaffController;
 import controllers.StudentController;
 import controllers.CommitteeController;
 
-import interfaces.dao.CurrentUserDao;
 import dao.CurrentUserDaoImpl;
+
+import interfaces.dao.CurrentUserDao;
 
 import models.User;
 

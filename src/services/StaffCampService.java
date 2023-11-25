@@ -1,33 +1,27 @@
 package services;
 
-import java.util.Arrays;
 import java.util.ArrayList;
-import java.util.Date;
-import utils.DateUtil;
 import java.util.GregorianCalendar;
-import java.util.Scanner;
-import java.text.SimpleDateFormat;
-
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
+
+import dao.CampDaoImpl;
+import dao.CurrentUserDaoImpl;
 
 import enums.Visibility;
+
+import interfaces.dao.CampDao;
+import interfaces.dao.CurrentUserDao;
+import interfaces.services.CampServiceable;
+
 import models.Camp;
 import models.CommitteeMember;
 import models.Enquiry;
-import models.Staff;
 import models.Student;
 import models.Suggestion;
-import interfaces.services.CampServiceable;
-import interfaces.dao.CurrentUserDao;
-import interfaces.dao.StudentDao;
-import interfaces.dao.CommitteeMemberDao;
-import interfaces.dao.CampDao;
-import dao.CurrentUserDaoImpl;
-import dao.StudentDaoImpl;
-import dao.CommitteeMemberDaoImpl;
-import dao.CampDaoImpl;
 
+import utils.DateUtil;
 
 public class StaffCampService implements CampServiceable {
     private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
