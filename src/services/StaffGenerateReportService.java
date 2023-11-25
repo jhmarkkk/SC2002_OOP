@@ -64,6 +64,7 @@ private static final Scanner sc = new Scanner(System.in);
     		if (choice >= 0 || choice <= i) {
     			selectedCampName = createdCampNames.get(choice);
     			selectedCamp = campDao.getCamps().get(selectedCampName);
+				System.out.println(selectedCamp.getName());
     			break;
     		}
     		

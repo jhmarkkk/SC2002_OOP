@@ -57,7 +57,7 @@ public class StudentEnquiryService implements EnquiryServiceable {
         // Get camp name
         System.out.println("Camp to Enquiry: ");
         Integer campNameInput = sc.nextInt();
-        String campName = studentCamps.get(campNameInput--);
+        String campName = studentCamps.get(--campNameInput);
 
         // Get enquiry
         System.out.println("Enter Enquiry: ");
