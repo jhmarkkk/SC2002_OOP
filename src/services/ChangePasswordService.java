@@ -2,6 +2,7 @@ package services;
 
 import java.util.Scanner;
 
+import controllers.SessionController;
 import dao.CurrentUserDaoImpl;
 import interfaces.dao.CurrentUserDao;
 import interfaces.services.ChangePasswordServiceable;
@@ -48,6 +49,7 @@ public class ChangePasswordService implements ChangePasswordServiceable{
     	}
     	
     	System.out.println("Password sucessfully changed");
+    	SessionController.endSession();
     	return true;
     }
 }
