@@ -92,8 +92,11 @@ public class StaffCampService implements CampServiceable {
         //COMMITTEE SLOTS
         System.out.println("Enter number of committee slots: ");
         int temp = sc.nextInt();
-        while (temp > 10){
-            System.out.println("Max number of committee slots is 10. Try again.");
+        while (temp > 10 || temp > totalSlots){
+            if(temp <= 10)
+                System.out.printf("Max number of committee slots is %d. Try again.%n", totalSlots);
+            else
+                System.out.println("There can only be 0-10 committee slots. Try again.");
             System.out.println("Enter number of committee slots: ");
             temp = sc.nextInt();
         }
