@@ -45,14 +45,14 @@ public class StaffReplyEnquiryService implements ReplyEnquiryServiceable {
         }
         do {
             for (i = 0; i < enquiriesID.size(); i++)
-                System.out.printf("Choice %d : Enquiry ID %d", i, enquiriesID.get(i));
+                System.out.printf("Choice %d : Enquiry ID %d", i + 1, enquiriesID.get(i));
             System.out.printf("Choice %d : Back", i + 1);
             System.out.printf("Select choice: ");
             choice = sc.nextInt();
             System.out.println();
             if (choice == i + 1)
                 return;
-            if (choice >= 0 || choice <= i) {
+            if (choice >= 1 || choice <= i) {
                 enquiryReplyID = enquiriesID.get(choice);
                 break;
             }
