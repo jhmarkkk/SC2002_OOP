@@ -65,7 +65,7 @@ public class StaffCampService implements CampServiceable {
 
         //REGISTRATION CLOSING DATE
         System.out.println("Enter registration closing date: ");
-        String closingDate = sc.next();
+        String closingDate = sc.nextLine();
         GregorianCalendar registrationClosingDate = DateUtil.toDate(closingDate);
         System.out.println("Registration Closing Date: ");
         System.out.println(String.format("%04d-%02d-%02d", registrationClosingDate.get(GregorianCalendar.YEAR), registrationClosingDate.get(GregorianCalendar.MONTH) + 1, registrationClosingDate.get(GregorianCalendar.DAY_OF_MONTH)) + "\n");
@@ -73,21 +73,30 @@ public class StaffCampService implements CampServiceable {
 
         //OPEN TO
         System.out.println("Enter user group (School Name or NTU):");
-        String openTo = sc.next();
+        String openTo = sc.nextLine();
         
         System.out.println("Camp is only open to " + openTo + "\n");
 
 
         //LOCATION
         System.out.println("Enter camp location: ");
-        String location = sc.next();
+        String location = sc.nextLine();
         System.out.println("Camp location: " + location + "\n");
 
 
         //TOTAL SLOTS
-        System.out.println("Enter toal number of slots: ");
-        int totalSlots = sc.nextInt();
-        System.out.println("Total number of slots: " + totalSlots + "\n");
+        while(true){
+            System.out.println("Enter toal number of slots: ");
+            if(sc.hasNextInt()){
+                int totalSlots = sc.nextInt();
+                break;
+            }
+            else{
+                System.out.println("Invalid input. Please enter a valid integer.");
+                sc.next();
+            }
+                System.out.println("Total number of slots: " + totalSlots + "\n");
+        }
         
 
         //COMMITTEE SLOTS
@@ -95,7 +104,7 @@ public class StaffCampService implements CampServiceable {
         int temp = sc.nextInt();
         while (temp > 10 || temp > totalSlots){
             if(temp <= 10)
-                System.out.printf("Max number of committee slots is %d. Try again.%n", totalSlots);
+                System.out.printf("There is only %d total slots. Try again.%n", totalSlots);
             else
                 System.out.println("There can only be 0-10 committee slots. Try again.");
             System.out.println("Enter number of committee slots: ");
@@ -107,7 +116,7 @@ public class StaffCampService implements CampServiceable {
 
         //CAMP DESCRIPTION
         System.out.println("Enter camp description: ");
-        String description = sc.next();
+        String description = sc.nextLine();
         System.out.println("Camp description: " + description + "\n");
 
 
@@ -198,14 +207,12 @@ public class StaffCampService implements CampServiceable {
         if (choice == i + 1) return;
 
         
-        // if (choice >= 0 || choice <= i) {
-        //     selectedCampName = registeredCamps.get(choice);
-        //     selectedCamp = campDao.getCamps().get(selectedCampName);
-        // }
-        selectedCampName = registeredCamps.get(choice - 1);
-        selectedCamp = campDao.getCamps().get(selectedCampName);
+        if (choice >= 0 || choice <= i) {
+            selectedCampName = registeredCamps.get(choice-1);
+            selectedCamp = campDao.getCamps().get(selectedCampName);
+        }
         
-        //
+        //Edit Camps options
         do {
             System.out.println("---------------Edit Camps---------------");
             System.out.println("Edit:");
