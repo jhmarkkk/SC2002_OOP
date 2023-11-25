@@ -325,10 +325,10 @@ public class CampDataService implements DataServiceable {
 					}
 				}
 
-				// printing fields for test
-				for (String f : fields) {
-					System.out.println(f);
-				}
+				// // printing fields for test
+				// for (String f : fields) {
+				// 	System.out.println(f);
+				// }
 
 				Camp importedCamp = new Camp(campName, dates, registrationClosingDate, openTo, location,
 						totalSlots, committeeSlots, description, staff, attendees, withdrawnAttendees,
