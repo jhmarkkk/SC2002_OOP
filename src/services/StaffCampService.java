@@ -40,10 +40,22 @@ public class StaffCampService implements CampServiceable {
 
         //DATES
         // Accept user input for the starting camp date
-        System.out.println("Enter starting camp date (YYYY-MM-DD): ");
-        String startDateStr = sc.nextLine();
-        GregorianCalendar startDate = DateUtil.toDate(startDateStr);
+        GregorianCalendar currentDate = new GregorianCalendar(2023, 11, 27);
+        GregorianCalendar startDate;
 
+        // Check if start date is after current date
+        while (true){
+            System.out.println("Enter starting camp date (YYYY-MM-DD): ");
+            String startDateStr = sc.nextLine();
+            startDate = DateUtil.toDate(startDateStr);
+            boolean isBefore = startDate.before(currentDate);
+            if(isBefore == false)
+                break;
+            else
+                System.out.println("Invalid date. Please enter valid date.");
+                sc.next();
+        }
+        
         // Accept user input for the ending camp date
         System.out.println("Enter number of days camp is held: ");
         int numOfDays = sc.nextInt();
@@ -59,7 +71,7 @@ public class StaffCampService implements CampServiceable {
 
         //REGISTRATION CLOSING DATE
         System.out.println("Enter registration closing date: ");
-        String closingDate = sc.next();
+        String closingDate = sc.nextLine();
         GregorianCalendar registrationClosingDate = DateUtil.toDate(closingDate);
         System.out.println("Registration Closing Date: ");
         System.out.println(String.format("%04d-%02d-%02d", registrationClosingDate.get(GregorianCalendar.YEAR), registrationClosingDate.get(GregorianCalendar.MONTH) + 1, registrationClosingDate.get(GregorianCalendar.DAY_OF_MONTH)) + "\n");
@@ -67,21 +79,32 @@ public class StaffCampService implements CampServiceable {
 
         //OPEN TO
         System.out.println("Enter user group (School Name or NTU):");
-        String openTo = sc.next();
+        String openTo = sc.nextLine();
         
         System.out.println("Camp is only open to " + openTo + "\n");
 
 
         //LOCATION
         System.out.println("Enter camp location: ");
-        String location = sc.next();
+        String location = sc.nextLine();
         System.out.println("Camp location: " + location + "\n");
 
 
         //TOTAL SLOTS
-        System.out.println("Enter toal number of slots: ");
-        int totalSlots = sc.nextInt();
-        System.out.println("Total number of slots: " + totalSlots + "\n");
+        int totalSlots = 0;
+        while(true){
+            System.out.println("Enter toal number of slots: ");
+
+            if(sc.hasNextInt()){
+                totalSlots = sc.nextInt();
+                break;
+            }
+            else{
+                System.out.println("Invalid input. Please enter a valid integer.");
+                sc.next();
+            }
+                System.out.println("Total number of slots: " + totalSlots + "\n");
+        }
         
 
         //COMMITTEE SLOTS
@@ -89,7 +112,7 @@ public class StaffCampService implements CampServiceable {
         int temp = sc.nextInt();
         while (temp > 10 || temp > totalSlots){
             if(temp <= 10)
-                System.out.printf("Max number of committee slots is %d. Try again.%n", totalSlots);
+                System.out.printf("There is only %d total slots. Try again.%n", totalSlots);
             else
                 System.out.println("There can only be 0-10 committee slots. Try again.");
             System.out.println("Enter number of committee slots: ");
@@ -101,7 +124,7 @@ public class StaffCampService implements CampServiceable {
 
         //CAMP DESCRIPTION
         System.out.println("Enter camp description: ");
-        String description = sc.next();
+        String description = sc.nextLine();
         System.out.println("Camp description: " + description + "\n");
 
 
@@ -178,28 +201,29 @@ public class StaffCampService implements CampServiceable {
     	ArrayList<String> registeredCamps = currentUser.getRegisteredCamps();
         
         //Choose which camp to edit
-        System.out.println("Edit from:");
-        for (i = 0; i < registeredCamps.size(); i++)
-            System.out.printf("%d. %s\n", i+1, registeredCamps.get(i));
-        
-        System.out.printf("%d. Back\n", i+1);
-        System.out.print("Choice: ");
-        
-        choice = sc.nextInt();
-        
-        System.out.println();
-        
-        if (choice == i + 1) return;
+        do {
+            System.out.println("Edit from:");
+            for (i = 0; i < registeredCamps.size(); i++)
+                System.out.printf("%d. %s\n", i+1, registeredCamps.get(i));
+            
+            System.out.printf("%d. Back\n", i+1);
+            System.out.print("Choice: ");
+            
+            choice = sc.nextInt();
+            
+            System.out.println();
+            
+            if (choice == i + 1) return;
 
+            
+            if (choice >= 0 || choice <= i) {
+                selectedCampName = registeredCamps.get(choice-1);
+                selectedCamp = campDao.getCamps().get(selectedCampName);
+                break;
+            }
+        } while (true);
         
-        // if (choice >= 0 || choice <= i) {
-        //     selectedCampName = registeredCamps.get(choice);
-        //     selectedCamp = campDao.getCamps().get(selectedCampName);
-        // }
-        selectedCampName = registeredCamps.get(choice - 1);
-        selectedCamp = campDao.getCamps().get(selectedCampName);
-        
-        //
+        //Edit Camps options
         do {
             System.out.println("---------------Edit Camps---------------");
             System.out.println("Edit:");
