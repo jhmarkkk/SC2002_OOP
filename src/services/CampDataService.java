@@ -31,8 +31,10 @@ public class CampDataService implements DataServiceable {
 
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
 			// Write enquiryCounter and suggestionCounter
-			String enquiryCounterString = Integer.toString(Enquiry.getEnquiryCounter());
-			String suggestionCounterString = Integer.toString(Suggestion.getSuggestionCounter());
+			bw.write("Enquiry Counter,Suggestion Counter");
+			bw.newLine();
+			String enquiryCounterString = Integer.toString(Enquiry.getEnquiryCounter() - 1);
+			String suggestionCounterString = Integer.toString(Suggestion.getSuggestionCounter() - 1);
 			bw.write(enquiryCounterString + "," + suggestionCounterString);
 			bw.newLine();
 			// Write header line
@@ -204,11 +206,13 @@ public class CampDataService implements DataServiceable {
 
 			int enquiryCount, suggestionCount;
 
+			// Read the header of enquiryCounter and suggestionCounter
+			line = br.readLine();
 			// Read the enquiryCounter and suggestionCounter
 			line = br.readLine();
 			String[] counts = line.split(",");
-			enquiryCount = Integer.parseInt(counts[0]);
-			suggestionCount = Integer.parseInt(counts[1]);
+			enquiryCount = Integer.parseInt(counts[0]) + 1;
+			suggestionCount = Integer.parseInt(counts[1]) + 1;
 			Enquiry.setEnquiryCounter(enquiryCount);
 			Suggestion.setSuggestionCounter(suggestionCount);
 
