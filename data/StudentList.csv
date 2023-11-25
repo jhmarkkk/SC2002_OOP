@@ -1,12 +1,10 @@
 Name,Email,Faculty,Password,RegisteredCamps,Enquiries
-CHERN,YCHERN@e.ntu.edu.sg,SCSE,password,camp1|camp2|camp3,camp1=1|2|3
-CALVIN,CT113@e.ntu.edu.sg,SCSE,password,#NULL!,#NULL!
-LEE,LE51@e.ntu.edu.sg,SCSE,password,#NULL!,#NULL!
-RAWAL,AKY013@e.ntu.edu.sg,SSS,password,#NULL!,#NULL!
-CHAN,YCN019@e.ntu.edu.sg,NBS,password,#NULL!,#NULL!
-BRANDON,BR015@e.ntu.edu.sg,EEE,password,#NULL!,#NULL!
-DONG,DON84@e.ntu.edu.sg,ADM,password,#NULL!,#NULL!
-ERNEST,ELI34@e.ntu.edu.sg,EEE,password,#NULL!,#NULL!
-KOH,KOH1@e.ntu.edu.sg,ADM,password,camp4,camp1=1|2|3*camp2=4|5
-DENISE,DL007@e.ntu.edu.sg,SCSE,password,#NULL!,#NULL!
-LIU,SL22@e.ntu.edu.sg,NBS,password,#NULL!,#NULL!
+CHERN,YCHERN@e.ntu.edu.sg;,NBS,P@$$w0rd,NBS Orientation,NBS Orientation=1
+KOH,KOH1@e.ntu.edu.sg;,NBS,P@$$w0rd,NBS Orientation,#NULL!
+BRANDON,BR015@e.ntu.edu.sg;,NBS,P@$$w0rd,NBS Orientation,#NULL!
+CALVIN,CT113@e.ntu.edu.sg;,SCSE,password,#NULL!,#NULL!
+CHAN,YCN019@e.ntu.edu.sg;,NBS,P@$$w0rd,#NULL!,NBS Orientation=2
+DENISE,DL007@e.ntu.edu.sg;,SCSE,P@$$w0rd,#NULL!,#NULL!
+ERNEST,ELI34@e.ntu.edu.sg;,EEE,P@$$w0rd,#NULL!,#NULL!
+LIU,SL22@e.ntu.edu.sg;,SCSE,P@$$w0rd,#NULL!,#NULL!
+RAWAL,AKY013@e.ntu.edu.sg;,SSS,P@$$w0rd,#NULL!,#NULL!
