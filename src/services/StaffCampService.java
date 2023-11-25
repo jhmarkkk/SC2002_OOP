@@ -3,6 +3,7 @@ package services;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Date;
+import utils.DateUtil;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 import java.text.SimpleDateFormat;
@@ -47,7 +48,7 @@ public class StaffCampService implements CampServiceable {
         // Accept user input for the starting camp date
         System.out.println("Enter starting camp date (YYYY-MM-DD): ");
         String startDateStr = sc.nextLine();
-        GregorianCalendar startDate = toDate(startDateStr);
+        GregorianCalendar startDate = DateUtil.toDate(startDateStr);
 
         // Accept user input for the ending camp date
         System.out.println("Enter number of days camp is held: ");
@@ -65,7 +66,7 @@ public class StaffCampService implements CampServiceable {
         //REGISTRATION CLOSING DATE
         System.out.println("Enter registration closing date: ");
         String closingDate = sc.next();
-        GregorianCalendar registrationClosingDate = parseDate(closingDate);
+        GregorianCalendar registrationClosingDate = DateUtil.toDate(closingDate);
         System.out.println("Registration Closing Date: ");
         System.out.println(String.format("%04d-%02d-%02d", registrationClosingDate.get(GregorianCalendar.YEAR), registrationClosingDate.get(GregorianCalendar.MONTH) + 1, registrationClosingDate.get(GregorianCalendar.DAY_OF_MONTH)) + "\n");
 
@@ -92,8 +93,11 @@ public class StaffCampService implements CampServiceable {
         //COMMITTEE SLOTS
         System.out.println("Enter number of committee slots: ");
         int temp = sc.nextInt();
-        while (temp > 10){
-            System.out.println("Max number of committee slots is 10. Try again.");
+        while (temp > 10 || temp > totalSlots){
+            if(temp <= 10)
+                System.out.printf("Max number of committee slots is %d. Try again.%n", totalSlots);
+            else
+                System.out.println("There can only be 0-10 committee slots. Try again.");
             System.out.println("Enter number of committee slots: ");
             temp = sc.nextInt();
         }
@@ -227,7 +231,7 @@ public class StaffCampService implements CampServiceable {
 
                     System.out.println("Enter new starting camp date (YYYY-MM-DD): ");
                     String startDateStr = sc.nextLine();
-                    GregorianCalendar startDate = toDate(startDateStr);
+                    GregorianCalendar startDate = DateUtil.toDate(startDateStr);
 
                     // Accept user input for the number of days camp is held
                     System.out.println("Enter number of days camp is held: ");
@@ -249,7 +253,7 @@ public class StaffCampService implements CampServiceable {
                     String newClosingDate = sc.nextLine();
                     
                     // Change from String to GregorianCalendar
-                    GregorianCalendar newRegistrationClosingDate = parseDate(newClosingDate);
+                    GregorianCalendar newRegistrationClosingDate = DateUtil.toDate(newClosingDate);
 
                     System.out.println("Updated registration closing date: " + newRegistrationClosingDate);
                     System.out.println(String.format("%04d-%02d-%02d", newRegistrationClosingDate.get(GregorianCalendar.YEAR),
