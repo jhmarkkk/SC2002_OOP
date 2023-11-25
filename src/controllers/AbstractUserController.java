@@ -2,6 +2,9 @@ package controllers;
 
 import java.util.Scanner;
 
+import dao.CurrentUserDaoImpl;
+
+import interfaces.dao.CurrentUserDao;
 import interfaces.services.ChangePasswordServiceable;
 import interfaces.views.ProfileViewable;
 
@@ -13,6 +16,8 @@ import views.ProfileView;
 abstract class AbstractUserController {
 	
 	protected static Scanner sc = new Scanner(System.in);
+	
+	protected static CurrentUserDao currentuserDao = new CurrentUserDaoImpl();
 	
 	protected static ProfileViewable profileView = new ProfileView();
 	
@@ -41,23 +46,23 @@ abstract class AbstractUserController {
 			
 			switch (choice) {
 			case 1:
-				changePassword();
+				if (changePassword()) return;
 				break;
 			case 2:
-				break;
+				return;
 			default:
 				System.out.println("Invalid choice. Please choose again.");
 			}
 			
-		} while (choice != 2);
+		} while (true);
 	}
 	
-	protected void changePassword() {
+	protected boolean changePassword() {
 
 		int choice;
 		
 		do {
-			if(changePasswordService.changePassword()) return;
+			if(changePasswordService.changePassword()) return true;
 			
 			do {
 				System.out.println("1. Try again");			
@@ -70,7 +75,7 @@ abstract class AbstractUserController {
 				
 				if (choice == 1) break;
 				
-				if (choice == 2) return;
+				if (choice == 2) return false;
 				
 				System.out.println("Invalid choice. Please choose again.");
 			} while (true);

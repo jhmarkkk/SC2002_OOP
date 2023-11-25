@@ -51,7 +51,7 @@ public class StaffController extends AbstractUserController {
 	private static final ReplyEnquiryServiceable replyEnquiryService = new StaffReplyEnquiryService();
 
 	private static final GenerateReportServiceable generateReportService = new StaffGenerateReportService();
-
+	
 	@Override
 	public void start() {
 
@@ -99,7 +99,9 @@ public class StaffController extends AbstractUserController {
 				default:
 					System.out.println("Invalid choice. Please choose again.");
 			}
-
+			
+			if (currentuserDao.getCurrentUser() == null) return;
+			
 		} while (true);
 	}
 
