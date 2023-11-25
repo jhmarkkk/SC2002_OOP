@@ -1,6 +1,7 @@
 package views;
 
 import enums.SortType;
+import enums.Role;
 import interfaces.views.CampViewable;
 
 import interfaces.dao.StaffDao;
@@ -29,9 +30,9 @@ public class RegisteredCampView implements CampViewable {
         StaffDao staffDao = new StaffDaoImpl();
         CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
         Student student = (Student) currentUserDao.getCurrentUser();
-        String role = student.getRole().toString();
+        Role role = student.getRole();
         System.out.println("===== List of Registered Camps =====");
-        if (role == "Committee") {
+        if (role.equals(Role.COMMITTEE)) {
             CommitteeMember committeeMember = (CommitteeMember) student;
             // find the camp the Committee facilitates
             Camp facilitatingCamp = campsMap.get(committeeMember.getFacilitatingCamp());

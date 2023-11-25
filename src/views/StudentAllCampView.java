@@ -29,18 +29,19 @@ public class StudentAllCampView implements CampViewable {
         ArrayList<Camp> studentCamps = new ArrayList<Camp>();
         for (Camp camp : campsMap.values()) {
             // if the id does not match the idlist, remove it from camps
-            if (camp.getOpenTo().equals("NTU") || (faculty.equals(camp.getOpenTo()))
-                    && camp.getVisibility() == Visibility.ON) {
-                studentCamps.add(camp);
+            if (camp.getVisibility() == Visibility.ON) {
+                if (camp.getOpenTo().equals("NTU") || (faculty.equals(camp.getOpenTo()))) {
+                    studentCamps.add(camp);
+                }
             }
-
         }
 
         studentCamps = CampFilter.filter(studentCamps, sortType);
         int index = 1;
-        System.out.println("===== List of Camps : Student =====");
+        System.out.println("===== List of Camps : Student =====\n");
         for (Camp studentCamp : studentCamps) {
-            System.out.printf("----- (Camp %d) %s -----\n", index, studentCamp.getName());
+            System.out.printf("\n----- %s Camp -----\n", index, studentCamp.getName());
+            System.out.printf("Faculty : %s", studentCamp.getOpenTo());
             System.out.print("Duration: ");
             System.out.printf("From %s ", DateUtil.toString(studentCamp.getDates().get(0)));
             System.out.printf("to %s ",
@@ -50,7 +51,7 @@ public class StudentAllCampView implements CampViewable {
             System.out.printf("Attendee Slots available: %d\n", studentCamp.getAttendeeSlots());
             System.out.printf("Camp Committee Slots available: %d\n", studentCamp.getCommitteeSlots());
             System.out.printf("Description: %s\n", studentCamp.getDescription());
-            System.out.printf("Staff in charge: %s\n",
+            System.out.printf("Staff in charge: %s",
                     staffDao.getStaffs().get(studentCamp.getStaffInCharge()).getName());
             index++;
         }
