@@ -18,10 +18,10 @@ public class CommitteeSuggestionService implements SuggestionServiceable {
 
     private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
     private static final CampDao campDao = new CampDaoImpl();
-    private static final CommitteeMember comMember = (CommitteeMember) currentUserDao.getCurrentUser();
-    private static final Camp facilitatingCamp = campDao.getCamps().get(comMember.getFacilitatingCamp());
 
     public void create() {
+        CommitteeMember comMember = (CommitteeMember) currentUserDao.getCurrentUser();
+        Camp facilitatingCamp = campDao.getCamps().get(comMember.getFacilitatingCamp());
         System.out.printf("Enter Suggestion for %s >>> ", facilitatingCamp.getName());
         String suggestionString = sc.nextLine();
 
@@ -43,6 +43,8 @@ public class CommitteeSuggestionService implements SuggestionServiceable {
 
     public void delete() {
         int i, choice, suggestionDeleteID;
+        CommitteeMember comMember = (CommitteeMember) currentUserDao.getCurrentUser();
+        Camp facilitatingCamp = campDao.getCamps().get(comMember.getFacilitatingCamp());
         ArrayList<Integer> suggestionIDs = comMember.getSuggestions();
         if (suggestionIDs.size() == 0) {
             System.out.println("No suggestion to delete!");
@@ -57,8 +59,8 @@ public class CommitteeSuggestionService implements SuggestionServiceable {
             System.out.println();
             if (choice == i + 1)
                 return;
-            if (choice >= 0 || choice <= i) {
-                suggestionDeleteID = suggestionIDs.get(i);
+            if (choice >= 1 || choice <= i) {
+                suggestionDeleteID = suggestionIDs.get(choice - 1);
                 break;
             }
         } while (true);
@@ -75,6 +77,8 @@ public class CommitteeSuggestionService implements SuggestionServiceable {
 
     public void edit() {
         int i, choice, suggestionEditID;
+        CommitteeMember comMember = (CommitteeMember) currentUserDao.getCurrentUser();
+        Camp facilitatingCamp = campDao.getCamps().get(comMember.getFacilitatingCamp());
         ArrayList<Integer> suggestionIDs = comMember.getSuggestions();
         if (suggestionIDs.size() == 0) {
             System.out.println("No suggestion to edit!");
@@ -90,7 +94,7 @@ public class CommitteeSuggestionService implements SuggestionServiceable {
             if (choice == i + 1)
                 return;
             if (choice >= 0 || choice <= i) {
-                suggestionEditID = suggestionIDs.get(i);
+                suggestionEditID = suggestionIDs.get(choice - 1);
                 break;
             }
         } while (true);

@@ -63,6 +63,9 @@ public class StudentController extends AbstractUserController {
 				default:
 					System.out.println("Invalid choice. Please choose again.");
 			}
+
+			if (currentuserDao.getCurrentUser() == null) return;
+			
 		} while (true);
 	}
 

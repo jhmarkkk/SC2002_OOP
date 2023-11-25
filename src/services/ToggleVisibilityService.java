@@ -57,8 +57,25 @@ public class ToggleVisibilityService implements ToggleVisibilityServiceable{
     		selectedCamp = campData.get(createdCampNames.get(choice));
     	    if (selectedCamp.getVisibility() == Visibility.OFF)
     	    	selectedCamp.setVisibility(Visibility.ON);
-    	    else
-    	    	selectedCamp.setVisibility(Visibility.OFF);
+    	    else {
+    	    	if (validateToggle(selectedCamp))
+    	    		System.out.println("Unable to toggle camp visibility off.");
+    	    	else
+    	    		selectedCamp.setVisibility(Visibility.OFF);
+    	    }
 		} while (true);
+    }
+    
+    private boolean validateToggle(Camp camp) {
+    	
+    	if (!camp.getAttendees().isEmpty()) return false;
+    	
+    	if (!camp.getCommitteeMembers().isEmpty()) return false;
+    	
+    	if (!camp.getEnquiries().isEmpty()) return false;
+    	
+    	if (!camp.getSuggestions().isEmpty()) return false;
+    	
+    	return true;
     }
 }
