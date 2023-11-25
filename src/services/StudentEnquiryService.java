@@ -94,13 +94,6 @@ public class StudentEnquiryService implements EnquiryServiceable {
         ArrayList<String> campNameList = new ArrayList<>(campData.keySet());
         ArrayList<String> enquiryList = campData.getEnquiries();
 
-        // // Choose which camp to delete enquiry from
-        // System.out.println("Delete from: ");
-        // for (int i = 0 ; i < campNameList.size() ; i++){
-        //     System.out.println(campNameList.get(i));
-        // }
-        // String campName = sc.nextLine();
-
         // If there are no enquiries
         if(enquiryList.size() == 0){
             System.out.println("No enquiries to delete!");
@@ -134,6 +127,7 @@ public class StudentEnquiryService implements EnquiryServiceable {
         System.out.printf("You have deleted the following enquiry: %s\n", enquiryDelete);
     }
 
+    
     public void edit(){
         Student currentUser = (Student) currentUserDao.getCurrentUser();
         Camp facilitatingCamp = campDao.getCamps().get(currentUser.getFacilitatingCamp());
