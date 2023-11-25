@@ -1,353 +1,368 @@
 package services;
 
-import java.util.Arrays;
 import java.util.ArrayList;
-import java.util.Date;
-import utils.DateUtil;
 import java.util.GregorianCalendar;
-import java.util.Scanner;
-import java.text.SimpleDateFormat;
-
-import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Map;
+import java.util.Scanner;
 
-import enums.Visibility;
-import models.Camp;
-import models.CommitteeMember;
-import models.Enquiry;
-import models.Staff;
-import models.Student;
-import models.Suggestion;
-import interfaces.services.CampServiceable;
-import interfaces.dao.CurrentUserDao;
-import interfaces.dao.StudentDao;
-import interfaces.dao.CommitteeMemberDao;
-import interfaces.dao.CampDao;
-import dao.CurrentUserDaoImpl;
-import dao.StudentDaoImpl;
-import dao.CommitteeMemberDaoImpl;
 import dao.CampDaoImpl;
+import dao.CurrentUserDaoImpl;
+import interfaces.dao.CampDao;
+import interfaces.dao.CurrentUserDao;
+import interfaces.services.CampServiceable;
 
+import models.Camp;
+import models.Staff;
+
+import utils.DateUtil;
 
 public class StaffCampService implements CampServiceable {
-    private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
-    private static final CampDao campDao = new CampDaoImpl();
+	
+	private static final Scanner sc = new Scanner(System.in);
 
-    Scanner sc = new Scanner(System.in);
+	private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
     
-    public void create() {
-        Map<String, Camp> campMap = new HashMap<>();
-
-        //CAMP NAME
-        System.out.println("Enter camp name: ");
-        String name = sc.nextLine();
-        System.out.println("Camp name: " + name + "\n");
+	private static final CampDao campDao = new CampDaoImpl();
 
 
-        //DATES
-        // Accept user input for the starting camp date
-        GregorianCalendar currentDate = new GregorianCalendar(2023, 11, 27);
-        GregorianCalendar startDate;
-
-        // Check if start date is after current date
-        while (true){
-            System.out.println("Enter starting camp date (YYYY-MM-DD): ");
-            String startDateStr = sc.nextLine();
-            startDate = DateUtil.toDate(startDateStr);
-            boolean isBefore = startDate.before(currentDate);
-            if(isBefore == false)
-                break;
-            else
-                System.out.println("Invalid date. Please enter valid date.");
-                sc.next();
-        }
-        
-        // Accept user input for the ending camp date
-        System.out.println("Enter number of days camp is held: ");
-        int numOfDays = sc.nextInt();
-        ArrayList<GregorianCalendar> dates = getDateRange(startDate, numOfDays);
-
-        // Print the range of dates
-        System.out.println("Camp Dates:");
-        for (GregorianCalendar date : dates) {
-            System.out.println(String.format("%04d-%02d-%02d", date.get(GregorianCalendar.YEAR), date.get(GregorianCalendar.MONTH) + 1, date.get(GregorianCalendar.DAY_OF_MONTH)));
-        }
-        System.out.println();
-
-
-        //REGISTRATION CLOSING DATE
-        System.out.println("Enter registration closing date: ");
-        String closingDate = sc.nextLine();
-        GregorianCalendar registrationClosingDate = DateUtil.toDate(closingDate);
-        System.out.println("Registration Closing Date: ");
-        System.out.println(String.format("%04d-%02d-%02d", registrationClosingDate.get(GregorianCalendar.YEAR), registrationClosingDate.get(GregorianCalendar.MONTH) + 1, registrationClosingDate.get(GregorianCalendar.DAY_OF_MONTH)) + "\n");
-
-
-        //OPEN TO
-        System.out.println("Enter user group (School Name or NTU):");
-        String openTo = sc.nextLine();
-        
-        System.out.println("Camp is only open to " + openTo + "\n");
-
-
-        //LOCATION
-        System.out.println("Enter camp location: ");
-        String location = sc.nextLine();
-        System.out.println("Camp location: " + location + "\n");
-
-
-        //TOTAL SLOTS
-        int totalSlots = 0;
-        while(true){
-            System.out.println("Enter toal number of slots: ");
-
-            if(sc.hasNextInt()){
-                totalSlots = sc.nextInt();
-                break;
-            }
-            else{
-                System.out.println("Invalid input. Please enter a valid integer.");
-                sc.next();
-            }
-                System.out.println("Total number of slots: " + totalSlots + "\n");
-        }
-        
-
-        //COMMITTEE SLOTS
-        System.out.println("Enter number of committee slots: ");
-        int temp = sc.nextInt();
-        while (temp > 10 || temp > totalSlots){
-            if(temp <= 10)
-                System.out.printf("There is only %d total slots. Try again.%n", totalSlots);
-            else
-                System.out.println("There can only be 0-10 committee slots. Try again.");
-            System.out.println("Enter number of committee slots: ");
-            temp = sc.nextInt();
-        }
-        int committeeSlots = temp;
-        System.out.println("Number of committee slots: " + committeeSlots + "\n");
-
-
-        //CAMP DESCRIPTION
-        System.out.println("Enter camp description: ");
-        String description = sc.nextLine();
-        System.out.println("Camp description: " + description + "\n");
-
-
-        //STAFF IN CHARGE
+	public void create() {
+    	
+        Map<String, Camp> campData = campDao.getCamps();
+        String name = enterName();
+        ArrayList<GregorianCalendar> dates = enterDates();
+        GregorianCalendar registrationClosingDate = enterRegistrationClosingDate();
+        String openTo = enterOpenTo();
+        String location = enterLocation();
+        int totalSlots = enterTotalSlots();
+        int committeeSlots = enterCommitteeSlots(totalSlots);
+        String description = enterDescription();
         String staffInCharge = currentUserDao.getCurrentUser().getUserID();
-
-
-        // Define rest of values as NULL
-        ArrayList<String> attendees = null;
-        ArrayList<String> withdrawnAttendees = null;
-		ArrayList<String> committeeMembers = null;
-        Map<Integer, Enquiry> enquiries = null;
-		Map<Integer, Suggestion> suggestions = null;
-        Visibility visibility = Visibility.OFF;
-
-        Camp camp = new Camp(name, dates, registrationClosingDate, openTo, location, totalSlots, committeeSlots, description,
-        staffInCharge, attendees, withdrawnAttendees, committeeMembers, enquiries, suggestions, visibility);
-        campMap.put(name, camp);
+        Camp camp = new Camp(name, dates, registrationClosingDate, openTo, location,
+        		totalSlots, committeeSlots, description, staffInCharge);
+        
+        campData.put(name, camp);
     }
 
 
     public void delete() {
-        int i, choice;
+    	
+        int i = 0, choice;
         String selectedCampName;
-        
+        Camp selectedCamp;
+        Staff currentUser = (Staff) currentUserDao.getCurrentUser();
+        ArrayList<String> createdCampNames = currentUser.getCreatedCamps();
         Map<String, Camp> campData = campDao.getCamps();
-        Student currentUser = (Student)currentUserDao.getCurrentUser();
-        CommitteeMember currentCommitteeMember = (CommitteeMember)currentUserDao.getCurrentUser();
-
-    	ArrayList<String> registeredCamps = currentUser.getRegisteredCamps();
+      
+        do {
+        	System.out.println("Delete from:");
+        	for (i = 0; i < createdCampNames.size(); i++)
+        		System.out.printf("%d. %s\n", i+1, createdCampNames.get(i));
+        	
+        	System.out.printf("%d. Back\n", i+1);
+        	System.out.print("Choice: ");
+        	
+        	choice = sc.nextInt();
+        	
+        	System.out.println();
+        	
+        	if (choice == i + 1) return;
+        	
+        	if (choice >= 1 || choice <= i) {
+        		selectedCampName = createdCampNames.get(choice - 1);
+        		selectedCamp = campData.get(selectedCampName);
+        		break;
+        	}
+        	
+        	System.out.println("Invalid choice. Try again.");
+		} while (true);
         
-        //Choose which camp to delete
-        System.out.println("Delete from:");
-        for (i = 0; i < registeredCamps.size(); i++)
-            System.out.printf("%d. %s\n", i+1, registeredCamps.get(i));
-        
-        System.out.printf("%d. Back\n", i+1);
-        System.out.print("Choice: ");
-        
-        choice = sc.nextInt();
-        
-        System.out.println();
-        
-        if (choice == i + 1) return;
-
-        selectedCampName = registeredCamps.get(choice - 1);
-
-        // Deleting specified camp name and its values
-        campData.remove(selectedCampName);
-        System.out.println(selectedCampName + " successfully deleted.");
-        System.out.println("Remaining number of camps created by you: " + registeredCamps.size());
-
-        // Deleting each enquiry in the Enquiries Map
-        Map<String, ArrayList<Integer>> userEnquiries = currentUser.getEnquiries();
-        if(userEnquiries.containsKey(selectedCampName)){
-            userEnquiries.remove(selectedCampName);
+        if (validateDelete(selectedCamp)) {
+        	campData.remove(selectedCampName);
+        	System.out.println(selectedCampName + " successfully deleted");
+        	return;
         }
-
-        // Deleting each suggestion in the Suggestion Map
-        ArrayList<Integer> userSuggestions = currentCommitteeMember.getSuggestions();
-        for (int index : userSuggestions){
-            userSuggestions.remove(index);
-        }
+        
+        System.out.println("Unable to delete " + selectedCampName);
     }
 
 
     public void edit() {
-        int i, choice, edit_choice;
+    	
+        int i = 0, choice;
         String selectedCampName;
         Camp selectedCamp;
+        GregorianCalendar newRegistrationClosingDate;
+        String newOpenTo;
+        String newLocation;
+        int newTotalSlots;
+        int newCommitteeSlots;
+        String newDescription;
+        Staff currentUser = (Staff)currentUserDao.getCurrentUser();
+        ArrayList<String> createdCampNames = currentUser.getCreatedCamps();
+        Map<String, Camp> campData = campDao.getCamps();
         
-        //Map<String, Camp> campData = campDao.getCamps();
-        Student currentUser = (Student)currentUserDao.getCurrentUser();
-    	ArrayList<String> registeredCamps = currentUser.getRegisteredCamps();
-        
-        //Choose which camp to edit
         do {
-            System.out.println("Edit from:");
-            for (i = 0; i < registeredCamps.size(); i++)
-                System.out.printf("%d. %s\n", i+1, registeredCamps.get(i));
-            
-            System.out.printf("%d. Back\n", i+1);
-            System.out.print("Choice: ");
-            
+        	System.out.println("Edit:");
+        	for (i = 0; i < createdCampNames.size(); i++)
+        		System.out.printf("%d. %s\n", i+1, createdCampNames.get(i));
+        	
+        	System.out.printf("%d. Back\n", i+1);
+        	System.out.print("Choice: ");
+        	
+        	choice = sc.nextInt();
+        	
+        	System.out.println();
+        	
+        	if (choice == i + 1) return;
+        	
+        	if (choice >= 1 || choice <= i) {
+        		selectedCampName = createdCampNames.get(choice - 1);
+        		selectedCamp = campData.get(selectedCampName);
+        		break;
+        	}
+        	
+        	System.out.println("Invalid choice. Try again.");
+		} while (true);
+
+        do {
+            System.out.printf("Editing %s\n", selectedCampName);
+            System.out.println("Edit option:");
+            System.out.println("1. Registration closing date");
+            System.out.println("2. Open to");
+            System.out.println("3. Location");
+            System.out.println("4. Total slots");
+            System.out.println("5. Camp committee slots");
+            System.out.println("6. Description");
+            System.out.println("7. Back");
+        
             choice = sc.nextInt();
             
-            System.out.println();
-            
-            if (choice == i + 1) return;
-
-            
-            if (choice >= 0 || choice <= i) {
-                selectedCampName = registeredCamps.get(choice-1);
-                selectedCamp = campDao.getCamps().get(selectedCampName);
-                break;
-            }
-        } while (true);
-        
-        //Edit Camps options
-        do {
-            System.out.println("---------------Edit Camps---------------");
-            System.out.println("Edit:");
-            System.out.println("1. Dates");
-            System.out.println("2. Registration closing date");
-            System.out.println("3. Open to");
-            System.out.println("4. Location");
-            System.out.println("5. Total slots");
-            System.out.println("6. Camp committee slots");
-            System.out.println("7. Description");
-            System.out.println("8. Back");
-        
-            edit_choice = sc.nextInt();
-            
-            switch(edit_choice){
+            switch(choice) {
                 case 1:
-                    // 1. DATES
-                    System.out.println("Current camp dates:");
-                    for (GregorianCalendar date : selectedCamp.getDates()) {
-                        System.out.println(String.format("%04d-%02d-%02d", date.get(GregorianCalendar.YEAR),
-                        date.get(GregorianCalendar.MONTH) + 1, date.get(GregorianCalendar.DAY_OF_MONTH)));
-                    }
-
-                    System.out.println("Enter new starting camp date (YYYY-MM-DD): ");
-                    String startDateStr = sc.nextLine();
-                    GregorianCalendar startDate = DateUtil.toDate(startDateStr);
-
-                    // Accept user input for the number of days camp is held
-                    System.out.println("Enter number of days camp is held: ");
-                    int numOfDays = sc.nextInt();
-                    ArrayList<GregorianCalendar> newDates = getDateRange(startDate, numOfDays);
-
-                    // Print the range of dates
-                    System.out.println("Camp Dates:");
-                    for (GregorianCalendar date : newDates) {
-                        System.out.println(String.format("%04d-%02d-%02d", date.get(GregorianCalendar.YEAR),
-                        date.get(GregorianCalendar.MONTH) + 1, date.get(GregorianCalendar.DAY_OF_MONTH)));
-                    }
-                    selectedCamp.setDates(newDates);
+                    System.out.println("Current registration closing date: " + selectedCamp.getRegistrationClosingDate());
+                    newRegistrationClosingDate = enterRegistrationClosingDate();
+                    selectedCamp.setRegistrationClosingDate(newRegistrationClosingDate);
+                    System.out.println("Registration closing date updated");       
                     break;
                 case 2:
-                    // 2. REGISTRATION CLOSING DATE
-                    System.out.println("Current registration closing date: " + selectedCamp.getRegistrationClosingDate());
-                    System.out.println("Enter new registration closing date: ");
-                    String newClosingDate = sc.nextLine();
-                    
-                    // Change from String to GregorianCalendar
-                    GregorianCalendar newRegistrationClosingDate = DateUtil.toDate(newClosingDate);
-
-                    System.out.println("Updated registration closing date: " + newRegistrationClosingDate);
-                    System.out.println(String.format("%04d-%02d-%02d", newRegistrationClosingDate.get(GregorianCalendar.YEAR),
-                    newRegistrationClosingDate.get(GregorianCalendar.MONTH) + 1, newRegistrationClosingDate.get(GregorianCalendar.DAY_OF_MONTH)) + "\n");
-                    
-                    selectedCamp.setRegistrationClosingDate(newRegistrationClosingDate);
+                    System.out.println("Current user group: " + selectedCamp.getOpenTo());
+                    newOpenTo = enterOpenTo();
+                    selectedCamp.setOpenTo(newOpenTo);
+                    System.out.println("User group updated");
                     break;
                 case 3:
-                    // 3. OPEN TO 
-                    System.out.println("Current user group: " + selectedCamp.getOpenTo());
-                    System.out.println("Enter new user group: ");
-                    String newOpenTo = sc.nextLine();
-                    System.out.println("Updated user group: " + newOpenTo);
-                    selectedCamp.setOpenTo(newOpenTo);
+                    System.out.println("Current location: " + selectedCamp.getLocation());
+                    newLocation = enterLocation();
+                    selectedCamp.setLocation(newLocation);
+                    System.out.println("Location Updated");
                     break;
                 case 4:
-                    // 4. LOCATION
-                    System.out.println("Current location: " + selectedCamp.getLocation());
-                    System.out.println("Enter new location: ");
-                    String newLocation = sc.nextLine();
-                    System.out.println("Updated location: " + newLocation);
-                    selectedCamp.setLocation(newLocation);
+                    System.out.println("Current total slots: " + selectedCamp.getTotalSlots());
+                    newTotalSlots = enterTotalSlots();
+                    selectedCamp.setTotalSlots(newTotalSlots);
+                    System.out.println("Total slots updated");
                     break;
                 case 5:
-                    // 5. TOTAL SLOTS
-                    System.out.println("Current total slots: " + selectedCamp.getTotalSlots());
-                    System.out.println("Enter new total slots: ");
-                    int newTotalSlots = sc.nextInt();
-                    System.out.println("Updated total slots: " + newTotalSlots);
-                    selectedCamp.setTotalSlots(newTotalSlots);
+                    System.out.println("Current camp committee slots: " + selectedCamp.getCommitteeSlots());
+                    newCommitteeSlots = enterCommitteeSlots(selectedCamp.getTotalSlots());
+                    selectedCamp.setCommitteeSlots(newCommitteeSlots);
+                    System.out.println("Camp committee slots updated");
                     break;
                 case 6:
-                    // 6. CAMP COMMITTEE SLOTS
-                    System.out.println("Current camp committee slots: " + selectedCamp.getCommitteeSlots());
-                    System.out.println("Enter new camp committee slots: ");
-                    int newCommitteeSlots = sc.nextInt();
-                    System.out.println("Updated camp committee slots: " + newCommitteeSlots);
-                    selectedCamp.setCommitteeSlots(newCommitteeSlots);
+                    System.out.println("Current camp description: " + selectedCamp.getDescription());
+                    newDescription = enterDescription();
+                    selectedCamp.setDescription(newDescription);
+                    System.out.println("Camp description updated");
                     break;
                 case 7:
-                    // 7. DESCRIPTION
-                    System.out.println("Current camp description: " + selectedCamp.getDescription());
-                    System.out.println("Enter new camp description: ");
-                    String newDescription = sc.nextLine();
-                    System.out.println("Updated camp description: " + newDescription);
-                    selectedCamp.setDescription(newDescription);
-                    break;
-                case 8:
-                    // 8. BACK
-                    // Go back to main menu
                     return;
                 default:
                     System.out.println("Invalid choice. Try again.");
                     break;
             }
-        } while(edit_choice < 1 || edit_choice > 8);        
+        } while(true);        
     }
+    
+    private static String enterName() {
+    	
+        String name;
+        
+        do {
+        	System.out.print("Enter camp name: ");
+        	name = sc.nextLine();
+        	if (!name.isBlank()) return name;
+        	
+        	System.out.println("Invalid name. Try again.\n");
+		} while (true);
+    }
+    
+    private static ArrayList<GregorianCalendar> enterDates() {
+    	
+    	int numOfDays;
+    	String startDateStr;
+    	GregorianCalendar startDate;
+    	GregorianCalendar today = new GregorianCalendar();
+    	
+    	do {
+    		System.out.print("Enter starting camp date (YYYY-MM-DD): ");
+    		startDateStr = sc.nextLine();
+    		try {
+    			startDate = DateUtil.toDate(startDateStr);
+    		} catch (Exception e) {
+    			System.out.println("Invalid input. Try again.\n");
+    			continue;
+			}
+    		
+    		if (DateUtil.toString(today).compareTo(startDateStr) < 0) {
+    			System.out.println();
+    			break;
+    		}
+    		
+    		System.out.println("Invalid date. Try again.\n");
+		} while (true);
 
-
+        do {
+        	System.out.print("Enter number of days camp is held: ");
+        	try {
+        		numOfDays = sc.nextInt();				
+        		ArrayList<GregorianCalendar> dates = getDateRange(startDate, numOfDays);
+        		System.out.println();
+        		return dates;
+			} catch (InputMismatchException e) {
+				System.out.println("Invalid input. Try again.\n");
+    			continue;
+			}        	
+		} while (true);
+    }
     //Get Date Range method
     private static ArrayList<GregorianCalendar> getDateRange(GregorianCalendar startDate, int numOfDays) {
+    	
         ArrayList<GregorianCalendar> dateRange = new ArrayList<>();
         GregorianCalendar currentDate = new GregorianCalendar(startDate.get(GregorianCalendar.YEAR),
                 startDate.get(GregorianCalendar.MONTH), startDate.get(GregorianCalendar.DAY_OF_MONTH));
 
-        for (int i=0; i<numOfDays; i++){
+        for (int i = 0; i < numOfDays; i++) {
             dateRange.add(new GregorianCalendar(currentDate.get(GregorianCalendar.YEAR),
                     currentDate.get(GregorianCalendar.MONTH), currentDate.get(GregorianCalendar.DAY_OF_MONTH)));
             currentDate.add(GregorianCalendar.DAY_OF_MONTH, 1);
         }
+        
         return dateRange;
     }
+    
+    private static GregorianCalendar enterRegistrationClosingDate() {
+		
+    	String closingDateStr;
+    	GregorianCalendar closingDate;
+    	GregorianCalendar today = new GregorianCalendar();
+    	
+    	do {
+    		System.out.print("Enter registration closing date (YYYY-MM-DD): ");
+    		closingDateStr = sc.nextLine();
+    		try {
+    			closingDate = DateUtil.toDate(closingDateStr);
+    		} catch (Exception e) {
+    			System.out.println("Invalid input. Try again.\n");
+    			continue;
+			}
+    		
+    		if (DateUtil.toString(today).compareTo(closingDateStr) < 0) {
+    			System.out.println();
+    			return closingDate;
+    		}
+    		
+    		System.out.println("Invalid date. Try again.\n");
+		} while (true);
+	}
+    
+    private static String enterOpenTo() {
+    	
+    	String openTo;
+    	
+    	do {
+        	System.out.print("Enter user group (School Name or NTU): ");
+        	openTo = sc.nextLine();
+        	if (!openTo.isBlank()) return openTo;
+        	
+        	System.out.println("Invalid user group. Try again.\n");
+		} while (true);
+	}
+    
+    private static String enterLocation() {
+    	
+    	String location;
+    	
+    	do {
+        	System.out.print("Enter user group (School Name or NTU): ");
+        	location = sc.nextLine();
+        	if (!location.isBlank()) return location;
+        	
+        	System.out.println("Invalid loaction. Try again.\n");
+		} while (true);
+	}
+    
+    private static int enterTotalSlots() {
+		
+    	int totalSlots;
+    	
+    	do {
+        	System.out.print("Enter total slots: ");
+        	try {
+        		totalSlots = sc.nextInt();				
+        		System.out.println();
+        		return totalSlots;
+			} catch (InputMismatchException e) {
+				System.out.println("Invalid input. Try again.\n");
+    			continue;
+			}
+		} while (true);
+	}
+    
+    private static int enterCommitteeSlots(int totalSlots) {
+		
+    	int committeeSlots;
+    	
+    	do {
+    		System.out.print("Enter number of committee slots: ");
+    		try {
+    			committeeSlots = sc.nextInt();
+			} catch (InputMismatchException e) {
+				System.out.println("Invalid input. Try again.\n");
+    			continue;
+			}
+    		
+    		if (committeeSlots < 0 || committeeSlots > 10 || committeeSlots > totalSlots) {
+    			System.out.println("Invalid number of slots. Try again.\n");
+    			continue;
+    		}
+    		System.out.println();
+    		return committeeSlots;
+		} while (true);
+	}
+    
+    private static String enterDescription() {
+    	
+    	String description;
+    	
+    	do {
+        	System.out.print("Enter camp description: ");
+        	description = sc.nextLine();
+        	if (!description.isBlank()) return description;
+        	
+        	System.out.println("Invalid description. Try again.\n");
+		} while (true);
+	}
+
+    private boolean validateDelete(Camp camp) {
+    	
+    	if (camp.getAttendees().size() > 0) return false;
+    	
+    	if (camp.getCommitteeMembers().size() > 0) return false;
+    	
+    	if (camp.getEnquiries().size() > 0) return false;
+    	
+    	return true;
+    }
 }
+

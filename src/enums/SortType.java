@@ -1,6 +1,7 @@
 package enums;
 
 public enum SortType {
+	
 	NAME,
 	DATES,
 	CLOSING_DATE,

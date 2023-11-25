@@ -22,6 +22,7 @@ public class Enquiry {
 	 * @param reply
 	 */
 	public Enquiry(Integer enquiryID, String enquiry, String enquirer, String replier, String reply) {
+		
 		this.enquiryID = enquiryID;
 		this.enquiry = enquiry;
 		this.enquirer = enquirer;
@@ -35,6 +36,7 @@ public class Enquiry {
 	 * @param enquirer
 	 */
 	public Enquiry(String enquiry, String enquirer) {
+		
 		this.enquiryID = enquiryCounter++;
 		this.enquiry = enquiry;
 		this.enquirer = enquirer;

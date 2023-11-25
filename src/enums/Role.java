@@ -1,6 +1,7 @@
 package enums;
 
 public enum Role {
+	
 	STAFF,
 	STUDENT,
 	COMMITTEE;

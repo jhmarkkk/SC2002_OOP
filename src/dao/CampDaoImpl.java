@@ -1,12 +1,10 @@
-/**
- * 
- */
 package dao;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import interfaces.dao.CampDao;
+
 import models.Camp;
 
 /**
