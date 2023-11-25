@@ -34,6 +34,7 @@ public class StaffApproveSuggestionService implements ApproveSuggestionServiceab
         Integer suggestionID;
         Suggestion selectedSuggestion;
         Camp camp;
+        CommitteeMember committeeMember;
         Staff staff = (Staff) currentUserDao.getCurrentUser();
         ArrayList<Integer> suggestionIDList = new ArrayList<>();
         ArrayList<String> createdCampNames = staff.getCreatedCamps();
@@ -74,8 +75,9 @@ public class StaffApproveSuggestionService implements ApproveSuggestionServiceab
         
         camp = suggestionCampPair.get(suggestionID);
         selectedSuggestion = camp.getSuggestions().get(suggestionID);
+        committeeMember = committeeMemberData.get(selectedSuggestion.getSuggester());
         System.out.println("Suggestion: " + selectedSuggestion.getSuggestion());
-        System.out.println("Suggested by: " + committeeMemberData.get(selectedSuggestion.getSuggester()));
+        System.out.println("Suggested by: " + committeeMember.getName());
         System.out.println("Camp: " + camp.getName());
         
         do {
@@ -90,6 +92,7 @@ public class StaffApproveSuggestionService implements ApproveSuggestionServiceab
     		switch (choice) {
 			case 1:
 				selectedSuggestion.setApproved(true);
+				committeeMember.setPoints(committeeMember.getPoints() + 1);
 				System.out.println("Suggestion has been approved");
 				return;
 			case 2:

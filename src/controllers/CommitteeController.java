@@ -1,8 +1,5 @@
 package controllers;
 
-import dao.CurrentUserDaoImpl;
-
-import interfaces.dao.CurrentUserDao;
 import interfaces.services.GenerateReportServiceable;
 import interfaces.services.ReplyEnquiryServiceable;
 import interfaces.services.SuggestionServiceable;
@@ -21,8 +18,6 @@ import views.CommitteeSuggestionView;
 
 public class CommitteeController extends StudentController {
 	
-	private static CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
-	
 	private static final CampDetailViewable campDetailView = new CampDetailView();
 	
 	private static final SuggestionViewable suggestionView = new CommitteeSuggestionView();
@@ -36,7 +31,7 @@ public class CommitteeController extends StudentController {
 	@Override
 	public void start() {
 		
-		CommitteeMember committeeMember = (CommitteeMember)currentUserDao.getCurrentUser();
+		CommitteeMember committeeMember = (CommitteeMember)currentuserDao.getCurrentUser();
 		int choice;
 		
 		do {
@@ -77,6 +72,9 @@ public class CommitteeController extends StudentController {
 			default:
 				System.out.println("Invalid choice. Please choose again.");
 			}
+
+			if (currentuserDao.getCurrentUser() == null) return;
+			
 		} while(true);
 	}
 	
