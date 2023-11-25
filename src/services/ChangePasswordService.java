@@ -48,6 +48,7 @@ public class ChangePasswordService implements ChangePasswordServiceable{
     		return false;
     	}
     	
+		currentUser.setPassword(newPassword);
     	System.out.println("Password sucessfully changed");
     	SessionController.endSession();
     	return true;
