@@ -103,6 +103,40 @@ public class StudentEnquiryService implements EnquiryServiceable {
         Map<String, Camp> campData = campDao.getCamps();
         ArrayList<String> campNameList = new ArrayList<>(campData.keySet());
         Map<String, ArrayList<Integer>> enquiryList = currentUser.getEnquiries();
+        Map<Integer, Camp> enquiryToCamp = new HashMap<Integer, Camp>(); 
+        ArrayList<Integer> studentEnquiriesList = new ArrayList<Integer>();
+        for (Map.Entry<String, ArrayList<Integer>> entry : currentUser.getEnquiries().entrySet()) {
+            String campName = entry.getKey();
+            Camp currentCamp = campData.get(campName);
+            ArrayList<Integer> enquiryIDs = entry.getValue();
+            Map<Integer, Enquiry> enquiryListforCamp = currentCamp.getEnquiries();
+            for (Integer enquiryID : enquiryIDs) {
+                enquiryToCamp.put(enquiryID, currentCamp);
+                studentEnquiriesList.add(enquiryID);
+                Enquiry selectedEnquiry = enquiryListforCamp.get(enquiryID);
+            }
+        }
+        int i = 0, choice, selectedEnquiryID;
+        do {
+            for (i = 0; i < studentEnquiriesList.size(); i++)
+                System.out.printf("Choice %d : Suggestion ID %d\n", i, studentEnquiriesList.get(i));
+            System.out.printf("Choice %d : Back", i + 1);
+            System.out.printf("Select choice: ");
+            choice = sc.nextInt();
+            System.out.println();
+            if (choice == i + 1)
+                return;
+            if (choice >= 1 || choice <= i) {
+                selectedEnquiryID = studentEnquiriesList.get(choice - 1);
+                break;
+            }
+        } while (true);
+        Camp selectedCamp = enquiryToCamp.get(selectedEnquiryID);
+        ArrayList<Integer> selectedCampEnquiries = currentUser.getEnquiries().get(selectedCamp.getName());
+        // remove student's knowledge of enquiry
+        selectedCampEnquiries.remove(Integer.valueOf(selectedEnquiryID));
+        // remove camp's knowledge of enquiry
+        selectedCamp.getEnquiries().remove(selectedEnquiryID);
 
         // // Choose which camp to delete enquiry from
         // System.out.println("Delete from: ");
@@ -111,39 +145,39 @@ public class StudentEnquiryService implements EnquiryServiceable {
         // }
         // String campName = sc.nextLine();
 
-        // If there are no enquiries
-        if(enquiryList.size() == 0){
-            System.out.println("No enquiries to delete!");
-            return;
-        }
+        // // If there are no enquiries
+        // if(enquiryList.size() == 0){
+        //     System.out.println("No enquiries to delete!");
+        //     return;
+        // }
 
-        // Choose which enquiry to delete
-        int i = 0;
+        // // Choose which enquiry to delete
+        // int i = 0;
         
-        do {
-            for (i = 0; i < enquiryList.size(); i++)
-                {System.out.printf("Choice %d : %s\n", i + 1, enquiryList.get(i));}
-            System.out.printf("Choice %d : Back", i + 1);
-            System.out.printf("Select choice: ");
-            int choice = sc.nextInt();
-            System.out.println();
-            if (choice == i + 1)
-                return;
-            if (choice >= 1 || choice <= i + 1) {
-                String enquiryDelete = enquiryList.get(choice-1);
-                break;
-            }
+        // do {
+        //     for (i = 0; i < enquiryList.size(); i++)
+        //         {System.out.printf("Choice %d : %s\n", i + 1, enquiryList.get(i));}
+        //     System.out.printf("Choice %d : Back", i + 1);
+        //     System.out.printf("Select choice: ");
+        //     int choice = sc.nextInt();
+        //     System.out.println();
+        //     if (choice == i + 1)
+        //         return;
+        //     if (choice >= 1 || choice <= i + 1) {
+        //         String enquiryDelete = enquiryList.get(choice-1);
+        //         break;
+        //     }
             
-        } while (true);
+        // } while (true);
 
-        // remove the enquiry from the user's knowledge
-        enquiryList.remove(Integer.valueOf(enquiryDelete));
-        // remove the enquiry from camp's knowledge
-        Map<Integer, Enquiry> EnquiryMap = facilitatingCamp.getEnquiries();
-        EnquiryMap.remove(enquiryDelete);
-        facilitatingCamp.setEnquiries(EnquiryMap);
+        // // remove the enquiry from the user's knowledge
+        // enquiryList.remove(Integer.valueOf(enquiryDelete));
+        // // remove the enquiry from camp's knowledge
+        // Map<Integer, Enquiry> EnquiryMap = facilitatingCamp.getEnquiries();
+        // EnquiryMap.remove(enquiryDelete);
+        // facilitatingCamp.setEnquiries(EnquiryMap);
 
-        System.out.printf("You have deleted the following enquiry: %s\n", enquiryDelete);
+        // System.out.printf("You have deleted the following enquiry: %s\n", enquiryDelete);
     }
 
     public void edit(){
