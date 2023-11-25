@@ -47,12 +47,13 @@ public class StaffCampService implements CampServiceable {
         //DATES
         // Accept user input for the starting camp date
         GregorianCalendar currentDate = new GregorianCalendar(2023, 11, 27);
+        GregorianCalendar startDate;
 
         // Check if start date is after current date
         while (true){
             System.out.println("Enter starting camp date (YYYY-MM-DD): ");
             String startDateStr = sc.nextLine();
-            GregorianCalendar startDate = DateUtil.toDate(startDateStr);
+            startDate = DateUtil.toDate(startDateStr);
             boolean isBefore = startDate.before(currentDate);
             if(isBefore == false)
                 break;
@@ -96,10 +97,12 @@ public class StaffCampService implements CampServiceable {
 
 
         //TOTAL SLOTS
+        int totalSlots = 0;
         while(true){
             System.out.println("Enter toal number of slots: ");
+
             if(sc.hasNextInt()){
-                int totalSlots = sc.nextInt();
+                totalSlots = sc.nextInt();
                 break;
             }
             else{
@@ -204,24 +207,27 @@ public class StaffCampService implements CampServiceable {
     	ArrayList<String> registeredCamps = currentUser.getRegisteredCamps();
         
         //Choose which camp to edit
-        System.out.println("Edit from:");
-        for (i = 0; i < registeredCamps.size(); i++)
-            System.out.printf("%d. %s\n", i+1, registeredCamps.get(i));
-        
-        System.out.printf("%d. Back\n", i+1);
-        System.out.print("Choice: ");
-        
-        choice = sc.nextInt();
-        
-        System.out.println();
-        
-        if (choice == i + 1) return;
+        do {
+            System.out.println("Edit from:");
+            for (i = 0; i < registeredCamps.size(); i++)
+                System.out.printf("%d. %s\n", i+1, registeredCamps.get(i));
+            
+            System.out.printf("%d. Back\n", i+1);
+            System.out.print("Choice: ");
+            
+            choice = sc.nextInt();
+            
+            System.out.println();
+            
+            if (choice == i + 1) return;
 
-        
-        if (choice >= 0 || choice <= i) {
-            selectedCampName = registeredCamps.get(choice-1);
-            selectedCamp = campDao.getCamps().get(selectedCampName);
-        }
+            
+            if (choice >= 0 || choice <= i) {
+                selectedCampName = registeredCamps.get(choice-1);
+                selectedCamp = campDao.getCamps().get(selectedCampName);
+                break;
+            }
+        } while (true);
         
         //Edit Camps options
         do {
