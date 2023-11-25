@@ -46,10 +46,21 @@ public class StaffCampService implements CampServiceable {
 
         //DATES
         // Accept user input for the starting camp date
-        System.out.println("Enter starting camp date (YYYY-MM-DD): ");
-        String startDateStr = sc.nextLine();
-        GregorianCalendar startDate = DateUtil.toDate(startDateStr);
+        GregorianCalendar currentDate = new GregorianCalendar(2023, 11, 27);
 
+        // Check if start date is after current date
+        while (true){
+            System.out.println("Enter starting camp date (YYYY-MM-DD): ");
+            String startDateStr = sc.nextLine();
+            GregorianCalendar startDate = DateUtil.toDate(startDateStr);
+            boolean isBefore = startDate.before(currentDate);
+            if(isBefore == false)
+                break;
+            else
+                System.out.println("Invalid date. Please enter valid date.");
+                sc.next();
+        }
+        
         // Accept user input for the ending camp date
         System.out.println("Enter number of days camp is held: ");
         int numOfDays = sc.nextInt();
