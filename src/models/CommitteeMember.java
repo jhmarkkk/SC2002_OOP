@@ -7,7 +7,7 @@ import enums.Role;
 
 /**
  * The CommitteeMember class represents a committee member in the system, extending the Student class.
- * It includes information about the camps facilitated by the committee member, suggestion IDs, and the points earned by the committee member.
+ * It includes additional information about the camps facilitated by the committee member, suggestion IDs, and the points earned by the committee member.
  */
 public class CommitteeMember extends Student {
 	
@@ -61,10 +61,7 @@ public class CommitteeMember extends Student {
 	 * @param enquiries 		A map containing the Committee Member's enquiries, with camp names as keys and lists of enquiry IDs as values.
 	 * @param facilitatingCamp 	The name of the camp facilitated by the Committee Member.
 	 */
-	public CommitteeMember(String userID, String password, String name, String faculty,
-			ArrayList<String> registeredCamps, Map<String, ArrayList<Integer>> enquiries,
-			String facilitatingCamp) {
-		
+	public CommitteeMember(String userID, String password, String name, String faculty, ArrayList<String> registeredCamps, Map<String, ArrayList<Integer>> enquiries, String facilitatingCamp) {
 		super(userID, password, name, faculty, registeredCamps, enquiries);
 		this.setRole(Role.COMMITTEE);
 		this.facilitatingCamp = facilitatingCamp;

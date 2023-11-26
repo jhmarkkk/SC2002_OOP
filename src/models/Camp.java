@@ -48,12 +48,7 @@ public class Camp {
 	 * @param suggestions 				A map associating suggestion IDs with their respective suggestions.
 	 * @param visibility 				The visibility status indicating whether the camp is open for registration.
 	 */
-	public Camp(String name, ArrayList<GregorianCalendar> dates, GregorianCalendar registrationClosingDate,
-			String openTo, String location, int totalSlots, int committeeSlots, String description,
-			String staffInCharge, ArrayList<String> attendees, ArrayList<String> withdrawnAttendees,
-			ArrayList<String> committeeMembers, Map<Integer, Enquiry> enquiries,
-			Map<Integer, Suggestion> suggestions, Visibility visibility) {
-		
+	public Camp(String name, ArrayList<GregorianCalendar> dates, GregorianCalendar registrationClosingDate, String openTo, String location, int totalSlots, int committeeSlots, String description, String staffInCharge, ArrayList<String> attendees, ArrayList<String> withdrawnAttendees, ArrayList<String> committeeMembers, Map<Integer, Enquiry> enquiries, Map<Integer, Suggestion> suggestions, Visibility visibility) {
 		this.name = name;
 		this.dates = dates;
 		this.registrationClosingDate = registrationClosingDate;
@@ -84,9 +79,7 @@ public class Camp {
 	 * @param description 				A brief description of the camp.
 	 * @param staffInCharge 			The name of the staff in charge of the camp.
 	 */
-	public Camp(String name, ArrayList<GregorianCalendar> dates, GregorianCalendar registrationClosingDate,
-			String openTo, String location, int totalSlots, int committeeSlots, String description, String staffInCharge) {
-		
+	public Camp(String name, ArrayList<GregorianCalendar> dates, GregorianCalendar registrationClosingDate, String openTo, String location, int totalSlots, int committeeSlots, String description, String staffInCharge) {
 		this.name = name;
 		this.dates = dates;
 		this.registrationClosingDate = registrationClosingDate;

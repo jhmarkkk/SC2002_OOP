@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import enums.Role;
 
 /**
- * The Staff class represents a staff member in the system.
- * It extends the User class and includes additional information about the camps created by the staff member.
+ * The Staff class represents a staff in the system, extending the User class.
+ * It includes information additional information about the camps created by the staff member.
  */
 public class Staff extends User{
 	/**
@@ -24,8 +24,7 @@ public class Staff extends User{
 	 * @param role			The role of the Staff member
 	 * @param createdCamps	The list of camps created by the Staff member.
 	 */
-	public Staff(String userID, String password, String name,
-			String faculty, ArrayList<String> createdCamps) {
+	public Staff(String userID, String password, String name, String faculty, ArrayList<String> createdCamps) {
 		super(userID, password, name, faculty, Role.STAFF);
 		this.createdCamps = createdCamps;
 	}
