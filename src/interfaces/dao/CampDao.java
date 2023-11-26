@@ -4,9 +4,6 @@ import java.util.Map;
 
 import models.Camp;
 
-/**
- * 
- */
 public interface CampDao {
 	
 	public Map<String, Camp> getCamps();
