@@ -188,7 +188,7 @@ public class CommitteeController extends StudentController {
 				break;
 			case 2:
 				deleteSuggestion();
-				break;
+				return;
 			case 3:
 				return;
 			default:

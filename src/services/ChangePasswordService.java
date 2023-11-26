@@ -18,7 +18,6 @@ public class ChangePasswordService implements ChangePasswordServiceable{
     	User currentUser = currentUserDao.getCurrentUser();
     	
 		PrintUtil.header("Changing Password");
-    	System.out.print("Enter old password: ");
     	oldPassword = InputUtil.nextString("Enter old password");
     	newPassword = InputUtil.nextString("Enter new password");
     	

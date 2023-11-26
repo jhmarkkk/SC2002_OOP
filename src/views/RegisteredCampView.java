@@ -1,71 +1,76 @@
 package views;
 
-import enums.SortType;
-import enums.Role;
-import interfaces.views.CampViewable;
-
-import interfaces.dao.StaffDao;
-import dao.StaffDaoImpl;
-
-import interfaces.dao.CampDao;
-import dao.CampDaoImpl;
-
-import interfaces.dao.CurrentUserDao;
-import dao.CurrentUserDaoImpl;
-
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Map;
 
+import enums.SortType;
+import enums.Role;
+
+import dao.CampDaoImpl;
+import dao.CurrentUserDaoImpl;
+import dao.StaffDaoImpl;
+
+import interfaces.dao.CampDao;
+import interfaces.dao.CurrentUserDao;
+import interfaces.dao.StaffDao;
+import interfaces.views.CampDetailViewable;
+import interfaces.views.CampViewable;
+
 import models.Camp;
 import models.Student;
-import models.CommitteeMember;
-import utils.SortCampUtil;
+import models.Staff;
+
 import utils.DateUtil;
+import utils.PrintUtil;
+import utils.SortCampUtil;
 
 public class RegisteredCampView implements CampViewable {
+
+    private static final CampDao campDao = new CampDaoImpl();
+
+    private static final StaffDao staffDao = new StaffDaoImpl();
+
+    private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
+
+    private static final CampDetailViewable campDetailView = new CampDetailView();
+    
     public void sortView(SortType sortType) {
-        CampDao campDao = new CampDaoImpl();
-        Map<String, Camp> campsMap = campDao.getCamps();
-        StaffDao staffDao = new StaffDaoImpl();
-        CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
-        Student student = (Student) currentUserDao.getCurrentUser();
-        Role role = student.getRole();
-        System.out.println("===== List of Registered Camps =====");
-        if (role.equals(Role.COMMITTEE)) {
-            CommitteeMember committeeMember = (CommitteeMember) student;
-            // find the camp the Committee facilitates
-            Camp facilitatingCamp = campsMap.get(committeeMember.getFacilitatingCamp());
-            System.out.printf("----- (Facilitating Camp) %s -----\n", facilitatingCamp.getName());
-            System.out.print("Duration: ");
-            System.out.printf("From %s ", DateUtil.toString(facilitatingCamp.getDates().get(0)));
-            System.out.printf("to %s ",
-                    DateUtil.toString(facilitatingCamp.getDates().get(facilitatingCamp.getDates().size() - 1)));
-            System.out.printf("\nLocation: %s\n", facilitatingCamp.getLocation());
-            System.out.printf("Attendee Slots available: %d\n", facilitatingCamp.getAttendeeSlots());
-            System.out.printf("Staff in charge: %s\n", facilitatingCamp.getStaffInCharge());
 
-        }
-
-        ArrayList<String> registeredCampIDs = student.getRegisteredCamps();
+        int i = 1;
+        ArrayList<GregorianCalendar> dateList;
+        Student student = (Student)currentUserDao.getCurrentUser();
+        Map<String, Camp> campData = campDao.getCamps();
+        Map<String, Staff> staffData = staffDao.getStaffs();
+        ArrayList<String> registeredCampNameList = student.getRegisteredCamps();
         ArrayList<Camp> registeredCampList = new ArrayList<Camp>();
-        for (String registeredCampID : registeredCampIDs) {
-            registeredCampList.add(campsMap.get(registeredCampID));
+
+        for (String registeredCampID : registeredCampNameList) {
+            registeredCampList.add(campData.get(registeredCampID));
         }
+        
         registeredCampList = SortCampUtil.sort(registeredCampList, sortType);
-        int index = 1;
-        for (Camp registeredCamp : registeredCampList) {
-            System.out.printf("----- (Attending Camp %d) %s -----\n", index, registeredCamp.getName());
-            System.out.print("Dates: ");
-            for (GregorianCalendar date : registeredCamp.getDates()) {
-                System.out.printf("%s ", DateUtil.toString(date));
-            }
-            System.out.printf("\nLocation: %s\n", registeredCamp.getLocation());
-            System.out.printf("Attendee Slots available: %d\n", registeredCamp.getAttendeeSlots());
-            System.out.printf("Camp Committee Slots available: %d\n", registeredCamp.getCommitteeSlots());
-            System.out.printf("Staff in charge: %s\n",
-                    staffDao.getStaffs().get(registeredCamp.getStaffInCharge()).getName());
-            index++;
+        
+        PrintUtil.header("List of Registered Camp");
+        if (student.getRole() == Role.COMMITTEE) campDetailView.view();
+
+        PrintUtil.header("Attending Camps");
+        for (Camp camp : registeredCampList) {
+            dateList = camp.getDates();
+            PrintUtil.header(String.format("Camp %d", i++));
+            System.out.printf("%-30s: %s\n","Name" , camp.getName());
+            System.out.printf("%-30s: %s -> %s\n","Duration",
+                DateUtil.toString(dateList.get(0)),
+                DateUtil.toString(dateList.get(dateList.size() - 1)));
+            System.out.printf("%-30s: %s\n","Registration Closing Date" ,DateUtil.toString(camp.getRegistrationClosingDate()));
+            System.out.printf("%-30s: %s\n","User group" , camp.getOpenTo());
+            System.out.printf("%-30s: %s\n","Location" , camp.getLocation());
+            System.out.printf("%-30s: %s\n","Remaining attendee slots", camp.getAttendeeSlots() - camp.getAttendees().size());
+            System.out.printf("%-30s: %s\n","Remaining camp committee slots",
+                camp.getCommitteeSlots() - camp.getCommitteeMembers().size());
+            System.out.printf("%-30s: %s\n","Description" , camp.getDescription());
+            System.out.printf("%-30s: %s\n","Staff-in-charge" , staffData.get(camp.getStaffInCharge()).getName());
+            System.out.println();
         }
     }
 }

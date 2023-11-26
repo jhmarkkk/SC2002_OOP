@@ -167,7 +167,7 @@ public class StudentController extends AbstractUserController {
 					break;
 				case 2:
 					deleteEnquiry();
-					break;
+					return;
 				case 3:
 					return;
 				default:
