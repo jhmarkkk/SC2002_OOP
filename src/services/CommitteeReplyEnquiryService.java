@@ -107,7 +107,7 @@ public class CommitteeReplyEnquiryService implements ReplyEnquiryServiceable {
         } while (true);
 
         selectedEnquiry.setReply(replyField);
-        selectedEnquiry.setReplier(currentUser.getUserID());
+        selectedEnquiry.setReplier(currentUser.getName());
         currentUser.setPoints(currentUser.getPoints() + 1);
         System.out.println("\n> Enquiry replied");
     }

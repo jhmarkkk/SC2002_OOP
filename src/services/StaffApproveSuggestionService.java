@@ -92,7 +92,7 @@ public class StaffApproveSuggestionService implements ApproveSuggestionServiceab
         do {
     		PrintUtil.header("Approve Suggestion");
     		for (i = 0; i < validSuggestionIDList.size(); i++)
-    			System.out.printf("%2d. %s\n", i+1, validSuggestionIDList.get(i));
+    			System.out.printf("%2d. Suggestion ID %s\n", i+1, validSuggestionIDList.get(i));
     		
     		System.out.printf("%2d. Back\n", i+1);
     		choice = InputUtil.choice();
