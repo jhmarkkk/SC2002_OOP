@@ -19,6 +19,14 @@ import models.Staff;
 import utils.DateUtil;
 import utils.PrintUtil;
 
+/**
+ * The {@code CampDetailView} class provides a view for displaying detailed information about a camp, specifically the camp currently facilitated by the committee member logged in.
+ * It implements the {@link CampDetailViewable} interface.
+ * 
+ * @author Chong Jiejun
+ * @version 1.0
+ * @since 1.0
+ */
 public class CampDetailView implements CampDetailViewable {
 
     private static final CampDao campDao = new CampDaoImpl();
@@ -27,6 +35,9 @@ public class CampDetailView implements CampDetailViewable {
 
     private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
 
+    /**
+     * Displays detailed information about the camp currently facilitated by the logged-in committee member.
+     */    
     public void view() {
 
         Map<String, Camp> campData = campDao.getCamps();

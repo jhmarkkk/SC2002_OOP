@@ -30,17 +30,37 @@ import views.StaffAllCampView;
 import views.StaffEnquiryView;
 import views.StaffSuggestionView;
 
-/**
- * This {@link StaffController} class is responsible for handling the
- * staff specific user interface and interactions. It extends the
- * {@link UserController} class and provides functionality for staff to
- * view his/her profile, change password, view all camps, view camps
- * created by him/herself, view attendees within aforementioned camps,
- * create camps, edit camps, delete camps, view suggestions, approve
- * suggestions, view enquiry, reply enquiry and generate report
+ /**
+ * The {@code StaffController} class handles the staff-specific user interface and interactions in the CAMs application. 
+ * It extends the {@code UserController} class and provides functionality for staff to view their profile, change password, view all camps, view camps created by themselves, view attendees within camps, create camps, edit camps, delete camps, view suggestions, approve suggestions, view enquiries, reply to enquiries, and generate reports.
+ * 
+ * <p>Note: Subclasses are expected to implement specific methods for sorting views, toggling visibility, creating, editing, and deleting camps, approving suggestions, replying to enquiries, and generating reports.</p>
  * 
  * @author Chua Shan Hong
- *
+ * @version 1.0
+ * @since 1.0
+ * 
+ * @see StaffApproveSuggestionService
+ * @see StaffCampService
+ * @see StaffGenerateReportService
+ * @see StaffReplyEnquiryService
+ * @see ToggleVisibilityService
+ * @see interfaces.views.CampViewable
+ * @see interfaces.views.EnquiryViewable
+ * @see interfaces.views.SuggestionViewable
+ * @see interfaces.services.ApproveSuggestionServiceable
+ * @see interfaces.services.CampServiceable
+ * @see interfaces.services.GenerateReportServiceable
+ * @see interfaces.services.ReplyEnquiryServiceable
+ * @see interfaces.services.ToggleVisibilityServiceable
+ * @see models.Camp
+ * @see models.Staff
+ * @see utils.InputUtil
+ * @see utils.PrintUtil
+ * @see views.CreatedCampView
+ * @see views.StaffAllCampView
+ * @see views.StaffEnquiryView
+ * @see views.StaffSuggestionView
  */
 public class StaffController extends AbstractUserController {
 
@@ -60,6 +80,9 @@ public class StaffController extends AbstractUserController {
 
 	private static final GenerateReportServiceable generateReportService = new StaffGenerateReportService();
 	
+    /**
+     * Initiates the main menu for staff, allowing them to access specific features.
+     */	
 	@Override
 	public void start() {
 
@@ -107,6 +130,9 @@ public class StaffController extends AbstractUserController {
 		} while (true);
 	}
 
+    /**
+     * Displays all camps, allowing staff to sort them based on various criteria.
+     */	
 	@Override
 	protected void viewAllCamps() {
 
@@ -154,6 +180,9 @@ public class StaffController extends AbstractUserController {
 		} while (true);
 	}
 
+    /**
+     * Displays enquiries, allowing staff to reply to them.
+     */
 	@Override
 	protected void viewEnquiries() {
 
@@ -175,6 +204,9 @@ public class StaffController extends AbstractUserController {
 		} while (true);
 	}
 
+    /**
+     * Displays camps created by the current staff, allowing them to perform various actions.
+     */	
 	protected void viewCreatedCamps() {
 
 		Staff currentUser = (Staff)currentuserDao.getCurrentUser();
@@ -231,26 +263,41 @@ public class StaffController extends AbstractUserController {
 		} while (true);
 	}
 
+    /**
+     * Toggles the visibility of a camp.
+     */	
 	protected void toggleVisibility() {
 
 		toggleVisibilityService.toggle();
 	}
 
+    /**
+     * Creates a new camp.
+     */	
 	protected void createCamp() {
 
 		campService.create();
 	}
 
+    /**
+     * Edits an existing camp.
+     */	
 	protected void editCamp() {
 
 		campService.edit();
 	}
 
+    /**
+     * Deletes an existing camp.
+     */	
 	protected void deleteCamp() {
 
 		campService.delete();
 	}
 
+    /**
+     * Displays suggestions and allows staff to approve them.
+     */	
 	protected void viewSuggestions() {
 
 		do {
@@ -271,16 +318,25 @@ public class StaffController extends AbstractUserController {
 		} while (true);
 	}
 
+    /**
+     * Approves a suggestion.
+     */	
 	protected void approveSuggestion() {
 
 		approveSuggestionService.approve();
 	}
 
+    /**
+     * Replies to an enquiry.
+     */	
 	protected void replyEnquiry() {
 
 		replyEnquiryService.reply();
 	}
 
+    /**
+     * Generates a report and exports it.
+     */	
 	protected void generateReport() {
 
 		generateReportService.exporting("report/StaffReport.txt");

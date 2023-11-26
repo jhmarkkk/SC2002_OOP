@@ -17,13 +17,50 @@ import utils.DateUtil;
 import utils.InputUtil;
 import utils.PrintUtil;
 
+/**
+ * The {@code StaffCampService} class provides methods for staff members to manage camps they are responsible for.
+ * It implements the {@code CampServiceable} interface for creating, deleting, and editing camps.
+ * 
+ * <p>The class allows staff members to create new camps, delete existing camps, and edit the details of existing camps.</p>
+ * 
+ * @author Chuan Shan Hong
+ * @author Joelle Chew Ningxi
+ * @version 1.0
+ * @since 1.0
+ * 
+ * @see interfaces.services.CampServiceable
+ * @see dao.CampDaoImpl
+ * @see dao.CurrentUserDaoImpl
+ * @see models.Camp
+ * @see models.Staff
+ * @see utils.DateUtil
+ * @see utils.InputUtil
+ * @see utils.PrintUtil
+ */
 public class StaffCampService implements CampServiceable {
 	
+    /**
+     * The data access object for managing camps.
+     */
 	private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
     
+    /**
+     * The data access object for managing the current user.
+     */
 	private static final CampDao campDao = new CampDaoImpl();
 
-
+    /**
+     * Creates a new camp based on user input and adds it to the list of camps managed by the current staff member.
+     *
+     * @see #enterName()
+     * @see #enterDates()
+     * @see #enterRegistrationClosingDate()
+     * @see #enterOpenTo()
+     * @see #enterLocation()
+     * @see #enterTotalSlots()
+     * @see #enterCommitteeSlots(int, int)
+     * @see #enterDescription()
+     */
 	public void create() {
     	
 		PrintUtil.header("Create camp");
@@ -48,7 +85,13 @@ public class StaffCampService implements CampServiceable {
 		System.out.println("\n> Camp created");
     }
 
-
+    /**
+     * Deletes an existing camp based on user input.
+     * The staff member can only delete a camp if it has no attendees, committee members, or pending enquiries.
+     *
+     * @see #validateDelete(Camp)
+     * @see utils.InputUtil#choice()
+     */
     public void delete() {
     	
         int i = 0, choice;
@@ -86,7 +129,18 @@ public class StaffCampService implements CampServiceable {
         System.out.println("\n> Unable to delete " + selectedCampName);
     }
 
-
+   /**
+     * Edits the details of an existing camp based on user input.
+     * The staff member can edit various aspects of the camp, such as dates, user group, location, total slots, and more.
+     *
+     * @see #enterRegistrationClosingDate()
+     * @see #enterOpenTo()
+     * @see #enterLocation()
+     * @see #enterTotalSlots()
+     * @see #enterCommitteeSlots(int, int)
+     * @see #enterDescription()
+     * @see utils.InputUtil#choice()
+     */
     public void edit() {
     	
         int i = 0, choice;
@@ -178,7 +232,13 @@ public class StaffCampService implements CampServiceable {
         } while(true);        
     }
     
-    private static String enterName() {
+    
+    /**
+     * Prompts the user to enter the name of the camp.
+     *
+     * @return The name of the camp entered by the user.
+     */
+	private static String enterName() {
     	
         String name;
         
@@ -190,6 +250,13 @@ public class StaffCampService implements CampServiceable {
 		} while (true);
     }
     
+    /**
+     * Prompts the user to enter the starting date and the number of days the camp is held.
+     *
+     * @return A list of Gregorian calendar dates representing the range of camp dates.
+     * @see #getDateRange(GregorianCalendar, int)
+     * @see utils.InputUtil#nextInt(String)
+     */
     private static ArrayList<GregorianCalendar> enterDates() {
     	
     	int numOfDays;
@@ -224,7 +291,15 @@ public class StaffCampService implements CampServiceable {
 			return dates;    	
 		} while (true);
     }
-    //Get Date Range method
+    
+    /**
+     * Retrieves a date range based on the starting date and the number of days the camp is held.
+     *
+     * @param startDate The starting date of the camp.
+     * @param numOfDays The number of days the camp is held.
+     *
+     * @return A list of Gregorian calendar dates representing the range of camp dates.
+     */
     private static ArrayList<GregorianCalendar> getDateRange(GregorianCalendar startDate, int numOfDays) {
     	
         ArrayList<GregorianCalendar> dateRange = new ArrayList<GregorianCalendar>();
@@ -239,7 +314,13 @@ public class StaffCampService implements CampServiceable {
         
         return dateRange;
     }
-    
+
+    /**
+     * Prompts the user to enter the registration closing date for the camp.
+     *
+     * @return The registration closing date entered by the user.
+     * @see utils.InputUtil#nextString(String)
+     */
     private static GregorianCalendar enterRegistrationClosingDate() {
 		
     	String closingDateStr;
@@ -262,7 +343,13 @@ public class StaffCampService implements CampServiceable {
 			PrintUtil.invalid("date");
 		} while (true);
 	}
-    
+
+    /**
+     * Prompts the user to enter the user group for the camp (e.g., School Name or NTU).
+     *
+     * @return The user group entered by the user.
+     * @see utils.InputUtil#nextString(String)
+     */
     private static String enterOpenTo() {
     	
     	String openTo;
@@ -275,6 +362,12 @@ public class StaffCampService implements CampServiceable {
 		} while (true);
 	}
     
+	/**
+     * Prompts the user to enter the location of the camp.
+     *
+     * @return The location entered by the user.
+     * @see utils.InputUtil#nextString(String)
+     */
     private static String enterLocation() {
     	
     	String location;
@@ -287,6 +380,12 @@ public class StaffCampService implements CampServiceable {
 		} while (true);
 	}
     
+	/**
+	 * Prompts the user to enter the total number of slots available for the camp.
+	 *
+	 * @return The total number of slots entered by the user.
+	 * @see utils.InputUtil#nextInt(String)
+	 */
     private static int enterTotalSlots() {
 		
     	int totalSlots;
@@ -303,6 +402,16 @@ public class StaffCampService implements CampServiceable {
 		} while (true);
 	}
     
+	/**
+	 * Prompts the user to enter the number of committee slots for the camp.
+	 * Validates the input to ensure it is within a valid range.
+	 *
+	 * @param totalSlots      The total number of slots available for the camp.
+	 * @param occupiedSlots   The number of slots already occupied by committee members.
+	 *
+	 * @return The number of committee slots entered by the user.
+	 * @see utils.InputUtil#nextInt(String)
+	 */
     private static int enterCommitteeSlots(int totalSlots, int occupiedSlots) {
 		
     	int committeeSlots;
@@ -330,6 +439,12 @@ public class StaffCampService implements CampServiceable {
 		} while (true);
 	}
     
+	/**
+	 * Prompts the user to enter the description of the camp.
+	 *
+	 * @return The description entered by the user.
+	 * @see utils.InputUtil#nextString(String)
+	 */	
     private static String enterDescription() {
     	
     	String description;
@@ -342,6 +457,14 @@ public class StaffCampService implements CampServiceable {
 		} while (true);
 	}
 
+    /**
+     * Validates whether a camp can be deleted.
+     * A camp can be deleted only if it has no attendees, committee members, or pending enquiries.
+     *
+     * @param camp The camp to be validated for deletion.
+     *
+     * @return {@code true} if the camp can be deleted, {@code false} otherwise.
+     */
     private static boolean validateDelete(Camp camp) {
     	
     	if (camp.getAttendees().size() > 0) return false;

@@ -25,6 +25,14 @@ import utils.DateUtil;
 import utils.PrintUtil;
 import utils.SortCampUtil;
 
+/**
+ * The {@code RegisteredCampView} class provides a view to display the list of camps that a student is registered for.
+ * It implements the {@link CampViewable} interface.
+ * 
+ * @author Chong Jiejun
+ * @version 1.0
+ * @since 1.0
+ */
 public class RegisteredCampView implements CampViewable {
 
     private static final CampDao campDao = new CampDaoImpl();
@@ -35,6 +43,11 @@ public class RegisteredCampView implements CampViewable {
 
     private static final CampDetailViewable campDetailView = new CampDetailView();
     
+    /**
+     * Displays the list of registered camps for the current student.
+     * 
+     * @param sortType The type of sorting to be applied to the camps.
+     */    
     public void sortView(SortType sortType) {
 
         int i = 1;
@@ -51,9 +64,11 @@ public class RegisteredCampView implements CampViewable {
         
         registeredCampList = SortCampUtil.sort(registeredCampList, sortType);
         
+        // If the student has a committee role, display the facilitating camp details
         PrintUtil.header("List of Registered Camp");
         if (student.getRole() == Role.COMMITTEE) campDetailView.view();
 
+        // Display the details of each registered camp
         PrintUtil.header("Attending Camps");
         for (Camp camp : registeredCampList) {
             dateList = camp.getDates();

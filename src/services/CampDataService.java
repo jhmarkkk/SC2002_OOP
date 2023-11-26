@@ -23,6 +23,26 @@ import models.Suggestion;
 
 import utils.DateUtil;
 
+/**
+ * The {@code CampDataService} class provides data import and export services for the camps in the CAMs application.
+ * It reads camp data from a file and writes camp data to a file.
+ * 
+ * <p>The class utilizes DAOs for accessing camp information and employs the {@code DateUtil} class for date-related operations.</p>
+ * 
+ * @author Chuan Shan Hong
+ * @author Joelle Chew Ningxi
+ * @version 1.0
+ * @since 1.0
+ * 
+ * @see interfaces.services.DataServiceable
+ * @see interfaces.dao.CampDao
+ * @see dao.CampDaoImpl
+ * @see models.Camp
+ * @see models.Enquiry
+ * @see models.Suggestion
+ * @see utils.DateUtil
+ * @see enums.Visibility
+ */
 public class CampDataService implements DataServiceable {
 
 	private static final CampDao campDao = new CampDaoImpl();
@@ -197,6 +217,11 @@ public class CampDataService implements DataServiceable {
 		}
 	}
 
+    /**
+     * Imports camp data from a specified file path.
+     *
+     * @param filePath The path for the file to be imported from.
+     */
 	public void importing(String filePath) {
 		CampDao campDao = new CampDaoImpl();
 		Map<String, Camp> campDataMap = campDao.getCamps();

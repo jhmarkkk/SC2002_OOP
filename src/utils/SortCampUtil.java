@@ -14,10 +14,25 @@ import utils.CampComparators.NameComparator;
 import utils.CampComparators.StaffComparator;
 import utils.CampComparators.StartComparator;
 
+/**
+ * The {@code SortCampUtil} class provides utility methods for sorting an {@link ArrayList} of {@link Camp} objects.
+ * It supports sorting based on different criteria specified by the {@link SortType} enum.
+ * 
+ * @author Chuan Shan Hong
+ * @version 1.0
+ * @since 1.0
+ */
 public class SortCampUtil {
 
+    /**
+     * Sorts the list of camps based on the specified sort type.
+     * 
+     * @param camps the list of camps to be sorted
+     * @param sortType the type of sorting to be applied
+     * 
+     * @return the sorted list of camps
+     */
     public static ArrayList<Camp> sort(ArrayList<Camp> camps, SortType sortType) {
-
         switch (sortType) {
             case NAME:
                 NameComparator nameComparator = new NameComparator();

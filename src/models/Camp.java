@@ -7,48 +7,112 @@ import java.util.Map;
 
 import enums.Visibility;
 
+/**
+ * The {@link Camp} class represents a camp in CAMs.
+ * Each camp has a unique name, schedule, registration details, description, and staff in charge.
+ * It also manages information about attendees, committee members, enquiries, suggestions, and visibility.
+ * 
+ * @author Chin Jun Hao, Mark
+ * @version 1.0
+ * @since 1.0
+ */
 public class Camp {
 	
+	/**
+	 * The name of the camp.
+	 */
 	private String name;
+
+	/**
+	 * The list of dates on which the camp is scheduled.
+	 */
 	private ArrayList<GregorianCalendar> dates;
+
+	/**
+	 * The closing date for camp registration.
+	 */
 	private GregorianCalendar registrationClosingDate;
+
+	/**
+	 * The faculty to which the camp is open.
+	 */
 	private String openTo;
+
+	/**
+	 * The location where the camp is held.
+	 */
 	private String location;
+
+	/**
+	 * The total number of available slots for the camp.
+	 */
 	private int totalSlots;
+
+	/**
+	 * The number of slots reserved for committee members.
+	 */
 	private int committeeSlots;
+
+	/**
+	 * A brief description of the camp.
+	 */
 	private String description;
+
+	/**
+	 * The name of the staff in charge of the camp.
+	 */
 	private String staffInCharge;
+
+	/**
+	 * A list of names of attendees registered for the camp.
+	 */
 	private ArrayList<String> attendees;
+
+	/**
+	 * A list of names of attendees who have withdrawn from the camp.
+	 */
 	private ArrayList<String> withdrawnAttendees;
+
+	/**
+	 * A list of names of committee members involved in the camp.
+	 */
 	private ArrayList<String> committeeMembers;
+
+	/**
+	 * A map associating enquiry IDs with their respective enquiries.
+	 */
 	private Map<Integer, Enquiry> enquiries;
+
+	/**
+	 * A map associating suggestion IDs with their respective suggestions.
+	 */
 	private Map<Integer, Suggestion> suggestions;
+
+	/**
+	 * The visibility status indicating whether the camp is open for registration.
+	 */
 	private Visibility visibility;
 	
 	/**
-	 * Constructor used for importing Camp from csv.
-	 * @param name
-	 * @param dates
-	 * @param registrationClosingDate
-	 * @param openTo
-	 * @param location
-	 * @param totalSlots
-	 * @param committeeSlots
-	 * @param description
-	 * @param staffInCharge
-	 * @param attendees
-	 * @param withdrawnAttendees
-	 * @param committeeMembers
-	 * @param enquiries
-	 * @param suggestions
-	 * @param visibility
+	 * Constructor used for importing {@link Camp} from CSV.
+	 * 
+	 * @param name 						The name of the camp.
+	 * @param dates 					The list of dates on which the camp is scheduled.
+	 * @param registrationClosingDate	The closing date for camp registration.
+	 * @param openTo 					The faculty to which the camp is open.
+	 * @param location 					The location where the camp is held.
+	 * @param totalSlots 				The total number of available slots for the camp.
+	 * @param committeeSlots 			The number of slots reserved for committee members.
+	 * @param description 				A brief description of the camp.
+	 * @param staffInCharge 			The name of the staff in charge of the camp.
+	 * @param attendees 				A list of names of attendees registered for the camp.
+	 * @param withdrawnAttendees 		A list of names of attendees who have withdrawn from the camp.
+	 * @param committeeMembers			A list of names of committee members involved in the camp.
+	 * @param enquiries 				A map associating enquiry IDs with their respective enquiries.
+	 * @param suggestions 				A map associating suggestion IDs with their respective suggestions.
+	 * @param visibility 				The visibility status indicating whether the camp is open for registration.
 	 */
-	public Camp(String name, ArrayList<GregorianCalendar> dates, GregorianCalendar registrationClosingDate,
-			String openTo, String location, int totalSlots, int committeeSlots, String description,
-			String staffInCharge, ArrayList<String> attendees, ArrayList<String> withdrawnAttendees,
-			ArrayList<String> committeeMembers, Map<Integer, Enquiry> enquiries,
-			Map<Integer, Suggestion> suggestions, Visibility visibility) {
-		
+	public Camp(String name, ArrayList<GregorianCalendar> dates, GregorianCalendar registrationClosingDate, String openTo, String location, int totalSlots, int committeeSlots, String description, String staffInCharge, ArrayList<String> attendees, ArrayList<String> withdrawnAttendees, ArrayList<String> committeeMembers, Map<Integer, Enquiry> enquiries, Map<Integer, Suggestion> suggestions, Visibility visibility) {
 		this.name = name;
 		this.dates = dates;
 		this.registrationClosingDate = registrationClosingDate;
@@ -64,24 +128,22 @@ public class Camp {
 		this.enquiries = enquiries;
 		this.suggestions = suggestions;
 		this.visibility = visibility;
-
 	}
 
 	/**
-	 * Constructor used for Staff to create new Camp.
-	 * @param name
-	 * @param dates
-	 * @param registrationClosingDate
-	 * @param openTo
-	 * @param location
-	 * @param totalSlots
-	 * @param committeeSlots
-	 * @param description
-	 * @param staffInCharge
+	 * Constructor for Staff to create new {@link Camp}.
+	 * 
+	 * @param name 						The name of the camp.
+	 * @param dates 					The list of dates on which the camp is scheduled.
+	 * @param registrationClosingDate 	The closing date for camp registration.
+	 * @param openTo 					The faculty to which the camp is open.
+	 * @param location 					The location where the camp is held.
+	 * @param totalSlots 				The total number of available slots for the camp.
+	 * @param committeeSlots 			The number of slots reserved for committee members.
+	 * @param description 				A brief description of the camp.
+	 * @param staffInCharge 			The name of the staff in charge of the camp.
 	 */
-	public Camp(String name, ArrayList<GregorianCalendar> dates, GregorianCalendar registrationClosingDate,
-			String openTo, String location, int totalSlots, int committeeSlots, String description, String staffInCharge) {
-		
+	public Camp(String name, ArrayList<GregorianCalendar> dates, GregorianCalendar registrationClosingDate, String openTo, String location, int totalSlots, int committeeSlots, String description, String staffInCharge) {
 		this.name = name;
 		this.dates = dates;
 		this.registrationClosingDate = registrationClosingDate;
@@ -100,7 +162,9 @@ public class Camp {
 	}
 
 	/**
-	 * @return the name
+	 * Returns the name of the camp.
+	 * 
+	 * @return The name of the camp.
 	 */
 	public String getName() {
 		
@@ -108,7 +172,9 @@ public class Camp {
 	}
 
 	/**
-	 * @param name the name to set
+	 * Sets the name of the camp.
+	 * 
+	 * @param name The new name for the camp to set.
 	 */
 	public void setName(String name) {
 		
@@ -116,7 +182,9 @@ public class Camp {
 	}
 
 	/**
-	 * @return the dates
+	 * Returns the dates of the camp.
+	 * 
+	 * @return An ArrayList of GregorianCalendar objects representing the dates of the camp.
 	 */
 	public ArrayList<GregorianCalendar> getDates() {
 		
@@ -124,7 +192,9 @@ public class Camp {
 	}
 
 	/**
-	 * @param dates the dates to set
+	 * Sets the dates of the camp.
+	 * 
+	 * @param dates An ArrayList of GregorianCalendar objects representing the dates to set.
 	 */
 	public void setDates(ArrayList<GregorianCalendar> dates) {
 		
@@ -132,7 +202,9 @@ public class Camp {
 	}
 
 	/**
-	 * @return the registrationClosingDate
+	 * Returns the registration closing date of the camp.	
+	 *  
+	 * @return The registration closing date of the camp as a GregorianCalendar object.
 	 */
 	public GregorianCalendar getRegistrationClosingDate() {
 		
@@ -140,7 +212,9 @@ public class Camp {
 	}
 
 	/**
-	 * @param registrationClosingDate the registrationClosingDate to set
+	 * Sets the registration closing date of the camp.	
+	 * 
+	 * @param registrationClosingDate The GregorianCalendar object representing the new registration closing date of the camp to set.
 	 */
 	public void setRegistrationClosingDate(GregorianCalendar registrationClosingDate) {
 		
@@ -148,7 +222,9 @@ public class Camp {
 	}
 
 	/**
-	 * @return the openTo
+	 * Returns the faculty in which the camp is open.
+	 * 
+	 * @return The faculty in which the camp is open.
 	 */
 	public String getOpenTo() {
 		
@@ -156,7 +232,9 @@ public class Camp {
 	}
 
 	/**
-	 * @param openTo the openTo to set
+	 * Sets the faculty to which the camp is open.
+	 * 
+	 * @param openTo The new faculty to which the camp is open to.
 	 */
 	public void setOpenTo(String openTo) {
 		
@@ -164,7 +242,9 @@ public class Camp {
 	}
 
 	/**
-	 * @return the location
+	 * Returns the location where the camp is held.
+	 * 
+	 * @return The location where the camp is held.
 	 */
 	public String getLocation() {
 		
@@ -172,7 +252,9 @@ public class Camp {
 	}
 
 	/**
-	 * @param location the location to set
+	 * Sets the location where the cammp is held.
+	 * 
+	 * @param location The new location where the camp is held.
 	 */
 	public void setLocation(String location) {
 		
@@ -180,7 +262,9 @@ public class Camp {
 	}
 
 	/**
-	 * @return the totalSlots
+	 * Returns the total number of slots open for the camp.
+	 * 
+	 * @return the total number of slots open for the camp.
 	 */
 	public int getTotalSlots() {
 		
@@ -188,7 +272,9 @@ public class Camp {
 	}
 
 	/**
-	 * @param totalSlots the totalSlots to set
+	 * Sets the total number of slots open for the camp.
+	 * 
+	 * @param totalSlots the new total number of slots open for the camp.
 	 */
 	public void setTotalSlots(int totalSlots) {
 		
@@ -196,7 +282,9 @@ public class Camp {
 	}
 
 	/**
-	 * @return the committeeSlots
+	 * Returns the number of slots available for the camp's committee members.
+	 * 
+	 * @return The number of slots available for the camp's committee members.
 	 */
 	public int getCommitteeSlots() {
 		
@@ -204,7 +292,9 @@ public class Camp {
 	}
 
 	/**
-	 * @param committeeSlots the committeeSlots to set
+	 * Sets the number of slots available for the camp's committee members.
+	 * 
+	 * @param committeeSlots The new number of slots available for the camp's committee members.
 	 */
 	public void setCommitteeSlots(int committeeSlots) {
 		
@@ -212,7 +302,9 @@ public class Camp {
 	}
 
 	/**
-	 * @return the description
+	 * Returns the description of the camp.
+	 * 
+	 * @return The description of the camp.
 	 */
 	public String getDescription() {
 		
@@ -220,7 +312,9 @@ public class Camp {
 	}
 
 	/**
-	 * @param description the description to set
+	 * Sets the description of the camp.
+	 * 
+	 * @param description The new description of the camp.
 	 */
 	public void setDescription(String description) {
 		
@@ -228,7 +322,9 @@ public class Camp {
 	}
 
 	/**
-	 * @return the attendees
+	 * Returns the list of attendees for the camp.
+	 * 
+	 * @return An ArrayList containing the names of attendees for the camp.
 	 */
 	public ArrayList<String> getAttendees() {
 		
@@ -236,7 +332,9 @@ public class Camp {
 	}
 
 	/**
-	 * @param attendees the attendees to set
+	 * Sets the list of attendees for the camp.
+	 * 
+	 * @param attendees A new ArrayList containing the names of attendees for the camp.
 	 */
 	public void setAttendees(ArrayList<String> attendees) {
 		
@@ -244,7 +342,9 @@ public class Camp {
 	}
 
 	/**
-	 * @return the withdrawnAttendees
+	 * Returns the list of attendees who have withdrawn from the camp.
+	 * 
+	 * @return An ArrayList containing the names of attendees who have withdrawn from the camp.
 	 */
 	public ArrayList<String> getWithdrawnAttendees() {
 		
@@ -252,7 +352,9 @@ public class Camp {
 	}
 
 	/**
-	 * @param withdrawnAttendees the withdrawnAttendees to set
+	 * Sets the list of attendees who have withdrawn from the camp.
+	 * 
+	 * @param withdrawnAttendees A new ArrayList containing the names of attendees who have withdrawn from the camp.
 	 */
 	public void setWithdrawnAttendees(ArrayList<String> withdrawnAttendees) {
 		
@@ -260,7 +362,9 @@ public class Camp {
 	}
 
 	/**
-	 * @return the committeeMembers
+	 * Returns the list of committee members of the camp.
+	 * 
+	 * @return An ArrayList containing the names of the committee members of the camp.
 	 */
 	public ArrayList<String> getCommitteeMembers() {
 		
@@ -268,7 +372,9 @@ public class Camp {
 	}
 
 	/**
-	 * @param committeeMembers the committeeMembers to set
+	 * Sets the list of committee members of the camp.
+	 * 
+	 * @param committeeMembers A new ArrayList containing the names of the committee members of the camp.
 	 */
 	public void setCommitteeMembers(ArrayList<String> committeeMembers) {
 		
@@ -276,7 +382,9 @@ public class Camp {
 	}
 
 	/**
-	 * @return the visibility
+	 * Returns the visibility status indicating whether the camp is visible to students for registrations.
+	 * 
+	 * @return The visibility status of the camp.
 	 */
 	public Visibility getVisibility() {
 		
@@ -284,7 +392,9 @@ public class Camp {
 	}
 
 	/**
-	 * @param visibility the visibility to set
+	 * Sets the visibility status to determine whether the camp is visible to students for registrations.
+	 * 
+	 * @param visibility The new visibility status of the camp to set.
 	 */
 	public void setVisibility(Visibility visibility) {
 		
@@ -292,7 +402,9 @@ public class Camp {
 	}
 
 	/**
-	 * @return the enquiries
+	 * Returns a map associating Enquiry IDs with their respective Enquiries.
+	 * 
+	 * @return A map of Enquiry IDs with their respective Enquiries.
 	 */
 	public Map<Integer, Enquiry> getEnquiries() {
 		
@@ -300,7 +412,9 @@ public class Camp {
 	}
 
 	/**
-	 * @param enquiries the enquiries to set
+	 * Sets the map of Enquiry IDs with their respective Enquiries.
+	 * 
+	 * @param enquiries A new map of Enquiry IDs with their respective Enquiries to set.
 	 */
 	public void setEnquiries(Map<Integer, Enquiry> enquiries) {
 		
@@ -308,7 +422,9 @@ public class Camp {
 	}
 
 	/**
-	 * @return the suggestions
+	 * Returns a map associating Suggestion IDs with their respective Suggestions.
+	 * 
+	 * @return A map of Suggestion IDs with their respective Suggestions.
 	 */
 	public Map<Integer, Suggestion> getSuggestions() {
 		
@@ -316,7 +432,9 @@ public class Camp {
 	}
 
 	/**
-	 * @param suggestions the suggestions to set
+	 * Sets the map of Suggestion IDs with their respective Suggestions.
+	 * 
+	 * @param suggestions A new map of Suggestion IDs with their respective Suggestions to set.
 	 */
 	public void setSuggestions(Map<Integer, Suggestion> suggestions) {
 		
@@ -324,7 +442,9 @@ public class Camp {
 	}
 
 	/**
-	 * @return the staffInCharge
+	 * Returns the name of the Staff-In-Charge of the camp.
+	 * 
+	 * @return The name of the Staff-In-Charge.
 	 */
 	public String getStaffInCharge() {
 		
@@ -332,13 +452,13 @@ public class Camp {
 	}
 	
 	/**
+	 * Returns the number of slots remaining for attendee registration.
 	 * 
-	 * @return The number of slots remaining for attendees.
+	 * @return The calculated number of slots available for attendee registration.
 	 */
 	public int getAttendeeSlots() {
 		
 		return this.totalSlots - this.committeeSlots;
 	}
 	
-
 }

@@ -17,12 +17,40 @@ import models.Suggestion;
 import utils.InputUtil;
 import utils.PrintUtil;
 
+/**
+ * The {@code CommitteeSuggestionService} class provides methods for committee members to manage suggestions in the context of a specific camp.
+ * It implements the {@code SuggestionServiceable} interface for handling the creation, deletion, and editing of suggestions.
+ * 
+ * <p>The class allows committee members to create, delete, and edit suggestions related to the camp they are facilitating.</p>
+ * 
+ * @author Chong Jiejun
+ * @version 1.0
+ * @since 1.0
+ * 
+ * @see interfaces.services.SuggestionServiceable
+ * @see dao.CampDaoImpl
+ * @see dao.CurrentUserDaoImpl
+ * @see models.Camp
+ * @see models.CommitteeMember
+ * @see models.Suggestion
+ * @see utils.InputUtil
+ * @see utils.PrintUtil
+ */
 public class CommitteeSuggestionService implements SuggestionServiceable {
 
+    /**
+     * The data access object for managing camps.
+     */
     private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
 
+    /**
+     * The data access object for managing the current user.
+     */    
     private static final CampDao campDao = new CampDaoImpl();
 
+    /**
+     * Creates a new suggestion for the camp facilitated by the current committee member.
+     */
     public void create() {
 
         CommitteeMember currentUser = (CommitteeMember) currentUserDao.getCurrentUser();
@@ -47,6 +75,9 @@ public class CommitteeSuggestionService implements SuggestionServiceable {
         System.out.println("\n> Suggestion created");
     }
 
+    /**
+     * Deletes a suggestion created by the current committee member for the camp facilitated by them.
+     */
     public void delete() {
 
         int i, choice;
@@ -88,6 +119,9 @@ public class CommitteeSuggestionService implements SuggestionServiceable {
         System.out.println("\n> Suggestion deleted");
     }
 
+    /**
+     * Edits the content of a suggestion created by the current committee member for the camp facilitated by them.
+     */
     public void edit() {
 
         int i, choice;
