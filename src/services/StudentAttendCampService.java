@@ -161,26 +161,26 @@ public class StudentAttendCampService implements AttendCampServiceable {
 
 		for (Camp camp : camps) {
 			if (camp.getVisibility() == Visibility.OFF)
-				continue;
-
+			continue;
+			
 			if (compareFaculty(camp.getOpenTo(), user.getFaculty()))
-				continue;
-
+			continue;
+			
 			if (compareSlots(camp))
-				continue;
-
+			continue;
+			
 			if (compareDeadline(DateUtil.toString(camp.getRegistrationClosingDate())))
-				continue;
-
+			continue;
+			
 			if (registeredCampName.contains(camp.getName()))
-				continue;
-
+			continue;
+			
 			if (camp.getWithdrawnAttendees().contains(user.getUserID()))
-				continue;
-
+			continue;
+			
 			if (compareFacilitatingCamp(user, camp.getName()))
-				continue;
-
+			continue;
+			
 			if (compareDates(camp.getDates(), unavailableDates))
 				continue;
 
@@ -216,9 +216,9 @@ public class StudentAttendCampService implements AttendCampServiceable {
 		GregorianCalendar today = new GregorianCalendar();
 
 		if (DateUtil.toString(today).compareTo(deadline) < 0)
-			return true;
+			return false;
 
-		return false;
+		return true;
 	}
 
 	private Boolean compareFacilitatingCamp(Student user, String campName) {
