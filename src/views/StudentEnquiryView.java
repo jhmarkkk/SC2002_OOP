@@ -49,17 +49,3 @@ public class StudentEnquiryView implements EnquiryViewable {
         }
     }
 }
-
-// for (String registeredCampID : registeredCampIDs) {
-// Camp registeredCamp = campsMap.get(registeredCampID);
-// for (Enquiry enq : registeredCamp.getEnquiries().values()) {
-// if (enq.getEnquirer().equals(student.getUserID()))
-// System.out.printf("***** Enquiry %d *****\n", enq.getEnquiryID());
-// System.out.printf("%s\n", enq.getEnquiry());
-// if (enq.getReplier() != null) {
-// System.out.printf("~~~~~ Replied by: %s ~~~~~\n", enq.getReplier());
-// System.out.printf("%s\n", enq.getReply());
-// }
-// }
-
-// }
