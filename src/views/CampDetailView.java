@@ -16,7 +16,6 @@ import interfaces.views.CampDetailViewable;
 import models.Camp;
 import models.CommitteeMember;
 import models.Staff;
-
 import utils.DateUtil;
 import utils.PrintUtil;
 
@@ -52,4 +51,5 @@ public class CampDetailView implements CampDetailViewable {
         System.out.println();
 
     }
+
 }

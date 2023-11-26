@@ -21,9 +21,9 @@ import models.Camp;
 import models.Student;
 import models.Staff;
 
-import utils.SortCampUtil;
 import utils.DateUtil;
 import utils.PrintUtil;
+import utils.SortCampUtil;
 
 public class RegisteredCampView implements CampViewable {
 
@@ -44,8 +44,10 @@ public class RegisteredCampView implements CampViewable {
         Map<String, Staff> staffData = staffDao.getStaffs();
         ArrayList<String> registeredCampNameList = student.getRegisteredCamps();
         ArrayList<Camp> registeredCampList = new ArrayList<Camp>();
-        
-        for (String registeredCampName : registeredCampNameList) registeredCampList.add(campData.get(registeredCampName));
+
+        for (String registeredCampID : registeredCampNameList) {
+            registeredCampList.add(campData.get(registeredCampID));
+        }
         
         registeredCampList = SortCampUtil.sort(registeredCampList, sortType);
         
