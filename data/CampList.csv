@@ -1,5 +1,5 @@
 Enquiry Counter,Suggestion Counter
-1,2
+1,0
 campName,dates,registrationClosingDate,openTo,location,totalSlots,committeeSlots,description,staffInCharge,attendees,withdrawnAttendees,committeeMembers,visibility,enquiries,suggestions
 NTU UOC,2024-02-10,2024-02-01,NTU,NTU,500,10,NTU UOC 2024 to welcome NTU freshmen,ANWIT,#NULL!,#NULL!,#NULL!,OFF,#NULL!,#NULL!
 ADM Orientation,2024-03-10|2024-03-11,2024-03-01,ADM,ADM,60,6,ADM Orientation 2024 to welcome ADM freshmen,OURIN,#NULL!,#NULL!,ELI34,ON,#NULL!,#NULL!
