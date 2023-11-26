@@ -19,7 +19,8 @@ import models.Student;
 import utils.PrintUtil;
 
 /**
- * The {@code StaffEnquiryView} class provides functionality to view enquiries made for the camps created by the current staff member.
+ * The {@code StaffEnquiryView} class provides functionality to view enquiries
+ * made for the camps created by the current staff member.
  * It implements the {@link EnquiryViewable} interface.
  *
  * @author Chuan Shan Hong
@@ -33,7 +34,7 @@ public class StaffEnquiryView implements EnquiryViewable {
      * Represents the data access object for camp-related operations.
      */
     public static final CampDao campDao = new CampDaoImpl();
-    
+
     /**
      * Represents the data access object for the current user.
      */
@@ -43,9 +44,10 @@ public class StaffEnquiryView implements EnquiryViewable {
      * Represents the data access object for student-related operations.
      */
     public static final StudentDao studentDao = new StudentDaoImpl();
-    
+
     /**
-     * Displays details of enquiries made for the camps created by the current staff member.
+     * Displays details of enquiries made for the camps created by the current staff
+     * member.
      */
     public void view() {
 
@@ -62,7 +64,7 @@ public class StaffEnquiryView implements EnquiryViewable {
                 System.out.printf("%-15s: %s\n", "Camp", camp.getName());
                 System.out.printf("%-15s: %s\n", "Enquired by", studentData.get(enquiry.getEnquirer()));
                 System.out.printf("%-15s: %s\n", "Enquiry", enquiry.getEnquiry());
-                if (enquiry.getEnquirer() == null) {
+                if (enquiry.getReplier() == null) {
                     System.out.printf("%-15s: -\n", "Replied by");
                     System.out.printf("%-15s: -\n", "Reply");
                 } else {

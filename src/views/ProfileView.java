@@ -43,5 +43,6 @@ public class ProfileView implements ProfileViewable {
             System.out.printf(" of %s\n", committeeMember.getFacilitatingCamp());
             System.out.printf("%-10s: %d\n", "Points", committeeMember.getPoints());
         }
+        System.out.println();
     }
 }
