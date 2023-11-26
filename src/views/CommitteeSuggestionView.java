@@ -16,7 +16,6 @@ public class CommitteeSuggestionView implements SuggestionViewable {
         CommitteeMember committeeMember = (CommitteeMember) currentUserDao.getCurrentUser();
         CampDao campDao = new CampDaoImpl();
         Camp facilitatingCamp = campDao.getCamps().get(committeeMember.getFacilitatingCamp());
-        int sugIndex = 1;
         System.out.printf("===== Facilitating %s Suggestions =====\n", facilitatingCamp.getName());
         for (Suggestion sug : facilitatingCamp.getSuggestions().values()) {
             if (!sug.getApproved()) {

@@ -7,8 +7,13 @@ import interfaces.services.EnquiryServiceable;
 import interfaces.views.CampViewable;
 import interfaces.views.EnquiryViewable;
 
+import models.Student;
+
 import services.StudentAttendCampService;
 import services.StudentEnquiryService;
+
+import utils.InputUtil;
+import utils.PrintUtil;
 
 import views.StudentAllCampView;
 import views.RegisteredCampView;
@@ -27,22 +32,16 @@ public class StudentController extends AbstractUserController {
 	@Override
 	public void start() {
 
-		int choice;
-
 		do {
+			PrintUtil.header("Main Menu");
 			System.out.println("1. View profile");
 			System.out.println("2. View all camps");
 			System.out.println("3. View my registered camps");
 			System.out.println("4. View my enquiries");
 			System.out.println("5. Create enquiry");
 			System.out.println("6. Log out");
-			System.out.print("\nChoice: ");
 
-			choice = sc.nextInt();
-
-			System.out.println();
-
-			switch (choice) {
+			switch (InputUtil.choice()) {
 				case 1:
 					viewProfile();
 					break;
@@ -61,18 +60,17 @@ public class StudentController extends AbstractUserController {
 				case 6:
 					return;
 				default:
-					System.out.println("Invalid choice. Please choose again.");
+					PrintUtil.invalid("choice");
 			}
 
 			if (currentuserDao.getCurrentUser() == null) return;
-			
+
 		} while (true);
 	}
 
 	@Override
 	protected void viewAllCamps() {
 
-		int choice;
 		SortType type = SortType.NAME;
 
 		campView = new StudentAllCampView();
@@ -85,13 +83,8 @@ public class StudentController extends AbstractUserController {
 			System.out.println("4. Sort by camp faculty");
 			System.out.println("5. Register for camp");
 			System.out.println("6. Back");
-			System.out.print("\nChoice: ");
 
-			choice = sc.nextInt();
-
-			System.out.println();
-
-			switch (choice) {
+			switch (InputUtil.choice()) {
 				case 1:
 					type = SortType.DATES;
 					break;
@@ -106,11 +99,11 @@ public class StudentController extends AbstractUserController {
 					break;
 				case 5:
 					registerForCamp();
-					break;
+					return;
 				case 6:
 					return;
 				default:
-					System.out.println("Invalid choice. Please choose again.");
+					PrintUtil.invalid("choice");
 			}
 
 		} while (true);
@@ -119,22 +112,21 @@ public class StudentController extends AbstractUserController {
 	@Override
 	protected void viewEnquiries() {
 
-		int choice;
+		Student currentUser = (Student)currentuserDao.getCurrentUser();
+		
+		if (currentUser.getEnquiries().isEmpty()) {
+			System.out.println("No created equiry");
+			return;
+		}
 
 		enquiryView = new StudentEnquiryView();
-
 		do {
 			enquiryView.view();
 			System.out.println("1. Edit enquiry");
 			System.out.println("2. Delete enquiry");
 			System.out.println("3. Back");
-			System.out.print("\nChoice: ");
 
-			choice = sc.nextInt();
-
-			System.out.println();
-
-			switch (choice) {
+			switch (InputUtil.choice()) {
 				case 1:
 					editEnquiry();
 					break;
@@ -144,18 +136,22 @@ public class StudentController extends AbstractUserController {
 				case 3:
 					return;
 				default:
-					System.out.println("Invalid choice. Please choose again.");
+					PrintUtil.invalid("choice");
 			}
 		} while (true);
 	}
 
 	protected void viewRegisteredCamps() {
 
-		int choice;
+		Student currentUser = (Student)currentuserDao.getCurrentUser();
 		SortType type = SortType.NAME;
+		
+		if (currentUser.getRegisteredCamps().isEmpty()) {
+			System.out.println("No registered camp");
+			return;
+		}
 
 		campView = new RegisteredCampView();
-
 		do {
 			campView.sortView(type);
 			System.out.println("1. Sort by camp dates");
@@ -164,13 +160,8 @@ public class StudentController extends AbstractUserController {
 			System.out.println("4. Sort by camp faculty");
 			System.out.println("5. Withdraw from camp");
 			System.out.println("6. Back");
-			System.out.print("\nChoice: ");
 
-			choice = sc.nextInt();
-
-			System.out.println();
-
-			switch (choice) {
+			switch (InputUtil.choice()) {
 				case 1:
 					type = SortType.DATES;
 					break;
@@ -189,7 +180,7 @@ public class StudentController extends AbstractUserController {
 				case 6:
 					return;
 				default:
-					System.out.println("Invalid choice. Please choose again.");
+					PrintUtil.invalid("choice");
 			}
 
 		} while (true);
@@ -201,8 +192,8 @@ public class StudentController extends AbstractUserController {
 	}
 
 	protected void withdrawFromCamp() {
-		attendCampService.withdraw();
 
+		attendCampService.withdraw();
 	}
 
 	protected void createEnquiry() {
