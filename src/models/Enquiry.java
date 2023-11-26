@@ -1,16 +1,15 @@
 package models;
 
 /**
- * The {@code Enquiry} class represents an inquiry made by a user in CAMs.
+ * The {@code Enquiry} class represents an inquiry made by a {@link User} in CAMs.
  * An enquiry consists of an ID, the actual inquiry message, the enquirer's name, the name of the replier (if any), and a reply message (if available).
  * 
- * <p>The class provides constructors for importing Enquiry instances from CSV and for creating new enquiries initiated by an user. 
+ * <p>The class provides constructors for importing Enquiry instances from CSV and for creating new enquiries initiated by an {@link User}. 
  * Additionally, it contains methods for retrieving and modifying the details of an enquiry.</p>
  * 
  * @author Chin Jun Hao, Mark
  * @version 1.0
  * @since 1.0
- * 
  */
 public class Enquiry {
 	
