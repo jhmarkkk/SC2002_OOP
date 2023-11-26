@@ -39,6 +39,10 @@ public class StaffGenerateReportService implements GenerateReportServiceable {
 	
 	private static final CampDao campDao = new CampDaoImpl();
 	
+	
+	/** 
+	 * @param filePath The path for the file to be exported to
+	 */
 	public void exporting(String filePath) {
     	
 		int i = 0, choice;

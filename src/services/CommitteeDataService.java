@@ -18,6 +18,10 @@ import models.CommitteeMember;
 
 public class CommitteeDataService implements DataServiceable {
 
+    
+    /** 
+     * @param filePath  The path for the file to be exported to
+     */
     public void exporting (String filePath) {
         
         CommitteeMemberDao committeeMemberDao = new CommitteeMemberDaoImpl();

@@ -13,7 +13,11 @@ import models.Student;
 
 public class StudentDataService implements DataServiceable {
 
-	public void exporting (String filePath) {
+	
+    /** 
+     * @param filePath The path for the file to be exported to
+     */
+    public void exporting (String filePath) {
 
         StudentDao studentDao = new StudentDaoImpl();
         Map<String, Student> studentDataMap = studentDao.getStudents();

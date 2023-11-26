@@ -60,7 +60,12 @@ public class ToggleVisibilityService implements ToggleVisibilityServiceable{
 		} while (true);
     }
     
-    private boolean validateToggle(Camp camp) {
+    
+	/** 
+	 * @param camp The object of camp
+	 * @return boolean
+	 */
+	private boolean validateToggle(Camp camp) {
     	
     	if (!camp.getAttendees().isEmpty()) return false;
     	

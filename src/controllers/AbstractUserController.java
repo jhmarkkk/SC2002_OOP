@@ -45,7 +45,7 @@ abstract class AbstractUserController {
 	
 	protected static ChangePasswordServiceable changePasswordService = new ChangePasswordService();
 	
-    /**
+	/**
      * Abstract method to be implemented by subclasses to start the user interaction.
      */	
 	public abstract void start();

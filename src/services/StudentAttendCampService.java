@@ -148,6 +148,12 @@ public class StudentAttendCampService implements AttendCampServiceable {
 		System.out.printf("You have withdrawn from %s\n", selectedCampName);
 	}
 
+	
+	/** 
+	 * @param user the student object
+	 * 
+	 * @return ArrayList<Camp> of camps for the student
+	 */
 	private ArrayList<Camp> getValidCamps(Student user) {
 
 		Map<String, Camp> campData = campDao.getCamps();

@@ -177,7 +177,11 @@ public class StaffCampService implements CampServiceable {
         } while(true);        
     }
     
-    private static String enterName() {
+    
+	/** 
+	 * @return String
+	 */
+	private static String enterName() {
     	
         String name;
         

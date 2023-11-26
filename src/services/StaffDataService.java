@@ -16,7 +16,11 @@ import models.Staff;
 
 public class StaffDataService implements DataServiceable {
 	
-	public void exporting (String filePath) {
+	
+    /** 
+     * @param filePath The path for the file to be exported to
+     */
+    public void exporting (String filePath) {
 
         StaffDao staffDao = new StaffDaoImpl();
         Map<String, Staff> staffDataMap = staffDao.getStaffs();

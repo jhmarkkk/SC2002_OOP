@@ -25,6 +25,10 @@ import enums.Visibility;
 
 public class CampDataService implements DataServiceable {
 
+	
+	/** 
+	 * @param filePath The path for the file to be exported to
+	 */
 	public void exporting(String filePath) {
 		CampDao campDao = new CampDaoImpl();
 		Map<String, Camp> campDataMap = campDao.getCamps();

@@ -61,7 +61,13 @@ public class AuthService implements AuthServiceable {
     	currentUserDao.setCurrentUser(null);
     }
     
-    private User validateUser(String userID, String password) {
+    
+	/** 
+	 * @param userID	The username entered by the user
+	 * @param password	The password entered by the user
+	 * @return User
+	 */
+	private User validateUser(String userID, String password) {
     	
     	User user = null;
     	Map<String, Staff> staffData = staffDao.getStaffs();

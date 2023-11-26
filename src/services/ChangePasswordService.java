@@ -12,7 +12,11 @@ public class ChangePasswordService implements ChangePasswordServiceable{
 
 	private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
 	
-    public boolean changePassword(){
+    
+	/** 
+	 * @return boolean
+	 */
+	public boolean changePassword(){
 
     	String oldPassword, newPassword;
     	User currentUser = currentUserDao.getCurrentUser();
