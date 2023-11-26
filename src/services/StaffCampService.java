@@ -2,9 +2,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.InputMismatchException;
 import java.util.Map;
-import java.util.Scanner;
 
 import dao.CampDaoImpl;
 import dao.CurrentUserDaoImpl;
@@ -16,11 +14,11 @@ import models.Camp;
 import models.Staff;
 
 import utils.DateUtil;
+import utils.InputUtil;
+import utils.PrintUtil;
 
 public class StaffCampService implements CampServiceable {
 	
-	private static final Scanner sc = new Scanner(System.in);
-
 	private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
     
 	private static final CampDao campDao = new CampDaoImpl();
@@ -28,6 +26,9 @@ public class StaffCampService implements CampServiceable {
 
 	public void create() {
     	
+		PrintUtil.header("Create camp");
+		Staff currentUser = (Staff)currentUserDao.getCurrentUser();
+		ArrayList<String> createdCampNameList = currentUser.getCreatedCamps();
         Map<String, Camp> campData = campDao.getCamps();
         String name = enterName();
         ArrayList<GregorianCalendar> dates = enterDates();
@@ -42,6 +43,8 @@ public class StaffCampService implements CampServiceable {
         		totalSlots, committeeSlots, description, staffInCharge);
         
         campData.put(name, camp);
+		createdCampNameList.add(name);
+		currentUser.setCreatedCamps(createdCampNameList);
     }
 
 
@@ -55,17 +58,12 @@ public class StaffCampService implements CampServiceable {
         Map<String, Camp> campData = campDao.getCamps();
       
         do {
-        	System.out.println("Delete from:");
+			PrintUtil.header("Delete camp");
         	for (i = 0; i < createdCampNames.size(); i++)
         		System.out.printf("%d. %s\n", i+1, createdCampNames.get(i));
         	
         	System.out.printf("%d. Back\n", i+1);
-        	System.out.print("Choice: ");
-        	
-        	choice = sc.nextInt();
-        	
-        	System.out.println();
-        	
+        	choice = InputUtil.choice();
         	if (choice == i + 1) return;
         	
         	if (choice >= 1 || choice <= i) {
@@ -74,11 +72,13 @@ public class StaffCampService implements CampServiceable {
         		break;
         	}
         	
-        	System.out.println("Invalid choice. Try again.");
+			PrintUtil.invalid("choice");
 		} while (true);
         
         if (validateDelete(selectedCamp)) {
         	campData.remove(selectedCampName);
+			createdCampNames.remove(selectedCampName);
+			currentUser.setCreatedCamps(createdCampNames);;
         	System.out.println(selectedCampName + " successfully deleted");
         	return;
         }
@@ -103,16 +103,12 @@ public class StaffCampService implements CampServiceable {
         Map<String, Camp> campData = campDao.getCamps();
         
         do {
-        	System.out.println("Edit:");
+			PrintUtil.header("Edit Camp");
         	for (i = 0; i < createdCampNames.size(); i++)
         		System.out.printf("%d. %s\n", i+1, createdCampNames.get(i));
         	
         	System.out.printf("%d. Back\n", i+1);
-        	System.out.print("Choice: ");
-        	
-        	choice = sc.nextInt();
-        	
-        	System.out.println();
+        	choice = InputUtil.choice();
         	
         	if (choice == i + 1) return;
         	
@@ -122,23 +118,21 @@ public class StaffCampService implements CampServiceable {
         		break;
         	}
         	
-        	System.out.println("Invalid choice. Try again.");
+			PrintUtil.invalid("choice");
 		} while (true);
 
         do {
-            System.out.printf("Editing %s\n", selectedCampName);
+			PrintUtil.header(String.format("Editing %s", selectedCampName));
             System.out.println("Edit option:");
-            System.out.println("1. Registration closing date");
-            System.out.println("2. Open to");
-            System.out.println("3. Location");
-            System.out.println("4. Total slots");
-            System.out.println("5. Camp committee slots");
-            System.out.println("6. Description");
+            System.out.println("1. Edit registration closing date");
+            System.out.println("2. Edit user group");
+            System.out.println("3. Edit location");
+            System.out.println("4. Edit total slots");
+            System.out.println("5. Edit camp committee slots");
+            System.out.println("6. Edit description");
             System.out.println("7. Back");
-        
-            choice = sc.nextInt();
-            
-            switch(choice) {
+
+            switch(InputUtil.choice()) {
                 case 1:
                     System.out.println("Current registration closing date: " + selectedCamp.getRegistrationClosingDate());
                     newRegistrationClosingDate = enterRegistrationClosingDate();
@@ -178,7 +172,7 @@ public class StaffCampService implements CampServiceable {
                 case 7:
                     return;
                 default:
-                    System.out.println("Invalid choice. Try again.");
+					PrintUtil.invalid("choice");
                     break;
             }
         } while(true);        
@@ -189,11 +183,10 @@ public class StaffCampService implements CampServiceable {
         String name;
         
         do {
-        	System.out.print("Enter camp name: ");
-        	name = sc.nextLine();
+        	name = InputUtil.nextString("Enter camp name");
         	if (!name.isBlank()) return name;
         	
-        	System.out.println("Invalid name. Try again.\n");
+			PrintUtil.invalid("name");
 		} while (true);
     }
     
@@ -205,34 +198,31 @@ public class StaffCampService implements CampServiceable {
     	GregorianCalendar today = new GregorianCalendar();
     	
     	do {
-    		System.out.print("Enter starting camp date (YYYY-MM-DD): ");
-    		startDateStr = sc.nextLine();
+    		startDateStr = InputUtil.nextString("Enter starting camp date (YYYY-MM-DD)");
     		try {
     			startDate = DateUtil.toDate(startDateStr);
     		} catch (Exception e) {
-    			System.out.println("Invalid input. Try again.\n");
+				PrintUtil.invalid("input");
     			continue;
 			}
     		
     		if (DateUtil.toString(today).compareTo(startDateStr) < 0) {
-    			System.out.println();
     			break;
     		}
-    		
-    		System.out.println("Invalid date. Try again.\n");
+
+			PrintUtil.invalid("date");
 		} while (true);
 
         do {
-        	System.out.print("Enter number of days camp is held: ");
-        	try {
-        		numOfDays = sc.nextInt();				
-        		ArrayList<GregorianCalendar> dates = getDateRange(startDate, numOfDays);
-        		System.out.println();
-        		return dates;
-			} catch (InputMismatchException e) {
-				System.out.println("Invalid input. Try again.\n");
-    			continue;
-			}        	
+			numOfDays = InputUtil.nextInt("Enter number of days camp is held");
+			if (numOfDays <= 0) {
+				PrintUtil.invalid("input");
+				continue;
+			}
+
+			ArrayList<GregorianCalendar> dates = getDateRange(startDate, numOfDays);
+			System.out.println();
+			return dates;    	
 		} while (true);
     }
     //Get Date Range method
@@ -259,11 +249,11 @@ public class StaffCampService implements CampServiceable {
     	
     	do {
     		System.out.print("Enter registration closing date (YYYY-MM-DD): ");
-    		closingDateStr = sc.nextLine();
+    		closingDateStr = InputUtil.nextString("Enter registration closing date (YYYY-MM-DD)");
     		try {
     			closingDate = DateUtil.toDate(closingDateStr);
     		} catch (Exception e) {
-    			System.out.println("Invalid input. Try again.\n");
+				PrintUtil.invalid("input");
     			continue;
 			}
     		
@@ -272,7 +262,7 @@ public class StaffCampService implements CampServiceable {
     			return closingDate;
     		}
     		
-    		System.out.println("Invalid date. Try again.\n");
+			PrintUtil.invalid("date");
 		} while (true);
 	}
     
@@ -281,11 +271,10 @@ public class StaffCampService implements CampServiceable {
     	String openTo;
     	
     	do {
-        	System.out.print("Enter user group (School Name or NTU): ");
-        	openTo = sc.nextLine();
+        	openTo = InputUtil.nextString("Enter user group (School Name or NTU)");
         	if (!openTo.isBlank()) return openTo;
         	
-        	System.out.println("Invalid user group. Try again.\n");
+			PrintUtil.invalid("input");
 		} while (true);
 	}
     
@@ -294,11 +283,10 @@ public class StaffCampService implements CampServiceable {
     	String location;
     	
     	do {
-        	System.out.print("Enter user group (School Name or NTU): ");
-        	location = sc.nextLine();
+        	location = InputUtil.nextString("Enter location");
         	if (!location.isBlank()) return location;
         	
-        	System.out.println("Invalid loaction. Try again.\n");
+        	PrintUtil.invalid("input");
 		} while (true);
 	}
     
@@ -308,14 +296,13 @@ public class StaffCampService implements CampServiceable {
     	
     	do {
         	System.out.print("Enter total slots: ");
-        	try {
-        		totalSlots = sc.nextInt();				
-        		System.out.println();
-        		return totalSlots;
-			} catch (InputMismatchException e) {
-				System.out.println("Invalid input. Try again.\n");
-    			continue;
+			totalSlots = InputUtil.nextInt("Enter total slots");				
+			if (totalSlots <= 0) {
+				PrintUtil.invalid("input");
+				continue;
 			}
+
+			return totalSlots;
 		} while (true);
 	}
     
@@ -324,19 +311,12 @@ public class StaffCampService implements CampServiceable {
     	int committeeSlots;
     	
     	do {
-    		System.out.print("Enter number of committee slots: ");
-    		try {
-    			committeeSlots = sc.nextInt();
-			} catch (InputMismatchException e) {
-				System.out.println("Invalid input. Try again.\n");
-    			continue;
-			}
-    		
+    		committeeSlots = InputUtil.nextInt("Enter number of committee slots");   		
     		if (committeeSlots < 0 || committeeSlots > 10 || committeeSlots > totalSlots) {
-    			System.out.println("Invalid number of slots. Try again.\n");
+				PrintUtil.invalid("input");
     			continue;
     		}
-    		System.out.println();
+
     		return committeeSlots;
 		} while (true);
 	}
@@ -346,11 +326,10 @@ public class StaffCampService implements CampServiceable {
     	String description;
     	
     	do {
-        	System.out.print("Enter camp description: ");
-        	description = sc.nextLine();
+        	description = InputUtil.nextString("Enter camp description");
         	if (!description.isBlank()) return description;
         	
-        	System.out.println("Invalid description. Try again.\n");
+			PrintUtil.invalid("input");
 		} while (true);
 	}
 
