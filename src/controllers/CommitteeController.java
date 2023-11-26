@@ -11,8 +11,10 @@ import models.CommitteeMember;
 import services.CommitteeGenerateReportService;
 import services.CommitteeReplyEnquiryService;
 import services.CommitteeSuggestionService;
+
 import utils.InputUtil;
 import utils.PrintUtil;
+
 import views.CampDetailView;
 import views.CommitteeEnquiryView;
 import views.CommitteeSuggestionView;
@@ -76,15 +78,14 @@ public class CommitteeController extends StudentController {
 	
 	protected void viewCampDetails() {
 			
-		campDetailView.view();
 		
 		do {
+			campDetailView.view();
 			System.out.println("1. View attendees' enquires");
 			System.out.println("2. View my suggestions");
 			System.out.println("3. Create suggestion");
 			System.out.println("4. Generate attendee report");
 			System.out.println("5. Back");
-			System.out.print("\nChoice: ");
 			
 			switch (InputUtil.choice()) {
 			case 1:

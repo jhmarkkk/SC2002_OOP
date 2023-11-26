@@ -1,4 +1,0 @@
-Name,Email,Faculty,Password,RegisteredCamps,Enquiries,FacilitatingCamp,Suggestions,Points
-LEE,LE51@e.ntu.edu.sg,SCSE,password,camp1|camp2|camp3,camp1=1|2|3,camp4,1|2,0
-RAWAL,AKY013@e.ntu.edu.sg,SSS,password,camp1,#NULL!,,#NULL!,0
-LIU,SL22@e.ntu.edu.sg,NBS,password,camp4,camp1=1|2|3*camp2=4|5,,3,0
