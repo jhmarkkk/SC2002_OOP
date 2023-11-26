@@ -15,7 +15,19 @@ package enums;
  * @since 1.0
  */
 public enum GenerateType {
+
+	/**
+     * Represents the generation of all items.
+     */
 	ALL,
+
+	/**
+     * Represents the generation specific to attendees.
+     */
 	ATTENDEE,
+
+    /**
+     * Represents the generation specific to committees.
+     */
 	COMMITTEE;
 }

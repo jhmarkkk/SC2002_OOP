@@ -33,7 +33,6 @@ public class Student extends User {
 	 * @param password 			The password of the Student member.
 	 * @param name 				The name of the Student member.
 	 * @param faculty 			The faculty to which the Student member belongs.
-	 * @param role 				The role of the Student member
 	 * @param registeredCamps	The list of camps the Committee Member is registered for.
 	 * @param enquiries 		A map containing the Committee Member's enquiries, with camp names as keys and lists of enquiry IDs as values.
 	 */

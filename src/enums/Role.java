@@ -17,9 +17,20 @@ package enums;
  * @since 1.0
  */
 public enum Role {
-	
+
+	/**
+     * Represents the role of a staff member.
+     */
 	STAFF,
+
+	/**
+     * Represents the role of a student.
+     */
 	STUDENT,
+
+    /**
+     * Represents the role of a committee member.
+     */
 	COMMITTEE;
 	
     /**

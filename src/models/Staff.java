@@ -26,7 +26,6 @@ public class Staff extends User{
 	 * @param password		The password of the Staff member.
 	 * @param name			The name of the Staff member.
 	 * @param faculty		The faculty to which the Staff member belongs.
-	 * @param role			The role of the Staff member
 	 * @param createdCamps	The list of camps created by the Staff member.
 	 */
 	public Staff(String userID, String password, String name, String faculty, ArrayList<String> createdCamps) {

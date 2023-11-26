@@ -18,7 +18,14 @@ package enums;
  */
 public enum Visibility {
 	
+	/**
+     * Represents the "On" visibility state.
+     */
 	ON,
+
+	/**
+     * Represents the "Off" visibility state.
+     */
 	OFF;
 	
 	/**

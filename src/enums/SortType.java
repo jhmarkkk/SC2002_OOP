@@ -19,10 +19,33 @@ package enums;
  */
 public enum SortType {
 	
+	/**
+     * Sort by name.
+     */
 	NAME,
+
+    /**
+     * Sort by dates.
+     */
 	DATES,
+
+	/**
+     * Sort by closing dates.
+     */
 	CLOSING_DATE,
+
+	/**
+     * Sort by location.
+     */
 	LOCATION,
+
+    /**
+     * Sort by faculty.
+     */
 	FACULTY,
+
+	/**
+     * Sort by staff.
+     */
 	STAFF;
 }

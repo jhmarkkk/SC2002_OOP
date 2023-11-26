@@ -52,9 +52,11 @@ public class CAMs {
 	private CAMs() {}
 
 	
-	/** 
-	 * @param args
-	 */
+    /**
+     * The main method of the CAMs application.
+     *
+     * @param args the command-line arguments.
+     */
 	public static void main(String[] args) {
 
 		do {
