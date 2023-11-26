@@ -9,16 +9,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 
+import dao.StaffDaoImpl;
+
 import interfaces.services.DataServiceable;
 import interfaces.dao.StaffDao;
-import dao.StaffDaoImpl;
+
 import models.Staff;
 
 public class StaffDataService implements DataServiceable {
 	
+    private static final StaffDao staffDao = new StaffDaoImpl();
+
 	public void exporting (String filePath) {
 
-        StaffDao staffDao = new StaffDaoImpl();
         Map<String, Staff> staffDataMap = staffDao.getStaffs();
 
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {

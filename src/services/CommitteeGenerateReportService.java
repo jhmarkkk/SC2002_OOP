@@ -25,6 +25,7 @@ import interfaces.services.GenerateReportServiceable;
 import models.Camp;
 import models.CommitteeMember;
 import models.Student;
+
 import utils.InputUtil;
 
 public class CommitteeGenerateReportService implements GenerateReportServiceable {

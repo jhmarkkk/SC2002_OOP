@@ -1,14 +1,5 @@
 package services;
 
-import interfaces.services.DataServiceable;
-import interfaces.dao.CampDao;
-
-import dao.CampDaoImpl;
-
-import models.Camp;
-import models.Enquiry;
-import models.Suggestion;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -19,14 +10,24 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import utils.DateUtil;
+import dao.CampDaoImpl;
 
 import enums.Visibility;
 
+import interfaces.dao.CampDao;
+import interfaces.services.DataServiceable;
+
+import models.Camp;
+import models.Enquiry;
+import models.Suggestion;
+
+import utils.DateUtil;
+
 public class CampDataService implements DataServiceable {
 
+	private static final CampDao campDao = new CampDaoImpl();
+
 	public void exporting(String filePath) {
-		CampDao campDao = new CampDaoImpl();
 		Map<String, Camp> campDataMap = campDao.getCamps();
 
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {

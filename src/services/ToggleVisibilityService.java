@@ -8,13 +8,15 @@ import dao.CurrentUserDaoImpl;
 
 import enums.Visibility;
 
-import models.Camp;
-import models.Staff;
-import utils.InputUtil;
-import utils.PrintUtil;
 import interfaces.dao.CampDao;
 import interfaces.dao.CurrentUserDao;
 import interfaces.services.ToggleVisibilityServiceable;
+
+import models.Camp;
+import models.Staff;
+
+import utils.InputUtil;
+import utils.PrintUtil;
 
 public class ToggleVisibilityService implements ToggleVisibilityServiceable{
 		
@@ -22,7 +24,7 @@ public class ToggleVisibilityService implements ToggleVisibilityServiceable{
 	
 	private static final CampDao campDao = new CampDaoImpl();
 	
-    public void toggle(){
+    public void toggle() {
     	
     	int i, choice;
     	String campName;
@@ -33,10 +35,9 @@ public class ToggleVisibilityService implements ToggleVisibilityServiceable{
     	
     	do {
 			PrintUtil.header("Toggle Visibility");
-    		System.out.println("Toggle visibility for:");
 			for (i = 0; i < createdCampNames.size(); i++) {
 				campName = createdCampNames.get(i);
-				System.out.printf("%2d. %-40s | %s\n", i+1, campName, campData.get(campName).getVisibility().toString());
+				System.out.printf("%2d. %-30s | %s\n", i+1, campName, campData.get(campName).getVisibility().toString());
 			}
 			
 			System.out.printf("%2d. Back\n", i + 1);
@@ -52,11 +53,13 @@ public class ToggleVisibilityService implements ToggleVisibilityServiceable{
     	    if (selectedCamp.getVisibility() == Visibility.OFF)
     	    	selectedCamp.setVisibility(Visibility.ON);
     	    else {
-    	    	if (validateToggle(selectedCamp))
-    	    		System.out.println("Unable to toggle camp visibility off.");
-    	    	else
-    	    		selectedCamp.setVisibility(Visibility.OFF);
-    	    }
+    	    	if (validateToggle(selectedCamp)) {
+    	    		System.out.println("\n> Unable to toggle camp visibility off.");
+					return;
+				}
+    	    	selectedCamp.setVisibility(Visibility.OFF);
+			}
+			System.out.println("\n> Visibility toggled");
 		} while (true);
     }
     

@@ -6,16 +6,19 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import dao.StudentDaoImpl;
+
 import interfaces.services.DataServiceable;
 import interfaces.dao.StudentDao;
-import dao.StudentDaoImpl;
+
 import models.Student;
 
 public class StudentDataService implements DataServiceable {
 
+    private static final StudentDao studentDao = new StudentDaoImpl();
+    
 	public void exporting (String filePath) {
 
-        StudentDao studentDao = new StudentDaoImpl();
         Map<String, Student> studentDataMap = studentDao.getStudents();
 
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
