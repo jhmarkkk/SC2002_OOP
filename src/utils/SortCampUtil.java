@@ -13,8 +13,10 @@ import utils.CampComparators.LocationComparator;
 import utils.CampComparators.FacultyComparator;
 import utils.CampComparators.StaffComparator;
 
-public class CampFilter {
-    public static ArrayList<Camp> filter(ArrayList<Camp> camps, SortType sortType) {
+public class SortCampUtil {
+
+    public static ArrayList<Camp> sort(ArrayList<Camp> camps, SortType sortType) {
+
         switch (sortType) {
             case NAME:
                 NameComparator nameComparator = new NameComparator();

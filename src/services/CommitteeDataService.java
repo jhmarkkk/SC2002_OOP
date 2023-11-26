@@ -58,7 +58,6 @@ public class CommitteeDataService implements DataServiceable {
                 if (committeeMember.getSuggestions().isEmpty()) {
                     suggestionsString = "#NULL!";
                 } else {
-                    System.out.println();
                     suggestionsString = committeeMember.getSuggestions().stream().map(Object::toString).collect(Collectors.joining("|"));
                 }
 
@@ -75,7 +74,6 @@ public class CommitteeDataService implements DataServiceable {
                 bw.newLine();
             }
 
-            System.out.println("Committee data exported successfully!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -190,7 +188,6 @@ public class CommitteeDataService implements DataServiceable {
                     }
                 }
             }
-        	System.out.println("Committee data imported successfully!");
         } catch (IOException e) {
             e.printStackTrace();
         }

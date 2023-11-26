@@ -1,6 +1,5 @@
 package services;
 
-import java.lang.System;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,7 +61,6 @@ public class StudentDataService implements DataServiceable {
                 bw.newLine();
             }
 
-            System.out.println("Student data exported successfully!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -158,7 +156,6 @@ public class StudentDataService implements DataServiceable {
                     }
                 }
             }
-			System.out.println("Student data imported successfully!");
         } catch (IOException e) {
             e.printStackTrace();
         }

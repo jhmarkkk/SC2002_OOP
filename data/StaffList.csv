@@ -1,6 +1,6 @@
 Name,Email,Faculty,Password,createdCamps
-Madhukumar,HUKUMAR@NTU.EDU.SG,SCSE,P@$$w0rd,#NULL!
 Alexei,OURIN@ntu.edu.sg,ADM,P@$$w0rd,H13 Orientation|ADM Orientation
-Chattopadhyay,UPAM@NTU.EDU.SG,EEE,P@$$w0rd,#NULL!
-Datta,ANWIT@NTU.EDU.SG,SCSE,P@$$w0rd,NBS Orientation|NTU UOC
-Arvind,ARVI@NTU.EDU.SG,NBS,P@$$w0rd,#NULL!
+Chattopadhyay,UPAM@ntu.edu.sg,EEE,P@$$w0rd,#NULL!
+Madhukumar,HUKUMAR@ntu.edu.sg,SCSE,P@$$w0rd,#NULL!
+Arvind,ARVI@ntu.edu.sg,NBS,P@$$w0rd,#NULL!
+Datta,ANWIT@ntu.edu.sg,SCSE,P@$$w0rd,NBS Orientation|NTU UOC

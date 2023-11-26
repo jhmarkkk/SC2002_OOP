@@ -61,8 +61,8 @@ private static final Scanner sc = new Scanner(System.in);
     		
     		if (choice == i + 1) return;
     		
-    		if (choice >= 0 || choice <= i) {
-    			selectedCampName = createdCampNames.get(choice);
+    		if (choice >= 1 || choice <= i) {
+    			selectedCampName = createdCampNames.get(choice - 1);
     			selectedCamp = campDao.getCamps().get(selectedCampName);
     			break;
     		}
@@ -104,6 +104,8 @@ private static final Scanner sc = new Scanner(System.in);
 		} catch (IOException e) {
 			System.out.println("Invalid Path");
 		}
+
+		System.out.println("Report generated");
     }
 	
 	public String generate(Camp camp, GenerateType type){
@@ -125,6 +127,7 @@ private static final Scanner sc = new Scanner(System.in);
         	}
         	
     		for (String userID : camp.getCommitteeMembers()) {
+				System.out.println("Test: " + userID);
     			student = committeeMemberData.get(userID);
         		report = report.concat(String.format("%-10s| %s\n", student.getName(), "Committee member"));
         	}
@@ -147,9 +150,9 @@ private static final Scanner sc = new Scanner(System.in);
         
         if (type == GenerateType.COMMITTEE) {
         	report = String.format("Committee Members' List for %s\n", camp.getName());
-        	report = report.concat(String.format("%s\n", "=".repeat(14)));
+        	report = report.concat(String.format("%s\n", "=".repeat(18)));
         	report = report.concat(String.format("%-10s| %s\n", "Name", "Points"));
-        	report = report.concat(String.format("%s\n", "-".repeat(14)));      	
+        	report = report.concat(String.format("%s\n", "-".repeat(18)));      	
     		for (String userID : camp.getCommitteeMembers()) {
         		committeeMember = committeeMemberData.get(userID);
         		report = report.concat(String.format("%-10s| %s\n", committeeMember.getName(), committeeMember.getPoints()));

@@ -40,7 +40,7 @@ public class CommitteeController extends StudentController {
 			System.out.println("3. View registered camps");
 			System.out.println("4. View my enquiries");
 			System.out.println("5. Create enquiry");
-			System.out.printf("6. View %s details", committeeMember.getFacilitatingCamp());
+			System.out.printf("6. View %s details\n", committeeMember.getFacilitatingCamp());
 			System.out.println("7. Log out");
 			System.out.print("\nChoice: ");
 			

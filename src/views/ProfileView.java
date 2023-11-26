@@ -8,6 +8,7 @@ import interfaces.dao.CurrentUserDao;
 import interfaces.views.ProfileViewable;
 
 import models.User;
+import utils.PrintUtil;
 import models.CommitteeMember;
 
 public class ProfileView implements ProfileViewable {
@@ -19,18 +20,18 @@ public class ProfileView implements ProfileViewable {
         User currentUser = currentUserDao.getCurrentUser();
         CommitteeMember committeeMember;
         
-        System.out.println("===== User Profile =====");
-        System.out.printf("User ID: %s\n", currentUser.getUserID());
-        System.out.printf("Name: %s\n", currentUser.getName());
-        System.out.printf("Faculty: %s\n", currentUser.getFaculty());
-        System.out.printf("Role: %s", currentUser.getRole().toString());
+        PrintUtil.header("User Profile");
+        System.out.printf("%-10s: %s\n","User ID" , currentUser.getUserID());
+        System.out.printf("%-10s: %s\n", "Name", currentUser.getName());
+        System.out.printf("%-10s: %s\n", "Format", currentUser.getFaculty());
+        System.out.printf("%-10s: %s", "Role", Role.toString(currentUser.getRole()));
         
         if (currentUser.getRole() == Role.COMMITTEE) {
             committeeMember = (CommitteeMember) currentUser;
             System.out.printf(" of %s\n", committeeMember.getFacilitatingCamp());
-            System.out.printf("Points: %d\n", committeeMember.getPoints());
+            System.out.printf("%-10s: %d\n", "Points", committeeMember.getPoints());
         }
         
-        System.out.println();
+        System.out.println("\n");
     }
 }
