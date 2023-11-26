@@ -62,7 +62,7 @@ public class StaffEnquiryView implements EnquiryViewable {
                 System.out.printf("%-15s: %s\n","Camp" , camp.getName());
                 System.out.printf("%-15s: %s\n","Enquired by" , studentData.get(enquiry.getEnquirer()));
                 System.out.printf("%-15s: %s\n","Enquiry" , enquiry.getEnquiry());
-                if (enquiry.getEnquirer() == null) {
+                if (enquiry.getReplier() == null) {
                     System.out.printf("%-15s: -\n","Replied by");
                     System.out.printf("%-15s: -\n","Reply");
                 } else {
