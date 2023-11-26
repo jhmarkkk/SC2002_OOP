@@ -1,7 +1,6 @@
 package services;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import dao.CampDaoImpl;
 import dao.CommitteeMemberDaoImpl;
@@ -36,13 +35,13 @@ public class CommitteeReplyEnquiryService implements ReplyEnquiryServiceable {
         ArrayList<Enquiry> validEnquiryList = new ArrayList<Enquiry>();
 
         for (Enquiry enquiry : camp.getEnquiries().values()) {
-            if (enquiry.getEnquirer() != null) continue;
+            if (enquiry.getEnquirer() == null) continue;
 
             validEnquiryList.add(enquiry);
         }
 
         if (validEnquiryList.size() == 0) {
-            System.out.println("No enqury to reply");
+            System.out.println("No enquiry to reply");
             return;
         }
 
