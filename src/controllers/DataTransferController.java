@@ -18,6 +18,7 @@ public class DataTransferController {
 	private static DataServiceable campDataService = new CampDataService();
 	
 	public static void importData() {
+		
 		staffDataService.importing("data/StaffList.csv");
 		studentDataService.importing("data/StudentList.csv");
 		committeeMemberDataService.importing("data/CommitteeList.csv");

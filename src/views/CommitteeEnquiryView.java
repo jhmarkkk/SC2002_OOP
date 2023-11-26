@@ -1,20 +1,22 @@
 package views;
 
+import java.util.Map;
+
+import dao.CampDaoImpl;
+import dao.CurrentUserDaoImpl;
+import dao.StudentDaoImpl;
+
+import interfaces.dao.CampDao;
+import interfaces.dao.CurrentUserDao;
+import interfaces.dao.StudentDao;
 import interfaces.views.EnquiryViewable;
+
 import models.Camp;
 import models.CommitteeMember;
 import models.Enquiry;
 import models.Student;
+
 import utils.PrintUtil;
-import interfaces.dao.CurrentUserDao;
-import interfaces.dao.StudentDao;
-import dao.CurrentUserDaoImpl;
-import dao.StudentDaoImpl;
-import interfaces.dao.CampDao;
-
-import java.util.Map;
-
-import dao.CampDaoImpl;
 
 public class CommitteeEnquiryView implements EnquiryViewable {
 
@@ -29,15 +31,21 @@ public class CommitteeEnquiryView implements EnquiryViewable {
         Camp camp = campDao.getCamps().get(currentUser.getFacilitatingCamp());
         Map<String, Student> studentData = studentDao.getStudents();
 
-        PrintUtil.header(String.format("View %s Enquiries", camp.getName()));
+        PrintUtil.header(String.format("%s Enquiries", camp.getName()));
         for (Enquiry enquiry : camp.getEnquiries().values()) {
-            System.out.println("-".repeat(29));
+            System.out.println("-".repeat(50));
             System.out.printf("%-15s: %s\n","Enquiry ID" , enquiry.getEnquiryID());
             System.out.printf("%-15s: %s\n","Camp" , camp.getName());
-            System.out.printf("%-15s: %s\n","Enquired by" , studentData.get(enquiry.getEnquirer()));
+            System.out.printf("%-15s: %s\n","Enquired by" , studentData.get(enquiry.getEnquirer()).getName());
             System.out.printf("%-15s: %s\n","Enquiry" , enquiry.getEnquiry());
-            System.out.printf("%-15s: %s\n","Replied by" , enquiry.getReplier());
-            System.out.printf("%-15s: %s\n","Reply" , enquiry.getReply());
+            if (enquiry.getEnquirer() == null) {
+                System.out.printf("%-15s: -\n","Replied by");
+                System.out.printf("%-15s: -\n","Reply");
+            } else {
+                System.out.printf("%-15s: %s\n","Replied by" , enquiry.getReplier());
+                System.out.printf("%-15s: %s\n","Reply" , enquiry.getReply());
+            }
+
             System.out.println();
         }
 

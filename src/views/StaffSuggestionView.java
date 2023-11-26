@@ -4,12 +4,15 @@ import java.util.Map;
 
 import dao.CampDaoImpl;
 import dao.CurrentUserDaoImpl;
+
 import interfaces.dao.CampDao;
 import interfaces.dao.CurrentUserDao;
 import interfaces.views.SuggestionViewable;
+
 import models.Camp;
 import models.Staff;
 import models.Suggestion;
+
 import utils.PrintUtil;
 
 public class StaffSuggestionView implements SuggestionViewable {
@@ -24,13 +27,13 @@ public class StaffSuggestionView implements SuggestionViewable {
         Map<String, Camp> campData = campDao.getCamps();
         Staff currentUser = (Staff)currentUserDao.getCurrentUser();
 
-        PrintUtil.header("View Committee Suggestions");
+        PrintUtil.header("Camp Committee Suggestions");
         for (String createdCampID : currentUser.getCreatedCamps()) {
             camp = campData.get(createdCampID);
             if (camp.getSuggestions().size() == 0) continue;
 
             for (Suggestion suggestion : camp.getSuggestions().values()) {
-                System.out.println("-".repeat(29));
+                System.out.println("-".repeat(50));
                 System.out.printf("%-15s: %s\n","Suggestion ID" , suggestion.getSuggestionID());
                 System.out.printf("%-15s: %s\n","Camp" , camp.getName());
                 System.out.printf("%-15s: %s\n","Suggested by" , suggestion.getSuggester());

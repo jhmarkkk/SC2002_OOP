@@ -255,7 +255,7 @@ public class StaffController extends AbstractUserController {
 
 		do {
 			suggestionView.view();
-			System.out.println("1. Approve suggestion");
+			System.out.println("1. Approve pending suggestions");
 			System.out.println("2. Back");
 
 			switch (InputUtil.choice()) {

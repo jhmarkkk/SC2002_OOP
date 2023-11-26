@@ -48,7 +48,7 @@ public class CreatedCampView implements CampViewable {
         }
 
         createdCampList = SortCampUtil.sort(createdCampList, sortType);
-        PrintUtil.header("List of All Camps");
+        PrintUtil.header("List of Created Camps");
         for (Camp camp : createdCampList) {
             dateList = camp.getDates();
             PrintUtil.header(String.format("Camp %d", i++));
