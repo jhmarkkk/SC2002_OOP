@@ -13,7 +13,7 @@ import enums.Visibility;
  * It also manages information about attendees, committee members, enquiries, suggestions, and visibility.
  * 
  * @author Chin Jun Hao, Mark
- * @version 3.0
+ * @version 1.0
  * @since 1.0
  */
 public class Camp {
@@ -94,7 +94,7 @@ public class Camp {
 	private Visibility visibility;
 	
 	/**
-	 * Constructor used for importing Camp from CSV.
+	 * Constructor used for importing {@link Camp} from CSV.
 	 * 
 	 * @param name 						The name of the camp.
 	 * @param dates 					The list of dates on which the camp is scheduled.
@@ -131,7 +131,7 @@ public class Camp {
 	}
 
 	/**
-	 * Constructor for Staff to create new Camp.
+	 * Constructor for Staff to create new {@link Camp}.
 	 * 
 	 * @param name 						The name of the camp.
 	 * @param dates 					The list of dates on which the camp is scheduled.
@@ -174,7 +174,7 @@ public class Camp {
 	/**
 	 * Sets the name of the camp.
 	 * 
-	 * @param name The new name for the camp.
+	 * @param name The new name for the camp to set.
 	 */
 	public void setName(String name) {
 		
@@ -234,7 +234,7 @@ public class Camp {
 	/**
 	 * Sets the faculty to which the camp is open.
 	 * 
-	 * @param openTo The faculty to which the camp is open to.
+	 * @param openTo The new faculty to which the camp is open to.
 	 */
 	public void setOpenTo(String openTo) {
 		

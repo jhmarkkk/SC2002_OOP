@@ -11,7 +11,7 @@ import enums.Role;
  * Each student also has a {@link Role} which determines their level of access.
  * 
  * @author Chin Jun Hao, Mark
- * @version 3.0
+ * @version 1.0
  * @since 1.0
  */
 public class Student extends User {
@@ -27,7 +27,7 @@ public class Student extends User {
 	private Map<String, ArrayList<Integer>> enquiries;
 	
 	/**
-	 * Constructor used for importing Student from CSV.
+	 * Constructor used for importing {@link Student} from CSV.
 	 * 
 	 * @param userID 			The user ID of the Student member.
 	 * @param password 			The password of the Student member.

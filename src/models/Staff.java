@@ -10,7 +10,7 @@ import enums.Role;
  * Each staff also has a {@link Role} which determines their level of access.
  * 
  * @author Chin Jun Hao, Mark
- * @version 3.0
+ * @version 1.0
  * @since 1.0
  */
 public class Staff extends User{
@@ -20,7 +20,7 @@ public class Staff extends User{
 	private ArrayList<String> createdCamps;
 	
 	/**
-	 * Constructor used for importing Staff from CSV.
+	 * Constructor used for importing {@link Staff} from CSV.
 	 * 
 	 * @param userID		The user ID of the Staff member.
 	 * @param password		The password of the Staff member.

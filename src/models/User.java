@@ -10,7 +10,7 @@ import enums.Role;
  * <p>This class provides a basic structure for user-related functionalities within the CAMs system.</p>
  * 
  * @author Chin Jun Hao, Mark
- * @version 3.0
+ * @version 1.0
  * @since 1.0
  */
 public class User {
@@ -150,7 +150,7 @@ public class User {
 	/**
 	 * Sets the {@link Role} of the user.
 	 * 
-	 * @param role The new role of the user.
+	 * @param role The new role of the user to set.
 	 */
 	public void setRole(Role role) {
 		

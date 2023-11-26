@@ -11,7 +11,7 @@ import enums.Role;
  * Each Committee Member also has a {@link Role} which determines their level of access.
  * 
  * @author Chin Jun Hao, Mark
- * @version 3.0
+ * @version 1.0
  * @since 1.0
  */
 public class CommitteeMember extends Student {
@@ -32,7 +32,7 @@ public class CommitteeMember extends Student {
 	private int points = 0;
 	
 	/**
-	 * Constructor used for importing Committee Member from CSV.
+	 * Constructor used for importing {@link CommitteeMember} from CSV.
 	 * 
 	 * @param userID 			The user ID of the Committee Member.
 	 * @param password 			The password of the Committee Member.
@@ -56,7 +56,7 @@ public class CommitteeMember extends Student {
 	}
 
 	/**
-	 * Constructor used to promote Student to Committee Member.
+	 * Constructor used to promote {@link Student} to {@link CommitteeMember}.
 	 * 
 	 * @param userID 			The user ID of the Committee Member.
 	 * @param password 			The password of the Committee Member.
@@ -107,7 +107,7 @@ public class CommitteeMember extends Student {
 	/**
 	 * Sets the points earned for the committee member.
 	 * 
-	 * @param points The new value for the committee member's points.
+	 * @param points The new value for the committee member's points to set.
 	 */
 	public void setPoints(int points) {
 		
