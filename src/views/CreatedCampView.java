@@ -22,18 +22,24 @@ import utils.DateUtil;
 import utils.PrintUtil;
 
 /**
- * This file is the implementation for staff to view all the camps that the
- * staff are currently in control of
+ * The {@code CreatedCampView} class provides a view for staff to see all camps they have created.
+ * It implements the {@link CampViewable} interface.
  * 
- * @author Jiejun
+ * @author Chong Jiejun
+ * @version 1.0
+ * @since 1.0
  */
-
 public class CreatedCampView implements CampViewable {
 
     private static final CampDao campDao = new CampDaoImpl();
 
     private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
 
+    /**
+     * Displays a sorted view of all camps created by the current staff member.
+     *
+     * @param sortType The type of sorting to be applied.
+     */    
     public void sortView(SortType sortType) {
 
         int i = 1;
@@ -67,51 +73,3 @@ public class CreatedCampView implements CampViewable {
         }
     }
 }
-
-// private ArrayList<Camp> createdCamps = createdCamps;
-// }
-
-// public void view() {
-// CampDaoInterface campDao = CampDaoImplementation();
-// ArrayList<Camp> camps = campDao.getCamps();
-// System.out.println("===== Created Camps =====");
-// System.out.printf(
-// "Index | Camp Name | Dates | Registration closing date | Open to | Location |
-// Total slots | Camp Committee slots | Description | Visibility");
-// }
-
-// /**
-// * @param idlist
-// * @return ArrayList<Object>
-// */
-// public void filter(ArrayList<String> idlist, FilterType filterType =
-// filterType.Name) {
-// // use the interface to get camps
-// CampDaoInterface campDao = CampDaoImplementation();
-// ArrayList<Camp> camps = campDao.getCamps();
-// for (String id : idlist) {
-// for (Camp camp : camps) {
-// // if the id does not match the idlist, remove it from camps
-// if (!Objects.equals(id, camp.getName())) {
-// camps.remove(camp);
-// }
-// }
-// }
-// for (Camp camp : camps) {
-// }
-// if (filter == FilterType.NAME) {
-// Collections.sort(camps, (camp1, camp2) ->
-// camp1.getName().compareTo.camp2.getName());
-// return camps;
-// }
-// if (filter == FilterType.DATES) {
-// Collections.sort(camps, (camp1, camp2) ->
-// camp1.getLocation().compareTo.camp2.getLocation());
-// return camps;
-// }
-// if (filter == FilterType.DATE) {
-// Collections.sort(camps, (camp1, camp2) ->
-// camp1.getDate().compareTo.camp2.getName());
-// return camps;
-// }
-// };

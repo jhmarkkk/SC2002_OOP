@@ -23,6 +23,14 @@ import utils.SortCampUtil;
 import utils.DateUtil;
 import utils.PrintUtil;
 
+/**
+ * The {@code StudentAllCampView} class provides a view for students to see all available camps.
+ * It implements the {@link CampViewable} interface.
+ * 
+ * @author Chong Jiejun
+ * @version 1.0
+ * @since 1.0
+ */
 public class StudentAllCampView implements CampViewable {
 
     private static final CampDao campDao = new CampDaoImpl(); 
@@ -31,6 +39,11 @@ public class StudentAllCampView implements CampViewable {
 
     private static final StaffDao staffDao = new StaffDaoImpl();
 
+    /**
+     * Displays all available camps for the student.
+     * 
+     * @param sortType The sorting type for displaying the camps.
+     */    
     public void sortView(SortType sortType) {
 
         int i = 1;

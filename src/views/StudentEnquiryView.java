@@ -13,12 +13,23 @@ import models.Enquiry;
 import models.Student;
 import utils.PrintUtil;
 
+/**
+ * The {@code StudentEnquiryView} class provides a view for students to see their enquiries.
+ * It implements the {@link EnquiryViewable} interface.
+ * 
+ * @author Chong Jiejun
+ * @version 1.0
+ * @since 1.0
+ */
 public class StudentEnquiryView implements EnquiryViewable {
 
     private static final CampDao campDao = new CampDaoImpl();
 
     private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
     
+    /**
+     * Displays the enquiries made by the student.
+     */    
     public void view() {
 
         String campName;
@@ -49,17 +60,3 @@ public class StudentEnquiryView implements EnquiryViewable {
         }
     }
 }
-
-// for (String registeredCampID : registeredCampIDs) {
-// Camp registeredCamp = campsMap.get(registeredCampID);
-// for (Enquiry enq : registeredCamp.getEnquiries().values()) {
-// if (enq.getEnquirer().equals(student.getUserID()))
-// System.out.printf("***** Enquiry %d *****\n", enq.getEnquiryID());
-// System.out.printf("%s\n", enq.getEnquiry());
-// if (enq.getReplier() != null) {
-// System.out.printf("~~~~~ Replied by: %s ~~~~~\n", enq.getReplier());
-// System.out.printf("%s\n", enq.getReply());
-// }
-// }
-
-// }
