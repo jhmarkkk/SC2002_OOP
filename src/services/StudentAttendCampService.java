@@ -282,7 +282,7 @@ public class StudentAttendCampService implements AttendCampServiceable {
 		studentDao.setStudents(studentStore);
 
 		ArrayList<String> committeeMembers = camp.getCommitteeMembers();
-		committeeMembers.add(committeeMember.getName());
+		committeeMembers.add(committeeMember.getUserID());
 		camp.setCommitteeMembers(committeeMembers);
 
 		System.out.printf("You have registered for %s as a committee member\n", camp.getName());

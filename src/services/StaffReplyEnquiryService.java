@@ -30,8 +30,7 @@ public class StaffReplyEnquiryService implements ReplyEnquiryServiceable {
     public void reply() {
         
         int i = 0, choice;
-        Camp createdCamp, selectedCamp;
-        Integer selectedEnquiryID;
+        Camp camp, selectedCamp;
         Enquiry selectedEnquiry;
         String replyField;
         Staff currentUser = (Staff) currentUserDao.getCurrentUser();
@@ -39,8 +38,8 @@ public class StaffReplyEnquiryService implements ReplyEnquiryServiceable {
         Map<Integer, Camp> enquiryIDToCampMap = new HashMap<Integer, Camp>();
         
         for (String createdCampName : currentUser.getCreatedCamps()) {
-            createdCamp = campDao.getCamps().get(createdCampName);
-            for (Enquiry enquiry : createdCamp.getEnquiries().values()) {
+            camp = campDao.getCamps().get(createdCampName);
+            for (Enquiry enquiry : camp.getEnquiries().values()) {
                 if (enquiry.getEnquirer() != null) continue;
 
                 enquiryIDToCampMap.put(enquiry.getEnquiryID(), campDao.getCamps().get(createdCampName));
@@ -54,6 +53,7 @@ public class StaffReplyEnquiryService implements ReplyEnquiryServiceable {
         }
 
         do {
+            PrintUtil.header("Reply Enquiry");
             for (i = 0; i < validEnquiryList.size(); i++)
                 System.out.printf("%2d : Enquiry %d\n", i + 1, validEnquiryList.get(i).getEnquiryID());
 

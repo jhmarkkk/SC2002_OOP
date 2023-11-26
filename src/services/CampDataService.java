@@ -54,7 +54,6 @@ public class CampDataService implements DataServiceable {
 					dateStringArrayList.add(DateUtil.toString(cal));
 				}
 				dates = String.join("|", dateStringArrayList);
-				System.out.println("printing dates: " + dates);
 
 				String registeredClosingDate = DateUtil.toString(exportingCamp.getRegistrationClosingDate());
 
@@ -106,7 +105,7 @@ public class CampDataService implements DataServiceable {
 						enquiryFields.add(enquiry.getEnquiry());
 						enquiryFields.add(enquiry.getEnquirer());
 						// if reply is null, there must be no replier either
-						if (enquiry.getReply().equals(null)) {
+						if (enquiry.getReply() == null) {
 							enquiryFields.add("#NULL!");
 							enquiryFields.add("#NULL!");
 						} else {
@@ -126,7 +125,7 @@ public class CampDataService implements DataServiceable {
 						enquiryFields.add(enquiry.getEnquiry());
 						enquiryFields.add(enquiry.getEnquirer());
 						// if reply is null, there must be no replier either
-						if (enquiry.getReply().equals(null)) {
+						if (enquiry.getReply() == null) {
 							enquiryFields.add("#NULL!");
 							enquiryFields.add("#NULL!");
 						} else {
