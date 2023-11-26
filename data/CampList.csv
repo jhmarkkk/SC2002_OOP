@@ -1,5 +1,7 @@
-3,2
+Enquiry Counter,Suggestion Counter
+0,1
 campName,dates,registrationClosingDate,openTo,location,totalSlots,committeeSlots,description,staffInCharge,attendees,withdrawnAttendees,committeeMembers,visibility,enquiries,suggestions
-abc,2023-12-01|2023-12-02|2023-12-03,2022-04-01,SCSE,NS,50,5,description1,staff1,JQX45|XYZ203|FYM112,#NULL!,KBTAN23|PWAN22,ON,#NULL!,1|Maybe we should increase committeeSlots|PWAN22|false*2|Set attendees to 0|PWAN22|true
-def,2023-12-04|2023-12-05|2023-12-06,2023-12-01,NTU,SS,100,10,description2,staff2,LTEO123,ZTK42|XYAN10,#NULL!,ON,1|How many people going?|JQX45|idk lol|HOJ88*2|Poggers camp|PYL11|#NULL!|#NULL!,#NULL!
-xyz,2024-01-01,2023-12-29,SBS,EastSpine,10,9,new year camp,staff3,#NULL!,XYAN10,LTEO123,ON,3|What is this ratio|ZZTAN29|#NULL!|#NULL!,#NULL!
+NTU UOC,2024-02-10,2024-02-01,NTU,NTU,500,10,NTU UOC 2024 to welcome NTU freshmen,ANWIT,#NULL!,#NULL!,#NULL!,OFF,#NULL!,#NULL!
+ADM Orientation,2024-03-10|2024-03-11,2024-03-01,ADM,ADM,60,6,ADM Orientation 2024 to welcome ADM freshmen,OURIN,#NULL!,#NULL!,ERNEST,ON,#NULL!,#NULL!
+NBS Orientation,2024-01-20|2024-01-21|2024-01-22,2024-01-01,NBS,SS,100,5,NBS Orientation 2024 to welcome NBS freshmen,ANWIT,YCHERN|KOH1|BR015,YCN019,LEE,ON,#NULL!,1|Add more slots|LE51|false
+H13 Orientation,2024-01-22,2024-01-15,NTU,Hall 13,50,1,H13 Orientation to welcome H13 freshmen,OURIN,DL007,#NULL!,DONG,ON,#NULL!,#NULL!

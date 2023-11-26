@@ -2,7 +2,6 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Scanner;
 
 import dao.CampDaoImpl;
 import dao.CurrentUserDaoImpl;
@@ -11,15 +10,14 @@ import enums.Visibility;
 
 import models.Camp;
 import models.Staff;
-
+import utils.InputUtil;
+import utils.PrintUtil;
 import interfaces.dao.CampDao;
 import interfaces.dao.CurrentUserDao;
 import interfaces.services.ToggleVisibilityServiceable;
 
 public class ToggleVisibilityService implements ToggleVisibilityServiceable{
-	
-	private static final Scanner sc = new Scanner(System.in);
-	
+		
 	private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
 	
 	private static final CampDao campDao = new CampDaoImpl();
@@ -34,27 +32,23 @@ public class ToggleVisibilityService implements ToggleVisibilityServiceable{
     	Map<String, Camp> campData = campDao.getCamps();
     	
     	do {
+			PrintUtil.header("Toggle Visibility");
     		System.out.println("Toggle visibility for:");
 			for (i = 0; i < createdCampNames.size(); i++) {
 				campName = createdCampNames.get(i);
 				System.out.printf("%2d. %-40s | %s\n", i+1, campName, campData.get(campName).getVisibility().toString());
 			}
 			
-			System.out.printf("%2d. Back\n", i+1);
-    		System.out.print("Choice: ");
-    		
-    		choice = sc.nextInt();
-    		
-    		System.out.println();
-    		
+			System.out.printf("%2d. Back\n", i + 1);
+    		choice = InputUtil.choice();
 			if (choice == i + 1) return;
     		
-    		if (choice < 1 || choice > i + 1) {
-    			System.out.println("Invalid choice. Please choose again.");
+    		if (choice < 1 || choice > i) {
+    			PrintUtil.invalid("choice");;
     			continue;
     		}
     		
-    		selectedCamp = campData.get(createdCampNames.get(choice));
+    		selectedCamp = campData.get(createdCampNames.get(choice - 1));
     	    if (selectedCamp.getVisibility() == Visibility.OFF)
     	    	selectedCamp.setVisibility(Visibility.ON);
     	    else {

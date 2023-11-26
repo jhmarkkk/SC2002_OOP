@@ -1,43 +1,58 @@
 package views;
 
-import enums.SortType;
-import interfaces.views.CampViewable;
-
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Map;
 
-import interfaces.dao.CampDao;
 import dao.CampDaoImpl;
-
-import interfaces.dao.StaffDao;
 import dao.StaffDaoImpl;
 
+import enums.SortType;
+import enums.Visibility;
+
+
+import interfaces.dao.CampDao;
+import interfaces.dao.StaffDao;
+import interfaces.views.CampViewable;
+
 import models.Camp;
-import utils.CampFilter;
+import models.Staff;
+import utils.SortCampUtil;
 import utils.DateUtil;
+import utils.PrintUtil;
 
 public class StaffAllCampView implements CampViewable {
+
+    private static final CampDao campDao = new CampDaoImpl();
+
+    private static final StaffDao staffDao = new StaffDaoImpl();
+
     public void sortView(SortType sortType) {
-        CampDao campDao = new CampDaoImpl();
-        Map<String, Camp> campsMap = campDao.getCamps();
-        StaffDao staffDao = new StaffDaoImpl();
-        ArrayList<Camp> staffAllCamps = new ArrayList<Camp>(campsMap.values());
-        staffAllCamps = CampFilter.filter(staffAllCamps, sortType);
-        int index = 1;
-        System.out.println("===== List of Camps : Staff =====");
-        for (Camp staffCamp : staffAllCamps) {
-            System.out.printf("----- (Camp %d) %s -----\n", index, staffCamp.getName());
-            System.out.printf("Visibility : %s", staffCamp.getVisibility().toString());
-            System.out.print("Duration: ");
-            System.out.printf("From %s ", DateUtil.toString(staffCamp.getDates().get(0)));
-            System.out.printf("to %s ",
-                    DateUtil.toString(staffCamp.getDates().get(staffCamp.getDates().size() - 1)));
-            System.out.printf("\nLocation: %s\n", staffCamp.getLocation());
-            System.out.printf("Attendee Slots available: %d\n", staffCamp.getAttendeeSlots());
-            System.out.printf("Camp Committee Slots available: %d\n", staffCamp.getCommitteeSlots());
-            System.out.printf("Staff in charge: %s\n",
-                    staffDao.getStaffs().get(staffCamp.getStaffInCharge()).getName());
-            index++;
+
+        int i = 1;
+        ArrayList<GregorianCalendar> dateList;
+        Map<String, Staff> staffData = staffDao.getStaffs();
+        Map<String, Camp> campsData = campDao.getCamps();
+        ArrayList<Camp> campList = new ArrayList<Camp>(campsData.values());
+        campList = SortCampUtil.sort(campList, sortType);
+
+        PrintUtil.header("List of All Camps");
+        for (Camp camp : campList) {
+            dateList = camp.getDates();
+            PrintUtil.header(String.format("Camp %d", i++));
+            System.out.printf("%-30s: %s\n","Name" , camp.getName());
+            System.out.printf("%-30s: %s -> %s\n","Duration",
+                DateUtil.toString(dateList.get(0)),
+                DateUtil.toString(dateList.get(dateList.size() - 1)));
+            System.out.printf("%-30s: %s\n","Registration Closing Date" ,DateUtil.toString(camp.getRegistrationClosingDate()));
+            System.out.printf("%-30s: %s\n","User group" , camp.getOpenTo());
+            System.out.printf("%-30s: %s\n","Location" , camp.getLocation());
+            System.out.printf("%-30s: %s\n","Total slots" , camp.getTotalSlots());
+            System.out.printf("%-30s: %s\n","Camp committee slots" , camp.getCommitteeSlots());
+            System.out.printf("%-30s: %s\n","Description" , camp.getDescription());
+            System.out.printf("%-30s: %s\n","Staff-in-charge" , staffData.get(camp.getStaffInCharge()).getName());
+            System.out.printf("%-30s: %s\n","Visibility" , Visibility.toString(camp.getVisibility()));
+            System.out.println();
         }
     }
 }

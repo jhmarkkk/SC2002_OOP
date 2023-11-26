@@ -12,6 +12,7 @@ import interfaces.dao.CurrentUserDao;
 import interfaces.dao.StaffDao;
 import interfaces.dao.StudentDao;
 import interfaces.services.AuthServiceable;
+import interfaces.services.ChangePasswordServiceable;
 import models.CommitteeMember;
 import models.Staff;
 import models.Student;
@@ -29,6 +30,8 @@ public class AuthService implements AuthServiceable {
     
     private static final CommitteeMemberDao committeeMemberDao = new CommitteeMemberDaoImpl();
 
+	private static final ChangePasswordServiceable changePasswordService = new ChangePasswordService();
+
     public void login(){
         
     	User currentUser;
@@ -43,12 +46,14 @@ public class AuthService implements AuthServiceable {
 		
 		currentUser = validateUser(userID, password);
 		
-		if (currentUser != null) {
-			currentUserDao.setCurrentUser(currentUser);
+		if (currentUser == null) {
+			System.out.println("Invalid user ID or password");
 			return;
 		}
-		
-		System.out.println("Invalid user ID or password");
+
+		currentUserDao.setCurrentUser(currentUser);
+		while (currentUser.getPassword().equals("password"))
+			changePasswordService.changePassword();
     }
 
     public void logout(){

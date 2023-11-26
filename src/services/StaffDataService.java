@@ -7,7 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 
 import interfaces.services.DataServiceable;
@@ -47,7 +46,6 @@ public class StaffDataService implements DataServiceable {
                 bw.newLine();
             }
 
-            System.out.println("Staff data exported successfully!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -80,7 +78,6 @@ public class StaffDataService implements DataServiceable {
 						String password = fields[3];
 						
 						String username = email.substring(0, email.indexOf('@'));
-						System.out.println("Username: " + username);
 						
 						String createdCampsString = fields[4];
 						ArrayList<String> createdCamps = new ArrayList<String>();
@@ -100,7 +97,6 @@ public class StaffDataService implements DataServiceable {
                     }
                 }
             }
-			System.out.println("Staff data imported successfully!");
         } catch (IOException e) {
             e.printStackTrace();
         }

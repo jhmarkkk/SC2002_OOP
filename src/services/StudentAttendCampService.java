@@ -3,7 +3,8 @@ package services;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Map;
-import java.util.Scanner;
+
+import controllers.SessionController;
 
 import dao.CampDaoImpl;
 import dao.CommitteeMemberDaoImpl;
@@ -12,6 +13,7 @@ import dao.StudentDaoImpl;
 
 import enums.Role;
 import enums.Visibility;
+
 import interfaces.dao.CampDao;
 import interfaces.dao.CommitteeMemberDao;
 import interfaces.dao.CurrentUserDao;
@@ -21,11 +23,12 @@ import interfaces.services.AttendCampServiceable;
 import models.Camp;
 import models.CommitteeMember;
 import models.Student;
+
 import utils.DateUtil;
+import utils.InputUtil;
+import utils.PrintUtil;
 
 public class StudentAttendCampService implements AttendCampServiceable {
-
-	private static final Scanner sc = new Scanner(System.in);
 
 	private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
 
@@ -43,17 +46,17 @@ public class StudentAttendCampService implements AttendCampServiceable {
 		ArrayList<Camp> validCamps = getValidCamps(currentUser);
 
 		do {
-			System.out.println("Register for:");
+			PrintUtil.header("Register for Camp");
+			if (validCamps.size() == 0) {
+				System.out.println("No valid camp to register");
+				return;
+			}
+
 			for (i = 0; i < validCamps.size(); i++)
 				System.out.printf("%2d. %s\n", i + 1, validCamps.get(i).getName());
 
-			System.out.printf("%d. Back\n", i + 1);
-			System.out.print("Choice: ");
-
-			choice = sc.nextInt();
-
-			System.out.println();
-
+			System.out.printf("%2d. Back\n", i + 1);
+			choice = InputUtil.choice();
 			if (choice == i + 1)
 				return;
 
@@ -62,31 +65,37 @@ public class StudentAttendCampService implements AttendCampServiceable {
 				break;
 			}
 
-			System.out.println("Invalid choice. Please choose again.");
+			PrintUtil.invalid("choice");
 		} while (true);
 
 		do {
 			System.out.println("Register as:");
 			System.out.println("1. Attendee");
-			if (selectedCamp.getCommitteeSlots() > selectedCamp.getCommitteeMembers().size())
-				System.out.println("2. CommitteeMember");
-			System.out.print("Choice: ");
+			System.out.println("2. CommitteeMember");
 
-			choice = sc.nextInt();
-
-			System.out.println();
-
+			choice = InputUtil.choice();
 			if (choice == 1) {
+				if (selectedCamp.getAttendeeSlots() <= selectedCamp.getAttendees().size()) {
+					System.out.println("Attendee Slots are full");
+					return;
+				}
+
 				joinAsAttendee(currentUser, selectedCamp);
-				break;
+				return;
 			}
 
-			if (choice == 2 || selectedCamp.getCommitteeSlots() > selectedCamp.getCommitteeMembers().size()) {
+			if (choice == 2) {
+				if (selectedCamp.getCommitteeSlots() <= selectedCamp.getCommitteeMembers().size()) {
+					System.out.println("Committee Slots are full");
+					return;
+				}
+
 				joinAsCommittee(currentUser, selectedCamp);
-				break;
+				SessionController.endSession();
+				return;
 			}
 
-			System.out.println("Invalid choice. Please choose again.");
+			PrintUtil.invalid("choice");
 		} while (true);
 	}
 
@@ -99,16 +108,17 @@ public class StudentAttendCampService implements AttendCampServiceable {
 		ArrayList<String> registeredCampNames = currentUser.getRegisteredCamps();
 
 		do {
-			System.out.println("Withdraw from:");
+			PrintUtil.header("Withdraw from Camp");
+			if (registeredCampNames.size() == 0) {
+				System.out.println("No camp to withdraw from");
+				return;
+			}
+			
 			for (i = 0; i < registeredCampNames.size(); i++)
 				System.out.printf("%2d. %s\n", i + 1, registeredCampNames.get(i));
 
 			System.out.printf("%2d. Back\n", i + 1);
-			System.out.print("Choice: ");
-
-			choice = sc.nextInt();
-
-			System.out.println();
+			choice = InputUtil.choice();
 
 			if (choice == i + 1)
 				return;
@@ -119,7 +129,7 @@ public class StudentAttendCampService implements AttendCampServiceable {
 				break;
 			}
 
-			System.out.println("Invalid choice. Please choose again.");
+			PrintUtil.invalid("choice");
 		} while (true);
 
 		if (validateWithdrawingFromCommittee(currentUser, selectedCampName))
@@ -151,26 +161,26 @@ public class StudentAttendCampService implements AttendCampServiceable {
 
 		for (Camp camp : camps) {
 			if (camp.getVisibility() == Visibility.OFF)
-				continue;
-
+			continue;
+			
 			if (compareFaculty(camp.getOpenTo(), user.getFaculty()))
-				continue;
-
+			continue;
+			
 			if (compareSlots(camp))
-				continue;
-
+			continue;
+			
 			if (compareDeadline(DateUtil.toString(camp.getRegistrationClosingDate())))
-				continue;
-
+			continue;
+			
 			if (registeredCampName.contains(camp.getName()))
-				continue;
-
+			continue;
+			
 			if (camp.getWithdrawnAttendees().contains(user.getUserID()))
-				continue;
-
+			continue;
+			
 			if (compareFacilitatingCamp(user, camp.getName()))
-				continue;
-
+			continue;
+			
 			if (compareDates(camp.getDates(), unavailableDates))
 				continue;
 
@@ -206,9 +216,9 @@ public class StudentAttendCampService implements AttendCampServiceable {
 		GregorianCalendar today = new GregorianCalendar();
 
 		if (DateUtil.toString(today).compareTo(deadline) < 0)
-			return true;
+			return false;
 
-		return false;
+		return true;
 	}
 
 	private Boolean compareFacilitatingCamp(Student user, String campName) {

@@ -7,13 +7,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Scanner;
 
 import dao.CampDaoImpl;
 import dao.CommitteeMemberDaoImpl;
 import dao.CurrentUserDaoImpl;
 import dao.StudentDaoImpl;
+
 import enums.GenerateType;
+
 import interfaces.dao.CampDao;
 import interfaces.dao.CommitteeMemberDao;
 import interfaces.dao.CurrentUserDao;
@@ -25,11 +26,11 @@ import models.CommitteeMember;
 import models.Staff;
 import models.Student;
 
+import utils.InputUtil;
+import utils.PrintUtil;
+
 public class StaffGenerateReportService implements GenerateReportServiceable {
 
-	
-private static final Scanner sc = new Scanner(System.in);
-	
 	private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
 	
 	private static final StudentDao studentDao = new StudentDaoImpl();
@@ -48,41 +49,32 @@ private static final Scanner sc = new Scanner(System.in);
     	ArrayList<String> createdCampNames = currentUser.getCreatedCamps();
     	
     	do {
-    		System.out.println("Generate report for:");
+			PrintUtil.header("Generate Report");
     		for (i = 0; i < createdCampNames.size(); i++)
     			System.out.printf("%2d. %s\n", i+1, createdCampNames.get(i));
     		
     		System.out.printf("%2d. Back\n", i+1);
-    		System.out.print("Choice: ");
-    		
-    		choice = sc.nextInt();
-    		
-    		System.out.println();
+    		choice = InputUtil.choice();
     		
     		if (choice == i + 1) return;
     		
-    		if (choice >= 0 || choice <= i) {
-    			selectedCampName = createdCampNames.get(choice);
+    		if (choice >= 1 || choice <= i) {
+    			selectedCampName = createdCampNames.get(choice - 1);
     			selectedCamp = campDao.getCamps().get(selectedCampName);
     			break;
     		}
     		
-    		System.out.println("Invalid choice. Please choose again.");
+			PrintUtil.invalid("choice");
 		} while (true);  	
     	
         do {
-        	System.out.printf("Generating report for %s\n", selectedCampName);
+			PrintUtil.header(String.format("Generating report for %s\n", selectedCampName));
         	System.out.println("1. Generate all students");
 			System.out.println("2. Generate attendees");
 			System.out.println("3. Generate committee members");
 			System.out.println("4. Back");
-			System.out.print("\nChoice: ");
-			
-			choice = sc.nextInt();
-			
-			System.out.println();
-			
-			switch (choice) {
+
+			switch (InputUtil.choice()) {
 			case 1:
 				report = generate(selectedCamp, GenerateType.ALL);
 				break;
@@ -95,7 +87,7 @@ private static final Scanner sc = new Scanner(System.in);
 			case 4:
 				return;
 			default:
-				System.out.println("Invalid choice. Please choose again.");
+				PrintUtil.invalid("choice");
 			}
 		} while (choice < 1 || choice > 4);
         
@@ -104,6 +96,8 @@ private static final Scanner sc = new Scanner(System.in);
 		} catch (IOException e) {
 			System.out.println("Invalid Path");
 		}
+
+		System.out.println("Report generated");
     }
 	
 	public String generate(Camp camp, GenerateType type){
@@ -125,6 +119,7 @@ private static final Scanner sc = new Scanner(System.in);
         	}
         	
     		for (String userID : camp.getCommitteeMembers()) {
+				System.out.println("Test: " + userID);
     			student = committeeMemberData.get(userID);
         		report = report.concat(String.format("%-10s| %s\n", student.getName(), "Committee member"));
         	}
@@ -147,9 +142,9 @@ private static final Scanner sc = new Scanner(System.in);
         
         if (type == GenerateType.COMMITTEE) {
         	report = String.format("Committee Members' List for %s\n", camp.getName());
-        	report = report.concat(String.format("%s\n", "=".repeat(14)));
+        	report = report.concat(String.format("%s\n", "=".repeat(18)));
         	report = report.concat(String.format("%-10s| %s\n", "Name", "Points"));
-        	report = report.concat(String.format("%s\n", "-".repeat(14)));      	
+        	report = report.concat(String.format("%s\n", "-".repeat(18)));      	
     		for (String userID : camp.getCommitteeMembers()) {
         		committeeMember = committeeMemberData.get(userID);
         		report = report.concat(String.format("%-10s| %s\n", committeeMember.getName(), committeeMember.getPoints()));

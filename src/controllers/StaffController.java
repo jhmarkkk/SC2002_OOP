@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.Map;
+
 import enums.SortType;
 
 import interfaces.views.CampViewable;
@@ -11,11 +13,17 @@ import interfaces.services.GenerateReportServiceable;
 import interfaces.services.ReplyEnquiryServiceable;
 import interfaces.services.ToggleVisibilityServiceable;
 
+import models.Camp;
+import models.Staff;
+
 import services.StaffApproveSuggestionService;
 import services.StaffCampService;
 import services.StaffGenerateReportService;
 import services.StaffReplyEnquiryService;
 import services.ToggleVisibilityService;
+
+import utils.InputUtil;
+import utils.PrintUtil;
 
 import views.CreatedCampView;
 import views.StaffAllCampView;
@@ -55,9 +63,8 @@ public class StaffController extends AbstractUserController {
 	@Override
 	public void start() {
 
-		int choice;
-
 		do {
+			PrintUtil.header("Main Menu");
 			System.out.println("1. View profile");
 			System.out.println("2. View all camps");
 			System.out.println("3. View my created camps");
@@ -66,13 +73,8 @@ public class StaffController extends AbstractUserController {
 			System.out.println("6. View attendees' enquiries");
 			System.out.println("7. Generate Report");
 			System.out.println("8. Log out");
-			System.out.print("\nChoice: ");
 
-			choice = sc.nextInt();
-
-			System.out.println();
-
-			switch (choice) {
+			switch (InputUtil.choice()) {
 				case 1:
 					viewProfile();
 					break;
@@ -97,7 +99,7 @@ public class StaffController extends AbstractUserController {
 				case 8:
 					return;
 				default:
-					System.out.println("Invalid choice. Please choose again.");
+					PrintUtil.invalid("choice");;
 			}
 			
 			if (currentuserDao.getCurrentUser() == null) return;
@@ -108,26 +110,26 @@ public class StaffController extends AbstractUserController {
 	@Override
 	protected void viewAllCamps() {
 
-		int choice;
+		Map<String, Camp> campData = campDao.getCamps();
 		SortType type = SortType.NAME;
 
-		campView = new StaffAllCampView();
+		if (campData.isEmpty()) {
+			System.out.println("No camp");
+			return;
+		}
 
+		campView = new StaffAllCampView();
 		do {
 			campView.sortView(type);
+			PrintUtil.header("Sort Option");
 			System.out.println("1. Sort by camp dates");
 			System.out.println("2. Sort by camp registration closing date");
 			System.out.println("3. Sort by camp location");
 			System.out.println("4. Sort by camp faculty");
 			System.out.println("5. Sort by camp staff-in-charge");
 			System.out.println("6. Back");
-			System.out.print("\nChoice: ");
 
-			choice = sc.nextInt();
-
-			System.out.println();
-
-			switch (choice) {
+			switch (InputUtil.choice()) {
 				case 1:
 					type = SortType.DATES;
 					break;
@@ -146,7 +148,7 @@ public class StaffController extends AbstractUserController {
 				case 6:
 					return;
 				default:
-					System.out.println("Invalid choice. Please choose again.");
+					PrintUtil.invalid("choice");;
 			}
 
 		} while (true);
@@ -155,27 +157,19 @@ public class StaffController extends AbstractUserController {
 	@Override
 	protected void viewEnquiries() {
 
-		int choice;
-
-
 		do {
 			enquiryView.view();
 			System.out.println("1. Reply enquiry");
 			System.out.println("2. Back");
-			System.out.print("\nChoice: ");
 
-			choice = sc.nextInt();
-
-			System.out.println();
-
-			switch (choice) {
+			switch (InputUtil.choice()) {
 				case 1:
 					replyEnquiry();
 					break;
 				case 2:
 					return;
 				default:
-					System.out.println("Invalid choice. Please choose again.");
+					PrintUtil.invalid("choice");;
 			}
 
 		} while (true);
@@ -183,11 +177,15 @@ public class StaffController extends AbstractUserController {
 
 	protected void viewCreatedCamps() {
 
-		int choice;
+		Staff currentUser = (Staff)currentuserDao.getCurrentUser();
 		SortType type = SortType.NAME;
 
-		campView = new CreatedCampView();
+		if (currentUser.getCreatedCamps().isEmpty()) {
+			System.out.println("No created camp");
+			return;
+		}
 
+		campView = new CreatedCampView();
 		do {
 			campView.sortView(type);
 			System.out.println("1. Sort by camp dates");
@@ -199,13 +197,8 @@ public class StaffController extends AbstractUserController {
 			System.out.println("7. Edit camp");
 			System.out.println("8. Delete camp");
 			System.out.println("9. Back");
-			System.out.print("\nChoice: ");
 
-			choice = sc.nextInt();
-
-			System.out.println();
-
-			switch (choice) {
+			switch (InputUtil.choice()) {
 				case 1:
 					type = SortType.DATES;
 					break;
@@ -229,11 +222,11 @@ public class StaffController extends AbstractUserController {
 					break;
 				case 8:
 					deleteCamp();
-					break;
+					return;
 				case 9:
 					return;
 				default:
-					System.out.println("Invalid choice. Please choose again.");
+					PrintUtil.invalid("choice");;
 			}
 		} while (true);
 	}
@@ -260,26 +253,19 @@ public class StaffController extends AbstractUserController {
 
 	protected void viewSuggestions() {
 
-		int choice;
-
 		do {
 			suggestionView.view();
 			System.out.println("1. Approve suggestion");
 			System.out.println("2. Back");
-			System.out.print("\nChoice: ");
 
-			choice = sc.nextInt();
-
-			System.out.println();
-
-			switch (choice) {
+			switch (InputUtil.choice()) {
 				case 1:
 					approveSuggestion();
 					break;
 				case 2:
 					return;
 				default:
-					System.out.println("Invalid choice. Please choose again.");
+					PrintUtil.invalid("choice");;
 			}
 
 		} while (true);

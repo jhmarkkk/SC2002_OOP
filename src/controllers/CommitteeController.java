@@ -11,7 +11,8 @@ import models.CommitteeMember;
 import services.CommitteeGenerateReportService;
 import services.CommitteeReplyEnquiryService;
 import services.CommitteeSuggestionService;
-
+import utils.InputUtil;
+import utils.PrintUtil;
 import views.CampDetailView;
 import views.CommitteeEnquiryView;
 import views.CommitteeSuggestionView;
@@ -32,23 +33,18 @@ public class CommitteeController extends StudentController {
 	public void start() {
 		
 		CommitteeMember committeeMember = (CommitteeMember)currentuserDao.getCurrentUser();
-		int choice;
 		
 		do {
+			PrintUtil.header("Main Menu");
 			System.out.println("1. View profile");
 			System.out.println("2. View all camps");
 			System.out.println("3. View registered camps");
 			System.out.println("4. View my enquiries");
 			System.out.println("5. Create enquiry");
-			System.out.printf("6. View %s details", committeeMember.getFacilitatingCamp());
+			System.out.printf("6. View %s details\n", committeeMember.getFacilitatingCamp());
 			System.out.println("7. Log out");
-			System.out.print("\nChoice: ");
 			
-			choice = sc.nextInt();
-			
-			System.out.println();
-			
-			switch (choice) {
+			switch (InputUtil.choice()) {
 			case 1:
 				viewProfile();
 				break;
@@ -70,7 +66,7 @@ public class CommitteeController extends StudentController {
 			case 7:
 				return;
 			default:
-				System.out.println("Invalid choice. Please choose again.");
+				PrintUtil.invalid("choice");
 			}
 
 			if (currentuserDao.getCurrentUser() == null) return;
@@ -79,9 +75,7 @@ public class CommitteeController extends StudentController {
 	}
 	
 	protected void viewCampDetails() {
-		
-		int choice;
-		
+			
 		campDetailView.view();
 		
 		do {
@@ -92,11 +86,7 @@ public class CommitteeController extends StudentController {
 			System.out.println("5. Back");
 			System.out.print("\nChoice: ");
 			
-			choice = sc.nextInt();
-			
-			System.out.println();
-			
-			switch (choice) {
+			switch (InputUtil.choice()) {
 			case 1:
 				viewAttendeesEnquiries();
 				break;
@@ -112,67 +102,53 @@ public class CommitteeController extends StudentController {
 			case 5:
 				return;
 			default:
-				System.out.println("Invalid choice. Please choose again.");
+				PrintUtil.invalid("choice");
 			}
 
 		} while(true);
 	}
 	
 	protected void viewAttendeesEnquiries() {
-		
-		int choice;
-		
+				
 		enquiryView = new CommitteeEnquiryView();
 		
 		do {
 			enquiryView.view();
 			System.out.println("1. Reply enquiry");
 			System.out.println("2. Back");
-			System.out.print("\nChoice: ");
 			
-			choice = sc.nextInt();
-			
-			System.out.println();
-			
-			switch (choice) {
+			switch (InputUtil.choice()) {
 			case 1:
 				replyEnquiry();
 				break;
 			case 2:
 				return;
 			default:
-				System.out.println("Invalid choice. Please choose again.");
+				PrintUtil.invalid("choice");
 			}
 			
 		} while (true);
 	}
 	
 	protected void viewSuggestions() {
-
-		int choice;
 		
 		do {
 			suggestionView.view();
 			System.out.println("1. Edit suggestion");
 			System.out.println("2. Delete suggestion");
 			System.out.println("3. Back");
-			System.out.print("\nChoice: ");
 			
-			choice = sc.nextInt();
-			
-			System.out.println();
-			
-			switch (choice) {
+			switch (InputUtil.choice()) {
 			case 1:
 				editSuggestion();
 				break;
 			case 2:
 				deleteSuggestion();
-				break;
+				return;
 			case 3:
 				return;
 			default:
-				System.out.println("Invalid choice. Please choose again.");
+				PrintUtil.invalid("choice");
 			}
 		} while (true);
 	}
