@@ -29,6 +29,9 @@ public class StudentEnquiryView implements EnquiryViewable {
 
     private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
 
+    /**
+     * Represents the data access object for student-related operations.
+     */
     public static final StudentDao studentDao = new StudentDaoImpl();
     
     /**

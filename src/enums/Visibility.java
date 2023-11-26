@@ -3,13 +3,12 @@ package enums;
 
 /**
  * The {@code Visibility} enum represents different visibility states.
- * <p>
+ * 
  * The enum values include:
  * <ul>
  *   <li>{@code ON}: Represents the "On" visibility state.</li>
  *   <li>{@code OFF}: Represents the "Off" visibility state.</li>
  * </ul>
- * </p>
  * 
  * <p>The enum also provides a {@link #toString(Visibility)} method to convert a visibility state to its corresponding string representation.</p>
  * 

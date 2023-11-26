@@ -2,7 +2,7 @@ package enums;
 
 /**
  * The {@code SortType} enum represents different sorting types.
- * <p>
+ * 
  * The enum values include:
  * <ul>
  *   <li>{@code NAME}: Sort by name.</li>
@@ -12,7 +12,6 @@ package enums;
  *   <li>{@code FACULTY}: Sort by faculty.</li>
  *   <li>{@code STAFF}: Sort by staff.</li>
  * </ul>
- * </p>
  *
  * @version 1.0
  * @since 1.0

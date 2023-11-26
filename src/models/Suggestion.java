@@ -97,7 +97,7 @@ public class Suggestion {
 	/**
 	 * Sets the approval status of the suggestion.
 	 * 
-	 * @param approver The new approval status to set.
+	 * @param approved The new approval status to set.
 	 */
 	public void setApproved(boolean approved) {
 		

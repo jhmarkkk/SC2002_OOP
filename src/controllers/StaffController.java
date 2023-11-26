@@ -40,7 +40,6 @@ import views.StaffSuggestionView;
  * @version 1.0
  * @since 1.0
  * 
- * @see UserController
  * @see StaffApproveSuggestionService
  * @see StaffCampService
  * @see StaffGenerateReportService

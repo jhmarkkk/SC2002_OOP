@@ -26,11 +26,19 @@ import utils.PrintUtil;
  * @see interfaces.views.EnquiryViewable
  */
 public class StaffEnquiryView implements EnquiryViewable {
-
+    /**
+     * Represents the data access object for camp-related operations.
+     */
     public static final CampDao campDao = new CampDaoImpl();
-
+    
+    /**
+     * Represents the data access object for the current user.
+     */
     public static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
 
+    /**
+     * Represents the data access object for student-related operations.
+     */
     public static final StudentDao studentDao = new StudentDaoImpl();
     
     /**

@@ -2,8 +2,6 @@ package interfaces.services;
 
 /**
  * The {@code ToggleVisibilityServiceable} interface represents an entity that provides the ability to toggle visibility.
- * 
- * <p>Classes implementing this interface should provide an implementation for the {@link #toggle()} method to handle the process of toggling visibility.</p>
  *
  * @author Huang Caihong
  * @author Joelle Chew Ningxi
