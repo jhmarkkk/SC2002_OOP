@@ -54,6 +54,7 @@ public class CampDataService implements DataServiceable {
 					dateStringArrayList.add(DateUtil.toString(cal));
 				}
 				dates = String.join("|", dateStringArrayList);
+				System.out.println("printing dates: " + dates);
 
 				String registeredClosingDate = DateUtil.toString(exportingCamp.getRegistrationClosingDate());
 
@@ -238,7 +239,7 @@ public class CampDataService implements DataServiceable {
 				campName = fields[0];
 
 				if (!fields[1].equals("#NULL!")) {
-					if (fields[1].contains("\\|")) {
+					if (fields[1].contains("|")) {
 						String[] dateStrings = fields[1].split("\\|");
 						for (String dateString : dateStrings) {
 							dates.add(DateUtil.toDate(dateString));
