@@ -25,7 +25,7 @@ public class StaffEnquiryView implements EnquiryViewable {
         Map<String, Student> studentsMap = studentDao.getStudents();
         for (String createdCampID : staff.getCreatedCamps()) {
             Camp createdCamp = campsMap.get(createdCampID);
-            PrintUtil.header("Enquiries for created camps");
+            PrintUtil.header("Created Camp Enquiries");
             for (Enquiry enq : createdCamp.getEnquiries().values()) {
                 System.out.println("-".repeat(29));
                 System.out.printf("%-10s: %s\n", "Enquiry ID", enq.getEnquiryID());
