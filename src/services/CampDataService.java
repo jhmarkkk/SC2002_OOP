@@ -1,14 +1,5 @@
 package services;
 
-import interfaces.services.DataServiceable;
-import interfaces.dao.CampDao;
-
-import dao.CampDaoImpl;
-
-import models.Camp;
-import models.Enquiry;
-import models.Suggestion;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -19,9 +10,18 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import utils.DateUtil;
+import dao.CampDaoImpl;
 
 import enums.Visibility;
+
+import interfaces.dao.CampDao;
+import interfaces.services.DataServiceable;
+
+import models.Camp;
+import models.Enquiry;
+import models.Suggestion;
+
+import utils.DateUtil;
 
 /**
  * The {@code CampDataService} class provides data import and export services for the camps in the CAMs application.
@@ -43,16 +43,11 @@ import enums.Visibility;
  * @see utils.DateUtil
  * @see enums.Visibility
  */
-
 public class CampDataService implements DataServiceable {
 
-    /**
-     * Exports camp data to a specified file path.
-     *
-     * @param filePath The path for the file to be exported to.
-     */
+	private static final CampDao campDao = new CampDaoImpl();
+
 	public void exporting(String filePath) {
-		CampDao campDao = new CampDaoImpl();
 		Map<String, Camp> campDataMap = campDao.getCamps();
 
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {

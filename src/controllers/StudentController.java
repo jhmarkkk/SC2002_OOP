@@ -106,7 +106,6 @@ public class StudentController extends AbstractUserController {
 		SortType type = SortType.NAME;
 
 		campView = new StudentAllCampView();
-
 		do {
 			campView.sortView(type);
 			System.out.println("1. Sort by camp dates");

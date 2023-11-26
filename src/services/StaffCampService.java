@@ -81,7 +81,8 @@ public class StaffCampService implements CampServiceable {
         
         campData.put(name, camp);
 		createdCampNameList.add(name);
-		System.out.println("Camp created");
+		
+		System.out.println("\n> Camp created");
     }
 
     /**
@@ -121,11 +122,11 @@ public class StaffCampService implements CampServiceable {
         if (validateDelete(selectedCamp)) {
         	campData.remove(selectedCampName);
 			createdCampNames.remove(selectedCampName);
-        	System.out.println(selectedCampName + " successfully deleted");
+        	System.out.println("\n> " + selectedCampName + " successfully deleted");
         	return;
         }
         
-        System.out.println("Unable to delete " + selectedCampName);
+        System.out.println("\n> Unable to delete " + selectedCampName);
     }
 
    /**
@@ -287,7 +288,6 @@ public class StaffCampService implements CampServiceable {
 			}
 
 			ArrayList<GregorianCalendar> dates = getDateRange(startDate, numOfDays);
-			System.out.println();
 			return dates;    	
 		} while (true);
     }
@@ -337,7 +337,6 @@ public class StaffCampService implements CampServiceable {
 			}
     		
     		if (DateUtil.toString(today).compareTo(closingDateStr) < 0) {
-    			System.out.println();
     			return closingDate;
     		}
     		
@@ -394,6 +393,7 @@ public class StaffCampService implements CampServiceable {
     	do {
 			totalSlots = InputUtil.nextInt("Enter total slots");				
 			if (totalSlots <= 0) {
+				System.err.print("Total slots must be more than 0. ");
 				PrintUtil.invalid("input");
 				continue;
 			}
@@ -417,13 +417,24 @@ public class StaffCampService implements CampServiceable {
     	int committeeSlots;
     	
     	do {
-    		committeeSlots = InputUtil.nextInt("Enter number of committee slots");   		
-    		if (committeeSlots < 0 || committeeSlots > 10 ||
-				committeeSlots > totalSlots || committeeSlots < occupiedSlots) {
+    		committeeSlots = InputUtil.nextInt("Enter number of committee slots");
+			if (committeeSlots < 0 || committeeSlots > 10) {
+				System.out.print("Committee slots must be between 0 - 10. ");
 				PrintUtil.invalid("input");
     			continue;
-    		}
+			}
 
+			if (committeeSlots > totalSlots) {
+				System.out.print("Committee slots must be less than total slots. ");
+				PrintUtil.invalid("input");
+    			continue;
+			}
+
+			if (committeeSlots < occupiedSlots) {
+				System.out.print("Committee slots must be more than current occupied slots. ");
+				PrintUtil.invalid("input");
+    			continue;
+			}
     		return committeeSlots;
 		} while (true);
 	}

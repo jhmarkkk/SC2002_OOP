@@ -85,7 +85,7 @@ public class StaffApproveSuggestionService implements ApproveSuggestionServiceab
         }
         
 		if (validSuggestionIDList.size() == 0) {
-            System.out.println("No suggestion to approve");
+            System.out.println("\n> No suggestion to approve");
             return;
         }
 
@@ -109,10 +109,11 @@ public class StaffApproveSuggestionService implements ApproveSuggestionServiceab
         camp = suggestionIDToCampMap.get(suggestionID);
         selectedSuggestion = camp.getSuggestions().get(suggestionID);
         committeeMember = committeeMemberData.get(selectedSuggestion.getSuggester());
-        System.out.println("Camp: " + camp.getName());
+		System.out.println();
 		System.out.printf("%-15s: %s\n","Camp" , camp.getName());
 		System.out.printf("%-15s: %s\n","Suggested by" , selectedSuggestion.getSuggester());
 		System.out.printf("%-15s: %s\n","Suggestion" , selectedSuggestion.getSuggestion());
+		System.out.println();
 		
         do {
         	System.out.println("1. Approve");
@@ -122,7 +123,7 @@ public class StaffApproveSuggestionService implements ApproveSuggestionServiceab
 			case 1:
 				selectedSuggestion.setApproved(true);
 				committeeMember.setPoints(committeeMember.getPoints() + 1);
-				System.out.println("Suggestion approved");
+				System.out.println("\n> Suggestion approved");
 				return;
 			case 2:
 				return;

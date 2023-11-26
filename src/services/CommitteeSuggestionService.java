@@ -5,12 +5,15 @@ import java.util.ArrayList;
 
 import dao.CampDaoImpl;
 import dao.CurrentUserDaoImpl;
+
 import interfaces.dao.CampDao;
 import interfaces.dao.CurrentUserDao;
 import interfaces.services.SuggestionServiceable;
+
 import models.Camp;
 import models.CommitteeMember;
 import models.Suggestion;
+
 import utils.InputUtil;
 import utils.PrintUtil;
 
@@ -69,7 +72,7 @@ public class CommitteeSuggestionService implements SuggestionServiceable {
         SuggestionData.put(newSuggestion.getSuggestionID(), newSuggestion);
         committeeSuggestionIDList.add(newSuggestion.getSuggestionID());
         currentUser.setPoints(currentUser.getPoints() + 1);
-        System.out.println("Suggestion created");
+        System.out.println("\n> Suggestion created");
     }
 
     /**
@@ -91,7 +94,7 @@ public class CommitteeSuggestionService implements SuggestionServiceable {
         }
 
         if (validSuggestionList.size() == 0) {
-            System.out.println("No valid suggestion to delete");
+            System.out.println("\n> No valid suggestion to delete");
             return;
         }
 
@@ -113,7 +116,7 @@ public class CommitteeSuggestionService implements SuggestionServiceable {
         validSuggestionList.remove(selectedSuggestion);
         suggestionData.remove(selectedSuggestion.getSuggestionID());
         currentUser.setPoints(currentUser.getPoints() - 1);
-        System.out.println("Suggestion deleted");
+        System.out.println("\n> Suggestion deleted");
     }
 
     /**
@@ -136,7 +139,7 @@ public class CommitteeSuggestionService implements SuggestionServiceable {
         }
 
         if (validSuggestionList.size() == 0) {
-            System.out.println("No valid suggestion to edit");
+            System.out.println("\n> No valid suggestion to edit");
             return;
         }
 
@@ -163,6 +166,6 @@ public class CommitteeSuggestionService implements SuggestionServiceable {
         } while (true);
 
         selectedSuggestion.setSuggestion(newSuggestionField);
-        System.out.println("Suggestion deleted");
+        System.out.println("\n> Suggestion edited");
     }
 }

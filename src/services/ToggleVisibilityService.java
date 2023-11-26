@@ -8,14 +8,15 @@ import dao.CurrentUserDaoImpl;
 
 import enums.Visibility;
 
-import models.Camp;
-import models.Staff;
-import utils.InputUtil;
-import utils.PrintUtil;
 import interfaces.dao.CampDao;
 import interfaces.dao.CurrentUserDao;
 import interfaces.services.ToggleVisibilityServiceable;
 
+import models.Camp;
+import models.Staff;
+
+import utils.InputUtil;
+import utils.PrintUtil;
 /**
  * The {@code ToggleVisibilityService} class provides functionality to toggle the visibility of camps created by the current staff member. 
  * It implements the {@link ToggleVisibilityServiceable} interface.
@@ -24,8 +25,16 @@ import interfaces.services.ToggleVisibilityServiceable;
  * @version 1.0
  * @since 1.0
  *
+ * @see dao.CampDaoImpl
+ * @see dao.CurrentUserDaoImpl
+ * @see enums.Visibility
+ * @see interfaces.dao.CampDao
+ * @see interfaces.dao.CurrentUserDao
  * @see interfaces.services.ToggleVisibilityServiceable
+ * @see models.Camp
+ * @see models.Staff
  */
+
 public class ToggleVisibilityService implements ToggleVisibilityServiceable{
 		
 	private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
@@ -36,7 +45,8 @@ public class ToggleVisibilityService implements ToggleVisibilityServiceable{
      * Toggles the visibility of camps created by the current staff member.
      * The staff member can choose a camp to toggle its visibility on or off.
      */
-    public void toggle(){
+	
+    public void toggle() {
     	
     	int i, choice;
     	String campName;
@@ -47,10 +57,9 @@ public class ToggleVisibilityService implements ToggleVisibilityServiceable{
     	
     	do {
 			PrintUtil.header("Toggle Visibility");
-    		System.out.println("Toggle visibility for:");
 			for (i = 0; i < createdCampNames.size(); i++) {
 				campName = createdCampNames.get(i);
-				System.out.printf("%2d. %-40s | %s\n", i+1, campName, campData.get(campName).getVisibility().toString());
+				System.out.printf("%2d. %-30s | %s\n", i+1, campName, campData.get(campName).getVisibility().toString());
 			}
 			
 			System.out.printf("%2d. Back\n", i + 1);
@@ -66,11 +75,13 @@ public class ToggleVisibilityService implements ToggleVisibilityServiceable{
     	    if (selectedCamp.getVisibility() == Visibility.OFF)
     	    	selectedCamp.setVisibility(Visibility.ON);
     	    else {
-    	    	if (validateToggle(selectedCamp))
-    	    		System.out.println("Unable to toggle camp visibility off.");
-    	    	else
-    	    		selectedCamp.setVisibility(Visibility.OFF);
-    	    }
+    	    	if (validateToggle(selectedCamp)) {
+    	    		System.out.println("\n> Unable to toggle camp visibility off.");
+					return;
+				}
+    	    	selectedCamp.setVisibility(Visibility.OFF);
+			}
+			System.out.println("\n> Visibility toggled");
 		} while (true);
     }
     

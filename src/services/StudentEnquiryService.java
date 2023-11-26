@@ -1,22 +1,24 @@
 package services;
 
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import interfaces.dao.CurrentUserDao;
-import dao.CurrentUserDaoImpl;
 import enums.Role;
 import enums.Visibility;
+
+import dao.CampDaoImpl;
+import dao.CurrentUserDaoImpl;
+
+import interfaces.dao.CampDao;
+import interfaces.dao.CurrentUserDao;
 import interfaces.services.EnquiryServiceable;
+
+import models.Camp;
+import models.CommitteeMember;
 import models.Enquiry;
 import models.Student;
 
-import dao.CampDaoImpl;
-import interfaces.dao.CampDao;
-import models.Camp;
-import models.CommitteeMember;
 import utils.InputUtil;
 import utils.PrintUtil;
 
@@ -31,7 +33,6 @@ import utils.PrintUtil;
  * @see interfaces.services.EnquiryServiceable
  */
 public class StudentEnquiryService implements EnquiryServiceable {
-    Scanner sc = new Scanner(System.in);
 
     private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
 
@@ -72,7 +73,7 @@ public class StudentEnquiryService implements EnquiryServiceable {
         do {
             PrintUtil.header("Enquire About Camp");
             if (validCampList.isEmpty()) {
-                System.out.println("No available camps to enquire");
+                System.out.println("\n> No available camps to enquire");
                 return;
             }
 
@@ -113,7 +114,7 @@ public class StudentEnquiryService implements EnquiryServiceable {
             studentEnquiryData.put(selectedCampName, studentCampEnquiryList);
         }
 
-        System.out.println("Enquiry created");
+        System.out.println("\n> Enquiry created");
     }
 
     /**
@@ -145,14 +146,14 @@ public class StudentEnquiryService implements EnquiryServiceable {
         }
 
         if (studentAllEnquiryList.isEmpty()) {
-            System.out.println("No valid enquiry to delete");
+            System.out.println("\n> No valid enquiry to delete");
             return;
         }
         
         do {
             PrintUtil.header("Delete Enquiry");
             for (i = 0; i < studentAllEnquiryList.size(); i++)
-                System.out.printf("%2d. Enquiry %d\n", i + 1, studentAllEnquiryList.get(i));
+                System.out.printf("%2d. Enquiry ID %d\n", i + 1, studentAllEnquiryList.get(i));
 
             System.out.printf("%2d. Back\n", i + 1);
             choice = InputUtil.choice();
@@ -172,7 +173,7 @@ public class StudentEnquiryService implements EnquiryServiceable {
         selectedCampStudentEnquiryList.remove(selectedEnquiryID);
         if (selectedCampStudentEnquiryList.isEmpty()) studentEnquiryData.remove(selectedCamp.getName());
         
-        System.out.println("Enquiry deleted");
+        System.out.println("\n> Enquiry deleted");
     }
     
     /**
@@ -206,14 +207,14 @@ public class StudentEnquiryService implements EnquiryServiceable {
         }
 
         if (studentAllEnquiryList.isEmpty()) {
-            System.out.println("No valid enquiry to edit");
+            System.out.println("\n>  valid enquiry to edit");
             return;
         }
         
         do {
             PrintUtil.header("Edit Enquiry");
             for (i = 0; i < studentAllEnquiryList.size(); i++)
-                System.out.printf("%2d. Enquiry %d\n", i + 1, studentAllEnquiryList.get(i));
+                System.out.printf("%2d. Enquiry ID %d\n", i + 1, studentAllEnquiryList.get(i));
 
             System.out.printf("%2d. Back\n", i + 1);
             choice = InputUtil.choice();
@@ -236,6 +237,6 @@ public class StudentEnquiryService implements EnquiryServiceable {
         } while (true);
 
         selectedEnquiry.setEnquiry(newEnquiryField);
-        System.out.println("Enquiry updated");
+        System.out.println("\n> Enquiry updated");
     }
 }

@@ -37,6 +37,7 @@ public class DataTransferController {
      * Imports data from CSV files for staff, students, committee members, and camps.
      */	
 	public static void importData() {
+		
 		staffDataService.importing("data/StaffList.csv");
 		studentDataService.importing("data/StudentList.csv");
 		committeeMemberDataService.importing("data/CommitteeList.csv");

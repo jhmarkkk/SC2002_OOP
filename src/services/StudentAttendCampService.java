@@ -81,7 +81,7 @@ public class StudentAttendCampService implements AttendCampServiceable {
 		do {
 			PrintUtil.header("Register for Camp");
 			if (validCamps.size() == 0) {
-				System.out.println("No valid camp to register");
+				System.out.println("\n> No valid camp to register");
 				return;
 			}
 
@@ -102,14 +102,14 @@ public class StudentAttendCampService implements AttendCampServiceable {
 		} while (true);
 
 		do {
-			System.out.println("Register as:");
+			System.out.println("\nRegister as:");
 			System.out.println("1. Attendee");
 			System.out.println("2. CommitteeMember");
 
 			choice = InputUtil.choice();
 			if (choice == 1) {
 				if (selectedCamp.getAttendeeSlots() <= selectedCamp.getAttendees().size()) {
-					System.out.println("Attendee Slots are full");
+					System.out.println("\n> Attendee Slots are full");
 					return;
 				}
 
@@ -119,7 +119,7 @@ public class StudentAttendCampService implements AttendCampServiceable {
 
 			if (choice == 2) {
 				if (selectedCamp.getCommitteeSlots() <= selectedCamp.getCommitteeMembers().size()) {
-					System.out.println("Committee Slots are full");
+					System.out.println("\n> Committee Slots are full");
 					return;
 				}
 
@@ -155,7 +155,7 @@ public class StudentAttendCampService implements AttendCampServiceable {
 		do {
 			PrintUtil.header("Withdraw from Camp");
 			if (registeredCampNames.size() == 0) {
-				System.out.println("No camp to withdraw from");
+				System.out.println("\n> No camp to withdraw from");
 				return;
 			}
 			
@@ -190,7 +190,7 @@ public class StudentAttendCampService implements AttendCampServiceable {
 		selectedCamp.setAttendees(attendees);
 		selectedCamp.setWithdrawnAttendees(withdrawnAttendees);
 
-		System.out.printf("You have withdrawn from %s\n", selectedCampName);
+		System.out.printf("\n> You have withdrawn from %s\n", selectedCampName);
 	}
 
 	
@@ -359,7 +359,7 @@ public class StudentAttendCampService implements AttendCampServiceable {
 		attendees.add(user.getUserID());
 		camp.setAttendees(attendees);
 
-		System.out.printf("You have registered for %s as an attendee\n", camp.getName());
+		System.out.printf("\n> You have registered for %s as an attendee\n", camp.getName());
 	}
 
 	/**
@@ -371,7 +371,7 @@ public class StudentAttendCampService implements AttendCampServiceable {
 	private void joinAsCommittee(Student user, Camp camp) {
 
 		if (user.getRole() == Role.COMMITTEE) {
-			System.out.println("You are already a committee memner of another camp");
+			System.out.println("\n> You are already a committee member of another camp");
 			return;
 		}
 
@@ -391,7 +391,7 @@ public class StudentAttendCampService implements AttendCampServiceable {
 		committeeMembers.add(committeeMember.getUserID());
 		camp.setCommitteeMembers(committeeMembers);
 
-		System.out.printf("You have registered for %s as a committee member\n", camp.getName());
+		System.out.printf("\n> You have registered for %s as a committee member\n", camp.getName());
 	}
 
 	/**
@@ -412,7 +412,7 @@ public class StudentAttendCampService implements AttendCampServiceable {
 		if (!committeeMember.getFacilitatingCamp().equals(campName))
 			return false;
 
-		System.out.printf("Committee member cannot withdraw from %s\n", campName);
+		System.out.printf("\n> Cannot withdraw from %s as a committee member\n", campName);
 		return true;
 	}
 }

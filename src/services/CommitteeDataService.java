@@ -11,9 +11,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import dao.CommitteeMemberDaoImpl;
+
 import interfaces.services.DataServiceable;
 import interfaces.dao.CommitteeMemberDao;
-import dao.CommitteeMemberDaoImpl;
+
 import models.CommitteeMember;
 
 /**
@@ -36,9 +38,10 @@ public class CommitteeDataService implements DataServiceable {
      *
      * @param filePath The path for the file to be exported to.
      */
+    private static final CommitteeMemberDao committeeMemberDao = new CommitteeMemberDaoImpl();
+
     public void exporting (String filePath) {
         
-        CommitteeMemberDao committeeMemberDao = new CommitteeMemberDaoImpl();
         Map<String, CommitteeMember> committeeDataMap = committeeMemberDao.getCommitteeMembers();
     
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {

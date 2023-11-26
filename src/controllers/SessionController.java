@@ -4,6 +4,7 @@ import dao.CurrentUserDaoImpl;
 import interfaces.dao.CurrentUserDao;
 import interfaces.services.AuthServiceable;
 import services.AuthService;
+
 import utils.InputUtil;
 import utils.PrintUtil;
 
@@ -55,7 +56,8 @@ public class SessionController {
 		do {
 			PrintUtil.header("Start");
 			System.out.println("1. Log in");
-			System.out.println("2. Quit");			
+			System.out.println("2. Quit");
+						
 			switch (InputUtil.choice()) {
 			case 1:
 				authService.login();

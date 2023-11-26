@@ -1,23 +1,26 @@
 package services;
 
-import interfaces.dao.CampDao;
-import interfaces.dao.CurrentUserDao;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import dao.CampDaoImpl;
 import dao.CurrentUserDaoImpl;
-import interfaces.dao.StaffDao;
 import dao.StaffDaoImpl;
+import dao.StudentDaoImpl;
+
+import interfaces.dao.CampDao;
+import interfaces.dao.CurrentUserDao;
+import interfaces.dao.StaffDao;
+import interfaces.dao.StudentDao;
 import interfaces.services.ReplyEnquiryServiceable;
 
+import models.Camp;
+import models.Enquiry;
 import models.Staff;
+
 import utils.InputUtil;
 import utils.PrintUtil;
-import models.Enquiry;
-import models.Camp;
 
 /**
  * The {@code StaffReplyEnquiryService} class provides methods for staff members to reply to enquiries related to camps they are responsible for.
@@ -50,6 +53,11 @@ public class StaffReplyEnquiryService implements ReplyEnquiryServiceable {
      * The data access object for managing staff members.
      */
     public static final StaffDao staffDao = new StaffDaoImpl();
+
+    /**
+     * The data access object for managing student members.
+     */
+    public static final StudentDao studentDao = new StudentDaoImpl();
 
     /**
      * The data access object for managing the current user.
@@ -88,7 +96,7 @@ public class StaffReplyEnquiryService implements ReplyEnquiryServiceable {
         }
 
         if (validEnquiryList.size() == 0) {
-            System.out.println("No enqury to reply");
+            System.out.println("\n> No enqury to reply");
             return;
         }
 
@@ -108,8 +116,9 @@ public class StaffReplyEnquiryService implements ReplyEnquiryServiceable {
         } while (true);
 
         selectedCamp = enquiryIDToCampMap.get(selectedEnquiry.getEnquiryID());
-        System.out.printf("%-10s: %s\n","Camp" , selectedCamp.getName());
-        System.out.printf("%-10s: %s\n","Enquiry" , selectedEnquiry.getEnquiry());
+        System.out.printf("%-15s: %s\n","Camp" , selectedCamp.getName());
+        System.out.printf("%-15s: %s\n","Enquired by" , studentDao.getStudents().get(selectedEnquiry.getEnquirer()).getName());
+        System.out.printf("%-15s: %s\n","Enquiry" , selectedEnquiry.getEnquiry());
         do {
             replyField = InputUtil.nextString("Enter reply");
             if (!replyField.isBlank()) break;
@@ -119,6 +128,6 @@ public class StaffReplyEnquiryService implements ReplyEnquiryServiceable {
 
         selectedEnquiry.setReply(replyField);
         selectedEnquiry.setReplier(currentUser.getUserID());
-        System.out.println("Enquiry replied");
+        System.out.println("\n> Enquiry replied");
     }
 }

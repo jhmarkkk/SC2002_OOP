@@ -10,11 +10,13 @@ import interfaces.dao.CampDao;
 import interfaces.dao.CommitteeMemberDao;
 import interfaces.dao.CurrentUserDao;
 import interfaces.services.ReplyEnquiryServiceable;
+
+import models.Camp;
 import models.CommitteeMember;
 import models.Enquiry;
+
 import utils.InputUtil;
 import utils.PrintUtil;
-import models.Camp;
 
 /**
  * The {@code CommitteeReplyEnquiryService} class provides methods for committee members to reply to enquiries in the context of a specific camp.
@@ -73,7 +75,7 @@ public class CommitteeReplyEnquiryService implements ReplyEnquiryServiceable {
         }
 
         if (validEnquiryList.size() == 0) {
-            System.out.println("No enquiry to reply");
+            System.out.println("\n> No enquiry to reply");
             return;
         }
 
@@ -105,6 +107,6 @@ public class CommitteeReplyEnquiryService implements ReplyEnquiryServiceable {
         selectedEnquiry.setReply(replyField);
         selectedEnquiry.setReplier(currentUser.getUserID());
         currentUser.setPoints(currentUser.getPoints() + 1);
-        System.out.println("Enquiry replied");
+        System.out.println("\n> Enquiry replied");
     }
 }

@@ -34,6 +34,5 @@ public class PrintUtil {
      */    
     public static void invalid(String type) {
         System.out.printf("Invalid %s. Try again.\n", type);
-        System.out.println("-".repeat(SIZE - 1));
     }
 }
