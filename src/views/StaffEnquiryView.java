@@ -15,6 +15,16 @@ import models.Staff;
 import models.Student;
 import utils.PrintUtil;
 
+/**
+ * The {@code StaffEnquiryView} class provides functionality to view enquiries made for the camps created by the current staff member.
+ * It implements the {@link EnquiryViewable} interface.
+ *
+ * @author Chuan Shan Hong
+ * @version 1.0
+ * @since 1.0
+ *
+ * @see interfaces.views.EnquiryViewable
+ */
 public class StaffEnquiryView implements EnquiryViewable {
 
     public static final CampDao campDao = new CampDaoImpl();
@@ -22,7 +32,10 @@ public class StaffEnquiryView implements EnquiryViewable {
     public static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
 
     public static final StudentDao studentDao = new StudentDaoImpl();
-
+    
+    /**
+     * Displays details of enquiries made for the camps created by the current staff member.
+     */
     public void view() {
 
         Camp camp;

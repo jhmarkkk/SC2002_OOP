@@ -13,12 +13,25 @@ import models.Suggestion;
 
 import utils.PrintUtil;
 
+/**
+ * The {@code CommitteeSuggestionView} class provides functionality to view suggestions made for a specific camp by the current committee member.
+ * It implements the {@link SuggestionViewable} interface.
+ *
+ * @author Chuan Shan Hong
+ * @version 1.0
+ * @since 1.0
+ *
+ * @see interfaces.views.SuggestionViewable
+ */
 public class CommitteeSuggestionView implements SuggestionViewable {
     
     private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
     
     private static final CampDao campDao = new CampDaoImpl();
     
+    /**
+     * Displays details of suggestions made for the camp facilitated by the current committee member.
+     */
     public void view() {
         
         CommitteeMember currentUser = (CommitteeMember)currentUserDao.getCurrentUser();

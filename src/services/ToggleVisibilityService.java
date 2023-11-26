@@ -17,10 +17,10 @@ import interfaces.dao.CurrentUserDao;
 import interfaces.services.ToggleVisibilityServiceable;
 
 /**
- * The {@code ToggleVisibilityService} class provides functionality to toggle the visibility of camps
- * created by the current staff member. It implements the {@link ToggleVisibilityServiceable} interface.
+ * The {@code ToggleVisibilityService} class provides functionality to toggle the visibility of camps created by the current staff member. 
+ * It implements the {@link ToggleVisibilityServiceable} interface.
  *
- * @author [Author Name]
+ * @author Chuan Shan Hong
  * @version 1.0
  * @since 1.0
  *

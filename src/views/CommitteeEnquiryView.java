@@ -16,6 +16,16 @@ import java.util.Map;
 
 import dao.CampDaoImpl;
 
+/**
+ * The {@code CommitteeEnquiryView} class provides functionality to view enquiries related to a specific camp.
+ * It implements the {@link EnquiryViewable} interface.
+ *
+ * @author Chuan Shan Hong
+ * @version 1.0
+ * @since 1.0
+ *
+ * @see interfaces.views.EnquiryViewable
+ */
 public class CommitteeEnquiryView implements EnquiryViewable {
 
     private static final CampDao campDao = new CampDaoImpl();
@@ -24,6 +34,9 @@ public class CommitteeEnquiryView implements EnquiryViewable {
 
     private static final StudentDao studentDao = new StudentDaoImpl();
 
+    /**
+     * Displays details of enquiries related to the camp facilitated by the current committee member.
+     */
     public void view() {
         CommitteeMember currentUser = (CommitteeMember) currentUserDao.getCurrentUser();
         Camp camp = campDao.getCamps().get(currentUser.getFacilitatingCamp());

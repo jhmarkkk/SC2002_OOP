@@ -12,12 +12,25 @@ import models.Staff;
 import models.Suggestion;
 import utils.PrintUtil;
 
+/**
+ * The {@code StaffSuggestionView} class provides functionality to view suggestions made for the camps created by the current staff member.
+ * It implements the {@link SuggestionViewable} interface.
+ *
+ * @author Chuan Shan Hong
+ * @version 1.0
+ * @since 1.0
+ *
+ * @see interfaces.views.SuggestionViewable
+ */
 public class StaffSuggestionView implements SuggestionViewable {
     
     private static final CampDao campDao = new CampDaoImpl();
 
     private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
     
+    /**
+     * Displays details of suggestions made for the camps created by the current staff member.
+     */
     public void view() {
         
         Camp camp;
