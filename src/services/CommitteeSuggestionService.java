@@ -2,7 +2,6 @@ package services;
 
 import java.util.Map;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import dao.CampDaoImpl;
 import dao.CurrentUserDaoImpl;
@@ -12,100 +11,124 @@ import interfaces.services.SuggestionServiceable;
 import models.Camp;
 import models.CommitteeMember;
 import models.Suggestion;
+import utils.InputUtil;
+import utils.PrintUtil;
 
 public class CommitteeSuggestionService implements SuggestionServiceable {
-    Scanner sc = new Scanner(System.in);
 
     private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
+
     private static final CampDao campDao = new CampDaoImpl();
 
     public void create() {
-        CommitteeMember comMember = (CommitteeMember) currentUserDao.getCurrentUser();
-        Camp facilitatingCamp = campDao.getCamps().get(comMember.getFacilitatingCamp());
-        System.out.printf("Enter Suggestion for %s >>> ", facilitatingCamp.getName());
-        String suggestionString = sc.nextLine();
 
-        String suggester = comMember.getUserID();
+        CommitteeMember currentUser = (CommitteeMember) currentUserDao.getCurrentUser();
+        Camp camp = campDao.getCamps().get(currentUser.getFacilitatingCamp());
+        Map<Integer, Suggestion> SuggestionData = camp.getSuggestions();
+        ArrayList<Integer> committeeSuggestionIDList = currentUser.getSuggestions();
+        String suggestionField;
+        Suggestion newSuggestion;
 
-        Suggestion newSuggestion = new Suggestion(suggestionString, suggester);
+        PrintUtil.header("New Suggestion");
+        do {
+            suggestionField = InputUtil.nextString("Enter suggestion");
+            if (!suggestionField.isBlank()) break;
 
-        Map<Integer, Suggestion> SuggestionMap = facilitatingCamp.getSuggestions();
+            PrintUtil.invalid("input");
+        } while (true);
 
-        // add to camps knowledge of the suggestion
-        SuggestionMap.put(newSuggestion.getSuggestionID(), newSuggestion);
-        facilitatingCamp.setSuggestions(SuggestionMap);
-        ArrayList<Integer> committeeSuggestionMap = comMember.getSuggestions();
-        // add to comMember knowledge of suggestion
-        committeeSuggestionMap.add(newSuggestion.getSuggestionID());
-
-        System.out.printf("You have created suggestion with id %d\n", newSuggestion.getSuggestionID());
+        newSuggestion = new Suggestion(suggestionField, currentUser.getUserID());
+        SuggestionData.put(newSuggestion.getSuggestionID(), newSuggestion);
+        committeeSuggestionIDList.add(newSuggestion.getSuggestionID());
+        currentUser.setPoints(currentUser.getPoints() + 1);
+        System.out.println("Suggestion created");
     }
 
     public void delete() {
-        int i, choice, suggestionDeleteID;
-        CommitteeMember comMember = (CommitteeMember) currentUserDao.getCurrentUser();
-        Camp facilitatingCamp = campDao.getCamps().get(comMember.getFacilitatingCamp());
-        ArrayList<Integer> suggestionIDs = comMember.getSuggestions();
-        if (suggestionIDs.size() == 0) {
-            System.out.println("No suggestion to delete!");
+
+        int i, choice;
+        Suggestion selectedSuggestion;
+        CommitteeMember currentUser = (CommitteeMember) currentUserDao.getCurrentUser();
+        Camp camp = campDao.getCamps().get(currentUser.getFacilitatingCamp());
+        Map<Integer, Suggestion> suggestionData = camp.getSuggestions();
+        ArrayList<Suggestion> validSuggestionList = new ArrayList<>();
+
+        for (Integer suggestionID : currentUser.getSuggestions()) {
+            if (suggestionData.get(suggestionID).getSuggester() != null) continue;
+
+            validSuggestionList.add(suggestionData.get(suggestionID));
+        }
+
+        if (validSuggestionList.size() == 0) {
+            System.out.println("No valid suggestion to delete");
             return;
         }
+
         do {
-            for (i = 0; i < suggestionIDs.size(); i++)
-                System.out.printf("Choice %d : Suggestion ID %d\n", i, suggestionIDs.get(i));
-            System.out.printf("Choice %d : Back", i + 1);
-            System.out.printf("Select choice: ");
-            choice = sc.nextInt();
-            System.out.println();
-            if (choice == i + 1)
-                return;
+            PrintUtil.header("Delete Suggestion");
+            for (i = 0; i < validSuggestionList.size(); i++)
+                System.out.printf("%2d. Suggestion %d\n", i, validSuggestionList.get(i).getSuggestionID());
+            
+            System.out.printf("%2d. Back", i + 1);
+            choice = InputUtil.choice();
+            if (choice == i + 1) return;
+
             if (choice >= 1 || choice <= i) {
-                suggestionDeleteID = suggestionIDs.get(choice - 1);
+                selectedSuggestion = validSuggestionList.get(choice - 1);
                 break;
             }
         } while (true);
 
-        // remove suggestion IDs from the user's knowledge
-        suggestionIDs.remove(Integer.valueOf(suggestionDeleteID));
-        // remove the suggestion from camp's knowledge
-        Map<Integer, Suggestion> SuggestionMap = facilitatingCamp.getSuggestions();
-        SuggestionMap.remove(suggestionDeleteID);
-        facilitatingCamp.setSuggestions(SuggestionMap);
-
-        System.out.printf("You have deleted suggestion with id %d\n", suggestionDeleteID);
+        validSuggestionList.remove(selectedSuggestion);
+        suggestionData.remove(selectedSuggestion.getSuggestionID());
+        currentUser.setPoints(currentUser.getPoints() - 1);
+        System.out.println("Suggestion deleted");
     }
 
     public void edit() {
-        int i, choice, suggestionEditID;
-        CommitteeMember comMember = (CommitteeMember) currentUserDao.getCurrentUser();
-        Camp facilitatingCamp = campDao.getCamps().get(comMember.getFacilitatingCamp());
-        ArrayList<Integer> suggestionIDs = comMember.getSuggestions();
-        if (suggestionIDs.size() == 0) {
-            System.out.println("No suggestion to edit!");
+
+        int i, choice;
+        Suggestion selectedSuggestion;
+        String newSuggestionField;
+        CommitteeMember currentUser = (CommitteeMember) currentUserDao.getCurrentUser();
+        Camp camp = campDao.getCamps().get(currentUser.getFacilitatingCamp());
+        Map<Integer, Suggestion> suggestionData = camp.getSuggestions();
+        ArrayList<Suggestion> validSuggestionList = new ArrayList<>();
+
+        for (Integer suggestionID : currentUser.getSuggestions()) {
+            if (suggestionData.get(suggestionID).getSuggester() != null) continue;
+
+            validSuggestionList.add(suggestionData.get(suggestionID));
+        }
+
+        if (validSuggestionList.size() == 0) {
+            System.out.println("No valid suggestion to edit");
             return;
         }
+
         do {
-            for (i = 0; i < suggestionIDs.size(); i++)
-                System.out.printf("Choice %d : Suggestion ID %d\n", i, suggestionIDs.get(i));
-            System.out.printf("Choice %d : Back", i + 1);
-            System.out.printf("Select choice: ");
-            choice = sc.nextInt();
-            System.out.println();
-            if (choice == i + 1)
-                return;
-            if (choice >= 0 || choice <= i) {
-                suggestionEditID = suggestionIDs.get(choice - 1);
+            PrintUtil.header("Edit Suggestion");
+            for (i = 0; i < validSuggestionList.size(); i++)
+                System.out.printf("%2d. Suggestion %d\n", i, validSuggestionList.get(i).getSuggestionID());
+            
+            System.out.printf("%2d. Back", i + 1);
+            choice = InputUtil.choice();
+            if (choice == i + 1) return;
+
+            if (choice >= 1 || choice <= i) {
+                selectedSuggestion = validSuggestionList.get(choice - 1);
                 break;
             }
         } while (true);
 
-        // change the suggestion from the camp's knowledge
-        Map<Integer, Suggestion> SuggestionMap = facilitatingCamp.getSuggestions();
-        Suggestion suggestionToEdit = SuggestionMap.get(suggestionEditID);
-        System.out.printf("Enter new Suggestion for %s >>> ", facilitatingCamp.getName());
-        String suggestionString = sc.nextLine();
-        suggestionToEdit.setSuggestion(suggestionString);
+        do {
+            newSuggestionField = InputUtil.nextString("Enter suggestion");
+            if (!newSuggestionField.isBlank()) break;
 
-        System.out.printf("You have edited suggestion with id %d\n", suggestionEditID);
+            PrintUtil.invalid("input");
+        } while (true);
+
+        selectedSuggestion.setSuggestion(newSuggestionField);
+        System.out.println("Suggestion deleted");
     }
 }
