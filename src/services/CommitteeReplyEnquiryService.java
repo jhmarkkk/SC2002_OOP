@@ -1,7 +1,6 @@
 package services;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import dao.CampDaoImpl;
 import dao.CommitteeMemberDaoImpl;
