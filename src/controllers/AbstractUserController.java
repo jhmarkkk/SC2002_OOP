@@ -24,10 +24,10 @@ import views.ProfileView;
  * @version 1.0
  * @since 1.0
  * 
- * @see CampDaoImpl
- * @see CurrentUserDaoImpl
- * @see ChangePasswordService
- * @see ProfileView
+ * @see dao.CampDaoImpl
+ * @see dao.CurrentUserDaoImpl
+ * @see services.ChangePasswordService
+ * @see views.ProfileView
  * @see interfaces.dao.CampDao
  * @see interfaces.dao.CurrentUserDao
  * @see interfaces.services.ChangePasswordServiceable

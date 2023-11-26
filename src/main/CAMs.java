@@ -29,14 +29,14 @@ import models.User;
  * @version 1.0
  * @since 1.0
  * 
- * @see SessionController
- * @see DataTransferController
- * @see StaffController
- * @see StudentController
- * @see CommitteeController
- * @see CurrentUserDaoImpl
- * @see StaffDaoImpl
- * @see StudentDaoImpl
+ * @see controllers.SessionController
+ * @see controllers.DataTransferController
+ * @see controllers.StaffController
+ * @see controllers.StudentController
+ * @see controllers.CommitteeController
+ * @see dao.CurrentUserDaoImpl
+ * @see dao.StaffDaoImpl
+ * @see dao.StudentDaoImpl
  * @see interfaces.dao.CurrentUserDao
  * @see interfaces.dao.StaffDao
  * @see interfaces.dao.StudentDao

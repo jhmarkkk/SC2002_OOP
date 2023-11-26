@@ -14,6 +14,9 @@ import models.Camp;
  * @author Chin Jun Hao, Mark
  * @version 1.0
  * @since 1.0
+ * 
+ * @see interfaces.dao.CampDao
+ * @see models.Camp
  */
 public class CampDaoImpl implements CampDao {
 	

@@ -16,6 +16,7 @@ import models.CommitteeMember;
  * @since 1.0
  * 
  * @see CommitteeMemberDao
+ * @see models.CommitteeMember
  */
 public class CommitteeMemberDaoImpl implements CommitteeMemberDao {
 	

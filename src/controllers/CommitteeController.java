@@ -34,9 +34,9 @@ import views.CommitteeSuggestionView;
  * @since 1.0
  * 
  * @see StudentController
- * @see CommitteeGenerateReportService
- * @see CommitteeReplyEnquiryService
- * @see CommitteeSuggestionService
+ * @see services.CommitteeGenerateReportService
+ * @see services.CommitteeReplyEnquiryService
+ * @see services.CommitteeSuggestionService
  * @see interfaces.services.GenerateReportServiceable
  * @see interfaces.services.ReplyEnquiryServiceable
  * @see interfaces.services.SuggestionServiceable
