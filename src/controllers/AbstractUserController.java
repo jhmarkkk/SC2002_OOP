@@ -1,7 +1,5 @@
 package controllers;
 
-import java.util.Scanner;
-
 import dao.CampDaoImpl;
 import dao.CurrentUserDaoImpl;
 import interfaces.dao.CampDao;
@@ -10,14 +8,14 @@ import interfaces.services.ChangePasswordServiceable;
 import interfaces.views.ProfileViewable;
 
 import services.ChangePasswordService;
+
 import utils.InputUtil;
 import utils.PrintUtil;
+
 import views.ProfileView;
 
 
 abstract class AbstractUserController {
-	
-	protected static Scanner sc = new Scanner(System.in);
 	
 	protected static CurrentUserDao currentuserDao = new CurrentUserDaoImpl();
 

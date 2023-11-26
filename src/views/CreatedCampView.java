@@ -4,26 +4,19 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Map;
 
-import interfaces.dao.CampDao;
 import dao.CampDaoImpl;
-
-import interfaces.dao.StaffDao;
-import dao.StaffDaoImpl;
-
-import interfaces.dao.StudentDao;
-import dao.StudentDaoImpl;
-
-import interfaces.dao.CurrentUserDao;
 import dao.CurrentUserDaoImpl;
 
+import enums.SortType;
+import enums.Visibility;
+
+import interfaces.dao.CampDao;
+import interfaces.dao.CurrentUserDao;
 import interfaces.views.CampViewable;
 
 import models.Camp;
 import models.Staff;
-import models.Student;
 
-import enums.SortType;
-import enums.Visibility;
 import utils.SortCampUtil;
 import utils.DateUtil;
 import utils.PrintUtil;
@@ -40,7 +33,6 @@ public class CreatedCampView implements CampViewable {
     private static final CampDao campDao = new CampDaoImpl();
 
     private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
-
 
     public void sortView(SortType sortType) {
 
