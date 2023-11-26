@@ -1,6 +1,6 @@
 Name,Email,Faculty,Password,RegisteredCamps,Enquiries
 CHERN,YCHERN@e.ntu.edu.sg,NBS,P@$$w0rd,NBS Orientation,#NULL!
-CALVIN,CT113@e.ntu.edu.sg,SCSE,password,#NULL!,#NULL!
+CALVIN,CT113@e.ntu.edu.sg,SCSE,P@$$w0rd,H13 Orientation,H13 Orientation=2
 RAWAL,AKY013@e.ntu.edu.sg,SSS,P@$$w0rd,#NULL!,#NULL!
 CHAN,YCN019@e.ntu.edu.sg,NBS,P@$$w0rd,#NULL!,#NULL!
 BRANDON,BR015@e.ntu.edu.sg,NBS,P@$$w0rd,NBS Orientation,#NULL!
