@@ -6,12 +6,24 @@ import java.util.Map;
 import enums.Role;
 
 /**
- * The Student class represents a student in the system, extending the User class.
- * It includes additional information about registered camps and enquiries made by the student.
+ * The {@link Student} class represents a student in CAMs.
+ * Student have a unique ID, password, name, and faculty.
+ * Each student also has a {@link Role} which determines their level of access.
+ * 
+ * @author Chin Jun Hao, Mark
+ * @version 3.0
+ * @since 1.0
  */
 public class Student extends User {
 	
+	/**
+ 	* The list of camps the Committee Member is registered for.
+ 	*/
 	private ArrayList<String> registeredCamps;
+
+	/**
+ 	* A map containing the Committee Member's enquiries, with camp names as keys and lists of enquiry IDs as values.
+ 	*/
 	private Map<String, ArrayList<Integer>> enquiries;
 	
 	/**
@@ -32,7 +44,7 @@ public class Student extends User {
 	}
 	
 	/**
-	 * Retrieves the list of camps the student is registered for.
+	 * Returns the list of camps the student is registered for.
 	 * 
 	 * @return An ArrayList containing the names of camps the student is registered for.
 	 */
@@ -52,7 +64,7 @@ public class Student extends User {
 	}
 
 	/**
-	 * Retrieves a map associating camp names with lists of enquiry IDs made by the student for each camp.
+	 * Returns a map associating camp names with lists of enquiry IDs made by the student for each camp.
 	 * 
 	 * @return A map of camp names with lists of enquiry IDs for each camp.
 	 */

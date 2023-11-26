@@ -5,8 +5,13 @@ import java.util.ArrayList;
 import enums.Role;
 
 /**
- * The Staff class represents a staff in the system, extending the User class.
- * It includes information additional information about the camps created by the staff member.
+ * The {@link Staff} class represents a staff in CAMs.
+ * Staff have a unique ID, password, name, and faculty.
+ * Each staff also has a {@link Role} which determines their level of access.
+ * 
+ * @author Chin Jun Hao, Mark
+ * @version 3.0
+ * @since 1.0
  */
 public class Staff extends User{
 	/**
@@ -30,7 +35,7 @@ public class Staff extends User{
 	}
 
 	/**
-	 * Retrieves the list of camps created by the Staff member
+	 * Returns the list of camps created by the Staff member
 	 * 
 	 * @return An ArrayList containing the names of camps created by the Staff member.
 	 */

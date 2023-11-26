@@ -8,25 +8,89 @@ import java.util.Map;
 import enums.Visibility;
 
 /**
- * The Camp class represents a camp in the system.
- * It contains information about the camp.
+ * The {@link Camp} class represents a camp in CAMs.
+ * Each camp has a unique name, schedule, registration details, description, and staff in charge.
+ * It also manages information about attendees, committee members, enquiries, suggestions, and visibility.
+ * 
+ * @author Chin Jun Hao, Mark
+ * @version 3.0
+ * @since 1.0
  */
 public class Camp {
 	
+	/**
+	 * The name of the camp.
+	 */
 	private String name;
+
+	/**
+	 * The list of dates on which the camp is scheduled.
+	 */
 	private ArrayList<GregorianCalendar> dates;
+
+	/**
+	 * The closing date for camp registration.
+	 */
 	private GregorianCalendar registrationClosingDate;
+
+	/**
+	 * The faculty to which the camp is open.
+	 */
 	private String openTo;
+
+	/**
+	 * The location where the camp is held.
+	 */
 	private String location;
+
+	/**
+	 * The total number of available slots for the camp.
+	 */
 	private int totalSlots;
+
+	/**
+	 * The number of slots reserved for committee members.
+	 */
 	private int committeeSlots;
+
+	/**
+	 * A brief description of the camp.
+	 */
 	private String description;
+
+	/**
+	 * The name of the staff in charge of the camp.
+	 */
 	private String staffInCharge;
+
+	/**
+	 * A list of names of attendees registered for the camp.
+	 */
 	private ArrayList<String> attendees;
+
+	/**
+	 * A list of names of attendees who have withdrawn from the camp.
+	 */
 	private ArrayList<String> withdrawnAttendees;
+
+	/**
+	 * A list of names of committee members involved in the camp.
+	 */
 	private ArrayList<String> committeeMembers;
+
+	/**
+	 * A map associating enquiry IDs with their respective enquiries.
+	 */
 	private Map<Integer, Enquiry> enquiries;
+
+	/**
+	 * A map associating suggestion IDs with their respective suggestions.
+	 */
 	private Map<Integer, Suggestion> suggestions;
+
+	/**
+	 * The visibility status indicating whether the camp is open for registration.
+	 */
 	private Visibility visibility;
 	
 	/**
@@ -98,7 +162,7 @@ public class Camp {
 	}
 
 	/**
-	 * Retrieves the name of the camp.
+	 * Returns the name of the camp.
 	 * 
 	 * @return The name of the camp.
 	 */
@@ -118,7 +182,7 @@ public class Camp {
 	}
 
 	/**
-	 * Retrieves the dates of the camp.
+	 * Returns the dates of the camp.
 	 * 
 	 * @return An ArrayList of GregorianCalendar objects representing the dates of the camp.
 	 */
@@ -138,7 +202,7 @@ public class Camp {
 	}
 
 	/**
-	 * Retrieves the registration closing date of the camp.	
+	 * Returns the registration closing date of the camp.	
 	 *  
 	 * @return The registration closing date of the camp as a GregorianCalendar object.
 	 */
@@ -158,7 +222,7 @@ public class Camp {
 	}
 
 	/**
-	 * Retrieves the faculty in which the camp is open.
+	 * Returns the faculty in which the camp is open.
 	 * 
 	 * @return The faculty in which the camp is open.
 	 */
@@ -178,7 +242,7 @@ public class Camp {
 	}
 
 	/**
-	 * Retrieves the location where the camp is held.
+	 * Returns the location where the camp is held.
 	 * 
 	 * @return The location where the camp is held.
 	 */
@@ -198,7 +262,7 @@ public class Camp {
 	}
 
 	/**
-	 * Retrieves the total number of slots open for the camp.
+	 * Returns the total number of slots open for the camp.
 	 * 
 	 * @return the total number of slots open for the camp.
 	 */
@@ -218,7 +282,7 @@ public class Camp {
 	}
 
 	/**
-	 * Retrieves the number of slots available for the camp's committee members.
+	 * Returns the number of slots available for the camp's committee members.
 	 * 
 	 * @return The number of slots available for the camp's committee members.
 	 */
@@ -238,7 +302,7 @@ public class Camp {
 	}
 
 	/**
-	 * Retrieves the description of the camp.
+	 * Returns the description of the camp.
 	 * 
 	 * @return The description of the camp.
 	 */
@@ -258,7 +322,7 @@ public class Camp {
 	}
 
 	/**
-	 * Retrieves the list of attendees for the camp.
+	 * Returns the list of attendees for the camp.
 	 * 
 	 * @return An ArrayList containing the names of attendees for the camp.
 	 */
@@ -278,7 +342,7 @@ public class Camp {
 	}
 
 	/**
-	 * Retrieves the list of attendees who have withdrawn from the camp.
+	 * Returns the list of attendees who have withdrawn from the camp.
 	 * 
 	 * @return An ArrayList containing the names of attendees who have withdrawn from the camp.
 	 */
@@ -298,7 +362,7 @@ public class Camp {
 	}
 
 	/**
-	 * Retrieves the list of committee members of the camp.
+	 * Returns the list of committee members of the camp.
 	 * 
 	 * @return An ArrayList containing the names of the committee members of the camp.
 	 */
@@ -318,7 +382,7 @@ public class Camp {
 	}
 
 	/**
-	 * Retrieves the visibility status indicating whether the camp is visible to students for registrations.
+	 * Returns the visibility status indicating whether the camp is visible to students for registrations.
 	 * 
 	 * @return The visibility status of the camp.
 	 */
@@ -338,7 +402,7 @@ public class Camp {
 	}
 
 	/**
-	 * Retrieves a map associating Enquiry IDs with their respective Enquiries.
+	 * Returns a map associating Enquiry IDs with their respective Enquiries.
 	 * 
 	 * @return A map of Enquiry IDs with their respective Enquiries.
 	 */
@@ -358,7 +422,7 @@ public class Camp {
 	}
 
 	/**
-	 * Retrieves a map associating Suggestion IDs with their respective Suggestions.
+	 * Returns a map associating Suggestion IDs with their respective Suggestions.
 	 * 
 	 * @return A map of Suggestion IDs with their respective Suggestions.
 	 */
@@ -378,7 +442,7 @@ public class Camp {
 	}
 
 	/**
-	 * Retrieves the name of the Staff-In-Charge of the camp.
+	 * Returns the name of the Staff-In-Charge of the camp.
 	 * 
 	 * @return The name of the Staff-In-Charge.
 	 */
@@ -388,7 +452,7 @@ public class Camp {
 	}
 	
 	/**
-	 * Retrieves the number of slots remaining for attendee registration.
+	 * Returns the number of slots remaining for attendee registration.
 	 * 
 	 * @return The calculated number of slots available for attendee registration.
 	 */

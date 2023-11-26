@@ -6,8 +6,13 @@ import java.util.Map;
 import enums.Role;
 
 /**
- * The CommitteeMember class represents a committee member in the system, extending the Student class.
- * It includes additional information about the camps facilitated by the committee member, suggestion IDs, and the points earned by the committee member.
+ * The {@link CommitteeMember} class represents a committee member in CAMs.
+ * Committee Member have a unique ID, password, name, faculty and points.
+ * Each Committee Member also has a {@link Role} which determines their level of access.
+ * 
+ * @author Chin Jun Hao, Mark
+ * @version 3.0
+ * @since 1.0
  */
 public class CommitteeMember extends Student {
 	
@@ -70,7 +75,7 @@ public class CommitteeMember extends Student {
 	}
 
 	/**
-	 * Retrieves a list of suggestion IDs.
+	 * Returns a list of suggestion IDs.
 	 * 
 	 * @return An ArrayList containing suggestion IDs.
 	 */
@@ -90,7 +95,7 @@ public class CommitteeMember extends Student {
 	}
 
 	/**
-	 * Retrieves the points earned by the committee member.
+	 * Returns the points earned by the committee member.
 	 * 
 	 * @return The points earned by the committee member.
 	 */
@@ -110,7 +115,7 @@ public class CommitteeMember extends Student {
 	}
 
 	/**
-	 * Retrieves the name of the camp in which the committee member is facilitating
+	 * Returns the name of the camp in which the committee member is facilitating
 	 * 
 	 * @return The name of the camp being facilitated by the committee member.
 	 */

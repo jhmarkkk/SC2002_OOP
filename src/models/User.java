@@ -6,39 +6,50 @@ import enums.Role;
  * The {@link User} class represents a user in CAMs.
  * Users have a unique ID, password, name, and faculty.
  * Each user also has a {@link Role} which determines their level of access.
+ * 
+ * <p>This class provides a basic structure for user-related functionalities within the CAMs system.</p>
+ * 
+ * @author Chin Jun Hao, Mark
+ * @version 3.0
+ * @since 1.0
  */
 public class User {
 	/**
-	 * The ID of the user.
+	 * The unique ID of the user.
 	 */
 	private String userID;
+
 	/**
-	 * The password of the user.
+	 * The password for user authentication.
+	 * Default value is "password".
 	 */
 	private String password = "password";
+
 	/**
 	 * The name of the user.
 	 */
 	private String name;
+
 	/**
-	 * The faculty of the user.
+	 * The faculty to which the user belongs.
 	 */
 	private String faculty;
+	
 	/**
-	 * The {@link Role} of the user.
+	 * The {@link Role} of the user determining their level of access.
 	 */
 	private Role role;
 	
 	/**
-	 * Constructs a {@link User} object with given userID, password, name, faculty and role.
-	 * @param userID the ID of the user
-	 * @param password the password of the user
-	 * @param name the name of the user
-	 * @param faculty the faculty of the user
-	 * @param role the {@link Role} of the user
+     * Constructs a {@link User} object with the provided userID, password, name, faculty, and role.
+	 * 
+	 * @param userID 	The unique ID of the user.
+	 * @param password 	The password of the user.
+	 * @param name 		The name of the user.
+	 * @param faculty 	The faculty to which the user belongs.
+	 * @param role 		The {@link Role} of the user.
 	 */
 	public User(String userID, String password, String name, String faculty, Role role) {
-		
 		this.userID = userID;
 		this.password = password;
 		this.name = name;
@@ -47,9 +58,9 @@ public class User {
 	}
 
 	/**
-	 * Returns the user ID of the user.
+	 * Returns the unique user ID of the user.
 	 * 
-	 * @return the userID
+	 * @return The user ID of the user.
 	 */
 	public String getUserID() {
 		
@@ -57,9 +68,9 @@ public class User {
 	}
 
 	/**
-	 * Sets the user ID of the user.
+	 * Sets the unique ID of the user.
 	 * 
-	 * @param userID the userID to set
+	 * @param userID The new user ID of the user to set.
 	 */
 	public void setUserID(String userID) {
 		
@@ -69,7 +80,7 @@ public class User {
 	/**
 	 * Returns the password of the user.
 	 * 
-	 * @return the password
+	 * @return The password of the user.
 	 */
 	public String getPassword() {
 		
@@ -79,7 +90,7 @@ public class User {
 	/**
 	 * Sets the password of the user.
 	 * 
-	 * @param password the password to set
+	 * @param password The new password to set for the user.
 	 */
 	public void setPassword(String password) {
 		
@@ -89,7 +100,7 @@ public class User {
 	/**
 	 * Returns the name of the user.
 	 * 
-	 * @return the name
+	 * @return The name of the user.
 	 */
 	public String getName() {
 		
@@ -99,7 +110,7 @@ public class User {
 	/**
 	 * Sets the name of the user.
 	 * 
-	 * @param name the name to set
+	 * @param name The new name of the user to set.
 	 */
 	public void setName(String name) {
 		
@@ -107,9 +118,9 @@ public class User {
 	}
 
 	/**
-	 * Returns the faculty of the user.
+	 * Returns the faculty to which the user belongs.
 	 * 
-	 * @return the faculty
+	 * @return The faculty to which the user belongs to.
 	 */
 	public String getFaculty() {
 		
@@ -117,9 +128,9 @@ public class User {
 	}
 
 	/**
-	 * Sets the faculty of the user.
+	 * Sets the faculty to which the user belongs.
 	 * 
-	 * @param faculty the faculty to set
+	 * @param faculty The new faculty to which the user belongs to.
 	 */
 	public void setFaculty(String faculty) {
 		
@@ -129,7 +140,7 @@ public class User {
 	/**
 	 * Returns the {@link Role} of the user.
 	 * 
-	 * @return the role
+	 * @return The role of the user.
 	 */
 	public Role getRole() {
 		
@@ -139,7 +150,7 @@ public class User {
 	/**
 	 * Sets the {@link Role} of the user.
 	 * 
-	 * @param role the role to set
+	 * @param role The new role of the user.
 	 */
 	public void setRole(Role role) {
 		
