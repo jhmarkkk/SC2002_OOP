@@ -7,13 +7,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Scanner;
 
 import dao.CampDaoImpl;
 import dao.CommitteeMemberDaoImpl;
 import dao.CurrentUserDaoImpl;
 import dao.StudentDaoImpl;
+
 import enums.GenerateType;
+
 import interfaces.dao.CampDao;
 import interfaces.dao.CommitteeMemberDao;
 import interfaces.dao.CurrentUserDao;
@@ -25,11 +26,11 @@ import models.CommitteeMember;
 import models.Staff;
 import models.Student;
 
+import utils.InputUtil;
+import utils.PrintUtil;
+
 public class StaffGenerateReportService implements GenerateReportServiceable {
 
-	
-private static final Scanner sc = new Scanner(System.in);
-	
 	private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
 	
 	private static final StudentDao studentDao = new StudentDaoImpl();
@@ -48,16 +49,12 @@ private static final Scanner sc = new Scanner(System.in);
     	ArrayList<String> createdCampNames = currentUser.getCreatedCamps();
     	
     	do {
-    		System.out.println("Generate report for:");
+			PrintUtil.header("Generate Report");
     		for (i = 0; i < createdCampNames.size(); i++)
     			System.out.printf("%2d. %s\n", i+1, createdCampNames.get(i));
     		
     		System.out.printf("%2d. Back\n", i+1);
-    		System.out.print("Choice: ");
-    		
-    		choice = sc.nextInt();
-    		
-    		System.out.println();
+    		choice = InputUtil.choice();
     		
     		if (choice == i + 1) return;
     		
@@ -67,22 +64,17 @@ private static final Scanner sc = new Scanner(System.in);
     			break;
     		}
     		
-    		System.out.println("Invalid choice. Please choose again.");
+			PrintUtil.invalid("choice");
 		} while (true);  	
     	
         do {
-        	System.out.printf("Generating report for %s\n", selectedCampName);
+			PrintUtil.header(String.format("Generating report for %s\n", selectedCampName));
         	System.out.println("1. Generate all students");
 			System.out.println("2. Generate attendees");
 			System.out.println("3. Generate committee members");
 			System.out.println("4. Back");
-			System.out.print("\nChoice: ");
-			
-			choice = sc.nextInt();
-			
-			System.out.println();
-			
-			switch (choice) {
+
+			switch (InputUtil.choice()) {
 			case 1:
 				report = generate(selectedCamp, GenerateType.ALL);
 				break;
@@ -95,7 +87,7 @@ private static final Scanner sc = new Scanner(System.in);
 			case 4:
 				return;
 			default:
-				System.out.println("Invalid choice. Please choose again.");
+				PrintUtil.invalid("choice");
 			}
 		} while (choice < 1 || choice > 4);
         
