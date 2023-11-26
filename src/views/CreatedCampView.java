@@ -22,7 +22,7 @@ import models.Student;
 
 import enums.SortType;
 
-import utils.CampFilter;
+import utils.SortCampUtil;
 import utils.DateUtil;
 
 /**
@@ -54,7 +54,7 @@ public class CreatedCampView implements CampViewable {
         for (String createdCampID : createdCampIDList) {
             createdCampsList.add(campMap.get(createdCampID));
         }
-        createdCampsList = CampFilter.filter(createdCampsList, sortType);
+        createdCampsList = SortCampUtil.sort(createdCampsList, sortType);
         int index = 1;
         for (Camp createdCamp : createdCampsList) {
             System.out.printf("----- (Created Camp %d) %s -----\n", index, createdCamp.getName());

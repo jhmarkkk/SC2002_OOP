@@ -20,7 +20,7 @@ import java.util.Map;
 import models.Camp;
 import models.Student;
 import models.CommitteeMember;
-import utils.CampFilter;
+import utils.SortCampUtil;
 import utils.DateUtil;
 
 public class RegisteredCampView implements CampViewable {
@@ -52,7 +52,7 @@ public class RegisteredCampView implements CampViewable {
         for (String registeredCampID : registeredCampIDs) {
             registeredCampList.add(campsMap.get(registeredCampID));
         }
-        registeredCampList = CampFilter.filter(registeredCampList, sortType);
+        registeredCampList = SortCampUtil.sort(registeredCampList, sortType);
         int index = 1;
         for (Camp registeredCamp : registeredCampList) {
             System.out.printf("----- (Attending Camp %d) %s -----\n", index, registeredCamp.getName());

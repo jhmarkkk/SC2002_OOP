@@ -19,8 +19,8 @@ public class SessionController {
 	
 	public static void startSession() {
 		
-		PrintUtil.header("Start");
 		do {
+			PrintUtil.header("Start");
 			System.out.println("1. Log in");
 			System.out.println("2. Quit");			
 			switch (InputUtil.choice()) {

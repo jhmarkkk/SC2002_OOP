@@ -3,7 +3,7 @@ package utils;
 
 public class PrintUtil {
     
-    private static final int SIZE = 40;
+    private static final int SIZE = 100;
 
     public static void header(String title) {
 

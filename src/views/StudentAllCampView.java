@@ -15,7 +15,7 @@ import enums.Visibility;
 import interfaces.views.CampViewable;
 
 import models.Camp;
-import utils.CampFilter;
+import utils.SortCampUtil;
 import utils.DateUtil;
 
 public class StudentAllCampView implements CampViewable {
@@ -36,7 +36,7 @@ public class StudentAllCampView implements CampViewable {
             }
         }
 
-        studentCamps = CampFilter.filter(studentCamps, sortType);
+        studentCamps = SortCampUtil.sort(studentCamps, sortType);
         int index = 1;
         System.out.println("===== List of Camps : Student =====\n");
         for (Camp studentCamp : studentCamps) {
