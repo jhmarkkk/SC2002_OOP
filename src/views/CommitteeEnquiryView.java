@@ -40,5 +40,6 @@ public class CommitteeEnquiryView implements EnquiryViewable {
             System.out.printf("%-15s: %s\n","Reply" , enquiry.getReply());
             System.out.println();
         }
+
     }
 }
