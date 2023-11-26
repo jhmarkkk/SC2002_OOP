@@ -127,7 +127,7 @@ public class StaffReplyEnquiryService implements ReplyEnquiryServiceable {
         } while (true);
 
         selectedEnquiry.setReply(replyField);
-        selectedEnquiry.setReplier(currentUser.getUserID());
+        selectedEnquiry.setReplier(currentUser.getName());
         System.out.println("\n> Enquiry replied");
     }
 }
