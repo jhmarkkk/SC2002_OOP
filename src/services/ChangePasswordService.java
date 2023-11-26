@@ -1,17 +1,15 @@
 package services;
 
-import java.util.Scanner;
-
 import controllers.SessionController;
 import dao.CurrentUserDaoImpl;
 import interfaces.dao.CurrentUserDao;
 import interfaces.services.ChangePasswordServiceable;
 import models.User;
+import utils.InputUtil;
+import utils.PrintUtil;
 
 public class ChangePasswordService implements ChangePasswordServiceable{
 
-	private static final Scanner sc = new Scanner(System.in);
-	
 	private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
 	
     public boolean changePassword(){
@@ -19,14 +17,10 @@ public class ChangePasswordService implements ChangePasswordServiceable{
     	String oldPassword, newPassword;
     	User currentUser = currentUserDao.getCurrentUser();
     	
-    	System.out.println("Changing password\n");
+		PrintUtil.header("Changing Password");
     	System.out.print("Enter old password: ");
-    	
-    	oldPassword = sc.nextLine();
-    	
-    	System.out.print("Enter new password: ");
-    	
-    	newPassword = sc.nextLine();
+    	oldPassword = InputUtil.nextString("Enter old password");
+    	newPassword = InputUtil.nextString("Enter new password");
     	
     	if (!currentUser.getPassword().equals(oldPassword)) {
     		System.out.println("Incorrect old password");
