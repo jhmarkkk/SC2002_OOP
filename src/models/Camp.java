@@ -26,7 +26,7 @@ public class Camp {
 	private Visibility visibility;
 	
 	/**
-	 * Constructor for importing Camp from CSV
+	 * Constructor used for importing Camp from CSV
 	 * 
 	 * @param name
 	 * @param dates
