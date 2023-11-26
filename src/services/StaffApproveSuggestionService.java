@@ -40,12 +40,12 @@ public class StaffApproveSuggestionService implements ApproveSuggestionServiceab
         ArrayList<String> createdCampNames = staff.getCreatedCamps();
         Map<String, CommitteeMember> committeeMemberData = committeeMemberDao.getCommitteeMembers();
         Map<String, Camp> campData = campDao.getCamps();
-        Map<Integer, Camp> suggestionCampPair = new HashMap<Integer, Camp>();
+        Map<Integer, Camp> suggestionIDToCampMap = new HashMap<Integer, Camp>();
         
         for (String campName : createdCampNames) {
         	camp = campData.get(campName);
         	for (Suggestion suggestion : camp.getSuggestions().values()) {
-        		suggestionCampPair.put(suggestion.getSuggestionID(), camp);
+        		suggestionIDToCampMap.put(suggestion.getSuggestionID(), camp);
         		if (suggestion.getApproved()) continue;
         		suggestionIDList.add(suggestion.getSuggestionID());
         	}
@@ -73,7 +73,7 @@ public class StaffApproveSuggestionService implements ApproveSuggestionServiceab
     		System.out.println("Invalid choice. Please choose again.");
 		} while (true);
         
-        camp = suggestionCampPair.get(suggestionID);
+        camp = suggestionIDToCampMap.get(suggestionID);
         selectedSuggestion = camp.getSuggestions().get(suggestionID);
         committeeMember = committeeMemberData.get(selectedSuggestion.getSuggester());
         System.out.println("Suggestion: " + selectedSuggestion.getSuggestion());
@@ -93,7 +93,7 @@ public class StaffApproveSuggestionService implements ApproveSuggestionServiceab
 			case 1:
 				selectedSuggestion.setApproved(true);
 				committeeMember.setPoints(committeeMember.getPoints() + 1);
-				System.out.println("Suggestion has been approved");
+				System.out.println("Suggestion approved");
 				return;
 			case 2:
 				return;

@@ -44,7 +44,7 @@ public class StaffCampService implements CampServiceable {
         
         campData.put(name, camp);
 		createdCampNameList.add(name);
-		currentUser.setCreatedCamps(createdCampNameList);
+		System.out.println("Camp created");
     }
 
 
@@ -60,9 +60,9 @@ public class StaffCampService implements CampServiceable {
         do {
 			PrintUtil.header("Delete camp");
         	for (i = 0; i < createdCampNames.size(); i++)
-        		System.out.printf("%d. %s\n", i+1, createdCampNames.get(i));
+        		System.out.printf("%2d. %s\n", i+1, createdCampNames.get(i));
         	
-        	System.out.printf("%d. Back\n", i+1);
+        	System.out.printf("%2d. Back\n", i+1);
         	choice = InputUtil.choice();
         	if (choice == i + 1) return;
         	
@@ -78,7 +78,6 @@ public class StaffCampService implements CampServiceable {
         if (validateDelete(selectedCamp)) {
         	campData.remove(selectedCampName);
 			createdCampNames.remove(selectedCampName);
-			currentUser.setCreatedCamps(createdCampNames);;
         	System.out.println(selectedCampName + " successfully deleted");
         	return;
         }
@@ -105,9 +104,9 @@ public class StaffCampService implements CampServiceable {
         do {
 			PrintUtil.header("Edit Camp");
         	for (i = 0; i < createdCampNames.size(); i++)
-        		System.out.printf("%d. %s\n", i+1, createdCampNames.get(i));
+        		System.out.printf("%2d. %s\n", i+1, createdCampNames.get(i));
         	
-        	System.out.printf("%d. Back\n", i+1);
+        	System.out.printf("%2d. Back\n", i+1);
         	choice = InputUtil.choice();
         	
         	if (choice == i + 1) return;
@@ -248,7 +247,6 @@ public class StaffCampService implements CampServiceable {
     	GregorianCalendar today = new GregorianCalendar();
     	
     	do {
-    		System.out.print("Enter registration closing date (YYYY-MM-DD): ");
     		closingDateStr = InputUtil.nextString("Enter registration closing date (YYYY-MM-DD)");
     		try {
     			closingDate = DateUtil.toDate(closingDateStr);
@@ -295,7 +293,6 @@ public class StaffCampService implements CampServiceable {
     	int totalSlots;
     	
     	do {
-        	System.out.print("Enter total slots: ");
 			totalSlots = InputUtil.nextInt("Enter total slots");				
 			if (totalSlots <= 0) {
 				PrintUtil.invalid("input");
@@ -333,7 +330,7 @@ public class StaffCampService implements CampServiceable {
 		} while (true);
 	}
 
-    private boolean validateDelete(Camp camp) {
+    private static boolean validateDelete(Camp camp) {
     	
     	if (camp.getAttendees().size() > 0) return false;
     	

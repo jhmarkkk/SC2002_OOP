@@ -55,7 +55,7 @@ public class StudentAttendCampService implements AttendCampServiceable {
 			for (i = 0; i < validCamps.size(); i++)
 				System.out.printf("%2d. %s\n", i + 1, validCamps.get(i).getName());
 
-			System.out.printf("%d. Back\n", i + 1);
+			System.out.printf("%2d. Back\n", i + 1);
 			choice = InputUtil.choice();
 			if (choice == i + 1)
 				return;
