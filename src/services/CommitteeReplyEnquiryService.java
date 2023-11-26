@@ -13,43 +13,66 @@ import interfaces.dao.CurrentUserDao;
 import interfaces.services.ReplyEnquiryServiceable;
 import models.CommitteeMember;
 import models.Enquiry;
+import utils.InputUtil;
+import utils.PrintUtil;
 import models.Camp;
 
 public class CommitteeReplyEnquiryService implements ReplyEnquiryServiceable {
-    Scanner sc = new Scanner(System.in);
+
     public static final CampDao campDao = new CampDaoImpl();
+
     public static final CommitteeMemberDao staffDao = new CommitteeMemberDaoImpl();
 
     public static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
 
     public void reply() {
-        // downcast user into a committee object
-        CommitteeMember comMember = (CommitteeMember) currentUserDao.getCurrentUser();
-        String facilitatingCampID = comMember.getFacilitatingCamp();
-        Camp facilitatingCamp = campDao.getCamps().get(facilitatingCampID);
-        ArrayList<Integer> facilitingEnqIDList = new ArrayList<Integer>(facilitatingCamp.getEnquiries().keySet());
-        int i = 0, choice, enquiryToReply;
+        
+        int i = 0, choice;
+        Enquiry selectedEnquiry;
+        String replyField;
+        CommitteeMember currentUser = (CommitteeMember)currentUserDao.getCurrentUser();
+        String campName = currentUser.getFacilitatingCamp();
+        Camp camp = campDao.getCamps().get(campName);
+        ArrayList<Enquiry> validEnquiryList = new ArrayList<Enquiry>();
+
+        for (Enquiry enquiry : camp.getEnquiries().values()) {
+            if (enquiry.getEnquirer() != null) continue;
+
+            validEnquiryList.add(enquiry);
+        }
+
+        if (validEnquiryList.size() == 0) {
+            System.out.println("No enqury to reply");
+            return;
+        }
+
         do {
-            for (i = 0; i < facilitingEnqIDList.size(); i++) {
-                System.out.printf("Choice %d : Enquiry ID %d", i, facilitingEnqIDList.get(i));
-            }
-            System.out.printf("Choice %d : Back", i + 1);
-            System.out.printf("Select choice: ");
-            choice = sc.nextInt();
-            System.out.println();
-            if (choice == i + 1)
-                return;
+            for (i = 0; i < validEnquiryList.size(); i++)
+                System.out.printf("%2d : Enquiry %d\n", i + 1, validEnquiryList.get(i).getEnquiryID());
+
+            System.out.printf("%2d : Back\n", i + 1);
+            choice = InputUtil.choice();
+            if (choice == i + 1) return;
+                
             if (choice >= 1 || choice <= i) {
-                enquiryToReply = facilitingEnqIDList.get(choice);
+                selectedEnquiry = validEnquiryList.get(choice - 1);
                 break;
             }
         } while (true);
-        System.out.println("Enter your reply: ");
-        String replyString = sc.nextLine();
-        Enquiry selectedEnquiry = facilitatingCamp.getEnquiries().get(enquiryToReply);
-        selectedEnquiry.setReply(replyString);
-        selectedEnquiry.setReplier(comMember.getUserID());
-        comMember.setPoints(comMember.getPoints() + 1);
-        System.out.printf("Reply sent! (Committee Member %s)\n", comMember.getUserID());
+
+
+        System.out.printf("%-10s: %s\n","Camp" , campName);
+        System.out.printf("%-10s: %s\n","Enquiry" , selectedEnquiry.getEnquiry());
+        do {
+            replyField = InputUtil.nextString("Enter reply");
+            if (!replyField.isBlank()) break;
+
+            PrintUtil.invalid("input");
+        } while (true);
+
+        selectedEnquiry.setReply(replyField);
+        selectedEnquiry.setReplier(currentUser.getUserID());
+        currentUser.setPoints(currentUser.getPoints() + 1);
+        System.out.println("Enquiry replied");
     }
 }

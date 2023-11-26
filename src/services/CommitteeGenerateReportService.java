@@ -26,10 +26,9 @@ import interfaces.services.GenerateReportServiceable;
 import models.Camp;
 import models.CommitteeMember;
 import models.Student;
+import utils.InputUtil;
 
 public class CommitteeGenerateReportService implements GenerateReportServiceable {
-	
-	private static final Scanner sc = new Scanner(System.in);
 	
 	private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
 	
@@ -53,12 +52,8 @@ public class CommitteeGenerateReportService implements GenerateReportServiceable
 			System.out.println("2. Generate attendees");
 			System.out.println("3. Generate committee members");
 			System.out.println("4. Back");
-			System.out.print("\nChoice: ");
 			
-			choice = sc.nextInt();
-			
-			System.out.println();
-			
+			choice = InputUtil.choice();
 			switch (choice) {
 			case 1:
 				report = generate(camp, GenerateType.ALL);
