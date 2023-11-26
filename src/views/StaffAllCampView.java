@@ -22,12 +22,25 @@ import utils.SortCampUtil;
 import utils.DateUtil;
 import utils.PrintUtil;
 
+/**
+ * The {@code StaffAllCampView} class provides a view for staff to see a list of all camps.
+ * It implements the {@link CampViewable} interface.
+ * 
+ * @author Chong Jiejun
+ * @version 1.0
+ * @since 1.0
+ */
 public class StaffAllCampView implements CampViewable {
 
     private static final CampDao campDao = new CampDaoImpl();
 
     private static final StaffDao staffDao = new StaffDaoImpl();
 
+    /**
+     * Displays a sorted view of all camps for staff.
+     * 
+     * @param sortType The type of sorting to be applied to the camps.
+     */    
     public void sortView(SortType sortType) {
 
         int i = 1;
@@ -37,6 +50,7 @@ public class StaffAllCampView implements CampViewable {
         ArrayList<Camp> campList = new ArrayList<Camp>(campsData.values());
         campList = SortCampUtil.sort(campList, sortType);
 
+        // Display details of each camp
         PrintUtil.header("List of All Camps");
         for (Camp camp : campList) {
             dateList = camp.getDates();

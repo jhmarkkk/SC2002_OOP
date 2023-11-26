@@ -28,6 +28,26 @@ import utils.DateUtil;
 import utils.InputUtil;
 import utils.PrintUtil;
 
+/**
+ * The {@code StudentAttendCampService} class provides methods for students to register for and withdraw from camps.
+ * It implements the {@code AttendCampServiceable} interface for managing the camp registration process.
+ * 
+ * @author Chuan Shan Hong
+ * @version 1.0
+ * @since 1.0
+ * 
+ * @see interfaces.services.AttendCampServiceable
+ * @see dao.CampDaoImpl
+ * @see dao.CommitteeMemberDaoImpl
+ * @see dao.CurrentUserDaoImpl
+ * @see dao.StudentDaoImpl
+ * @see models.Camp
+ * @see models.CommitteeMember
+ * @see models.Student
+ * @see utils.DateUtil
+ * @see utils.InputUtil
+ * @see utils.PrintUtil
+ */
 public class StudentAttendCampService implements AttendCampServiceable {
 
 	private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
@@ -38,6 +58,19 @@ public class StudentAttendCampService implements AttendCampServiceable {
 
 	private static final CampDao campDao = new CampDaoImpl();
 
+	/**
+     * Allows a student to register for a camp by selecting from the list of valid camps.
+     * The student can choose to register as an attendee or committee member based on available slots.
+     * 
+     * <p>If there are no valid camps to register for or if all slots are full, appropriate messages are displayed.</p>
+     * 
+     * @see utils.InputUtil
+     * @see utils.PrintUtil
+     * @see models.Camp
+     * @see models.Student
+     * @see enums.Role
+     * @see enums.Visibility
+     */
 	public void register() {
 
 		int i = 0, choice;
@@ -99,6 +132,18 @@ public class StudentAttendCampService implements AttendCampServiceable {
 		} while (true);
 	}
 
+    /**
+     * Allows a student to withdraw from a camp they have registered for.
+     * The student can select from the list of registered camps and withdraw from the chosen camp.
+     * 
+     * <p>If the student is a committee member facilitating the camp, they cannot withdraw, and a message is displayed.</p>
+     * 
+     * @see utils.InputUtil
+     * @see utils.PrintUtil
+     * @see models.Camp
+     * @see models.Student
+     * @see enums.Role
+     */
 	public void withdraw() {
 
 		int i = 0, choice;
@@ -148,6 +193,18 @@ public class StudentAttendCampService implements AttendCampServiceable {
 		System.out.printf("\n> You have withdrawn from %s\n", selectedCampName);
 	}
 
+	
+    /**
+     * Retrieves a list of valid camps for a student based on various criteria.
+     * The method considers factors such as camp visibility, faculty, available slots, registration deadlines, the student's already registered camps, withdrawn camps, facilitating camps (for committee members), and unavailable dates.
+     * 
+     * @param user The student object.
+	 * 
+     * @return An ArrayList of camps that are valid for the student to register.
+     * 
+     * @see utils.DateUtil
+     * @see enums.Visibility
+     */
 	private ArrayList<Camp> getValidCamps(Student user) {
 
 		Map<String, Camp> campData = campDao.getCamps();
@@ -189,6 +246,13 @@ public class StudentAttendCampService implements AttendCampServiceable {
 		return validCamps;
 	}
 
+	/**
+	 * Validates whether the camp is open to the student's faculty.
+	 * 
+	 * @param campFaculty The faculty to which the camp is open.
+	 * @param userFaculty The faculty of the student.
+	 * @return {@code true} if the camp is not open to the student's faculty, {@code false} otherwise.
+	 */
 	private Boolean compareFaculty(String campFaculty, String userFaculty) {
 
 		if (campFaculty.equals("NTU"))
@@ -200,6 +264,12 @@ public class StudentAttendCampService implements AttendCampServiceable {
 		return true;
 	}
 
+	/**
+	 * Validates whether the camp has available slots for attendees and committee members.
+	 * 
+	 * @param camp The camp for which to check available slots.
+	 * @return {@code true} if either attendee or committee member slots are full, {@code false} otherwise.
+	 */
 	private Boolean compareSlots(Camp camp) {
 
 		if (camp.getAttendees().size() < camp.getAttendeeSlots())
@@ -211,6 +281,14 @@ public class StudentAttendCampService implements AttendCampServiceable {
 		return true;
 	}
 
+	/**
+	 * Validates whether the camp registration deadline has passed.
+	 * 
+	 * @param deadline The registration closing date of the camp.
+	 * @return {@code true} if the registration deadline has passed, {@code false} otherwise.
+	 * 
+	 * @see utils.DateUtil
+	 */
 	private Boolean compareDeadline(String deadline) {
 
 		GregorianCalendar today = new GregorianCalendar();
@@ -221,6 +299,13 @@ public class StudentAttendCampService implements AttendCampServiceable {
 		return true;
 	}
 
+	/**
+	 * Validates whether the student is already facilitating another camp as a committee member.
+	 * 
+	 * @param user The student object.
+	 * @param campName The name of the camp for which to check facilitation.
+	 * @return {@code true} if the student is facilitating another camp, {@code false} otherwise.
+	 */
 	private Boolean compareFacilitatingCamp(Student user, String campName) {
 
 		CommitteeMember committeeMember;
@@ -235,6 +320,15 @@ public class StudentAttendCampService implements AttendCampServiceable {
 		return false;
 	}
 
+	/**
+	 * Validates whether the camp dates overlap with any dates the student is unavailable.
+	 * 
+	 * @param dates The dates of the camp.
+	 * @param unavailableDates The dates on which the student is unavailable.
+	 * @return {@code true} if there is an overlap, {@code false} otherwise.
+	 * 
+	 * @see utils.DateUtil
+	 */
 	private Boolean compareDates(ArrayList<GregorianCalendar> dates, ArrayList<GregorianCalendar> unavailableDates) {
 
 		for (GregorianCalendar date : dates) {
@@ -248,6 +342,12 @@ public class StudentAttendCampService implements AttendCampServiceable {
 		return false;
 	}
 
+	/**
+	 * Handles the process of a student joining a camp as an attendee.
+	 * 
+	 * @param user The student object.
+	 * @param camp The camp for which the student is registering.
+	 */
 	private void joinAsAttendee(Student user, Camp camp) {
 
 		ArrayList<String> registeredCamps = user.getRegisteredCamps();
@@ -262,6 +362,12 @@ public class StudentAttendCampService implements AttendCampServiceable {
 		System.out.printf("\n> You have registered for %s as an attendee\n", camp.getName());
 	}
 
+	/**
+	 * Handles the process of a student joining a camp as a committee member.
+	 * 
+	 * @param user The student object.
+	 * @param camp The camp for which the student is registering as a committee member.
+	 */
 	private void joinAsCommittee(Student user, Camp camp) {
 
 		if (user.getRole() == Role.COMMITTEE) {
@@ -288,6 +394,14 @@ public class StudentAttendCampService implements AttendCampServiceable {
 		System.out.printf("\n> You have registered for %s as a committee member\n", camp.getName());
 	}
 
+	/**
+	 * Validates whether a committee member can withdraw from a camp.
+	 * 
+	 * @param user The committee member object.
+	 * @param campName The name of the camp from which to withdraw.
+	 * 
+	 * @return {@code true} if the committee member cannot withdraw, {@code false} otherwise.
+	 */
 	private boolean validateWithdrawingFromCommittee(Student user, String campName) {
 
 		if (user.getRole() != Role.COMMITTEE)

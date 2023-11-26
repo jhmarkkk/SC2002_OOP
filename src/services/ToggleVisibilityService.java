@@ -17,12 +17,34 @@ import models.Staff;
 
 import utils.InputUtil;
 import utils.PrintUtil;
+/**
+ * The {@code ToggleVisibilityService} class provides functionality to toggle the visibility of camps created by the current staff member. 
+ * It implements the {@link ToggleVisibilityServiceable} interface.
+ *
+ * @author Chuan Shan Hong
+ * @version 1.0
+ * @since 1.0
+ *
+ * @see dao.CampDaoImpl
+ * @see dao.CurrentUserDaoImpl
+ * @see enums.Visibility
+ * @see interfaces.dao.CampDao
+ * @see interfaces.dao.CurrentUserDao
+ * @see interfaces.services.ToggleVisibilityServiceable
+ * @see models.Camp
+ * @see models.Staff
+ */
 
 public class ToggleVisibilityService implements ToggleVisibilityServiceable{
 		
 	private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
 	
 	private static final CampDao campDao = new CampDaoImpl();
+
+	/**
+     * Toggles the visibility of camps created by the current staff member.
+     * The staff member can choose a camp to toggle its visibility on or off.
+     */
 	
     public void toggle() {
     	
@@ -63,7 +85,14 @@ public class ToggleVisibilityService implements ToggleVisibilityServiceable{
 		} while (true);
     }
     
-    private boolean validateToggle(Camp camp) {
+    /**
+     * Validates whether a camp can be toggled to the "OFF" visibility.
+     * A camp cannot be toggled off if it has attendees, committee members, enquiries, or suggestions.
+     *
+     * @param camp The camp object to be validated.
+     * @return {@code true} if the camp can be toggled off, {@code false} otherwise.
+     */
+	private boolean validateToggle(Camp camp) {
     	
     	if (!camp.getAttendees().isEmpty()) return false;
     	

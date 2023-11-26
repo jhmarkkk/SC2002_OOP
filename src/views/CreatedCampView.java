@@ -22,18 +22,24 @@ import utils.DateUtil;
 import utils.PrintUtil;
 
 /**
- * This file is the implementation for staff to view all the camps that the
- * staff are currently in control of
+ * The {@code CreatedCampView} class provides a view for staff to see all camps they have created.
+ * It implements the {@link CampViewable} interface.
  * 
- * @author Jiejun
+ * @author Chong Jiejun
+ * @version 1.0
+ * @since 1.0
  */
-
 public class CreatedCampView implements CampViewable {
 
     private static final CampDao campDao = new CampDaoImpl();
 
     private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
 
+    /**
+     * Displays a sorted view of all camps created by the current staff member.
+     *
+     * @param sortType The type of sorting to be applied.
+     */    
     public void sortView(SortType sortType) {
 
         int i = 1;
