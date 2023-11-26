@@ -5,6 +5,7 @@ import models.Camp;
 import models.CommitteeMember;
 import models.Enquiry;
 import models.Student;
+import utils.PrintUtil;
 import interfaces.dao.CurrentUserDao;
 import interfaces.dao.StudentDao;
 import dao.CurrentUserDaoImpl;
@@ -16,22 +17,28 @@ import java.util.Map;
 import dao.CampDaoImpl;
 
 public class CommitteeEnquiryView implements EnquiryViewable {
+
+    private static final CampDao campDao = new CampDaoImpl();
+
+    private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
+
+    private static final StudentDao studentDao = new StudentDaoImpl();
+
     public void view() {
-        CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
-        CommitteeMember committeeMember = (CommitteeMember) currentUserDao.getCurrentUser();
-        CampDao campDao = new CampDaoImpl();
-        Camp facilitatingCamp = campDao.getCamps().get(committeeMember.getFacilitatingCamp());
-        StudentDao studentDao = new StudentDaoImpl();
-        Map<String, Student> studentsMap = studentDao.getStudents();
-        System.out.printf("===== (Facilitating Camp Enquiries) %s =====\n", facilitatingCamp.getName());
-        for (Enquiry enq : facilitatingCamp.getEnquiries().values()) {
-            System.out.printf("***** Enquiry %d from %s *****\n", enq.getEnquiryID(),
-                    studentsMap.get(enq.getEnquirer()));
-            System.out.printf("%s\n", enq.getEnquiry());
-            if (enq.getReplier() != null) {
-                System.out.printf("~~~~~ Reply by: %s ~~~~~\n", enq.getReplier());
-                System.out.printf("%s\n", enq.getReply());
-            }
+        CommitteeMember currentUser = (CommitteeMember) currentUserDao.getCurrentUser();
+        Camp camp = campDao.getCamps().get(currentUser.getFacilitatingCamp());
+        Map<String, Student> studentData = studentDao.getStudents();
+
+        PrintUtil.header(String.format("View %s Enquiries", camp.getName()));
+        for (Enquiry enquiry : camp.getEnquiries().values()) {
+            System.out.println("-".repeat(29));
+            System.out.printf("%-15s: %s\n","Enquiry ID" , enquiry.getEnquiryID());
+            System.out.printf("%-15s: %s\n","Camp" , camp.getName());
+            System.out.printf("%-15s: %s\n","Enquired by" , studentData.get(enquiry.getEnquirer()));
+            System.out.printf("%-15s: %s\n","Enquiry" , enquiry.getEnquiry());
+            System.out.printf("%-15s: %s\n","Replier" , enquiry.getReplier());
+            System.out.printf("%-15s: %s\n","Reply" , enquiry.getReply());
+            System.out.println();
         }
     }
 }
