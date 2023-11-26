@@ -36,7 +36,7 @@ public class CommitteeEnquiryView implements EnquiryViewable {
             System.out.printf("%-15s: %s\n","Camp" , camp.getName());
             System.out.printf("%-15s: %s\n","Enquired by" , studentData.get(enquiry.getEnquirer()));
             System.out.printf("%-15s: %s\n","Enquiry" , enquiry.getEnquiry());
-            System.out.printf("%-15s: %s\n","Replier" , enquiry.getReplier());
+            System.out.printf("%-15s: %s\n","Replied by" , enquiry.getReplier());
             System.out.printf("%-15s: %s\n","Reply" , enquiry.getReply());
             System.out.println();
         }
