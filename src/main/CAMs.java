@@ -56,8 +56,7 @@ public class CAMs {
 		do {
 			DataTransferController.importData();
 
-			currentUserDao.setCurrentUser(studentDao.getStudents().get("KOH1"));
-			// SessionController.startSession();
+			SessionController.startSession();
 			User user = currentUserDao.getCurrentUser();
 			if (user == null)
 				break;
@@ -75,8 +74,7 @@ public class CAMs {
 			}
 
 			SessionController.endSession();
-			// DataTransferController.exportData();
-			break;
+			DataTransferController.exportData();
 		} while (true);
 	}
 }
