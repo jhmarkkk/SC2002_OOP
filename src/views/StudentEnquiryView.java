@@ -60,9 +60,9 @@ public class StudentEnquiryView implements EnquiryViewable {
                 System.out.println("-".repeat(50));
                 System.out.printf("%-15s: %s\n","Enquiry ID" , enquiry.getEnquiryID());
                 System.out.printf("%-15s: %s\n","Camp" , campName);
-                System.out.printf("%-15s: %s\n","Enquired by" , studentData.get(enquiry.getEnquirer()));
+                System.out.printf("%-15s: %s\n","Enquired by" , studentData.get(enquiry.getEnquirer()).getName());
                 System.out.printf("%-15s: %s\n","Enquiry" , enquiry.getEnquiry());
-                if (enquiry.getReplier() == null) {
+                if (enquiry.getReplier() == null || enquiry.getReplier().equals("#NULL!")) {
                     System.out.printf("%-15s: -\n","Replied by");
                     System.out.printf("%-15s: -\n","Reply");
                 } else {
