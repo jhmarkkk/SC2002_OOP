@@ -227,7 +227,7 @@ public class StaffCampService implements CampServiceable {
     //Get Date Range method
     private static ArrayList<GregorianCalendar> getDateRange(GregorianCalendar startDate, int numOfDays) {
     	
-        ArrayList<GregorianCalendar> dateRange = new ArrayList<>();
+        ArrayList<GregorianCalendar> dateRange = new ArrayList<GregorianCalendar>();
         GregorianCalendar currentDate = new GregorianCalendar(startDate.get(GregorianCalendar.YEAR),
                 startDate.get(GregorianCalendar.MONTH), startDate.get(GregorianCalendar.DAY_OF_MONTH));
 
