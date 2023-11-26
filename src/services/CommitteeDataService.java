@@ -18,8 +18,26 @@ import interfaces.dao.CommitteeMemberDao;
 
 import models.CommitteeMember;
 
+/**
+ * The {@code CommitteeDataService} class provides methods for exporting and importing data related to committee members.
+ * It implements the {@code DataServiceable} interface for data management.
+ *  
+ * @author Huang Caihong
+ * @version 1.0
+ * @since 1.0
+ * 
+ * @see interfaces.services.DataServiceable
+ * @see interfaces.dao.CommitteeMemberDao
+ * @see dao.CommitteeMemberDaoImpl
+ * @see models.CommitteeMember
+ */
 public class CommitteeDataService implements DataServiceable {
 
+    /**
+     * Exports committee member data to a CSV file.
+     *
+     * @param filePath The path for the file to be exported to.
+     */
     private static final CommitteeMemberDao committeeMemberDao = new CommitteeMemberDaoImpl();
 
     public void exporting (String filePath) {
@@ -81,11 +99,14 @@ public class CommitteeDataService implements DataServiceable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-    
     
     }
-        
+    
+    /**
+     * Imports committee member data from a CSV file and updates the committee member repository.
+     *
+     * @param filePath The path of the file to be imported.
+     */    
     public void importing (String filePath) {
         CommitteeMemberDao committeeMemberDao = new CommitteeMemberDaoImpl();
         Map<String, CommitteeMember> committeeDataMap = committeeMemberDao.getCommitteeMembers();

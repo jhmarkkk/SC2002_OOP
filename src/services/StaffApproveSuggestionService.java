@@ -21,14 +21,47 @@ import models.Suggestion;
 import utils.InputUtil;
 import utils.PrintUtil;
 
+/**
+ * The {@code StaffApproveSuggestionService} class provides methods for staff members to approve suggestions related to camps they are responsible for.
+ * It implements the {@code ApproveSuggestionServiceable} interface for handling the approval of suggestions.
+ * 
+ * <p>The class allows staff members to view a list of pending suggestions associated with camps they manage and approve or reject them.</p>
+ * 
+ * @author Chuan Shan Hong
+ * @version 1.0
+ * @since 1.0
+ * 
+ * @see interfaces.services.ApproveSuggestionServiceable
+ * @see dao.CampDaoImpl
+ * @see dao.CommitteeMemberDaoImpl
+ * @see dao.CurrentUserDaoImpl
+ * @see models.Camp
+ * @see models.CommitteeMember
+ * @see models.Staff
+ * @see models.Suggestion
+ * @see utils.InputUtil
+ * @see utils.PrintUtil
+ */
 public class StaffApproveSuggestionService implements ApproveSuggestionServiceable {
    
+    /**
+     * The data access object for managing camps.
+     */
     private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
     
+    /**
+     * The data access object for managing committee members.
+     */
     private static final CampDao campDao = new CampDaoImpl();
     
+    /**
+     * The data access object for managing the current user.
+     */
     private static final CommitteeMemberDao committeeMemberDao = new CommitteeMemberDaoImpl();
-
+    
+    /**
+     * Approves or rejects suggestions related to camps managed by the current staff member.
+     */
     public void approve() {
     	
         int i = 0, choice;

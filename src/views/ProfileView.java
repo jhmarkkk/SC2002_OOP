@@ -12,12 +12,23 @@ import models.User;
 
 import utils.PrintUtil;
 
+/**
+ * The {@code ProfileView} class provides a view to display the user profile
+ * information.
+ * It implements the {@link ProfileViewable} interface.
+ * 
+ * @author Chong Jiejun
+ * @version 1.0
+ * @since 1.0
+ */
 public class ProfileView implements ProfileViewable {
 
     private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
 
+    /**
+     * Displays the user profile information.
+     */
     public void view() {
-
         User currentUser = currentUserDao.getCurrentUser();
         CommitteeMember committeeMember;
 

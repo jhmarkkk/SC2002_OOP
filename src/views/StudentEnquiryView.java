@@ -18,14 +18,29 @@ import models.Student;
 
 import utils.PrintUtil;
 
+/**
+ * The {@code StudentEnquiryView} class provides a view for students to see
+ * their enquiries.
+ * It implements the {@link EnquiryViewable} interface.
+ * 
+ * @author Chong Jiejun
+ * @version 1.0
+ * @since 1.0
+ */
 public class StudentEnquiryView implements EnquiryViewable {
 
     private static final CampDao campDao = new CampDaoImpl();
 
     private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
 
+    /**
+     * Represents the data access object for student-related operations.
+     */
     public static final StudentDao studentDao = new StudentDaoImpl();
 
+    /**
+     * Displays the enquiries made by the student.
+     */
     public void view() {
 
         String campName;

@@ -16,9 +16,35 @@ import interfaces.dao.StaffDao;
 
 import models.Staff;
 
+/**
+ * The {@code StaffDataService} class provides methods for exporting staff data to a file and importing staff data from a file.
+ * It implements the {@code DataServiceable} interface to support data import and export operations.
+ * 
+ * @author Huang Caihong
+ * @version 1.0
+ * @since 1.0
+ * 
+ * @see interfaces.services.DataServiceable
+ * @see interfaces.dao.StaffDao
+ * @see dao.StaffDaoImpl
+ * @see models.Staff
+ */
 public class StaffDataService implements DataServiceable {
+
+	private static final StaffDao staffDao = new StaffDaoImpl();
 	
-    private static final StaffDao staffDao = new StaffDaoImpl();
+    /**
+     * Exports staff data to a specified file path.
+     * The exported file contains a header line and data lines with staff details.
+     *
+     * @param filePath The path for the file to be exported to.
+     * @see java.io.BufferedWriter
+     * @see java.io.FileWriter
+     * @see java.io.IOException
+     * @see models.Staff
+     * @see interfaces.dao.StaffDao
+     * @see dao.StaffDaoImpl
+     */
 
 	public void exporting (String filePath) {
 
@@ -54,6 +80,19 @@ public class StaffDataService implements DataServiceable {
         }
 	}
 	
+    /**
+     * Imports staff data from a specified file path.
+     * The imported file is expected to have a header line and data lines with staff details.
+     * The data is processed and added to the staff data map.
+     *
+     * @param filePath The path for the file to be imported from.
+     * @see java.io.BufferedReader
+     * @see java.io.FileReader
+     * @see java.io.IOException
+     * @see models.Staff
+     * @see interfaces.dao.StaffDao
+     * @see dao.StaffDaoImpl
+     */
 	public void importing (String filePath) {
 
         StaffDao staffDao = new StaffDaoImpl();

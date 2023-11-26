@@ -13,10 +13,27 @@ import interfaces.dao.StudentDao;
 
 import models.Student;
 
+/**
+ * The {@code StudentDataService} class provides functionality to export and import student data to and from a CSV file, respectively.
+ * It implements the `DataServiceable` interface.
+ * 
+ * @author Huang Caihong
+ * @version 1.0
+ * @since 1.0
+ *  
+ * @see interfaces.services.DataServiceable
+ */
 public class StudentDataService implements DataServiceable {
 
     private static final StudentDao studentDao = new StudentDaoImpl();
-    
+
+    /**
+     * Exports student data to a CSV file.
+     * 
+     * @param filePath The path for the file to be exported to.
+     * 
+     * @see interfaces.services.DataServiceable
+     */    
 	public void exporting (String filePath) {
 
         Map<String, Student> studentDataMap = studentDao.getStudents();
@@ -69,6 +86,13 @@ public class StudentDataService implements DataServiceable {
         }
 	}
 	
+    /**
+     * Imports student data from a CSV file.
+     * 
+     * @param filePath The path of the file to import data from.
+     * 
+     * @see interfaces.services.DataServiceable
+     */
 	public void importing(String filePath) {
 
         StudentDao studentDao = new StudentDaoImpl();
