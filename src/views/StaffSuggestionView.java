@@ -10,25 +10,36 @@ import interfaces.views.SuggestionViewable;
 import models.Camp;
 import models.Staff;
 import models.Suggestion;
+import utils.PrintUtil;
 
 public class StaffSuggestionView implements SuggestionViewable {
-    public void view() {
-        CampDao campDao = new CampDaoImpl();
-        Map<String, Camp> campsMap = campDao.getCamps();
+    
+    private static final CampDao campDao = new CampDaoImpl();
 
-        CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
-        Staff staff = (Staff) currentUserDao.getCurrentUser();
-        for (String createdCampID : staff.getCreatedCamps()) {
-            Camp createdCamp = campsMap.get(createdCampID);
-            if (createdCamp.getSuggestions().size() == 0) {
-                continue;
-            }
-            System.out.printf("===== %s Suggestions =====\n", createdCamp.getName());
-            for (Suggestion sug : createdCamp.getSuggestions().values()) {
-                if (!sug.getApproved()) {
-                    System.out.printf("***** Suggestion %d from %s *****\n", sug.getSuggestionID(), sug.getSuggester());
-                    System.out.printf("%s\n", sug.getSuggestion());
-                }
+    private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
+    
+    public void view() {
+        
+        Camp camp;
+        Map<String, Camp> campData = campDao.getCamps();
+        Staff currentUser = (Staff)currentUserDao.getCurrentUser();
+
+        PrintUtil.header("View Committee Suggestions");
+        for (String createdCampID : currentUser.getCreatedCamps()) {
+            camp = campData.get(createdCampID);
+            if (camp.getSuggestions().size() == 0) continue;
+
+            for (Suggestion suggestion : camp.getSuggestions().values()) {
+                System.out.println("-".repeat(29));
+                System.out.printf("%-15s: %s\n","Suggestion ID" , suggestion.getSuggestionID());
+                System.out.printf("%-15s: %s\n","Camp" , camp.getName());
+                System.out.printf("%-15s: %s\n","Suggested by" , suggestion.getSuggester());
+                System.out.printf("%-15s: %s\n","Suggestion" , suggestion.getSuggestion());
+                System.out.printf("%-15s: ","Status");
+                if (suggestion.getApproved()) System.out.printf("%s\n", "Approved");
+                else System.out.printf("%s\n", "Pending");
+                
+                System.out.println();
             }
         }
     }
