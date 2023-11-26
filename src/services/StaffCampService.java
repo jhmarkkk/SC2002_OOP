@@ -36,7 +36,7 @@ public class StaffCampService implements CampServiceable {
         String openTo = enterOpenTo();
         String location = enterLocation();
         int totalSlots = enterTotalSlots();
-        int committeeSlots = enterCommitteeSlots(totalSlots);
+        int committeeSlots = enterCommitteeSlots(totalSlots, 0);
         String description = enterDescription();
         String staffInCharge = currentUserDao.getCurrentUser().getUserID();
         Camp camp = new Camp(name, dates, registrationClosingDate, openTo, location,
@@ -158,7 +158,7 @@ public class StaffCampService implements CampServiceable {
                     break;
                 case 5:
                     System.out.println("Current camp committee slots: " + selectedCamp.getCommitteeSlots());
-                    newCommitteeSlots = enterCommitteeSlots(selectedCamp.getTotalSlots());
+                    newCommitteeSlots = enterCommitteeSlots(selectedCamp.getTotalSlots(), selectedCamp.getCommitteeMembers().size());
                     selectedCamp.setCommitteeSlots(newCommitteeSlots);
                     System.out.println("Camp committee slots updated");
                     break;
@@ -303,13 +303,14 @@ public class StaffCampService implements CampServiceable {
 		} while (true);
 	}
     
-    private static int enterCommitteeSlots(int totalSlots) {
+    private static int enterCommitteeSlots(int totalSlots, int occupiedSlots) {
 		
     	int committeeSlots;
     	
     	do {
     		committeeSlots = InputUtil.nextInt("Enter number of committee slots");   		
-    		if (committeeSlots < 0 || committeeSlots > 10 || committeeSlots > totalSlots) {
+    		if (committeeSlots < 0 || committeeSlots > 10 ||
+				committeeSlots > totalSlots || committeeSlots < occupiedSlots) {
 				PrintUtil.invalid("input");
     			continue;
     		}

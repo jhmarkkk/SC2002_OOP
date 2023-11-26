@@ -31,7 +31,6 @@ public class StaffReplyEnquiryService implements ReplyEnquiryServiceable {
         
         int i = 0, choice;
         Camp createdCamp, selectedCamp;
-        Integer selectedEnquiryID;
         Enquiry selectedEnquiry;
         String replyField;
         Staff currentUser = (Staff) currentUserDao.getCurrentUser();
