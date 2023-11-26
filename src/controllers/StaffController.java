@@ -7,21 +7,24 @@ import enums.SortType;
 import interfaces.views.CampViewable;
 import interfaces.views.EnquiryViewable;
 import interfaces.views.SuggestionViewable;
-import models.Camp;
-import models.Staff;
 import interfaces.services.ApproveSuggestionServiceable;
 import interfaces.services.CampServiceable;
 import interfaces.services.GenerateReportServiceable;
 import interfaces.services.ReplyEnquiryServiceable;
 import interfaces.services.ToggleVisibilityServiceable;
 
+import models.Camp;
+import models.Staff;
+
 import services.StaffApproveSuggestionService;
 import services.StaffCampService;
 import services.StaffGenerateReportService;
 import services.StaffReplyEnquiryService;
 import services.ToggleVisibilityService;
+
 import utils.InputUtil;
 import utils.PrintUtil;
+
 import views.CreatedCampView;
 import views.StaffAllCampView;
 import views.StaffEnquiryView;

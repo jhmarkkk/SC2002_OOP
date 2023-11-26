@@ -2,7 +2,6 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Scanner;
 
 import dao.CampDaoImpl;
 import dao.CurrentUserDaoImpl;
@@ -18,9 +17,7 @@ import interfaces.dao.CurrentUserDao;
 import interfaces.services.ToggleVisibilityServiceable;
 
 public class ToggleVisibilityService implements ToggleVisibilityServiceable{
-	
-	private static final Scanner sc = new Scanner(System.in);
-	
+		
 	private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
 	
 	private static final CampDao campDao = new CampDaoImpl();

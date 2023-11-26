@@ -7,23 +7,29 @@ import controllers.StudentController;
 import controllers.CommitteeController;
 
 import dao.CurrentUserDaoImpl;
-
+import dao.StaffDaoImpl;
+import dao.StudentDaoImpl;
 import interfaces.dao.CurrentUserDao;
-
+import interfaces.dao.StaffDao;
+import interfaces.dao.StudentDao;
+import models.Staff;
 import models.User;
 
 public class CAMs {
 
 	private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
-
-	private CAMs() {
-	}
+	private static final StaffDao staffDao = new StaffDaoImpl();
+	private static final StudentDao studentDao = new StudentDaoImpl();
+	
+	private CAMs() {}
 
 	public static void main(String[] args) {
 
 		do {
 			DataTransferController.importData();
-			SessionController.startSession();
+
+			currentUserDao.setCurrentUser(studentDao.getStudents().get("KOH1"));
+			// SessionController.startSession();
 			User user = currentUserDao.getCurrentUser();
 			if (user == null)
 				break;
@@ -41,7 +47,8 @@ public class CAMs {
 			}
 
 			SessionController.endSession();
-			DataTransferController.exportData();
+			// DataTransferController.exportData();
+			break;
 		} while (true);
 	}
 }
