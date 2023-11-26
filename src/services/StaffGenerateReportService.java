@@ -29,6 +29,27 @@ import models.Student;
 import utils.InputUtil;
 import utils.PrintUtil;
 
+/**
+ * The {@code StaffGenerateReportService} class provides methods for staff members to generate reports related to camps they are responsible for.
+ * It implements the {@code GenerateReportServiceable} interface to support the generation of different types of reports.
+ * 
+ * @author Chuan Shan Hong
+ * @version 1.0
+ * @since 1.0
+ * 
+ * @see interfaces.services.GenerateReportServiceable
+ * @see dao.CampDaoImpl
+ * @see dao.CommitteeMemberDaoImpl
+ * @see dao.CurrentUserDaoImpl
+ * @see dao.StudentDaoImpl
+ * @see enums.GenerateType
+ * @see models.Camp
+ * @see models.CommitteeMember
+ * @see models.Staff
+ * @see models.Student
+ * @see utils.InputUtil
+ * @see utils.PrintUtil
+ */
 public class StaffGenerateReportService implements GenerateReportServiceable {
 
 	private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
@@ -40,9 +61,18 @@ public class StaffGenerateReportService implements GenerateReportServiceable {
 	private static final CampDao campDao = new CampDaoImpl();
 	
 	
-	/** 
-	 * @param filePath The path for the file to be exported to
-	 */
+    /**
+     * Exports a report to a specified file path based on the selected camp and report type.
+     * The exported report includes details of all students, attendees, or committee members for the selected camp.
+     *
+     * @param filePath The path for the file to be exported to.
+     * @see utils.InputUtil
+     * @see utils.PrintUtil
+     * @see enums.GenerateType
+     * @see models.Camp
+     * @see interfaces.dao.CampDao
+     * @see dao.CampDaoImpl
+     */
 	public void exporting(String filePath) {
     	
 		int i = 0, choice;
@@ -104,6 +134,23 @@ public class StaffGenerateReportService implements GenerateReportServiceable {
 		System.out.println("Report generated");
     }
 	
+
+    /**
+     * Generates a report for a selected camp and report type.
+     * The generated report includes details of all students, attendees, or committee members for the selected camp.
+     *
+     * @param camp The selected camp for which the report is generated.
+     * @param type The type of report to generate (ALL, ATTENDEE, COMMITTEE).
+     * @return The generated report as a string.
+     * @see enums.GenerateType
+     * @see models.Camp
+     * @see models.Student
+     * @see models.CommitteeMember
+     * @see interfaces.dao.StudentDao
+     * @see dao.StudentDaoImpl
+     * @see interfaces.dao.CommitteeMemberDao
+     * @see dao.CommitteeMemberDaoImpl
+     */
 	public String generate(Camp camp, GenerateType type){
     	
     	String report = "";

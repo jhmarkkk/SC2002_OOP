@@ -20,6 +20,16 @@ import models.CommitteeMember;
 import utils.InputUtil;
 import utils.PrintUtil;
 
+/**
+ * The {@code StudentEnquiryService} class provides methods to create, delete, and edit enquiries for a student.
+ * It implements the {@link EnquiryServiceable} interface.
+ *
+ * @author Chuan Shan Hong
+ * @version 1.0
+ * @since 1.0
+ *
+ * @see interfaces.services.EnquiryServiceable
+ */
 public class StudentEnquiryService implements EnquiryServiceable {
     Scanner sc = new Scanner(System.in);
 
@@ -27,6 +37,11 @@ public class StudentEnquiryService implements EnquiryServiceable {
 
     private static final CampDao campDao = new CampDaoImpl();
 
+    /**
+     * Creates a new enquiry for the current student.
+     * The student selects a camp and provides an enquiry message.
+     * The enquiry is associated with the selected camp and stored in the student's enquiries.
+     */
     public void create() {
 
         int i = 0, choice;
@@ -101,6 +116,10 @@ public class StudentEnquiryService implements EnquiryServiceable {
         System.out.println("Enquiry created");
     }
 
+    /**
+     * Deletes a selected enquiry for the current student.
+     * The student selects an enquiry to delete, and the associated camp is updated accordingly.
+     */
     public void delete() {
 
         int i = 0, choice;
@@ -155,7 +174,12 @@ public class StudentEnquiryService implements EnquiryServiceable {
         
         System.out.println("Enquiry deleted");
     }
-
+    
+    /**
+     * Edits a selected enquiry for the current student.
+     * The student selects an enquiry to edit and provides a new enquiry message.
+     * The selected enquiry is updated with the new message.
+     */
     public void edit() {
         
         int i = 0, choice;

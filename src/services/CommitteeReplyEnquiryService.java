@@ -16,14 +16,46 @@ import utils.InputUtil;
 import utils.PrintUtil;
 import models.Camp;
 
+/**
+ * The {@code CommitteeReplyEnquiryService} class provides methods for committee members to reply to enquiries in the context of a specific camp.
+ * It implements the {@code ReplyEnquiryServiceable} interface for handling the process of replying to enquiries.
+ * 
+ * <p>The class allows committee members to view and reply to enquiries related to the camp they are facilitating.</p>
+ *  
+ * @author Chong Jiejun
+ * @version 1.0
+ * @since 1.0
+ * 
+ * @see interfaces.services.ReplyEnquiryServiceable
+ * @see dao.CampDaoImpl
+ * @see dao.CommitteeMemberDaoImpl
+ * @see dao.CurrentUserDaoImpl
+ * @see models.CommitteeMember
+ * @see models.Enquiry
+ * @see utils.InputUtil
+ * @see utils.PrintUtil
+ * @see models.Camp
+ */
 public class CommitteeReplyEnquiryService implements ReplyEnquiryServiceable {
 
+    /**
+     * The data access object for managing camps.
+     */
     public static final CampDao campDao = new CampDaoImpl();
 
+    /**
+     * The data access object for managing committee members.
+     */    
     public static final CommitteeMemberDao staffDao = new CommitteeMemberDaoImpl();
 
+    /**
+     * The data access object for managing the current user.
+     */    
     public static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
 
+    /**
+     * Allows a committee member to reply to an enquiry.
+     */    
     public void reply() {
         
         int i = 0, choice;

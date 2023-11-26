@@ -19,14 +19,54 @@ import utils.PrintUtil;
 import models.Enquiry;
 import models.Camp;
 
+/**
+ * The {@code StaffReplyEnquiryService} class provides methods for staff members to reply to enquiries related to camps they are responsible for.
+ * It implements the {@code ReplyEnquiryServiceable} interface for replying to specific enquiries and managing the reply process.
+ * 
+ * <p>The class allows staff members to view a list of pending enquiries for camps they created, select an enquiry to reply to, and submit a reply.</p>
+ * 
+ * @author Chuan Shan Hong
+ * @version 1.0
+ * @since 1.0
+ * 
+ * @see interfaces.services.ReplyEnquiryServiceable
+ * @see dao.CampDaoImpl
+ * @see dao.CurrentUserDaoImpl
+ * @see dao.StaffDaoImpl
+ * @see models.Staff
+ * @see utils.InputUtil
+ * @see utils.PrintUtil
+ * @see models.Enquiry
+ * @see models.Camp
+ */
 public class StaffReplyEnquiryService implements ReplyEnquiryServiceable {
 
+    /**
+     * The data access object for managing camps.
+     */
     public static final CampDao campDao = new CampDaoImpl();
 
+    /**
+     * The data access object for managing staff members.
+     */
     public static final StaffDao staffDao = new StaffDaoImpl();
 
+    /**
+     * The data access object for managing the current user.
+     */
     public static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
-
+    
+    /**
+     * Allows a staff member to reply to a selected enquiry for a camp they created.
+     * The staff member can view a list of pending enquiries, select one to reply to, and submit a reply.
+     * 
+     * <p>If there are no pending enquiries, a message is displayed indicating that there are no enquiries to reply to.</p>
+     * 
+     * @see utils.InputUtil
+     * @see utils.PrintUtil
+     * @see models.Enquiry
+     * @see models.Camp
+     */
     public void reply() {
         
         int i = 0, choice;

@@ -27,6 +27,25 @@ import models.CommitteeMember;
 import models.Student;
 import utils.InputUtil;
 
+/**
+ * The {@code CommitteeGenerateReportService} class provides methods for exporting reports related to committee members.
+ * It implements the {@code GenerateReportServiceable} interface for report generation.
+ *  
+ * @author Chuan Shan Hong
+ * @version 1.0
+ * @since 1.0
+ * 
+ * @see interfaces.services.GenerateReportServiceable
+ * @see dao.CampDaoImpl
+ * @see dao.CommitteeMemberDaoImpl
+ * @see dao.CurrentUserDaoImpl
+ * @see dao.StudentDaoImpl
+ * @see models.Camp
+ * @see models.CommitteeMember
+ * @see models.Student
+ * @see enums.GenerateType
+ * @see utils.InputUtil
+ */
 public class CommitteeGenerateReportService implements GenerateReportServiceable {
 	
 	private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
@@ -38,9 +57,11 @@ public class CommitteeGenerateReportService implements GenerateReportServiceable
 	private static final CampDao campDao = new CampDaoImpl();
 	
 	
-	/** 
-	 * @param filePath	The path for the file to be exported to
-	 */
+    /**
+     * Exports a report to the specified file path based on the chosen report type.
+     *
+     * @param filePath The path for the file to be exported to.
+     */
 	public void exporting(String filePath) {
     	
 		int choice;
@@ -81,6 +102,14 @@ public class CommitteeGenerateReportService implements GenerateReportServiceable
 		}
     }
 	
+    /**
+     * Generates a report based on the specified camp and report type.
+     *
+     * @param camp The camp for which the report is generated.
+     * @param type The type of report to generate (ALL, ATTENDEE, COMMITTEE).
+	 * 
+     * @return The generated report as a string.
+     */	
     public String generate(Camp camp, GenerateType type){
     	
     	String report = "";
