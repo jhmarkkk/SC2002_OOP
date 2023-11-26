@@ -5,23 +5,39 @@ import java.util.Map;
 
 import enums.Role;
 
+/**
+ * The CommitteeMember class represents a committee member in the system, extending the Student class.
+ * It includes information about the camps facilitated by the committee member, suggestion IDs, and the points earned by the committee member.
+ */
 public class CommitteeMember extends Student {
 	
+	/**
+     * The name of the camp facilitated by the Committee Member.
+     */
 	private String facilitatingCamp;
+
+	/**
+     * A list of suggestion IDs representing suggestion provided by the Committee Member.
+     */
 	private ArrayList<Integer> suggestions;
+
+	/**
+     * The points earned by the Committee Member.
+     */
 	private int points = 0;
 	
 	/**
 	 * Constructor used for importing Committee Member from CSV.
-	 * @param userID
-	 * @param password
-	 * @param name
-	 * @param faculty
-	 * @param registeredCamps
-	 * @param enquiries
-	 * @param facilitatingCamp
-	 * @param suggestions
-	 * @param points
+	 * 
+	 * @param userID 			The user ID of the Committee Member.
+	 * @param password 			The password of the Committee Member.
+	 * @param name 				The name of the Committee Member.
+	 * @param faculty			The faculty to which the Committee Member belongs.
+	 * @param registeredCamps 	The list of camps the Committee Member is registered for.
+	 * @param enquiries 		A map containing the Committee Member's enquiries, with camp names as keys and lists of enquiry IDs as values.
+	 * @param facilitatingCamp	The name of the camp facilitated by the Committee Member.
+	 * @param suggestions 		A list of suggestion IDs representing suggestion provided by the Committee Member.
+	 * @param points 			The points earned by the Committee Member.
 	 */
 	public CommitteeMember(String userID, String password, String name, String faculty,
 			ArrayList<String> registeredCamps, Map<String, ArrayList<Integer>> enquiries,
@@ -36,13 +52,14 @@ public class CommitteeMember extends Student {
 
 	/**
 	 * Constructor used to promote Student to Committee Member.
-	 * @param userID
-	 * @param password
-	 * @param name
-	 * @param faculty
-	 * @param registeredCamps
-	 * @param enquiries
-	 * @param facilitatingCamp
+	 * 
+	 * @param userID 			The user ID of the Committee Member.
+	 * @param password 			The password of the Committee Member.
+	 * @param name 				The name of the Committee Member.
+	 * @param faculty 			The faculty to which the Committee Member belongs.
+	 * @param registeredCamps 	The list of camps the Committee Member is registered for.
+	 * @param enquiries 		A map containing the Committee Member's enquiries, with camp names as keys and lists of enquiry IDs as values.
+	 * @param facilitatingCamp 	The name of the camp facilitated by the Committee Member.
 	 */
 	public CommitteeMember(String userID, String password, String name, String faculty,
 			ArrayList<String> registeredCamps, Map<String, ArrayList<Integer>> enquiries,

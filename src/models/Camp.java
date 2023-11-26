@@ -7,6 +7,10 @@ import java.util.Map;
 
 import enums.Visibility;
 
+/**
+ * The Camp class represents a camp in the system.
+ * It contains information about the camp.
+ */
 public class Camp {
 	
 	private String name;
@@ -26,23 +30,23 @@ public class Camp {
 	private Visibility visibility;
 	
 	/**
-	 * Constructor used for importing Camp from CSV
+	 * Constructor used for importing Camp from CSV.
 	 * 
-	 * @param name
-	 * @param dates
-	 * @param registrationClosingDate
-	 * @param openTo
-	 * @param location
-	 * @param totalSlots
-	 * @param committeeSlots
-	 * @param description
-	 * @param staffInCharge
-	 * @param attendees
-	 * @param withdrawnAttendees
-	 * @param committeeMembers
-	 * @param enquiries
-	 * @param suggestions
-	 * @param visibility
+	 * @param name 						The name of the camp.
+	 * @param dates 					The list of dates on which the camp is scheduled.
+	 * @param registrationClosingDate	The closing date for camp registration.
+	 * @param openTo 					The faculty to which the camp is open.
+	 * @param location 					The location where the camp is held.
+	 * @param totalSlots 				The total number of available slots for the camp.
+	 * @param committeeSlots 			The number of slots reserved for committee members.
+	 * @param description 				A brief description of the camp.
+	 * @param staffInCharge 			The name of the staff in charge of the camp.
+	 * @param attendees 				A list of names of attendees registered for the camp.
+	 * @param withdrawnAttendees 		A list of names of attendees who have withdrawn from the camp.
+	 * @param committeeMembers			A list of names of committee members involved in the camp.
+	 * @param enquiries 				A map associating enquiry IDs with their respective enquiries.
+	 * @param suggestions 				A map associating suggestion IDs with their respective suggestions.
+	 * @param visibility 				The visibility status indicating whether the camp is open for registration.
 	 */
 	public Camp(String name, ArrayList<GregorianCalendar> dates, GregorianCalendar registrationClosingDate,
 			String openTo, String location, int totalSlots, int committeeSlots, String description,
@@ -65,21 +69,20 @@ public class Camp {
 		this.enquiries = enquiries;
 		this.suggestions = suggestions;
 		this.visibility = visibility;
-
 	}
 
 	/**
 	 * Constructor for Staff to create new Camp.
 	 * 
-	 * @param name
-	 * @param dates
-	 * @param registrationClosingDate
-	 * @param openTo
-	 * @param location
-	 * @param totalSlots
-	 * @param committeeSlots
-	 * @param description
-	 * @param staffInCharge
+	 * @param name 						The name of the camp.
+	 * @param dates 					The list of dates on which the camp is scheduled.
+	 * @param registrationClosingDate 	The closing date for camp registration.
+	 * @param openTo 					The faculty to which the camp is open.
+	 * @param location 					The location where the camp is held.
+	 * @param totalSlots 				The total number of available slots for the camp.
+	 * @param committeeSlots 			The number of slots reserved for committee members.
+	 * @param description 				A brief description of the camp.
+	 * @param staffInCharge 			The name of the staff in charge of the camp.
 	 */
 	public Camp(String name, ArrayList<GregorianCalendar> dates, GregorianCalendar registrationClosingDate,
 			String openTo, String location, int totalSlots, int committeeSlots, String description, String staffInCharge) {
