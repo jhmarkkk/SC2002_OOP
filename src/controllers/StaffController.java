@@ -222,7 +222,7 @@ public class StaffController extends AbstractUserController {
 					break;
 				case 8:
 					deleteCamp();
-					break;
+					return;
 				case 9:
 					return;
 				default:
