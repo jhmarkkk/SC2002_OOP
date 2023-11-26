@@ -1,1 +1,1 @@
-# SC2002_OOP
+# SC2002 CAMs Project
