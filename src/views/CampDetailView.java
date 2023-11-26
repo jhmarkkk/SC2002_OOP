@@ -2,6 +2,7 @@ package views;
 
 import java.util.Map;
 
+import enums.Visibility;;
 import dao.CampDaoImpl;
 import dao.CurrentUserDaoImpl;
 import dao.StaffDaoImpl;
@@ -27,7 +28,6 @@ public class CampDetailView implements CampDetailViewable {
         Camp facilitatingCamp = campDao.getCamps().get(committeeMember.getFacilitatingCamp());
 
         System.out.printf("===== (Facilitating Camp Details) %s =====\n", facilitatingCamp.getName());
-        System.out.printf("Visibility: ", facilitatingCamp.getVisibility().toString());
         System.out.print("Duration: ");
         System.out.printf("From %s ", DateUtil.toString(facilitatingCamp.getDates().get(0)));
         System.out.printf("to %s ",
@@ -37,6 +37,7 @@ public class CampDetailView implements CampDetailViewable {
         for (String attendeeID : facilitatingCamp.getAttendees()) {
             System.out.printf(" %s", studentsMap.get(attendeeID).getName());
         }
+        System.out.println();
         System.out.printf("Attendee Slots available: %d\n", facilitatingCamp.getAttendeeSlots());
         System.out.printf("Camp Committee Slots available: %d\n", facilitatingCamp.getCommitteeSlots());
         System.out.printf("Description: %s\n", facilitatingCamp.getDescription());
