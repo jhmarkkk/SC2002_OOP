@@ -7,21 +7,23 @@ import dao.CommitteeMemberDaoImpl;
 import dao.CurrentUserDaoImpl;
 import dao.StaffDaoImpl;
 import dao.StudentDaoImpl;
+
 import interfaces.dao.CommitteeMemberDao;
 import interfaces.dao.CurrentUserDao;
 import interfaces.dao.StaffDao;
 import interfaces.dao.StudentDao;
 import interfaces.services.AuthServiceable;
 import interfaces.services.ChangePasswordServiceable;
+
 import models.CommitteeMember;
 import models.Staff;
 import models.Student;
-import models.User;  
+import models.User;
+
+import utils.InputUtil;  
 
 public class AuthService implements AuthServiceable {
-    
-    private static final Scanner sc = new Scanner(System.in);
-    
+       
     private static final CurrentUserDao currentUserDao = new CurrentUserDaoImpl();
     
     private static final StaffDao staffDao = new StaffDaoImpl();
@@ -32,22 +34,15 @@ public class AuthService implements AuthServiceable {
 
 	private static final ChangePasswordServiceable changePasswordService = new ChangePasswordService();
 
-    public void login(){
+    public void login() {
         
     	User currentUser;
-    	
-        System.out.print("Enter user ID: ");
-        
-		String userID = sc.nextLine();
-		
-		System.out.print("Enter password: ");
-		
-		String password = sc.nextLine();
+		String userID = InputUtil.nextString("Enter user ID");
+		String password = InputUtil.nextString("Enter password");
 		
 		currentUser = validateUser(userID, password);
-		
 		if (currentUser == null) {
-			System.out.println("Invalid user ID or password");
+			System.out.println("\n> Invalid user ID or password");
 			return;
 		}
 
@@ -56,7 +51,7 @@ public class AuthService implements AuthServiceable {
 			changePasswordService.changePassword();
     }
 
-    public void logout(){
+    public void logout() {
         
     	currentUserDao.setCurrentUser(null);
     }

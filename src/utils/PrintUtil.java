@@ -1,6 +1,5 @@
 package utils;
 
-
 public class PrintUtil {
     
     private static final int SIZE = 100;
@@ -18,6 +17,5 @@ public class PrintUtil {
     public static void invalid(String type) {
 
         System.out.printf("Invalid %s. Try again.\n", type);
-        System.out.println("-".repeat(SIZE - 1));
     }
 }

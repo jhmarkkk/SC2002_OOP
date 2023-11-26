@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import enums.SortType;
+
 import models.Camp;
 
-import utils.CampComparators.NameComparator;
-import utils.CampComparators.StartComparator;
 import utils.CampComparators.ClosingComparator;
-import utils.CampComparators.LocationComparator;
 import utils.CampComparators.FacultyComparator;
+import utils.CampComparators.LocationComparator;
+import utils.CampComparators.NameComparator;
 import utils.CampComparators.StaffComparator;
+import utils.CampComparators.StartComparator;
 
 public class SortCampUtil {
 
