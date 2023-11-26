@@ -17,7 +17,6 @@ import dao.CampDaoImpl;
 import interfaces.dao.CampDao;
 import models.Camp;
 import models.CommitteeMember;
-import models.User;
 import utils.InputUtil;
 import utils.PrintUtil;
 
@@ -79,9 +78,14 @@ public class StudentEnquiryService implements EnquiryServiceable {
 			PrintUtil.invalid("choice");
 		} while (true);
 
-        enquiryField = InputUtil.nextString("Enter enquiry");
-        newEnquiry = new Enquiry(enquiryField, currentUser.getUserID());
+        do {
+            enquiryField = InputUtil.nextString("Enter enquiry");
+            if (!enquiryField.isBlank()) break;
 
+            PrintUtil.invalid("input");
+        } while (true);
+
+        newEnquiry = new Enquiry(enquiryField, currentUser.getUserID());
         enquiryData = selectedCamp.getEnquiries();
         enquiryData.put(newEnquiry.getEnquiryID(), newEnquiry);
 
@@ -93,6 +97,8 @@ public class StudentEnquiryService implements EnquiryServiceable {
             studentCampEnquiryList.add(newEnquiry.getEnquiryID());
             studentEnquiryData.put(selectedCampName, studentCampEnquiryList);
         }
+
+        System.out.println("Enquiry created");
     }
 
     public void delete() {
@@ -146,6 +152,7 @@ public class StudentEnquiryService implements EnquiryServiceable {
         selectedCampStudentEnquiryList = studentEnquiryData.get(selectedCamp.getName());
         selectedCampStudentEnquiryList.remove(selectedEnquiryID);
         if (selectedCampStudentEnquiryList.isEmpty()) studentEnquiryData.remove(selectedCamp.getName());
+        
         System.out.println("Enquiry deleted");
     }
 
@@ -197,7 +204,13 @@ public class StudentEnquiryService implements EnquiryServiceable {
 
         selectedCamp = enquiryIDToCampMap.get(selectedEnquiryID);
         selectedEnquiry = selectedCamp.getEnquiries().get(selectedEnquiryID);
-        newEnquiryField = InputUtil.nextString("Enter enquiry");
+        do {
+            newEnquiryField = InputUtil.nextString("Enter enquiry");
+            if (!newEnquiryField.isBlank()) break;
+
+            PrintUtil.invalid("input");
+        } while (true);
+
         selectedEnquiry.setEnquiry(newEnquiryField);
         System.out.println("Enquiry updated");
     }
