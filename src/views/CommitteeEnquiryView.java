@@ -19,7 +19,8 @@ import models.Student;
 import utils.PrintUtil;
 
 /**
- * The {@code CommitteeEnquiryView} class provides functionality to view enquiries related to a specific camp.
+ * The {@code CommitteeEnquiryView} class provides functionality to view
+ * enquiries related to a specific camp.
  * It implements the {@link EnquiryViewable} interface.
  *
  * @author Chuan Shan Hong
@@ -37,7 +38,8 @@ public class CommitteeEnquiryView implements EnquiryViewable {
     private static final StudentDao studentDao = new StudentDaoImpl();
 
     /**
-     * Displays details of enquiries related to the camp facilitated by the current committee member.
+     * Displays details of enquiries related to the camp facilitated by the current
+     * committee member.
      */
     public void view() {
         CommitteeMember currentUser = (CommitteeMember) currentUserDao.getCurrentUser();
@@ -47,16 +49,16 @@ public class CommitteeEnquiryView implements EnquiryViewable {
         PrintUtil.header(String.format("%s Enquiries", camp.getName()));
         for (Enquiry enquiry : camp.getEnquiries().values()) {
             System.out.println("-".repeat(50));
-            System.out.printf("%-15s: %s\n","Enquiry ID" , enquiry.getEnquiryID());
-            System.out.printf("%-15s: %s\n","Camp" , camp.getName());
-            System.out.printf("%-15s: %s\n","Enquired by" , studentData.get(enquiry.getEnquirer()).getName());
-            System.out.printf("%-15s: %s\n","Enquiry" , enquiry.getEnquiry());
+            System.out.printf("%-15s: %s\n", "Enquiry ID", enquiry.getEnquiryID());
+            System.out.printf("%-15s: %s\n", "Camp", camp.getName());
+            System.out.printf("%-15s: %s\n", "Enquired by", studentData.get(enquiry.getEnquirer()).getName());
+            System.out.printf("%-15s: %s\n", "Enquiry", enquiry.getEnquiry());
             if (enquiry.getReplier() == null || enquiry.getReplier().equals("#NULL!")) {
-                System.out.printf("%-15s: -\n","Replied by");
-                System.out.printf("%-15s: -\n","Reply");
+                System.out.printf("%-15s: -\n", "Replied by");
+                System.out.printf("%-15s: -\n", "Reply");
             } else {
-                System.out.printf("%-15s: %s\n","Replied by" , enquiry.getReplier());
-                System.out.printf("%-15s: %s\n","Reply" , enquiry.getReply());
+                System.out.printf("%-15s: %s\n", "Replied by", enquiry.getReplier());
+                System.out.printf("%-15s: %s\n", "Reply", enquiry.getReply());
             }
 
             System.out.println();

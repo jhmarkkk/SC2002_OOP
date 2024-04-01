@@ -59,17 +59,18 @@ public class CommitteeReplyEnquiryService implements ReplyEnquiryServiceable {
      * Allows a committee member to reply to an enquiry.
      */    
     public void reply() {
-        
+
         int i = 0, choice;
         Enquiry selectedEnquiry;
         String replyField;
-        CommitteeMember currentUser = (CommitteeMember)currentUserDao.getCurrentUser();
+        CommitteeMember currentUser = (CommitteeMember) currentUserDao.getCurrentUser();
         String campName = currentUser.getFacilitatingCamp();
         Camp camp = campDao.getCamps().get(campName);
         ArrayList<Enquiry> validEnquiryList = new ArrayList<Enquiry>();
 
         for (Enquiry enquiry : camp.getEnquiries().values()) {
-            if (enquiry.getEnquirer() == null) continue;
+            if (enquiry.getEnquirer() == null)
+                continue;
 
             validEnquiryList.add(enquiry);
         }
@@ -86,20 +87,21 @@ public class CommitteeReplyEnquiryService implements ReplyEnquiryServiceable {
 
             System.out.printf("%2d : Back\n", i + 1);
             choice = InputUtil.choice();
-            if (choice == i + 1) return;
-                
+            if (choice == i + 1)
+                return;
+
             if (choice >= 1 || choice <= i) {
                 selectedEnquiry = validEnquiryList.get(choice - 1);
                 break;
             }
         } while (true);
 
-
-        System.out.printf("%-10s: %s\n","Camp" , campName);
-        System.out.printf("%-10s: %s\n","Enquiry" , selectedEnquiry.getEnquiry());
+        System.out.printf("%-10s: %s\n", "Camp", campName);
+        System.out.printf("%-10s: %s\n", "Enquiry", selectedEnquiry.getEnquiry());
         do {
             replyField = InputUtil.nextString("Enter reply");
-            if (!replyField.isBlank()) break;
+            if (!replyField.isBlank())
+                break;
 
             PrintUtil.invalid("input");
         } while (true);

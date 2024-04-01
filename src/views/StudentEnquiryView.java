@@ -19,7 +19,8 @@ import models.Student;
 import utils.PrintUtil;
 
 /**
- * The {@code StudentEnquiryView} class provides a view for students to see their enquiries.
+ * The {@code StudentEnquiryView} class provides a view for students to see
+ * their enquiries.
  * It implements the {@link EnquiryViewable} interface.
  * 
  * @author Chong Jiejun
@@ -36,10 +37,10 @@ public class StudentEnquiryView implements EnquiryViewable {
      * Represents the data access object for student-related operations.
      */
     public static final StudentDao studentDao = new StudentDaoImpl();
-    
+
     /**
      * Displays the enquiries made by the student.
-     */    
+     */
     public void view() {
 
         String campName;
@@ -48,8 +49,8 @@ public class StudentEnquiryView implements EnquiryViewable {
         Map<Integer, Enquiry> campEnquiryData;
         Map<String, Camp> campsData = campDao.getCamps();
         Map<String, Student> studentData = studentDao.getStudents();
-        Student currentUser = (Student)currentUserDao.getCurrentUser();
-    
+        Student currentUser = (Student) currentUserDao.getCurrentUser();
+
         PrintUtil.header("My Enquiries");
         for (Map.Entry<String, ArrayList<Integer>> entry : currentUser.getEnquiries().entrySet()) {
             campName = entry.getKey();
@@ -58,18 +59,18 @@ public class StudentEnquiryView implements EnquiryViewable {
             for (Integer enquiryID : studentCampEnquiryIDList) {
                 enquiry = campEnquiryData.get(enquiryID);
                 System.out.println("-".repeat(50));
-                System.out.printf("%-15s: %s\n","Enquiry ID" , enquiry.getEnquiryID());
-                System.out.printf("%-15s: %s\n","Camp" , campName);
-                System.out.printf("%-15s: %s\n","Enquired by" , studentData.get(enquiry.getEnquirer()).getName());
-                System.out.printf("%-15s: %s\n","Enquiry" , enquiry.getEnquiry());
+                System.out.printf("%-15s: %s\n", "Enquiry ID", enquiry.getEnquiryID());
+                System.out.printf("%-15s: %s\n", "Camp", campName);
+                System.out.printf("%-15s: %s\n", "Enquired by", studentData.get(enquiry.getEnquirer()).getName());
+                System.out.printf("%-15s: %s\n", "Enquiry", enquiry.getEnquiry());
                 if (enquiry.getReplier() == null || enquiry.getReplier().equals("#NULL!")) {
-                    System.out.printf("%-15s: -\n","Replied by");
-                    System.out.printf("%-15s: -\n","Reply");
+                    System.out.printf("%-15s: -\n", "Replied by");
+                    System.out.printf("%-15s: -\n", "Reply");
                 } else {
-                    System.out.printf("%-15s: %s\n","Replied by" , enquiry.getReplier());
-                    System.out.printf("%-15s: %s\n","Reply" , enquiry.getReply());
+                    System.out.printf("%-15s: %s\n", "Replied by", enquiry.getReplier());
+                    System.out.printf("%-15s: %s\n", "Reply", enquiry.getReply());
                 }
-                
+
                 System.out.println();
             }
         }

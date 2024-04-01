@@ -44,7 +44,7 @@ public class CreatedCampView implements CampViewable {
 
         int i = 1;
         ArrayList<GregorianCalendar> dateList;
-        Staff currentUser = (Staff)currentUserDao.getCurrentUser();
+        Staff currentUser = (Staff) currentUserDao.getCurrentUser();
         ArrayList<String> createdCampNameList = currentUser.getCreatedCamps();
         Map<String, Camp> campsData = campDao.getCamps();
         ArrayList<Camp> createdCampList = new ArrayList<Camp>();
@@ -58,17 +58,18 @@ public class CreatedCampView implements CampViewable {
         for (Camp camp : createdCampList) {
             dateList = camp.getDates();
             PrintUtil.header(String.format("Camp %d", i++));
-            System.out.printf("%-30s: %s\n","Name" , camp.getName());
-            System.out.printf("%-30s: %s -> %s\n","Duration",
-                DateUtil.toString(dateList.get(0)),
-                DateUtil.toString(dateList.get(dateList.size() - 1)));
-            System.out.printf("%-30s: %s\n","Registration Closing Date" ,DateUtil.toString(camp.getRegistrationClosingDate()));
-            System.out.printf("%-30s: %s\n","User group" , camp.getOpenTo());
-            System.out.printf("%-30s: %s\n","Location" , camp.getLocation());
-            System.out.printf("%-30s: %s\n","Total slots" , camp.getTotalSlots());
-            System.out.printf("%-30s: %s\n","Camp committee slots" , camp.getCommitteeSlots());
-            System.out.printf("%-30s: %s\n","Description" , camp.getDescription());
-            System.out.printf("%-30s: %s\n","Visibility" , Visibility.toString(camp.getVisibility()));
+            System.out.printf("%-30s: %s\n", "Name", camp.getName());
+            System.out.printf("%-30s: %s -> %s\n", "Duration",
+                    DateUtil.toString(dateList.get(0)),
+                    DateUtil.toString(dateList.get(dateList.size() - 1)));
+            System.out.printf("%-30s: %s\n", "Registration Closing Date",
+                    DateUtil.toString(camp.getRegistrationClosingDate()));
+            System.out.printf("%-30s: %s\n", "User group", camp.getOpenTo());
+            System.out.printf("%-30s: %s\n", "Location", camp.getLocation());
+            System.out.printf("%-30s: %s\n", "Total slots", camp.getTotalSlots());
+            System.out.printf("%-30s: %s\n", "Camp committee slots", camp.getCommitteeSlots());
+            System.out.printf("%-30s: %s\n", "Description", camp.getDescription());
+            System.out.printf("%-30s: %s\n", "Visibility", Visibility.toString(camp.getVisibility()));
             System.out.println();
         }
     }
